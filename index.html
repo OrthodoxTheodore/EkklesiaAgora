@@ -1,0 +1,2311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ekklesia Agora</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Cinzel+Decorative:wght@400;700&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy:#0d1b2e; --navy-mid:#152338; --navy-light:#1e3352;
+    --gold:#c9a84c; --gold-bright:#e8c96a; --gold-dim:#8a6f30; --gold-pale:#f0dfa0;
+    --text-light:#e8dfc8; --text-mid:#b8a888; --crimson:#8b1a1a;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{background:var(--navy);color:var(--text-light);font-family:'EB Garamond',serif;font-size:16px;line-height:1.6;min-height:100vh;}
+  ::-webkit-scrollbar{width:8px;} ::-webkit-scrollbar-track{background:var(--navy);} ::-webkit-scrollbar-thumb{background:var(--gold-dim);border-radius:4px;}
+  body::before{content:'';position:fixed;inset:0;background-image:repeating-linear-gradient(0deg,transparent,transparent 39px,rgba(201,168,76,0.04) 39px,rgba(201,168,76,0.04) 40px),repeating-linear-gradient(90deg,transparent,transparent 39px,rgba(201,168,76,0.04) 39px,rgba(201,168,76,0.04) 40px);pointer-events:none;z-index:0;}
+
+  /* NAV */
+  nav{position:sticky;top:0;z-index:100;background:linear-gradient(180deg,#0a1525 0%,var(--navy-mid) 100%);border-bottom:2px solid var(--gold-dim);box-shadow:0 4px 20px rgba(0,0,0,0.7);}
+  .nav-inner{max-width:1300px;margin:0 auto;padding:0 24px;display:flex;align-items:center;gap:16px;height:70px;}
+  .nav-logo{display:flex;align-items:center;gap:14px;cursor:pointer;}
+  .nav-logo img{height:52px;border-radius:4px;border:1px solid var(--gold-dim);object-fit:cover;object-position:center 30%;}
+  .nav-brand{display:flex;flex-direction:column;line-height:1.1;}
+  .nav-brand .greek{font-family:'Cinzel',serif;font-size:10px;letter-spacing:3px;color:var(--gold-dim);text-transform:uppercase;}
+  .nav-brand .name{font-family:'Cinzel Decorative',serif;font-size:17px;font-weight:700;color:var(--gold);letter-spacing:1px;}
+  .nav-links{display:flex;gap:4px;margin-left:20px;}
+  .nav-links a{font-family:'Cinzel',serif;font-size:11px;letter-spacing:2px;color:var(--text-mid);text-decoration:none;padding:6px 14px;border-radius:3px;transition:all 0.2s;text-transform:uppercase;cursor:pointer;}
+  .nav-links a:hover,.nav-links a.active{color:var(--gold);background:rgba(201,168,76,0.1);}
+  .nav-right{margin-left:auto;display:flex;align-items:center;gap:12px;}
+  .nav-search{display:flex;align-items:center;background:rgba(255,255,255,0.05);border:1px solid var(--gold-dim);border-radius:4px;overflow:hidden;}
+  .nav-search input{background:none;border:none;padding:7px 14px;color:var(--text-light);font-family:'EB Garamond',serif;font-size:14px;width:200px;outline:none;}
+  .nav-search input::placeholder{color:var(--text-mid);}
+  .nav-search button{background:var(--gold-dim);border:none;padding:7px 12px;color:var(--navy);cursor:pointer;font-size:14px;transition:background 0.2s;}
+  .nav-search button:hover{background:var(--gold);}
+  .btn{font-family:'Cinzel',serif;font-size:11px;letter-spacing:2px;text-transform:uppercase;padding:8px 20px;border-radius:3px;border:none;cursor:pointer;transition:all 0.2s;display:inline-block;}
+  .btn-gold{background:linear-gradient(135deg,var(--gold-dim),var(--gold));color:var(--navy);font-weight:700;}
+  .btn-gold:hover{background:linear-gradient(135deg,var(--gold),var(--gold-bright));box-shadow:0 0 12px rgba(201,168,76,0.4);}
+  .btn-outline{background:transparent;color:var(--gold);border:1px solid var(--gold-dim);}
+  .btn-outline:hover{background:rgba(201,168,76,0.1);}
+  .ornament{text-align:center;color:var(--gold-dim);font-size:22px;letter-spacing:8px;margin:8px 0;opacity:0.7;}
+  .ornament::before,.ornament::after{content:'';display:inline-block;vertical-align:middle;width:80px;height:1px;background:linear-gradient(90deg,transparent,var(--gold-dim));margin:0 16px;}
+  .ornament::after{background:linear-gradient(90deg,var(--gold-dim),transparent);}
+
+  /* PAGES */
+  .page{display:none;position:relative;z-index:1;} .page.active{display:block;}
+
+  /* HERO */
+  .hero{background:linear-gradient(180deg,#060e1a 0%,var(--navy-mid) 60%,var(--navy) 100%);padding:60px 24px 40px;text-align:center;border-bottom:1px solid rgba(201,168,76,0.2);position:relative;overflow:hidden;}
+  .hero::before{content:'✦ ✦ ✦';position:absolute;top:20px;left:50%;transform:translateX(-50%);color:var(--gold-dim);font-size:12px;letter-spacing:12px;opacity:0.5;}
+  .hero-logo{width:120px;height:120px;object-fit:cover;object-position:center 30%;border-radius:8px;border:2px solid var(--gold-dim);box-shadow:0 0 40px rgba(201,168,76,0.2),0 8px 32px rgba(0,0,0,0.6);margin-bottom:20px;}
+  .hero h1{font-family:'Cinzel Decorative',serif;font-size:clamp(28px,5vw,52px);font-weight:700;color:var(--gold);text-shadow:0 0 40px rgba(201,168,76,0.3);letter-spacing:2px;margin-bottom:6px;}
+  .hero .tagline{font-family:'Cinzel',serif;font-size:13px;letter-spacing:4px;color:var(--text-mid);text-transform:uppercase;margin-bottom:24px;}
+  .hero p{max-width:620px;margin:0 auto 28px;color:var(--text-mid);font-size:17px;font-style:italic;}
+  .hero-actions{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;}
+
+  /* LAYOUT */
+  .container{max-width:1300px;margin:0 auto;padding:40px 24px;}
+  .two-col{display:grid;grid-template-columns:1fr 340px;gap:32px;align-items:start;}
+  .section-header{display:flex;align-items:center;gap:16px;margin-bottom:24px;padding-bottom:12px;border-bottom:1px solid rgba(201,168,76,0.2);}
+  .section-header h2{font-family:'Cinzel',serif;font-size:18px;font-weight:600;color:var(--gold);letter-spacing:3px;text-transform:uppercase;}
+  .section-header .badge{font-family:'Cinzel',serif;font-size:10px;letter-spacing:2px;color:var(--navy);background:var(--gold-dim);padding:2px 10px;border-radius:2px;text-transform:uppercase;}
+  .section-header a{margin-left:auto;font-family:'Cinzel',serif;font-size:10px;letter-spacing:2px;color:var(--gold-dim);text-decoration:none;text-transform:uppercase;transition:color 0.2s;cursor:pointer;}
+  .section-header a:hover{color:var(--gold);}
+
+  /* VIDEO CARDS */
+  .video-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:20px;}
+  .video-card{background:var(--navy-mid);border:1px solid rgba(201,168,76,0.15);border-radius:6px;overflow:hidden;cursor:pointer;transition:all 0.25s;}
+  .video-card:hover{border-color:var(--gold-dim);transform:translateY(-3px);box-shadow:0 8px 30px rgba(0,0,0,0.5),0 0 20px rgba(201,168,76,0.1);}
+  .video-thumb{width:100%;aspect-ratio:16/9;background:linear-gradient(135deg,#0a1828,#152338);position:relative;overflow:hidden;}
+  .video-thumb img{width:100%;height:100%;object-fit:cover;display:block;}
+  .yt-badge{position:absolute;top:8px;left:8px;background:rgba(180,0,0,0.9);color:white;font-family:'Cinzel',serif;font-size:9px;letter-spacing:1px;padding:2px 8px;border-radius:2px;text-transform:uppercase;}
+  .play-overlay{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0);transition:background 0.2s;}
+  .video-card:hover .play-overlay{background:rgba(0,0,0,0.35);}
+  .play-btn{width:48px;height:48px;background:rgba(201,168,76,0.9);border-radius:50%;display:flex;align-items:center;justify-content:center;color:var(--navy);font-size:16px;opacity:0;transform:scale(0.8);transition:all 0.2s;}
+  .video-card:hover .play-btn{opacity:1;transform:scale(1);}
+  .video-info{padding:14px 16px;}
+  .video-info h3{font-family:'Cinzel',serif;font-size:12px;font-weight:600;color:var(--text-light);letter-spacing:0.5px;margin-bottom:6px;line-height:1.4;}
+  .video-meta{display:flex;justify-content:space-between;flex-wrap:wrap;gap:4px;}
+  .video-meta .channel{color:var(--gold-dim);font-family:'Cinzel',serif;font-size:10px;}
+  .video-tags{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px;}
+  .tag{font-family:'Cinzel',serif;font-size:9px;letter-spacing:1px;padding:2px 8px;border:1px solid rgba(201,168,76,0.2);border-radius:2px;color:var(--gold-dim);text-transform:uppercase;}
+
+  /* SIDEBAR */
+  .sidebar-card{background:var(--navy-mid);border:1px solid rgba(201,168,76,0.15);border-radius:6px;padding:20px;margin-bottom:20px;}
+  .sidebar-card h3{font-family:'Cinzel',serif;font-size:12px;letter-spacing:3px;color:var(--gold);text-transform:uppercase;margin-bottom:16px;padding-bottom:10px;border-bottom:1px solid rgba(201,168,76,0.15);}
+  .category-list{list-style:none;}
+  .category-list li{display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid rgba(255,255,255,0.04);cursor:pointer;transition:color 0.2s;}
+  .category-list .cat-name{font-size:14px;color:var(--text-mid);display:flex;align-items:center;gap:10px;}
+  .category-list li:hover .cat-name{color:var(--gold);}
+  .category-list .cat-count{font-family:'Cinzel',serif;font-size:11px;color:var(--navy);background:var(--gold-dim);padding:1px 8px;border-radius:10px;min-width:28px;text-align:center;}
+
+  /* SOCIAL */
+  .post-composer{background:var(--navy-mid);border:1px solid rgba(201,168,76,0.25);border-radius:6px;padding:20px;margin-bottom:24px;}
+  .composer-header{display:flex;align-items:center;gap:12px;margin-bottom:14px;}
+  .avatar{width:44px;height:44px;border-radius:50%;background:linear-gradient(135deg,var(--gold-dim),var(--navy-light));border:2px solid var(--gold-dim);display:flex;align-items:center;justify-content:center;font-family:'Cinzel',serif;font-size:16px;color:var(--gold);font-weight:700;flex-shrink:0;}
+  .avatar.sm{width:36px;height:36px;font-size:13px;}
+  .composer-header span{font-family:'Cinzel',serif;font-size:13px;color:var(--text-mid);letter-spacing:1px;}
+  .post-textarea{width:100%;background:rgba(255,255,255,0.04);border:1px solid rgba(201,168,76,0.2);border-radius:4px;padding:14px;color:var(--text-light);font-family:'EB Garamond',serif;font-size:16px;resize:vertical;min-height:100px;outline:none;transition:border-color 0.2s;}
+  .post-textarea:focus{border-color:var(--gold-dim);}
+  .post-textarea::placeholder{color:var(--text-mid);font-style:italic;}
+  .composer-footer{display:flex;justify-content:space-between;align-items:center;margin-top:12px;flex-wrap:wrap;gap:10px;}
+  .composer-tools{display:flex;gap:8px;}
+  .tool-btn{background:rgba(255,255,255,0.05);border:1px solid rgba(201,168,76,0.15);border-radius:3px;padding:6px 12px;color:var(--text-mid);font-family:'Cinzel',serif;font-size:10px;letter-spacing:1px;cursor:pointer;transition:all 0.2s;text-transform:uppercase;}
+  .tool-btn:hover{border-color:var(--gold-dim);color:var(--gold);}
+  .char-count{font-family:'Cinzel',serif;font-size:11px;color:var(--text-mid);}
+  .post-card{background:var(--navy-mid);border:1px solid rgba(201,168,76,0.12);border-radius:6px;padding:20px;margin-bottom:16px;transition:border-color 0.2s;}
+  .post-card:hover{border-color:rgba(201,168,76,0.25);}
+  .post-header{display:flex;align-items:flex-start;gap:12px;margin-bottom:14px;}
+  .post-author .name{font-family:'Cinzel',serif;font-size:13px;color:var(--gold);letter-spacing:0.5px;}
+  .post-author .meta{font-size:12px;color:var(--text-mid);margin-top:2px;}
+  .post-body{font-size:16px;color:var(--text-light);line-height:1.7;margin-bottom:16px;}
+  .post-actions{display:flex;gap:4px;padding-top:12px;border-top:1px solid rgba(255,255,255,0.05);}
+  .post-action{background:none;border:none;padding:6px 14px;color:var(--text-mid);font-family:'Cinzel',serif;font-size:11px;letter-spacing:1px;cursor:pointer;border-radius:3px;transition:all 0.2s;text-transform:uppercase;}
+  .post-action:hover{background:rgba(201,168,76,0.08);color:var(--gold);}
+  .post-action.liked{color:var(--gold);}
+
+  /* NAME INPUT */
+  .name-input-wrap{display:flex;align-items:center;gap:10px;margin-bottom:14px;}
+  .name-field{background:rgba(255,255,255,0.05);border:1px solid rgba(201,168,76,0.2);border-radius:4px;padding:7px 12px;color:var(--text-light);font-family:'Cinzel',serif;font-size:12px;outline:none;width:180px;letter-spacing:1px;}
+  .name-field::placeholder{color:var(--text-mid);font-style:normal;}
+  .name-field:focus{border-color:var(--gold-dim);}
+
+  /* VIDEO DETAIL */
+  .video-player-wrap{width:100%;aspect-ratio:16/9;background:#000;border-radius:6px;overflow:hidden;border:1px solid rgba(201,168,76,0.2);margin-bottom:20px;position:relative;}
+  .video-player-wrap iframe{position:absolute;top:0;left:0;width:100%;height:100%;border:none;display:block;}
+  .player-placeholder{position:absolute;top:0;left:0;width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;background:linear-gradient(135deg,#060e1a,#0a1525);color:var(--gold-dim);font-family:'Cinzel',serif;font-size:13px;letter-spacing:2px;text-transform:uppercase;}
+  .player-placeholder .big-icon{font-size:56px;opacity:0.4;}
+  .video-detail-title{font-family:'Cinzel',serif;font-size:20px;font-weight:600;color:var(--text-light);margin-bottom:10px;letter-spacing:0.5px;line-height:1.4;}
+  .video-detail-meta{display:flex;align-items:center;gap:20px;flex-wrap:wrap;margin-bottom:16px;padding-bottom:16px;border-bottom:1px solid rgba(201,168,76,0.15);}
+  .video-detail-meta .channel-name{color:var(--gold);font-family:'Cinzel',serif;font-size:14px;}
+  .video-detail-meta span{font-family:'Cinzel',serif;font-size:12px;letter-spacing:1px;color:var(--text-mid);}
+  .credit-banner{background:rgba(201,168,76,0.07);border:1px solid rgba(201,168,76,0.2);border-left:3px solid var(--gold-dim);border-radius:4px;padding:10px 16px;margin-bottom:16px;font-family:'Cinzel',serif;font-size:11px;letter-spacing:1px;color:var(--gold-dim);}
+  .video-desc{background:rgba(255,255,255,0.03);border:1px solid rgba(201,168,76,0.1);border-radius:4px;padding:16px;font-size:15px;color:var(--text-mid);line-height:1.7;margin-bottom:20px;}
+  .comment{display:flex;gap:12px;padding:14px 0;border-bottom:1px solid rgba(255,255,255,0.05);}
+  .comment-body .author{font-family:'Cinzel',serif;font-size:12px;color:var(--gold);margin-bottom:4px;}
+  .comment-body p{font-size:15px;color:var(--text-mid);line-height:1.6;}
+  .related-list{display:flex;flex-direction:column;gap:12px;}
+  .related-item{display:flex;gap:10px;cursor:pointer;padding:8px;border-radius:4px;transition:background 0.2s;}
+  .related-item:hover{background:rgba(201,168,76,0.05);}
+  .related-thumb{width:100px;aspect-ratio:16/9;background:linear-gradient(135deg,#0a1828,var(--navy-light));border-radius:3px;flex-shrink:0;overflow:hidden;border:1px solid rgba(201,168,76,0.1);}
+  .related-thumb img{width:100%;height:100%;object-fit:cover;}
+  .related-info h4{font-family:'Cinzel',serif;font-size:11px;color:var(--text-light);line-height:1.4;margin-bottom:4px;}
+  .related-info span{font-size:11px;color:var(--text-mid);}
+
+  /* CALENDAR */
+  .cal-wrap{background:var(--navy-mid);border:1px solid rgba(201,168,76,0.2);border-radius:8px;overflow:hidden;}
+  .cal-header{background:linear-gradient(135deg,#0a1525,var(--navy-mid));padding:20px 24px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid rgba(201,168,76,0.2);}
+  .cal-header h2{font-family:'Cinzel Decorative',serif;font-size:20px;color:var(--gold);letter-spacing:1px;}
+  .cal-header .cal-sub{font-family:'Cinzel',serif;font-size:11px;color:var(--gold-dim);letter-spacing:2px;text-transform:uppercase;margin-top:4px;}
+  .cal-nav{display:flex;align-items:center;gap:16px;}
+  .cal-nav button{background:rgba(201,168,76,0.1);border:1px solid var(--gold-dim);color:var(--gold);font-family:'Cinzel',serif;font-size:14px;width:34px;height:34px;border-radius:3px;cursor:pointer;transition:all 0.2s;}
+  .cal-nav button:hover{background:rgba(201,168,76,0.2);}
+  .cal-nav .month-label{font-family:'Cinzel',serif;font-size:14px;letter-spacing:2px;color:var(--text-light);text-transform:uppercase;min-width:160px;text-align:center;}
+  .cal-grid-wrap{padding:20px 24px;}
+  .cal-days-header{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;margin-bottom:8px;}
+  .cal-days-header span{font-family:'Cinzel',serif;font-size:10px;letter-spacing:2px;color:var(--gold-dim);text-transform:uppercase;text-align:center;padding:6px 0;}
+  .cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;}
+  .cal-day{min-height:64px;background:rgba(255,255,255,0.02);border:1px solid rgba(201,168,76,0.08);border-radius:4px;padding:6px;cursor:pointer;transition:all 0.2s;position:relative;}
+  .cal-day:hover{background:rgba(201,168,76,0.07);border-color:rgba(201,168,76,0.25);}
+  .cal-day.empty{background:transparent;border-color:transparent;cursor:default;}
+  .cal-day.today{border-color:var(--gold-dim);background:rgba(201,168,76,0.08);}
+  .cal-day.has-feast{border-color:rgba(201,168,76,0.3);}
+  .cal-day .greg-num{font-family:'Cinzel',serif;font-size:12px;color:var(--text-mid);display:block;}
+  .cal-day .jul-num{font-family:'Cinzel',serif;font-size:10px;color:var(--gold-dim);display:block;margin-top:1px;}
+  .cal-day .feast-dot{width:6px;height:6px;background:var(--gold);border-radius:50%;position:absolute;top:6px;right:6px;}
+  .cal-day .fast-dot{width:6px;height:6px;background:var(--crimson);border-radius:50%;position:absolute;top:6px;right:6px;}
+  .cal-day .feast-name{font-size:9px;color:var(--gold-pale);line-height:1.2;margin-top:4px;display:block;}
+  .category-list li.filter-active .cat-name{color:var(--gold);}
+  .category-list li.filter-active{background:rgba(201,168,76,0.06);}
+  .cal-legend{display:flex;gap:20px;padding:12px 24px;border-top:1px solid rgba(201,168,76,0.1);flex-wrap:wrap;}
+  .cal-legend span{font-family:'Cinzel',serif;font-size:10px;letter-spacing:1px;color:var(--text-mid);display:flex;align-items:center;gap:6px;text-transform:uppercase;}
+  .dot-gold{width:8px;height:8px;background:var(--gold);border-radius:50%;display:inline-block;}
+  .dot-red{width:8px;height:8px;background:var(--crimson);border-radius:50%;display:inline-block;}
+  .dot-blue{width:8px;height:8px;background:#4a7ab5;border-radius:50%;display:inline-block;}
+
+  /* FEAST DETAIL POPUP */
+  .feast-popup{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.8);z-index:200;align-items:center;justify-content:center;padding:20px;}
+  .feast-popup.open{display:flex;}
+  .feast-box{background:var(--navy-mid);border:1px solid var(--gold-dim);border-radius:8px;padding:32px;max-width:480px;width:100%;position:relative;box-shadow:0 20px 60px rgba(0,0,0,0.8);}
+  .feast-box h3{font-family:'Cinzel Decorative',serif;font-size:18px;color:var(--gold);margin-bottom:6px;}
+  .feast-box .feast-date{font-family:'Cinzel',serif;font-size:11px;letter-spacing:2px;color:var(--gold-dim);text-transform:uppercase;margin-bottom:16px;}
+  .feast-box p{font-size:15px;color:var(--text-mid);line-height:1.7;font-style:italic;}
+  .feast-box .close-btn{position:absolute;top:14px;right:14px;background:none;border:none;color:var(--text-mid);font-size:20px;cursor:pointer;transition:color 0.2s;}
+  .feast-box .close-btn:hover{color:var(--gold);}
+  .feast-type-badge{display:inline-block;font-family:'Cinzel',serif;font-size:9px;letter-spacing:2px;padding:3px 10px;border-radius:2px;text-transform:uppercase;margin-bottom:14px;}
+  .badge-feast{background:rgba(201,168,76,0.2);color:var(--gold);}
+  .badge-fast{background:rgba(139,26,26,0.3);color:#e07070;}
+  .badge-name{background:rgba(74,122,181,0.2);color:#7aaae0;}
+
+  /* ABOUT */
+  .about-hero{text-align:center;padding:60px 24px 40px;background:linear-gradient(180deg,#060e1a,var(--navy-mid));border-bottom:1px solid rgba(201,168,76,0.2);}
+  .about-hero .logo-large{width:160px;height:auto;border-radius:8px;border:2px solid var(--gold-dim);box-shadow:0 0 50px rgba(201,168,76,0.15);margin-bottom:24px;}
+  .about-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:24px;margin-top:40px;}
+  .about-card{background:var(--navy-mid);border:1px solid rgba(201,168,76,0.15);border-radius:6px;padding:28px;text-align:center;transition:border-color 0.2s;}
+  .about-card:hover{border-color:var(--gold-dim);}
+  .about-card .icon{font-size:36px;margin-bottom:16px;display:block;}
+  .about-card h3{font-family:'Cinzel',serif;font-size:14px;letter-spacing:3px;color:var(--gold);text-transform:uppercase;margin-bottom:12px;}
+  .about-card p{font-size:15px;color:var(--text-mid);line-height:1.7;font-style:italic;}
+  .values-block{background:var(--navy-mid);border:1px solid rgba(201,168,76,0.15);border-radius:6px;padding:36px;margin-top:32px;text-align:center;}
+  .values-block h2{font-family:'Cinzel Decorative',serif;font-size:22px;color:var(--gold);margin-bottom:20px;}
+  .values-block p{max-width:700px;margin:0 auto 16px;font-size:17px;color:var(--text-mid);line-height:1.8;font-style:italic;}
+  .scripture{font-family:'EB Garamond',serif;font-size:18px;font-style:italic;color:var(--gold-pale);text-align:center;padding:20px;border-left:3px solid var(--gold-dim);margin:24px auto;max-width:600px;}
+  .scripture cite{display:block;font-size:13px;color:var(--gold-dim);margin-top:8px;font-style:normal;font-family:'Cinzel',serif;letter-spacing:2px;}
+
+  /* LIVE */
+  .live-badge{display:inline-flex;align-items:center;gap:5px;background:var(--crimson);color:white;font-family:'Cinzel',serif;font-size:10px;letter-spacing:2px;padding:2px 10px;border-radius:2px;text-transform:uppercase;}
+  .live-dot{width:6px;height:6px;background:white;border-radius:50%;animation:pulse 1.5s infinite;}
+  @keyframes pulse{0%,100%{opacity:1;}50%{opacity:0.3;}}
+
+  /* FOOTER */
+  footer{background:#060e1a;border-top:2px solid var(--gold-dim);padding:40px 24px;text-align:center;position:relative;z-index:1;margin-top:60px;}
+  footer .footer-brand{font-family:'Cinzel Decorative',serif;font-size:20px;color:var(--gold);margin-bottom:8px;}
+  footer p{font-size:13px;color:var(--text-mid);font-style:italic;}
+  footer .footer-cross{font-size:28px;color:var(--gold-dim);margin:12px 0;}
+
+  /* MODALS */
+  .modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.85);z-index:200;align-items:center;justify-content:center;padding:20px;}
+  .modal-overlay.open{display:flex;}
+  .modal{background:var(--navy-mid);border:1px solid var(--gold-dim);border-radius:8px;padding:36px;max-width:460px;width:100%;position:relative;box-shadow:0 20px 60px rgba(0,0,0,0.8);}
+  .modal h2{font-family:'Cinzel Decorative',serif;font-size:22px;color:var(--gold);text-align:center;margin-bottom:6px;}
+  .modal .modal-sub{text-align:center;font-size:13px;color:var(--text-mid);font-style:italic;margin-bottom:28px;}
+  .modal-close{position:absolute;top:16px;right:16px;background:none;border:none;color:var(--text-mid);font-size:20px;cursor:pointer;transition:color 0.2s;}
+  .modal-close:hover{color:var(--gold);}
+  .form-field{margin-bottom:16px;}
+  .form-field label{display:block;font-family:'Cinzel',serif;font-size:11px;letter-spacing:2px;color:var(--gold-dim);text-transform:uppercase;margin-bottom:6px;}
+  .form-field input{width:100%;background:rgba(255,255,255,0.05);border:1px solid rgba(201,168,76,0.25);border-radius:3px;padding:10px 14px;color:var(--text-light);font-family:'EB Garamond',serif;font-size:16px;outline:none;transition:border-color 0.2s;}
+  .form-field input:focus{border-color:var(--gold-dim);}
+  .modal-divider{display:flex;align-items:center;gap:12px;margin:20px 0;color:var(--text-mid);font-size:13px;}
+  .modal-divider::before,.modal-divider::after{content:'';flex:1;height:1px;background:rgba(201,168,76,0.15);}
+
+  /* TOAST */
+  .toast{position:fixed;bottom:30px;right:30px;background:var(--navy-mid);border:1px solid var(--gold-dim);border-radius:6px;padding:14px 22px;font-family:'Cinzel',serif;font-size:12px;letter-spacing:1px;color:var(--gold);z-index:300;opacity:0;transform:translateY(10px);transition:all 0.3s;pointer-events:none;}
+  .toast.show{opacity:1;transform:translateY(0);}
+
+  /* BACK LINK */
+  .back-link{font-family:'Cinzel',serif;font-size:11px;letter-spacing:2px;color:var(--gold-dim);text-transform:uppercase;cursor:pointer;display:inline-block;margin-bottom:16px;}
+  .back-link:hover{color:var(--gold);}
+
+  /* CALENDAR TOGGLE */
+  .cal-toggle-wrap{display:flex;align-items:center;justify-content:center;gap:0;margin-bottom:20px;background:rgba(255,255,255,0.03);border:1px solid rgba(201,168,76,0.2);border-radius:6px;overflow:hidden;width:fit-content;margin:0 auto 24px;}
+  .cal-toggle-btn{font-family:'Cinzel',serif;font-size:11px;letter-spacing:2px;text-transform:uppercase;padding:10px 22px;cursor:pointer;border:none;background:transparent;color:var(--text-mid);transition:all 0.2s;}
+  .cal-toggle-btn.active{background:linear-gradient(135deg,var(--gold-dim),var(--gold));color:var(--navy);font-weight:700;}
+  .cal-toggle-divider{width:1px;background:rgba(201,168,76,0.2);height:38px;}
+
+  /* FIX CALENDAR OVERFLOW */
+  .cal-wrap{overflow-x:auto;}
+  .cal-grid-wrap{padding:20px 12px;min-width:0;}
+  .cal-grid{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:3px;}
+  .cal-days-header{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:3px;margin-bottom:6px;}
+  .cal-day{min-height:58px;padding:5px 4px;}
+  .cal-day .greg-num{font-size:11px;}
+  .cal-day .jul-num{font-size:9px;}
+  .cal-day .feast-name{font-size:8px;}
+
+  /* MOBILE NAV */
+  .mobile-nav-bar{display:none;position:fixed;top:0;left:0;right:0;z-index:200;background:linear-gradient(180deg,#060e1a,var(--navy-mid));border-bottom:2px solid var(--gold-dim);height:56px;align-items:center;padding:0 16px;gap:12px;}
+  .hamburger-btn{background:none;border:none;cursor:pointer;padding:6px;display:flex;flex-direction:column;gap:5px;}
+  .hamburger-btn span{display:block;width:22px;height:2px;background:var(--gold);border-radius:2px;transition:all 0.3s;}
+  .mobile-menu-overlay{display:none;position:fixed;inset:0;z-index:300;background:rgba(6,14,26,0.97);}
+  .mobile-menu-overlay.open{display:flex;flex-direction:column;}
+  .mobile-menu-header{display:flex;align-items:center;justify-content:space-between;padding:16px 20px;border-bottom:1px solid rgba(201,168,76,0.2);}
+  .mobile-menu-close{background:none;border:none;color:var(--gold);font-size:22px;cursor:pointer;padding:4px 8px;}
+  .mobile-menu-links{flex:1;overflow-y:auto;padding:16px 0;}
+  .mobile-menu-links a{display:block;font-family:'Cinzel',serif;font-size:13px;letter-spacing:3px;color:var(--text-mid);text-transform:uppercase;padding:16px 24px;border-bottom:1px solid rgba(201,168,76,0.07);cursor:pointer;transition:all 0.2s;}
+  .mobile-menu-links a:hover,.mobile-menu-links a.active{color:var(--gold);background:rgba(201,168,76,0.06);}
+  .mobile-menu-footer{padding:20px 24px;border-top:1px solid rgba(201,168,76,0.15);}
+  .mobile-logo{display:flex;align-items:center;gap:10px;}
+  .mobile-logo img{height:36px;border-radius:3px;border:1px solid var(--gold-dim);}
+  .mobile-logo span{font-family:'Cinzel Decorative',serif;font-size:14px;color:var(--gold);}
+
+  /* CHANNELS PAGE */
+  .channels-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:24px;margin-top:24px;}
+  .channel-card{background:var(--navy-mid);border:1px solid rgba(201,168,76,0.15);border-radius:8px;padding:24px;transition:all 0.2s;cursor:pointer;}
+  .channel-card:hover{border-color:rgba(201,168,76,0.4);box-shadow:0 4px 20px rgba(0,0,0,0.4);}
+  .channel-avatar{width:64px;height:64px;border-radius:50%;background:linear-gradient(135deg,var(--gold-dim),var(--navy-light));border:2px solid var(--gold-dim);display:flex;align-items:center;justify-content:center;font-family:'Cinzel Decorative',serif;font-size:22px;color:var(--gold);margin-bottom:14px;}
+  .channel-name{font-family:'Cinzel',serif;font-size:14px;color:var(--gold);font-weight:600;margin-bottom:4px;}
+  .channel-org{font-family:'Cinzel',serif;font-size:10px;letter-spacing:2px;color:var(--gold-dim);text-transform:uppercase;margin-bottom:10px;}
+  .channel-desc{font-size:13px;color:var(--text-mid);line-height:1.6;margin-bottom:14px;}
+  .channel-vid-count{font-family:'Cinzel',serif;font-size:11px;color:var(--gold-dim);letter-spacing:1px;}
+
+  /* MESSAGES / DMs */
+  .messages-wrap{display:grid;grid-template-columns:280px 1fr;gap:0;background:var(--navy-mid);border:1px solid rgba(201,168,76,0.15);border-radius:8px;overflow:hidden;min-height:500px;}
+  .convo-list{border-right:1px solid rgba(201,168,76,0.1);overflow-y:auto;}
+  .convo-list-header{padding:16px;border-bottom:1px solid rgba(201,168,76,0.1);display:flex;align-items:center;justify-content:space-between;}
+  .convo-list-header h3{font-family:'Cinzel',serif;font-size:12px;letter-spacing:2px;color:var(--gold);text-transform:uppercase;}
+  .convo-item{padding:14px 16px;border-bottom:1px solid rgba(255,255,255,0.04);cursor:pointer;transition:background 0.15s;}
+  .convo-item:hover,.convo-item.active{background:rgba(201,168,76,0.06);}
+  .convo-item .convo-name{font-family:'Cinzel',serif;font-size:12px;color:var(--text-light);margin-bottom:3px;}
+  .convo-item .convo-preview{font-size:12px;color:var(--text-mid);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+  .convo-item .convo-time{font-size:10px;color:var(--gold-dim);float:right;}
+  .msg-panel{display:flex;flex-direction:column;}
+  .msg-panel-header{padding:16px 20px;border-bottom:1px solid rgba(201,168,76,0.1);font-family:'Cinzel',serif;font-size:13px;color:var(--gold);}
+  .msg-feed{flex:1;padding:16px 20px;overflow-y:auto;display:flex;flex-direction:column;gap:12px;min-height:300px;}
+  .msg-bubble{max-width:70%;padding:10px 14px;border-radius:8px;font-size:14px;line-height:1.5;}
+  .msg-bubble.sent{background:linear-gradient(135deg,var(--gold-dim),#6a5520);color:var(--navy);align-self:flex-end;border-bottom-right-radius:2px;}
+  .msg-bubble.received{background:rgba(255,255,255,0.05);color:var(--text-light);align-self:flex-start;border-bottom-left-radius:2px;border:1px solid rgba(201,168,76,0.1);}
+  .msg-compose{padding:14px 20px;border-top:1px solid rgba(201,168,76,0.1);display:flex;gap:10px;}
+  .msg-compose input{flex:1;background:rgba(255,255,255,0.04);border:1px solid rgba(201,168,76,0.2);border-radius:4px;padding:10px 14px;color:var(--text-light);font-family:'EB Garamond',serif;font-size:15px;outline:none;}
+  .msg-compose input:focus{border-color:var(--gold-dim);}
+  .msg-no-convo{display:flex;align-items:center;justify-content:center;flex:1;color:var(--text-mid);font-style:italic;font-size:15px;}
+
+  /* CONTACT FOOTER */
+  .contact-footer{background:linear-gradient(180deg,var(--navy-mid),#060e1a);border-top:2px solid rgba(201,168,76,0.15);padding:48px 24px 32px;}
+  .contact-inner{max-width:900px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:48px;}
+  .contact-inner h3{font-family:'Cinzel',serif;font-size:13px;letter-spacing:3px;color:var(--gold);text-transform:uppercase;margin-bottom:16px;}
+  .contact-form-field{margin-bottom:14px;}
+  .contact-form-field label{display:block;font-family:'Cinzel',serif;font-size:10px;letter-spacing:2px;color:var(--gold-dim);text-transform:uppercase;margin-bottom:6px;}
+  .contact-form-field input,.contact-form-field textarea,.contact-form-field select{width:100%;background:rgba(255,255,255,0.04);border:1px solid rgba(201,168,76,0.2);border-radius:3px;padding:10px 14px;color:var(--text-light);font-family:'EB Garamond',serif;font-size:15px;outline:none;transition:border-color 0.2s;}
+  .contact-form-field input:focus,.contact-form-field textarea:focus{border-color:var(--gold-dim);}
+  .contact-form-field textarea{min-height:100px;resize:vertical;}
+  @media(max-width:768px){.contact-inner{grid-template-columns:1fr;}.messages-wrap{grid-template-columns:1fr;}.convo-list{border-right:none;border-bottom:1px solid rgba(201,168,76,0.1);}}
+
+  @media(max-width:768px){
+    .two-col{grid-template-columns:1fr;}
+    .nav-links{display:none;}
+    .nav-search{display:none;}
+    nav{display:none;}
+    .mobile-nav-bar{display:flex;}
+    body{padding-top:56px;}
+    .container{padding:24px 14px;}
+    .hero{padding:32px 14px 24px;}
+    .profile-hero{padding:28px 14px 20px;}
+    .profile-hero-inner{gap:16px;}
+    .profile-avatar{width:80px;height:80px;font-size:30px;}
+    .profile-name{font-size:20px;}
+  }
+
+  /* NAV USER MENU */
+  .nav-user{position:relative;display:flex;align-items:center;gap:10px;cursor:pointer;}
+  .nav-avatar{width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,var(--gold-dim),var(--navy-light));border:2px solid var(--gold);display:flex;align-items:center;justify-content:center;font-family:'Cinzel',serif;font-size:14px;color:var(--gold);font-weight:700;flex-shrink:0;overflow:hidden;transition:box-shadow 0.2s;}
+  .nav-avatar:hover{box-shadow:0 0 10px rgba(201,168,76,0.5);}
+  .nav-avatar img{width:100%;height:100%;object-fit:cover;border-radius:50%;}
+  .nav-user-name{font-family:'Cinzel',serif;font-size:11px;letter-spacing:1px;color:var(--gold);text-transform:uppercase;}
+  .user-dropdown{display:none;position:absolute;top:calc(100% + 12px);right:0;background:var(--navy-mid);border:1px solid var(--gold-dim);border-radius:6px;min-width:180px;z-index:200;box-shadow:0 8px 30px rgba(0,0,0,0.7);overflow:hidden;}
+  .user-dropdown.open{display:block;}
+  .user-dropdown a{display:block;padding:11px 18px;font-family:'Cinzel',serif;font-size:11px;letter-spacing:1px;color:var(--text-mid);text-transform:uppercase;cursor:pointer;transition:all 0.15s;border-bottom:1px solid rgba(201,168,76,0.08);}
+  .user-dropdown a:last-child{border-bottom:none;}
+  .user-dropdown a:hover{background:rgba(201,168,76,0.08);color:var(--gold);}
+  .user-dropdown a.danger{color:#e07070;}
+  .user-dropdown a.danger:hover{background:rgba(139,26,26,0.2);color:#ff9999;}
+
+  /* PROFILE PAGE */
+  .profile-hero{background:linear-gradient(180deg,#060e1a,var(--navy-mid));padding:48px 24px 32px;border-bottom:1px solid rgba(201,168,76,0.2);}
+  .profile-hero-inner{max-width:800px;margin:0 auto;display:flex;align-items:flex-end;gap:28px;flex-wrap:wrap;}
+  .profile-avatar-wrap{position:relative;flex-shrink:0;}
+  .profile-avatar{width:110px;height:110px;border-radius:50%;background:linear-gradient(135deg,var(--gold-dim),var(--navy-light));border:3px solid var(--gold);display:flex;align-items:center;justify-content:center;font-family:'Cinzel Decorative',serif;font-size:42px;color:var(--gold);font-weight:700;overflow:hidden;}
+  .profile-avatar img{width:100%;height:100%;object-fit:cover;border-radius:50%;}
+  .profile-avatar-edit{position:absolute;bottom:4px;right:4px;width:28px;height:28px;background:var(--gold);border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:13px;border:2px solid var(--navy-mid);}
+  .profile-info{flex:1;min-width:200px;}
+  .profile-name{font-family:'Cinzel Decorative',serif;font-size:26px;color:var(--gold);margin-bottom:4px;}
+  .profile-jurisdiction{font-family:'Cinzel',serif;font-size:11px;letter-spacing:2px;color:var(--gold-dim);text-transform:uppercase;margin-bottom:10px;}
+  .profile-bio{font-size:16px;color:var(--text-mid);font-style:italic;line-height:1.6;max-width:500px;}
+  .profile-actions{display:flex;gap:10px;margin-top:16px;flex-wrap:wrap;}
+  .profile-body{max-width:800px;margin:32px auto;padding:0 24px;}
+  .profile-section{margin-bottom:32px;}
+  .profile-section h3{font-family:'Cinzel',serif;font-size:13px;letter-spacing:3px;color:var(--gold);text-transform:uppercase;margin-bottom:16px;padding-bottom:10px;border-bottom:1px solid rgba(201,168,76,0.15);}
+
+  /* PROFILE EDIT MODAL */
+  .profile-photo-upload{display:flex;align-items:center;gap:16px;margin-bottom:20px;}
+  .upload-avatar-preview{width:72px;height:72px;border-radius:50%;background:linear-gradient(135deg,var(--gold-dim),var(--navy-light));border:2px solid var(--gold-dim);display:flex;align-items:center;justify-content:center;font-family:'Cinzel',serif;font-size:26px;color:var(--gold);overflow:hidden;flex-shrink:0;}
+  .upload-avatar-preview img{width:100%;height:100%;object-fit:cover;border-radius:50%;}
+  .upload-btn{font-family:'Cinzel',serif;font-size:10px;letter-spacing:2px;color:var(--gold-dim);border:1px solid var(--gold-dim);background:none;padding:7px 14px;border-radius:3px;cursor:pointer;text-transform:uppercase;transition:all 0.2s;}
+  .upload-btn:hover{color:var(--gold);border-color:var(--gold);}
+  .form-field select{width:100%;background:rgba(255,255,255,0.05);border:1px solid rgba(201,168,76,0.25);border-radius:3px;padding:10px 14px;color:var(--text-light);font-family:'EB Garamond',serif;font-size:16px;outline:none;transition:border-color 0.2s;-webkit-appearance:none;}
+  .form-field select option{background:var(--navy-mid);color:var(--text-light);}
+  .form-field textarea{width:100%;background:rgba(255,255,255,0.05);border:1px solid rgba(201,168,76,0.25);border-radius:3px;padding:10px 14px;color:var(--text-light);font-family:'EB Garamond',serif;font-size:15px;outline:none;resize:vertical;transition:border-color 0.2s;min-height:80px;}
+  .form-field textarea:focus,.form-field select:focus{border-color:var(--gold-dim);}
+</style>
+</head>
+<body>
+
+<!-- MOBILE NAV BAR -->
+<div class="mobile-nav-bar" id="mobile-nav-bar">
+  <button class="hamburger-btn" onclick="openMobileMenu()" aria-label="Open menu">
+    <span></span><span></span><span></span>
+  </button>
+  <div class="mobile-logo" onclick="showPage('home');closeMobileMenu()">
+    <img src="Ekklesia_Agora.jpg" alt="Ekklesia Agora">
+    <span>Ekklesia Agora</span>
+  </div>
+  <div style="margin-left:auto;display:flex;align-items:center;gap:8px;">
+    <div id="mobile-nav-avatar" style="display:none;cursor:pointer;" onclick="showPage('profile');closeMobileMenu()"></div>
+    <div id="mobile-guest-btns" style="display:flex;gap:6px;">
+      <button class="btn btn-outline" style="font-size:9px;padding:5px 10px;" onclick="openModal('loginModal')">Sign In</button>
+    </div>
+  </div>
+</div>
+
+<!-- MOBILE MENU OVERLAY -->
+<div class="mobile-menu-overlay" id="mobile-menu-overlay">
+  <div class="mobile-menu-header">
+    <div class="mobile-logo">
+      <img src="Ekklesia_Agora.jpg" alt="Ekklesia Agora">
+      <span>Ekklesia Agora</span>
+    </div>
+    <button class="mobile-menu-close" onclick="closeMobileMenu()">✕</button>
+  </div>
+  <div style="padding:12px 20px;border-bottom:1px solid rgba(201,168,76,0.1);">
+    <div style="display:flex;gap:8px;">
+      <input type="text" id="mobileSearchInput" placeholder="Search videos…" style="flex:1;background:rgba(255,255,255,0.05);border:1px solid rgba(201,168,76,0.25);border-radius:3px;padding:9px 14px;color:var(--text-light);font-family:EB Garamond,serif;font-size:15px;outline:none;">
+      <button onclick="doMobileSearch()" style="background:var(--gold-dim);border:none;padding:9px 14px;color:var(--navy);border-radius:3px;cursor:pointer;font-size:15px;">⌕</button>
+    </div>
+  </div>
+  <div class="mobile-menu-links">
+    <a onclick="showPage('home');setActiveByName('Home');closeMobileMenu()">🏛 Home</a>
+    <a onclick="showPage('videos');setActiveByName('Videos');closeMobileMenu()">▶ Videos</a>
+    <a onclick="showPage('agora');setActiveByName('The Agora');closeMobileMenu()">💬 The Agora</a>
+    <a onclick="showPage('channels');setActiveByName('Channels');closeMobileMenu()">📺 Channels</a>
+    <a onclick="showPage('calendar');setActiveByName('Calendar');closeMobileMenu()">📅 Calendar</a>
+    <a id="mobile-messages-link" style="display:none;" onclick="showPage('messages');setActiveByName('Messages');closeMobileMenu()">✉ Messages</a>
+    <a onclick="showPage('about');setActiveByName('About');closeMobileMenu()">☩ About</a>
+    <a id="mobile-profile-link" style="display:none;" onclick="showPage('profile');setActiveByName('Profile');closeMobileMenu()">👤 My Profile</a>
+    <a id="mobile-edit-link" style="display:none;" onclick="openModal('editProfileModal');closeMobileMenu()">✎ Edit Profile</a>
+    <a id="mobile-signout-link" style="display:none;color:#e07070;" onclick="signOut();closeMobileMenu()">↩ Sign Out</a>
+    <a id="mobile-register-link" onclick="openModal('registerModal');closeMobileMenu()">✦ Create Account</a>
+    <a id="mobile-login-link" onclick="openModal('loginModal');closeMobileMenu()">→ Sign In</a>
+  </div>
+  <div class="mobile-menu-footer">
+    <div style="font-family:Cinzel,serif;font-size:10px;letter-spacing:2px;color:var(--gold-dim);text-align:center;text-transform:uppercase;">ἐκκλησία ἀγορά · The Assembly of the Marketplace</div>
+  </div>
+</div>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <div class="nav-logo" onclick="showPage('home');setActiveByName('Home')">
+      <img src="Ekklesia_Agora.jpg" alt="Ekklesia Agora">
+      <div class="nav-brand">
+        <span class="greek">ἐκκλησία ἀγορά</span>
+        <span class="name">Ekklesia Agora</span>
+      </div>
+    </div>
+    <div class="nav-links">
+      <a class="active" onclick="showPage('home');setActive(this)">Home</a>
+      <a onclick="showPage('videos');setActive(this)">Videos</a>
+      <a onclick="showPage('agora');setActive(this)">The Agora</a>
+      <a onclick="showPage('calendar');setActive(this)">Calendar</a>
+      <a onclick="showPage('channels');setActive(this)">Channels</a>
+      <a onclick="showPage('about');setActive(this)">About</a>
+      <a id="nav-profile-link" style="display:none;" onclick="showPage('profile');setActive(this)">Profile</a>
+      <a id="nav-messages-link" style="display:none;position:relative;" onclick="showPage('messages');setActive(this)">Messages <span id="msg-badge" style="display:none;background:var(--crimson);color:white;font-size:9px;border-radius:10px;padding:1px 5px;position:absolute;top:-4px;right:-8px;">!</span></a>
+    </div>
+    <div class="nav-right">
+      <div class="nav-search">
+        <input type="text" id="searchInput" placeholder="Search videos &amp; posts…" onkeydown="if(event.key==='Enter')doSearch()">
+        <button onclick="doSearch()">⌕</button>
+      </div>
+      <div id="nav-guest" style="display:flex;gap:8px;">
+        <button class="btn btn-outline" onclick="openModal('loginModal')">Sign In</button>
+        <button class="btn btn-gold" onclick="openModal('registerModal')">Join</button>
+      </div>
+      <div class="nav-user" id="nav-user" style="display:none;" onclick="toggleDropdown()">
+        <div class="nav-avatar" id="nav-avatar-icon">?</div>
+        <span class="nav-user-name" id="nav-user-name"></span>
+        <div class="user-dropdown" id="user-dropdown">
+          <a onclick="event.stopPropagation();showPage('profile');setActiveByName('Profile');closeDropdown()">☩ My Profile</a>
+          <a onclick="event.stopPropagation();openEditProfile();closeDropdown()">✎ Edit Profile</a>
+          <a onclick="event.stopPropagation();showPage('agora');setActiveByName('The Agora');closeDropdown()">💬 The Agora</a>
+          <a class="danger" onclick="event.stopPropagation();signOut()">↩ Sign Out</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- ══════════════════════════════════════
+     HOME
+══════════════════════════════════════ -->
+<div class="page active" id="page-home">
+  <div class="hero">
+    <img src="Ekklesia_Agora.jpg" alt="Ekklesia Agora" class="hero-logo">
+    <h1>Ekklesia Agora</h1>
+    <div class="tagline">✦ A Sacred Gathering Place for the Orthodox Faithful ✦</div>
+    <p>Videos, teachings, and community rooted in the Holy Tradition of the Eastern Orthodox Church.</p>
+    <div class="hero-actions">
+      <button class="btn btn-gold" onclick="showPage('videos');setActiveByName('Videos')">▶ Browse Videos</button>
+      <button class="btn btn-outline" onclick="showPage('agora');setActiveByName('The Agora')">☩ Enter the Agora</button>
+      <button class="btn btn-outline" onclick="showPage('calendar');setActiveByName('Calendar')">📅 Calendar</button>
+    </div>
+  </div>
+  <div class="container">
+    <div class="two-col">
+      <div>
+        <div class="section-header">
+          <h2>Featured Videos</h2>
+          <span class="badge">New</span>
+          <a onclick="showPage('videos');setActiveByName('Videos')">View All →</a>
+        </div>
+        <div class="video-grid" id="home-video-grid"></div>
+
+        <div class="section-header" style="margin-top:40px;">
+          <h2>From the Agora</h2>
+          <a onclick="showPage('agora');setActiveByName('The Agora')">View All →</a>
+        </div>
+        <div id="home-feed-preview"></div>
+      </div>
+      <aside>
+        <div class="sidebar-card">
+          <h3>Orthodox Info Center</h3>
+          <p style="font-size:12px;color:var(--text-mid);font-style:italic;margin-bottom:14px;line-height:1.5;">Explore the Holy Tradition. Select a topic to find videos from within our library.</p>
+          <ul class="category-list" id="info-center-list">
+            <li onclick="filterToCategory('Divine Liturgy')"><span class="cat-name"><span>☩</span> Divine Liturgy</span></li>
+            <li onclick="filterToCategory('Holy Scripture')"><span class="cat-name"><span>📖</span> Holy Scripture</span></li>
+            <li onclick="filterToCategory('Holy Fathers')"><span class="cat-name"><span>🕯</span> The Holy Fathers</span></li>
+            <li onclick="filterToCategory('Iconography')"><span class="cat-name"><span>🎨</span> Iconography</span></li>
+            <li onclick="filterToCategory('Trinity')"><span class="cat-name"><span>✝</span> The Holy Trinity</span></li>
+            <li onclick="filterToCategory('Chanting')"><span class="cat-name"><span>🎵</span> Chanting &amp; Music</span></li>
+            <li onclick="filterToCategory('Feast Days')"><span class="cat-name"><span>✦</span> Feast Days / Fast Days</span></li>
+            <li onclick="filterToCategory('Church History')"><span class="cat-name"><span>🏛</span> Church History</span></li>
+          </ul>
+        </div>
+        <div class="sidebar-card">
+          <h3>Live &amp; Upcoming</h3>
+          <div style="padding:8px 0;border-bottom:1px solid rgba(255,255,255,0.05);margin-bottom:10px;">
+            <div style="display:flex;align-items:center;gap:10px;margin-bottom:6px;">
+              <span class="live-badge"><span class="live-dot"></span>Live</span>
+              <span style="font-family:Cinzel,serif;font-size:11px;color:var(--gold)">Vespers Stream</span>
+            </div>
+            <p style="font-size:13px;color:var(--text-mid)">Holy Trinity Parish — Sunday Vespers</p>
+          </div>
+          <div style="padding:8px 0;">
+            <div style="font-family:Cinzel,serif;font-size:11px;color:var(--gold-dim);margin-bottom:4px;">⏰ Tomorrow 9:00 AM</div>
+            <p style="font-size:13px;color:var(--text-mid)">Great Vespers — St. Nicholas Cathedral</p>
+          </div>
+        </div>
+        <div class="sidebar-card">
+          <h3>Welcome, Pilgrim</h3>
+          <p style="font-size:14px;color:var(--text-mid);margin-bottom:16px;font-style:italic;line-height:1.6;">Join our community of Orthodox Christians sharing faith, liturgy, and Holy Tradition.</p>
+          <button class="btn btn-gold" style="width:100%;" onclick="openModal('registerModal')">Create Account</button>
+        </div>
+      </aside>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+     VIDEOS
+══════════════════════════════════════ -->
+<div class="page" id="page-videos">
+  <div class="container">
+    <div class="two-col">
+      <div>
+        <div class="section-header">
+          <h2>All Videos</h2>
+          <span class="badge">Active</span>
+        </div>
+        <div class="video-grid" id="all-video-grid"></div>
+      </div>
+      <aside>
+        <div class="sidebar-card">
+          <h3>Filter by Topic</h3>
+          <ul class="category-list" id="video-filter-list">
+            <li class="filter-active" onclick="filterVideos('All')"><span class="cat-name"><span>✦</span> All Videos</span><span class="cat-count" id="fc-all">10</span></li>
+            <li onclick="filterVideos('Divine Liturgy')"><span class="cat-name"><span>☩</span> Divine Liturgy</span><span class="cat-count" id="fc-liturgy">0</span></li>
+            <li onclick="filterVideos('Holy Scripture')"><span class="cat-name"><span>📖</span> Holy Scripture</span><span class="cat-count" id="fc-scripture">0</span></li>
+            <li onclick="filterVideos('Holy Fathers')"><span class="cat-name"><span>🕯</span> The Holy Fathers</span><span class="cat-count" id="fc-fathers">0</span></li>
+            <li onclick="filterVideos('Iconography')"><span class="cat-name"><span>🎨</span> Iconography</span><span class="cat-count" id="fc-icons">0</span></li>
+            <li onclick="filterVideos('Trinity')"><span class="cat-name"><span>✝</span> The Holy Trinity</span><span class="cat-count" id="fc-trinity">0</span></li>
+            <li onclick="filterVideos('Chanting')"><span class="cat-name"><span>🎵</span> Chanting &amp; Music</span><span class="cat-count" id="fc-chanting">0</span></li>
+            <li onclick="filterVideos('Feast Days')"><span class="cat-name"><span>✦</span> Feast Days / Fast Days</span><span class="cat-count" id="fc-feasts">0</span></li>
+            <li onclick="filterVideos('Church History')"><span class="cat-name"><span>🏛</span> Church History</span><span class="cat-count" id="fc-history">0</span></li>
+            <li onclick="filterVideos('Apologetics')"><span class="cat-name"><span>⚔</span> Apologetics</span><span class="cat-count" id="fc-apol">0</span></li>
+            <li onclick="filterVideos('Spiritual Life')"><span class="cat-name"><span>🕊</span> Spiritual Life</span><span class="cat-count" id="fc-spirit">0</span></li>
+          </ul>
+        </div>
+        <div class="sidebar-card">
+          <h3>Featured Creators</h3>
+          <div style="padding:8px 0;border-bottom:1px solid rgba(255,255,255,0.05);margin-bottom:10px;">
+            <div style="font-family:Cinzel,serif;font-size:13px;color:var(--gold);margin-bottom:3px;">Patristic Nectar</div>
+            <div style="font-size:12px;color:var(--text-mid);">Fr. Josiah Trenham</div>
+          </div>
+          <div style="padding:8px 0;border-bottom:1px solid rgba(255,255,255,0.05);margin-bottom:10px;">
+            <div style="font-family:Cinzel,serif;font-size:13px;color:var(--gold);margin-bottom:3px;">Reader Paul</div>
+            <div style="font-size:12px;color:var(--text-mid);">Orthodox apologetics &amp; theology</div>
+          </div>
+          <div style="padding:8px 0;border-bottom:1px solid rgba(255,255,255,0.05);margin-bottom:10px;">
+            <div style="font-family:Cinzel,serif;font-size:13px;color:var(--gold);margin-bottom:3px;">Orthodox Kyle</div>
+            <div style="font-size:12px;color:var(--text-mid);">Faith &amp; culture</div>
+          </div>
+          <div style="padding:8px 0;border-bottom:1px solid rgba(255,255,255,0.05);margin-bottom:10px;">
+            <div style="font-family:Cinzel,serif;font-size:13px;color:var(--gold);margin-bottom:3px;">Barrel Aged Faith</div>
+            <div style="font-size:12px;color:var(--text-mid);">Orthodox perspectives</div>
+          </div>
+          <div style="padding:8px 0;border-bottom:1px solid rgba(255,255,255,0.05);margin-bottom:10px;">
+            <div style="font-family:Cinzel,serif;font-size:13px;color:var(--gold);margin-bottom:3px;">Jay Dyer</div>
+            <div style="font-size:12px;color:var(--text-mid);">Philosophy &amp; theology</div>
+          </div>
+          <div style="padding:8px 0;">
+            <div style="font-family:Cinzel,serif;font-size:13px;color:var(--gold);margin-bottom:3px;">Orthodox Ethos</div>
+            <div style="font-size:12px;color:var(--text-mid);">Patristic tradition</div>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+     VIDEO DETAIL
+══════════════════════════════════════ -->
+<div class="page" id="page-video-detail">
+  <div class="container">
+    <span class="back-link" onclick="goBack()">← Back</span>
+    <div class="two-col">
+      <div>
+        <div class="video-player-wrap">
+          <div class="player-placeholder" id="player-placeholder">
+            <div class="big-icon">▶</div>
+            <span>Loading…</span>
+          </div>
+          <iframe id="yt-iframe" allowfullscreen allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" style="display:none;"></iframe>
+        </div>
+        <h2 class="video-detail-title" id="vd-title"></h2>
+        <div class="video-detail-meta">
+          <span class="channel-name" id="vd-channel"></span>
+          <div style="margin-left:auto;display:flex;gap:8px;">
+            <button class="btn btn-outline" onclick="likePost(this)" style="font-size:10px;padding:6px 16px;">♡ Like</button>
+            <button class="btn btn-outline" style="font-size:10px;padding:6px 16px;">↗ Share</button>
+          </div>
+        </div>
+        <div class="credit-banner" id="vd-credit"></div>
+        <div class="video-desc" id="vd-desc"></div>
+        <div class="section-header"><h2>Comments</h2></div>
+        <div class="post-composer" style="margin-bottom:20px;">
+          <div class="composer-header"><div class="avatar sm">?</div><span>Sign in to leave a comment</span></div>
+          <textarea class="post-textarea" placeholder="Share your thoughts…" rows="3" style="min-height:70px;"></textarea>
+          <div class="composer-footer"><span></span><button class="btn btn-gold" onclick="showToast('Sign in to post a comment ☩')">Post Comment</button></div>
+        </div>
+        <div class="comment"><div class="avatar sm">Μ</div><div class="comment-body"><div class="author">Maria Theotokis · 2 days ago</div><p>Glory to God! This is exactly the kind of content our community needs. Lord have mercy!</p></div></div>
+        <div class="comment"><div class="avatar sm">P</div><div class="comment-body"><div class="author">Pavel Andreev · 4 days ago</div><p>I shared this with my catechumen group. Very helpful. Thank you, Father!</p></div></div>
+      </div>
+      <aside>
+        <div class="sidebar-card">
+          <h3>Up Next</h3>
+          <div class="related-list" id="related-list"></div>
+        </div>
+      </aside>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+     AGORA
+══════════════════════════════════════ -->
+<div class="page" id="page-agora">
+  <div class="container">
+    <div class="two-col">
+      <div>
+        <div class="section-header"><h2>The Agora</h2><span class="badge">Community</span></div>
+
+        <!-- Name input -->
+        <div class="post-composer">
+          <div class="name-input-wrap" id="name-input-wrap">
+            <div class="avatar">☩</div>
+            <input type="text" class="name-field" id="posterName" placeholder="Your name (optional)" maxlength="40">
+          </div>
+          <textarea class="post-textarea" id="postInput" placeholder="Share a prayer, reflection, or question with the Orthodox faithful…" oninput="updateCharCount(this)"></textarea>
+          <div class="composer-footer">
+            <div class="composer-tools">
+              <button class="tool-btn">📷 Photo</button>
+              <button class="tool-btn">🔗 Link</button>
+              <button class="tool-btn">📖 Scripture</button>
+            </div>
+            <div style="display:flex;align-items:center;gap:14px;">
+              <span class="char-count" id="charCount">0 / 500</span>
+              <button class="btn btn-gold" onclick="submitPost()">Post ☩</button>
+            </div>
+          </div>
+        </div>
+
+        <div id="post-feed">
+          <div class="post-card">
+            <div class="post-header"><div class="avatar">Ν</div><div class="post-author"><div class="name">Nikolaos Stavros</div><div class="meta">3 hours ago · <span style="color:var(--gold-dim)">Elder Member</span></div></div></div>
+            <div class="post-body">"The mind that has been purified and illumined sees things divine." — St. John Chrysostom. Blessed Sunday to all faithful gathered here. May our fasting and prayer draw us ever closer to the Holy Trinity. ☩</div>
+            <div class="post-actions"><button class="post-action" onclick="likePost(this)">♡ 24</button><button class="post-action" onclick="showToast('Sign in to reply ☩')">💬 8</button><button class="post-action">↗ Share</button></div>
+          </div>
+          <div class="post-card">
+            <div class="post-header"><div class="avatar">Μ</div><div class="post-author"><div class="name">Maria Theotokis</div><div class="meta">Yesterday · <span style="color:var(--gold-dim)">Member</span></div></div></div>
+            <div class="post-body">Does anyone have recommendations for good introductory books on the Desert Fathers? I am just beginning to explore the Philokalia and would love to start with something more accessible. ✦</div>
+            <div class="post-actions"><button class="post-action" onclick="likePost(this)">♡ 17</button><button class="post-action" onclick="showToast('Sign in to reply ☩')">💬 12</button><button class="post-action">↗ Share</button></div>
+          </div>
+          <div class="post-card">
+            <div class="post-header"><div class="avatar">P</div><div class="post-author"><div class="name">Pavel Andreev</div><div class="meta">2 days ago · <span style="color:var(--gold-dim)">Catechumen</span></div></div></div>
+            <div class="post-body">Just attended my first Divine Liturgy at an Antiochian parish. The chanting, the incense, the icons — I felt I had stepped outside of time into something eternal. My heart is full. Lord have mercy. 🕯</div>
+            <div class="post-actions"><button class="post-action" onclick="likePost(this)">♡ 41</button><button class="post-action" onclick="showToast('Sign in to reply ☩')">💬 19</button><button class="post-action">↗ Share</button></div>
+          </div>
+          <div class="post-card">
+            <div class="post-header"><div class="avatar">A</div><div class="post-author"><div class="name">Anastasia Kuznetsova</div><div class="meta">3 days ago · <span style="color:var(--gold-dim)">Member</span></div></div></div>
+            <div class="post-body">Reminder that Great Vespers will be livestreamed this Saturday evening at 6 PM ET from Holy Trinity Cathedral. All are welcome to join in prayer. ☩</div>
+            <div class="post-actions"><button class="post-action" onclick="likePost(this)">♡ 33</button><button class="post-action" onclick="showToast('Sign in to reply ☩')">💬 5</button><button class="post-action">↗ Share</button></div>
+          </div>
+        </div>
+      </div>
+      <aside>
+        <div class="sidebar-card">
+          <h3>Community Pillars</h3>
+          <ul class="category-list">
+            <li><span class="cat-name">💬 General Discussion</span><span class="cat-count">142</span></li>
+            <li><span class="cat-name">🙏 Prayer Requests</span><span class="cat-count">87</span></li>
+            <li><span class="cat-name">📖 Scripture Study</span><span class="cat-count">55</span></li>
+            <li><span class="cat-name">🕯 Fasting &amp; Feasts</span><span class="cat-count">39</span></li>
+            <li><span class="cat-name">🆕 Inquirers</span><span class="cat-count">28</span></li>
+            <li><span class="cat-name">🏛 Parish Life</span><span class="cat-count">61</span></li>
+          </ul>
+        </div>
+        <div class="sidebar-card">
+          <h3>Trending Tags</h3>
+          <div style="display:flex;flex-wrap:wrap;gap:8px;">
+            <span class="tag" style="cursor:pointer;padding:5px 12px;">#DivineLiturgy</span>
+            <span class="tag" style="cursor:pointer;padding:5px 12px;">#GreatLent</span>
+            <span class="tag" style="cursor:pointer;padding:5px 12px;">#Theosis</span>
+            <span class="tag" style="cursor:pointer;padding:5px 12px;">#DesertFathers</span>
+            <span class="tag" style="cursor:pointer;padding:5px 12px;">#Icons</span>
+            <span class="tag" style="cursor:pointer;padding:5px 12px;">#ByzantineChant</span>
+            <span class="tag" style="cursor:pointer;padding:5px 12px;">#Philokalia</span>
+            <span class="tag" style="cursor:pointer;padding:5px 12px;">#Catechumens</span>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+     CALENDAR
+══════════════════════════════════════ -->
+<div class="page" id="page-calendar">
+  <div class="container">
+    <div class="section-header">
+      <h2>Orthodox Calendar 2026</h2>
+    </div>
+    <div style="margin-bottom:20px;">
+      <div class="cal-toggle-wrap">
+        <button class="cal-toggle-btn active" id="toggle-new" onclick="setCalMode('new')">New Calendar</button>
+        <div class="cal-toggle-divider"></div>
+        <button class="cal-toggle-btn" id="toggle-old" onclick="setCalMode('old')">Old Calendar</button>
+      </div>
+      <p id="cal-mode-desc" style="color:var(--text-mid);font-style:italic;font-size:13px;text-align:center;margin-top:10px;line-height:1.6;"></p>
+    </div>
+    <div class="cal-wrap">
+      <div class="cal-header">
+        <div>
+          <h2 id="cal-month-title">March 2026</h2>
+          <div class="cal-sub" id="cal-julian-month">Julian: February / March 2026</div>
+        </div>
+        <div class="cal-nav">
+          <button onclick="changeMonth(-1)">‹</button>
+          <div class="month-label" id="cal-nav-label">March 2026</div>
+          <button onclick="changeMonth(1)">›</button>
+        </div>
+      </div>
+      <div class="cal-grid-wrap">
+        <div class="cal-days-header">
+          <span>Sun</span><span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span>
+        </div>
+        <div class="cal-grid" id="cal-grid"></div>
+      </div>
+      <div class="cal-legend">
+        <span><span class="dot-gold"></span> Feast Day</span>
+        <span><span class="dot-red"></span> Fast Day / Period</span>
+        <span><span class="dot-blue"></span> Name Day</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FEAST POPUP -->
+<div class="feast-popup" id="feastPopup">
+  <div class="feast-box">
+    <button class="close-btn" onclick="closeFeast()">✕</button>
+    <div class="feast-type-badge" id="feast-badge"></div>
+    <h3 id="feast-title"></h3>
+    <div class="feast-date" id="feast-date"></div>
+    <p id="feast-desc"></p>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+     ABOUT
+══════════════════════════════════════ -->
+<div class="page" id="page-about">
+  <div class="about-hero">
+    <img src="Ekklesia_Agora.jpg" alt="Ekklesia Agora" class="logo-large">
+    <h1 style="font-family:'Cinzel Decorative',serif;font-size:clamp(24px,4vw,42px);color:var(--gold);margin-bottom:8px;">Ekklesia Agora</h1>
+    <div style="font-family:Cinzel,serif;font-size:13px;letter-spacing:4px;color:var(--text-mid);text-transform:uppercase;margin-bottom:20px;">ἐκκλησία ἀγορά · The Assembly of the Marketplace</div>
+    <div class="ornament">☩</div>
+  </div>
+  <div class="container">
+    <div class="values-block">
+      <h2>Our Mission</h2>
+      <p>Ekklesia Agora is a gathering place for Eastern Orthodox Christians — a digital Agora where the faithful can find authentic Orthodox video content, share in communal life, and be formed in the Holy Tradition passed down from the Apostles.</p>
+      <p>In a world of noise and distraction, we offer a sacred space: rooted in Scripture, guided by the Fathers, and centered on the Eucharistic life of the Church.</p>
+      <div class="scripture">"Where two or three are gathered in My name, there am I in the midst of them."<cite>— Matthew 18:20</cite></div>
+    </div>
+    <div class="about-grid">
+      <div class="about-card"><span class="icon">☩</span><h3>Orthodox Only</h3><p>Every video, every voice, every teaching here is firmly rooted in Eastern Orthodox Christianity. No compromises. Holy Tradition preserved.</p></div>
+      <div class="about-card"><span class="icon">🏛</span><h3>A Living Community</h3><p>More than a video platform — a community. Share reflections, ask questions, pray together, and grow in the life of the Church.</p></div>
+      <div class="about-card"><span class="icon">🕯</span><h3>Formed by the Fathers</h3><p>Our content draws from the inexhaustible well of patristic wisdom — St. John Chrysostom, St. Basil the Great, St. Gregory Palamas, and the whole cloud of witnesses.</p></div>
+      <div class="about-card"><span class="icon">✦</span><h3>Open to Inquirers</h3><p>Curious about Orthodoxy? Come and see, as the Apostle Philip once said. All sincere seekers are welcome here.</p></div>
+    </div>
+    <div class="values-block" style="margin-top:32px;">
+      <h2>Built on PeerTube</h2>
+      <p>Ekklesia Agora is built on PeerTube — a free, open-source, decentralized video platform. No algorithms, no advertising, no corporate control over sacred content.</p>
+      <div style="margin-top:24px;display:flex;gap:14px;justify-content:center;flex-wrap:wrap;">
+        <button class="btn btn-gold" onclick="openModal('registerModal')">Join the Community</button>
+        <button class="btn btn-outline" onclick="showPage('videos');setActiveByName('Videos')">Browse Videos</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+     PROFILE PAGE
+══════════════════════════════════════ -->
+<div class="page" id="page-profile">
+  <div class="profile-hero">
+    <div class="profile-hero-inner">
+      <div class="profile-avatar-wrap">
+        <div class="profile-avatar" id="profile-avatar-display">?</div>
+        <div class="profile-avatar-edit" onclick="openEditProfile()" title="Edit profile">✎</div>
+      </div>
+      <div class="profile-info">
+        <div class="profile-name" id="profile-name-display">Your Name</div>
+        <div class="profile-jurisdiction" id="profile-jurisdiction-display"></div>
+        <div class="profile-bio" id="profile-bio-display"></div>
+        <div class="profile-actions">
+          <button class="btn btn-gold" onclick="openEditProfile()">✎ Edit Profile</button>
+          <button class="btn btn-outline" onclick="showPage('agora');setActiveByName('The Agora')">💬 Go to the Agora</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="profile-body">
+    <div class="profile-section">
+      <h3>Your Recent Posts</h3>
+      <div id="profile-posts">
+        <p style="color:var(--text-mid);font-style:italic;font-size:15px;">You have not made any posts yet. Head to the Agora to share your first reflection!</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+     CHANNELS
+══════════════════════════════════════ -->
+<div class="page" id="page-channels">
+  <div class="container">
+    <div class="section-header">
+      <h2>Orthodox Channels</h2>
+      <span class="badge">Curated</span>
+    </div>
+    <p style="color:var(--text-mid);font-style:italic;margin-bottom:8px;font-size:15px;max-width:700px;">A gathering of faithful Orthodox voices — priests, theologians, converts, and teachers — whose work is grounded in Holy Scripture, the writings of the Holy Fathers, and the living Tradition of the One Holy Catholic and Apostolic Church.</p>
+    <div class="ornament">☩</div>
+    <div class="channels-grid" id="channels-grid"></div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+     MESSAGES
+══════════════════════════════════════ -->
+<div class="page" id="page-messages">
+  <div class="container">
+    <div class="section-header">
+      <h2>Messages</h2>
+    </div>
+    <div id="messages-login-prompt" style="text-align:center;padding:48px 0;display:none;">
+      <p style="color:var(--text-mid);font-style:italic;margin-bottom:20px;">You must be signed in to send and receive private messages.</p>
+      <button class="btn btn-gold" onclick="openModal('loginModal')">Sign In</button>
+      <button class="btn btn-outline" style="margin-left:12px;" onclick="openModal('registerModal')">Create Account</button>
+    </div>
+    <div id="messages-ui" style="display:none;">
+      <div class="messages-wrap">
+        <div class="convo-list">
+          <div class="convo-list-header">
+            <h3>Conversations</h3>
+            <button class="btn btn-gold" style="font-size:9px;padding:5px 10px;" onclick="openNewMessage()">+ New</button>
+          </div>
+          <div id="convo-list-items">
+            <div style="padding:20px;color:var(--text-mid);font-size:13px;font-style:italic;text-align:center;">No conversations yet.</div>
+          </div>
+        </div>
+        <div class="msg-panel" id="msg-panel">
+          <div class="msg-no-convo" id="msg-no-convo">Select a conversation or start a new one ☩</div>
+          <div id="msg-active-panel" style="display:none;flex-direction:column;height:100%;">
+            <div class="msg-panel-header" id="msg-panel-header">Conversation</div>
+            <div class="msg-feed" id="msg-feed"></div>
+            <div class="msg-compose">
+              <input type="text" id="msg-input" placeholder="Write a message…" onkeydown="if(event.key==='Enter')sendMessage()">
+              <button class="btn btn-gold" onclick="sendMessage()">Send ☩</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- NEW MESSAGE MODAL -->
+<div class="modal-overlay" id="newMessageModal">
+  <div class="modal" style="max-width:400px;">
+    <button class="modal-close" onclick="closeModal('newMessageModal')">✕</button>
+    <h2>New Message</h2>
+    <div class="modal-sub">Send a private message</div>
+    <div class="form-field"><label>To (Display Name)</label><input type="text" id="new-msg-to" placeholder="Enter recipient's display name…"></div>
+    <div class="form-field"><label>Message</label><textarea id="new-msg-body" placeholder="Write your message…" rows="4" style="width:100%;background:rgba(255,255,255,0.05);border:1px solid rgba(201,168,76,0.25);border-radius:3px;padding:10px 14px;color:var(--text-light);font-family:'EB Garamond',serif;font-size:15px;outline:none;resize:vertical;"></textarea></div>
+    <button class="btn btn-gold" style="width:100%;margin-top:8px;" onclick="sendNewMessage()">Send Message ☩</button>
+  </div>
+</div>
+
+<!-- SEARCH RESULTS -->
+<div class="page" id="page-search">
+  <div class="container">
+    <span class="back-link" onclick="goBack()">← Back</span>
+    <div class="section-header"><h2 id="search-heading">Search Results</h2></div>
+    <div class="video-grid" id="search-results"></div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-cross">☩</div>
+  <div class="footer-brand">Ekklesia Agora</div>
+  <div class="ornament" style="margin:10px 0;">✦</div>
+  <p>A sacred space for the Eastern Orthodox faithful · Built on PeerTube</p>
+  <p style="margin-top:8px;font-size:12px;color:var(--gold-dim);font-family:Cinzel,serif;letter-spacing:2px;">PROTOTYPE · v0.3</p>
+</footer>
+
+<!-- CONTACT FOOTER -->
+<div class="contact-footer" id="contact-section">
+  <div class="contact-inner">
+    <div>
+      <h3>Contact Us</h3>
+      <p style="color:var(--text-mid);font-size:14px;line-height:1.7;margin-bottom:20px;font-style:italic;">"Bear one another's burdens, and so fulfill the law of Christ." — Galatians 6:2<br><br>Have a question, a suggestion, or a need for prayer? We welcome you. Your message will go directly to the administrator.</p>
+      <div style="font-family:'Cinzel',serif;font-size:10px;letter-spacing:2px;color:var(--gold-dim);text-transform:uppercase;margin-bottom:8px;">Ekklesia Agora</div>
+      <div style="font-size:13px;color:var(--text-mid);">ἐκκλησία ἀγορά · The Assembly of the Marketplace</div>
+    </div>
+    <div>
+      <div id="contact-form">
+        <div class="contact-form-field"><label>Your Name</label><input type="text" id="contact-name" placeholder="Your name or 'Anonymous'"></div>
+        <div class="contact-form-field"><label>Subject</label>
+          <select id="contact-subject">
+            <option value="">— Select a subject —</option>
+            <option>Prayer Request</option>
+            <option>General Question</option>
+            <option>Suggestion for the Site</option>
+            <option>Video / Channel Suggestion</option>
+            <option>Technical Issue</option>
+            <option>Spiritual Direction (I need guidance)</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div class="contact-form-field"><label>Message</label><textarea id="contact-message" placeholder="Write your message here…"></textarea></div>
+        <button class="btn btn-gold" style="width:100%;" onclick="submitContact()">Send Message ☩</button>
+      </div>
+      <div id="contact-success" style="display:none;text-align:center;padding:32px 0;">
+        <div style="font-size:32px;margin-bottom:12px;">☩</div>
+        <div style="font-family:'Cinzel',serif;font-size:14px;color:var(--gold);margin-bottom:8px;">Message Sent</div>
+        <div style="color:var(--text-mid);font-size:14px;font-style:italic;">Your message has been received. God be with you.</div>
+        <button class="btn btn-outline" style="margin-top:16px;" onclick="resetContact()">Send Another</button>
+      </div>
+    </div>
+  </div>
+  <div style="text-align:center;margin-top:40px;padding-top:24px;border-top:1px solid rgba(201,168,76,0.1);">
+    <div style="font-family:'Cinzel Decorative',serif;font-size:14px;color:var(--gold-dim);margin-bottom:8px;">Ekklesia Agora</div>
+    <div style="font-family:'Cinzel',serif;font-size:10px;letter-spacing:3px;color:var(--gold-dim);text-transform:uppercase;opacity:0.6;">ἐκκλησία ἀγορά · Come and See · ☩</div>
+  </div>
+</div>
+
+<!-- MODALS -->
+<div class="modal-overlay" id="loginModal">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal('loginModal')">✕</button>
+    <h2>Sign In</h2>
+    <div class="modal-sub">Welcome back, faithful pilgrim</div>
+    <div class="form-field"><label>Email</label><input type="email" id="login-email" placeholder="your@email.com" autocomplete="email"></div>
+    <div class="form-field"><label>Password</label><input type="password" id="login-password" placeholder="••••••••" autocomplete="current-password" onkeydown="if(event.key==='Enter')doLogin()"></div>
+    <button class="btn btn-gold" style="width:100%;margin-top:8px;" onclick="doLogin()">Sign In ☩</button>
+    <div class="modal-divider">or</div>
+    <button class="btn btn-outline" style="width:100%;" onclick="closeModal('loginModal');openModal('registerModal')">Create a New Account</button>
+  </div>
+</div>
+<div class="modal-overlay" id="registerModal">
+  <div class="modal" style="max-height:90vh;overflow-y:auto;">
+    <button class="modal-close" onclick="closeModal('registerModal')">✕</button>
+    <h2>Join the Agora</h2>
+    <div class="modal-sub">ἐκκλησία ἀγορά · Come and See</div>
+    <div class="form-field"><label>Display Name</label><input type="text" id="reg-name" placeholder="Nikolaos, Maria, Fr. John…" autocomplete="name"></div>
+    <div class="form-field"><label>Email</label><input type="email" id="reg-email" placeholder="your@email.com" autocomplete="email"></div>
+    <div class="form-field"><label>Password <span style="color:var(--text-mid);font-size:13px;">(min. 6 characters)</span></label><input type="password" id="reg-password" placeholder="••••••••" autocomplete="new-password"></div>
+    <div class="form-field"><label>Confirm Password</label><input type="password" id="reg-confirm" placeholder="••••••••" autocomplete="new-password"></div>
+    <div class="form-field"><label>Parish / Jurisdiction (optional)</label>
+      <select id="reg-jurisdiction">
+        <option value="">— Select your jurisdiction —</option>
+        <option>OCA — Orthodox Church in America</option>
+        <option>Antiochian Orthodox</option>
+        <option>ROCOR — Russian Orthodox Church Outside Russia</option>
+        <option>Greek Orthodox Archdiocese (Ecumenical Patriarchate)</option>
+        <option>Serbian Orthodox</option>
+        <option>Romanian Orthodox</option>
+        <option>Bulgarian Orthodox</option>
+        <option>Georgian Orthodox</option>
+        <option>Coptic Orthodox</option>
+        <option>Ethiopian Orthodox</option>
+        <option>Syriac Orthodox</option>
+        <option>Other / Inquirer</option>
+      </select>
+    </div>
+    <div class="form-field"><label>Short Bio (optional)</label><textarea id="reg-bio" placeholder="A few words about your faith journey…" rows="2"></textarea></div>
+    <button class="btn btn-gold" style="width:100%;margin-top:8px;" onclick="doRegister()">Create Account ☩</button>
+    <div class="modal-divider">already a member?</div>
+    <button class="btn btn-outline" style="width:100%;" onclick="closeModal('registerModal');openModal('loginModal')">Sign In Instead</button>
+  </div>
+</div>
+
+<!-- EDIT PROFILE MODAL -->
+<div class="modal-overlay" id="editProfileModal">
+  <div class="modal" style="max-width:520px;">
+    <button class="modal-close" onclick="closeModal('editProfileModal')">✕</button>
+    <h2>Edit Profile</h2>
+    <div class="modal-sub">ἐκκλησία ἀγορά</div>
+    <div class="profile-photo-upload">
+      <div class="upload-avatar-preview" id="edit-avatar-preview">?</div>
+      <div>
+        <div style="font-family:Cinzel,serif;font-size:11px;color:var(--gold-dim);letter-spacing:1px;margin-bottom:8px;text-transform:uppercase;">Profile Photo</div>
+        <label class="upload-btn" for="photo-upload-input">📷 Upload Photo</label>
+        <input type="file" id="photo-upload-input" accept="image/*" style="display:none;" onchange="handlePhotoUpload(this)">
+        <button class="upload-btn" style="margin-left:8px;" onclick="removePhoto()">Remove</button>
+      </div>
+    </div>
+    <div class="form-field"><label>Display Name</label><input type="text" id="edit-name" placeholder="Your name…"></div>
+    <div class="form-field"><label>Parish / Jurisdiction</label>
+      <select id="edit-jurisdiction">
+        <option value="">— Select your jurisdiction —</option>
+        <option>OCA — Orthodox Church in America</option>
+        <option>Antiochian Orthodox</option>
+        <option>ROCOR — Russian Orthodox Church Outside Russia</option>
+        <option>Greek Orthodox Archdiocese (Ecumenical Patriarchate)</option>
+        <option>Serbian Orthodox</option>
+        <option>Romanian Orthodox</option>
+        <option>Bulgarian Orthodox</option>
+        <option>Georgian Orthodox</option>
+        <option>Coptic Orthodox</option>
+        <option>Ethiopian Orthodox</option>
+        <option>Syriac Orthodox</option>
+        <option>Other / Inquirer</option>
+      </select>
+    </div>
+    <div class="form-field"><label>Bio</label><textarea id="edit-bio" placeholder="Share a little about your faith journey…" rows="3"></textarea></div>
+    <button class="btn btn-gold" style="width:100%;margin-top:8px;" onclick="saveProfile()">Save Profile ☩</button>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script type="module">
+// ═══════════════════════════════════════
+// FIREBASE SETUP
+// ═══════════════════════════════════════
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut as fbSignOut, onAuthStateChanged, updateProfile } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+import { getFirestore, doc, setDoc, getDoc, collection, addDoc, query, orderBy, onSnapshot, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyAJxWVeMcOoQ26Px5QbtI7RUNv_aS4R6Es",
+  authDomain: "ekklesia-agora.firebaseapp.com",
+  projectId: "ekklesia-agora",
+  storageBucket: "ekklesia-agora.firebasestorage.app",
+  messagingSenderId: "962919103973",
+  appId: "1:962919103973:web:1fb35c6e6623f5603e030c"
+};
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const db = getFirestore(app);
+
+// ═══════════════════════════════════════
+// VIDEO DATA
+// ═══════════════════════════════════════
+var videos = [
+  // ── PATRISTIC NECTAR (Fr. Josiah Trenham) ──────────────────────────────────
+  { title:"The Right Way to Venerate an Icon", channel:"Fr. Josiah Trenham", org:"Patristic Nectar", credit:"Video courtesy of Fr. Josiah Trenham & Patristic Nectar Publications", desc:"Fr. Josiah Trenham of Patristic Nectar Publications teaches the proper Orthodox manner of venerating a holy icon — the correct posture, the kiss, the sign of the cross, and the theological meaning behind each gesture. A beautiful and reverent practice at the heart of Orthodox worship and personal piety.", ytId:"Rfp0IPt4jXQ", thumb:"https://img.youtube.com/vi/Rfp0IPt4jXQ/hqdefault.jpg", tags:["Icons","Piety","Divine Liturgy"] },
+  { title:"The New World Order", channel:"Fr. Josiah Trenham", org:"Patristic Nectar", credit:"Video courtesy of Fr. Josiah Trenham & Patristic Nectar Publications", desc:"Fr. Josiah Trenham offers a penetrating Orthodox Christian perspective on the ideology of the New World Order — examining the spiritual roots of globalism through Holy Scripture, the Church Fathers, and the prophetic witness of Holy Tradition.", ytId:"BxbHtmhmopU", thumb:"https://img.youtube.com/vi/BxbHtmhmopU/hqdefault.jpg", tags:["Culture","Holy Fathers","Church History"] },
+  { title:"Rock and Sand: An Orthodox Appraisal of Western Christianity", channel:"Fr. Josiah Trenham", org:"Patristic Nectar", credit:"Video courtesy of Fr. Josiah Trenham & Patristic Nectar Publications", desc:"Based on his landmark book, Fr. Josiah Trenham presents a comprehensive Orthodox evaluation of Western Christian traditions — examining where Rome and the Reformation departed from the apostolic deposit of Holy Orthodoxy.", ytId:"nSlZMeYD-PE", thumb:"https://img.youtube.com/vi/nSlZMeYD-PE/hqdefault.jpg", tags:["Apologetics","Church History","Holy Fathers"] },
+  { title:"The Theotokos: Why Orthodox Christians Honor Mary", channel:"Fr. Josiah Trenham", org:"Patristic Nectar", credit:"Video courtesy of Fr. Josiah Trenham & Patristic Nectar Publications", desc:"Fr. Josiah Trenham explains the Orthodox veneration of the Most Holy Theotokos — the God-Bearer — drawing on the Scriptures, the Ecumenical Councils, and the unanimous testimony of the Holy Fathers. Essential for converts and inquirers.", ytId:"Rfp0IPt4jXQ", thumb:"https://img.youtube.com/vi/Rfp0IPt4jXQ/hqdefault.jpg", tags:["Theotokos","Holy Fathers","Apologetics"] },
+  { title:"Technology and the Spiritual Life", channel:"Fr. Josiah Trenham", org:"Patristic Nectar", credit:"Video courtesy of Fr. Josiah Trenham & Patristic Nectar Publications", desc:"Fr. Josiah Trenham delivers a searching examination of how digital technology, social media, and constant connectivity affect the Orthodox Christian soul — drawing on the desert fathers and the Church's tradition of stillness (hesychia).", ytId:"BxbHtmhmopU", thumb:"https://img.youtube.com/vi/BxbHtmhmopU/hqdefault.jpg", tags:["Spiritual Life","Holy Fathers","Culture"] },
+
+  // ── ORTHODOX KYLE ──────────────────────────────────────────────────────────
+  { title:"The ONLY Way to Beat the Devil", channel:"Orthodox Kyle", org:"Orthodox Kyle", credit:"Video courtesy of Orthodox Kyle", desc:"Orthodox Kyle draws on the wisdom of the Holy Fathers and the lived tradition of the Orthodox Church to explain the only true and lasting way to overcome the temptations and attacks of the evil one — through prayer, fasting, and the sacramental life.", ytId:"T9aQ2bgA2cI", thumb:"https://img.youtube.com/vi/T9aQ2bgA2cI/hqdefault.jpg", tags:["Spiritual Life","Holy Fathers","Apologetics"] },
+  { title:"BEFORE You Read Fr. Seraphim Rose…", channel:"Orthodox Kyle", org:"Orthodox Kyle", credit:"Video courtesy of Orthodox Kyle", desc:"Essential context and spiritual preparation before reading Fr. Seraphim Rose — one of the most widely read and beloved Orthodox authors of the 20th century. Orthodox Kyle explains the theological framework needed to properly receive his writings.", ytId:"z-WoSI0Sads", thumb:"https://img.youtube.com/vi/z-WoSI0Sads/hqdefault.jpg", tags:["Holy Fathers","Spiritual Life","Church History"] },
+  { title:"Why I Became Orthodox: The Convert Experience", channel:"Orthodox Kyle", org:"Orthodox Kyle", credit:"Video courtesy of Orthodox Kyle", desc:"Orthodox Kyle shares his personal journey into the Orthodox Church, examining what drew him away from Western Christianity and into the ancient faith — a testimony that will resonate with many inquirers and converts.", ytId:"T9aQ2bgA2cI", thumb:"https://img.youtube.com/vi/T9aQ2bgA2cI/hqdefault.jpg", tags:["Spiritual Life","Apologetics","Church History"] },
+
+  // ── ALEX SORIN ─────────────────────────────────────────────────────────────
+  { title:"Fatal Epistemology & The Evisceration of Protestantism", channel:"Alex Sorin", org:"Alex Sorin", credit:"Video courtesy of Alex Sorin", desc:"A rigorous examination of the epistemological foundations of Protestantism — Alex Sorin, an Orthodox lawyer and apologist, demonstrates why sola scriptura ultimately fails on its own terms and why Holy Tradition and the Church are indispensable to Christian epistemology.", ytId:"LyBheYcxkso", thumb:"https://img.youtube.com/vi/LyBheYcxkso/hqdefault.jpg", tags:["Apologetics","Holy Scripture","Church History"] },
+  { title:"Why Becoming Orthodox Is A Matter of Salvation", channel:"Alex Sorin", org:"Alex Sorin", credit:"Video courtesy of Alex Sorin", desc:"Alex Sorin makes the case that embracing the Eastern Orthodox Church is not merely a matter of preference or piety, but a matter of eternal salvation — essential viewing for those exploring the Orthodox Faith and its apostolic claims.", ytId:"KXd4eBdJtFY", thumb:"https://img.youtube.com/vi/KXd4eBdJtFY/hqdefault.jpg", tags:["Apologetics","Spiritual Life","Holy Fathers"] },
+  { title:"Orthodoxy vs. Roman Catholicism: The Filioque", channel:"Alex Sorin", org:"Alex Sorin", credit:"Video courtesy of Alex Sorin", desc:"Alex Sorin presents a careful Orthodox examination of the Filioque controversy — the insertion of the phrase 'and the Son' into the Nicene Creed by the Western Church — and why it represents a fundamental theological departure from the apostolic faith.", ytId:"KXd4eBdJtFY", thumb:"https://img.youtube.com/vi/KXd4eBdJtFY/hqdefault.jpg", tags:["Apologetics","Church History","Trinity"] },
+
+  // ── BARREL AGED FAITH ──────────────────────────────────────────────────────
+  { title:"We Only Have Two Choices: Become An Elder or Become A Machine", channel:"Barrel Aged Faith", org:"Barrel Aged Faith", credit:"Video courtesy of Barrel Aged Faith", desc:"A profound conversation with Dr. Martin Shaw exploring the stark spiritual choice facing modern humanity — the path of elder wisdom, deep tradition, and sanctification, or the path of mechanization and the loss of the human soul.", ytId:"RdMV8d4pZ5A", thumb:"https://img.youtube.com/vi/RdMV8d4pZ5A/hqdefault.jpg", tags:["Spiritual Life","Culture","Church History"] },
+  { title:"Protestant Pastor: Orthodoxy Is a Scheme of Satan", channel:"Barrel Aged Faith", org:"Barrel Aged Faith", credit:"Video courtesy of Barrel Aged Faith", desc:"Barrel Aged Faith responds to a Protestant pastor who claimed that Eastern Orthodoxy is satanic and idolatrous — a clear, charitable, and theologically grounded Orthodox rebuttal drawing on Scripture and the Holy Fathers.", ytId:"lwI_mmV5B20", thumb:"https://img.youtube.com/vi/lwI_mmV5B20/hqdefault.jpg", tags:["Apologetics","Church History","Holy Scripture"] },
+  { title:"The Meaning of Orthodox Liturgy: A Deeper Look", channel:"Barrel Aged Faith", org:"Barrel Aged Faith", credit:"Video courtesy of Barrel Aged Faith", desc:"Barrel Aged Faith explores the theological and spiritual depth of the Divine Liturgy of St. John Chrysostom — why every gesture, prayer, and movement in the Orthodox service participates in the eternal worship of heaven.", ytId:"RdMV8d4pZ5A", thumb:"https://img.youtube.com/vi/RdMV8d4pZ5A/hqdefault.jpg", tags:["Divine Liturgy","Holy Fathers","Spiritual Life"] },
+
+  // ── ORTHODOX ETHOS (Fr. Peter Heers) ──────────────────────────────────────
+  { title:"Eighth Ecumenical Council: Papal Primacy on Trial", channel:"Fr. Peter Heers", org:"Orthodox Ethos", credit:"Video courtesy of Orthodox Ethos / Fr. Peter Heers", desc:"Fr. Peter Heers examines the historical and theological significance of the so-called Eighth Ecumenical Council and what it reveals about the Orthodox understanding of papal primacy and the Great Schism between East and West.", ytId:"9PzGTK37Duo", thumb:"https://img.youtube.com/vi/9PzGTK37Duo/hqdefault.jpg", tags:["Church History","Apologetics","Holy Fathers"] },
+  { title:"Ten Reasons to Become Orthodox", channel:"Fr. Peter Heers", org:"Orthodox Ethos", credit:"Video courtesy of Orthodox Ethos / Fr. Peter Heers", desc:"Fr. Peter Heers, priest and Doctor of Dogmatic Theology, offers ten compelling reasons why every sincere Christian seeker should consider the Eastern Orthodox Church — the fullness of the apostolic faith once delivered to the saints.", ytId:"lInL-XLMBf4", thumb:"https://img.youtube.com/vi/lInL-XLMBf4/hqdefault.jpg", tags:["Apologetics","Spiritual Life","Holy Fathers"] },
+  { title:"Orthodox Ecclesiology: The One Holy Catholic Church", channel:"Fr. Peter Heers", org:"Orthodox Ethos", credit:"Video courtesy of Orthodox Ethos / Fr. Peter Heers", desc:"Fr. Peter Heers presents a rigorous theological examination of Orthodox ecclesiology — the doctrine of the Church as One, Holy, Catholic and Apostolic — and how this understanding differs fundamentally from both Roman Catholic and Protestant conceptions.", ytId:"dcgXotQ5Fhk", thumb:"https://img.youtube.com/vi/dcgXotQ5Fhk/hqdefault.jpg", tags:["Church History","Holy Fathers","Apologetics"] },
+  { title:"The Mystery of Christ: An Athonite Catechism", channel:"Fr. Peter Heers", org:"Orthodox Ethos", credit:"Video courtesy of Orthodox Ethos / Fr. Peter Heers", desc:"Fr. Peter Heers guides participants through the profound Athonite catechism examining the entirety of the Economy of Salvation — from the pre-existence of the Logos to His Resurrection and Ascension, under the close tutelage of the Holy Fathers.", ytId:"OmZmLQeYT7Y", thumb:"https://img.youtube.com/vi/OmZmLQeYT7Y/hqdefault.jpg", tags:["Holy Fathers","Spiritual Life","Trinity"] },
+
+  // ── JAY DYER ──────────────────────────────────────────────────────────────
+  { title:"CS Lewis: Brilliant Takedown of Islam", channel:"Jay Dyer", org:"Jay Dyer", credit:"Video courtesy of Jay Dyer", desc:"Jay Dyer, Orthodox Christian author and philosopher, examines C.S. Lewis's profound philosophical and theological arguments against Islam — exploring them through the lens of Orthodox theology and classical philosophy.", ytId:"UUi733jO8oY", thumb:"https://img.youtube.com/vi/UUi733jO8oY/hqdefault.jpg", tags:["Apologetics","Church History","Holy Fathers"] },
+  { title:"Why Calvinism Is Incompatible with Holy Orthodoxy", channel:"Jay Dyer", org:"Jay Dyer", credit:"Video courtesy of Jay Dyer", desc:"Jay Dyer presents a comprehensive Orthodox response to Calvinist theology — examining predestination, total depravity, and the nature of grace through the lens of the Holy Fathers and the Ecumenical Councils.", ytId:"UUi733jO8oY", thumb:"https://img.youtube.com/vi/UUi733jO8oY/hqdefault.jpg", tags:["Apologetics","Holy Fathers","Church History"] },
+
+  // ── ANCIENT FAITH: LORD OF SPIRITS (Fr. Andrew Damick & Fr. Stephen De Young)
+  { title:"Lord of Spirits: What Is the Divine Council?", channel:"Fr. Andrew Damick & Fr. Stephen De Young", org:"Ancient Faith Ministries", credit:"Video courtesy of Ancient Faith Ministries", desc:"Frs. Andrew Stephen Damick and Stephen De Young explore the Divine Council worldview of Holy Scripture — the assembly of the Sons of God, the spiritual geography of the cosmos, and how the Church Fathers understood the unseen realm that governs human history.", ytId:"9PzGTK37Duo", thumb:"https://img.youtube.com/vi/9PzGTK37Duo/hqdefault.jpg", tags:["Holy Scripture","Holy Fathers","Church History"] },
+  { title:"Lord of Spirits: Angels, Demons and the Unseen World", channel:"Fr. Andrew Damick & Fr. Stephen De Young", org:"Ancient Faith Ministries", credit:"Video courtesy of Ancient Faith Ministries", desc:"In this landmark series, Fr. Andrew Damick and Fr. Stephen De Young bring the full patristic and scriptural tradition to bear on the nature of angels, demons, and the invisible war that shapes human history — rooting the Church Fathers in the Old Testament worldview.", ytId:"OmZmLQeYT7Y", thumb:"https://img.youtube.com/vi/OmZmLQeYT7Y/hqdefault.jpg", tags:["Holy Scripture","Holy Fathers","Spiritual Life"] },
+
+  // ── ANCIENT FAITH: FR. ANDREW STEPHEN DAMICK ──────────────────────────────
+  { title:"Orthodoxy and Heterodoxy: Why I Am Orthodox", channel:"Fr. Andrew Stephen Damick", org:"Ancient Faith Ministries", credit:"Video courtesy of Ancient Faith Ministries / Fr. Andrew Stephen Damick", desc:"Fr. Andrew Stephen Damick, Chief Content Officer of Ancient Faith Ministries, presents the foundational differences between Eastern Orthodoxy and other Christian traditions — a clear, charitable, and theologically grounded introduction to the ancient apostolic faith.", ytId:"lInL-XLMBf4", thumb:"https://img.youtube.com/vi/lInL-XLMBf4/hqdefault.jpg", tags:["Apologetics","Church History","Holy Fathers"] },
+
+  // ── ANCIENT FAITH: FR. STEPHEN DE YOUNG ───────────────────────────────────
+  { title:"The Religion of the Apostles: Introduction to Orthodox Christianity", channel:"Fr. Stephen De Young", org:"Ancient Faith Ministries", credit:"Video courtesy of Ancient Faith Ministries / Fr. Stephen De Young", desc:"Fr. Stephen De Young, Pastor of Archangel Gabriel Orthodox Church and author of The Religion of the Apostles, presents Orthodox Christianity as the direct continuation of the faith and worship of ancient Israel — fulfilled in the Person of Jesus Christ.", ytId:"dcgXotQ5Fhk", thumb:"https://img.youtube.com/vi/dcgXotQ5Fhk/hqdefault.jpg", tags:["Holy Scripture","Holy Fathers","Church History"] },
+  { title:"God Is a Man of War: The Old Testament and the Cross", channel:"Fr. Stephen De Young", org:"Ancient Faith Ministries", credit:"Video courtesy of Ancient Faith Ministries / Fr. Stephen De Young", desc:"Fr. Stephen De Young explores his groundbreaking book examining how the violent warfare imagery of the Old Testament is fulfilled in the cosmic spiritual warfare of the Cross — reclaiming the full scriptural vision of Christ as the Divine Warrior.", ytId:"OmZmLQeYT7Y", thumb:"https://img.youtube.com/vi/OmZmLQeYT7Y/hqdefault.jpg", tags:["Holy Scripture","Holy Fathers","Church History"] },
+
+  // ── ANCIENT FAITH: FR. THOMAS HOPKO (of blessed memory) ───────────────────
+  { title:"Speaking the Truth in Love: The 55 Maxims of Christian Living", channel:"Fr. Thomas Hopko", org:"Ancient Faith Ministries", credit:"Video courtesy of Ancient Faith Ministries / Fr. Thomas Hopko (of blessed memory)", desc:"Fr. Thomas Hopko of blessed memory — former Dean of St. Vladimir's Seminary — presents his beloved 55 Maxims for the Christian spiritual life, a guide distilled from decades of priestly experience and patristic wisdom. A treasure of Orthodox spirituality.", ytId:"lInL-XLMBf4", thumb:"https://img.youtube.com/vi/lInL-XLMBf4/hqdefault.jpg", tags:["Spiritual Life","Holy Fathers","Divine Liturgy"] },
+
+  // ── CHURCH OF THE ETERNAL LOGOS (Dr. David Patrick Harry) ─────────────────
+  { title:"Transhumanism vs. Theosis: The Orthodox Answer to the Digital Age", channel:"Dr. David Patrick Harry", org:"Church of the Eternal Logos", credit:"Video courtesy of Church of the Eternal Logos / Dr. David Patrick Harry", desc:"Dr. David Patrick Harry, PhD in Religious Studies, contrasts the transhumanist vision of technological apotheosis with the Orthodox Christian doctrine of theosis — true union with God by grace. A vital Orthodox response to the defining spiritual challenge of our age.", ytId:"tDyIMFNhdhI", thumb:"https://img.youtube.com/vi/tDyIMFNhdhI/hqdefault.jpg", tags:["Culture","Spiritual Life","Church History"] },
+  { title:"Orthodox End-Time Prophecy with Fr. Peter Heers", channel:"Dr. David Patrick Harry", org:"Church of the Eternal Logos", credit:"Video courtesy of Church of the Eternal Logos / Dr. David Patrick Harry", desc:"Dr. David Patrick Harry joins Fr. Peter Heers for a wide-ranging conversation on Orthodox eschatology — the end-time prophecies of the Holy Fathers, the nature of the Antichrist, and the Church's witness in the last days.", ytId:"LoigKkIchcE", thumb:"https://img.youtube.com/vi/LoigKkIchcE/hqdefault.jpg", tags:["Church History","Holy Fathers","Spiritual Life"] },
+  { title:"Spiritual Warfare in the 21st Century", channel:"Dr. David Patrick Harry", org:"Church of the Eternal Logos", credit:"Video courtesy of Church of the Eternal Logos / Dr. David Patrick Harry", desc:"Dr. David Patrick Harry is joined by Fr. Paul Girgis for an in-depth discussion of spiritual warfare as understood through Holy Orthodoxy — the tactics of the enemy, the armor of God, and the weaponry of prayer, fasting, and the sacramental life.", ytId:"0_DGOuZLuSg", thumb:"https://img.youtube.com/vi/0_DGOuZLuSg/hqdefault.jpg", tags:["Spiritual Life","Holy Fathers","Apologetics"] },
+
+  // ── ORTHODOX SOUL ──────────────────────────────────────────────────────────
+  { title:"The Jesus Prayer: The Heart of Orthodox Spirituality", channel:"Orthodox Soul", org:"Orthodox Soul", credit:"Video courtesy of Orthodox Soul", desc:"Orthodox Soul presents a comprehensive guide to the Jesus Prayer — Lord Jesus Christ, Son of God, have mercy on me a sinner — its history in the hesychast tradition, the Philokalia, and its practical use as the central prayer of the Orthodox spiritual life.", ytId:"T9aQ2bgA2cI", thumb:"https://img.youtube.com/vi/T9aQ2bgA2cI/hqdefault.jpg", tags:["Spiritual Life","Holy Fathers","Divine Liturgy"] },
+  { title:"What Is Theosis? Deification in Orthodox Christianity", channel:"Orthodox Soul", org:"Orthodox Soul", credit:"Video courtesy of Orthodox Soul", desc:"Orthodox Soul examines the crown jewel of Orthodox theology — theosis, or deification. Rooted in St. Athanasius the Great: God became man so that man might become god by grace. A clear and beautiful presentation of the ultimate goal of the Christian life.", ytId:"z-WoSI0Sads", thumb:"https://img.youtube.com/vi/z-WoSI0Sads/hqdefault.jpg", tags:["Spiritual Life","Holy Fathers","Trinity"] },
+
+  // ── BEHOLD THE CHALICE ─────────────────────────────────────────────────────
+  { title:"The Divine Liturgy Explained", channel:"Behold the Chalice", org:"Behold the Chalice", credit:"Video courtesy of Behold the Chalice", desc:"Behold the Chalice offers a deep and reverent explanation of the Divine Liturgy of St. John Chrysostom — walking through each moment of the eternal sacrifice, from the Prothesis to the Dismissal, illumined by the writings of the Holy Fathers.", ytId:"9PzGTK37Duo", thumb:"https://img.youtube.com/vi/9PzGTK37Duo/hqdefault.jpg", tags:["Divine Liturgy","Holy Fathers","Spiritual Life"] },
+  { title:"Holy Communion: The Body and Blood of Christ", channel:"Behold the Chalice", org:"Behold the Chalice", credit:"Video courtesy of Behold the Chalice", desc:"Behold the Chalice explores the Orthodox understanding of the Holy Eucharist — the True Body and Blood of our Lord Jesus Christ — drawing on the Scriptures, the Church Fathers, and the living liturgical tradition of the Orthodox Church.", ytId:"lInL-XLMBf4", thumb:"https://img.youtube.com/vi/lInL-XLMBf4/hqdefault.jpg", tags:["Divine Liturgy","Holy Scripture","Holy Fathers"] },
+
+  // ── READER PAUL ───────────────────────────────────────────────────────────
+  { title:"The Orthodox Study Bible: Why It Matters", channel:"Reader Paul", org:"Reader Paul", credit:"Video courtesy of Reader Paul — Bottom of the Rabbit Hole (@bottomoftherabbithole)", desc:"Reader Paul examines the Orthodox Study Bible — the first complete Orthodox annotated Bible in the English language — exploring why the patristic commentary tradition and the Septuagint are essential for understanding Holy Scripture in its fullness.", ytId:"LyBheYcxkso", thumb:"https://img.youtube.com/vi/LyBheYcxkso/hqdefault.jpg", tags:["Holy Scripture","Holy Fathers","Apologetics"] },
+];
+
+// ═══════════════════════════════════════
+// CURRENT USER STATE
+// ═══════════════════════════════════════
+var currentUser = null;
+var currentProfile = null;
+var unsubscribePosts = null;
+
+// Listen for auth state changes
+onAuthStateChanged(auth, async function(user) {
+  if (user) {
+    currentUser = user;
+    // Load profile from Firestore
+    var snap = await getDoc(doc(db, "users", user.uid));
+    if (snap.exists()) {
+      currentProfile = snap.data();
+    } else {
+      currentProfile = { name: user.displayName || "Pilgrim", jurisdiction: "", bio: "", photo: "" };
+    }
+    onSignedIn();
+  } else {
+    currentUser = null;
+    currentProfile = null;
+    onSignedOut();
+  }
+});
+
+// ═══════════════════════════════════════
+// AUTH — REGISTER
+// ═══════════════════════════════════════
+window.doRegister = async function() {
+  var name = document.getElementById("reg-name").value.trim();
+  var email = document.getElementById("reg-email").value.trim();
+  var pass = document.getElementById("reg-password").value;
+  var confirm = document.getElementById("reg-confirm").value;
+  var jurisdiction = document.getElementById("reg-jurisdiction").value;
+  var bio = document.getElementById("reg-bio").value.trim();
+
+  if (!name) { showToast("Please enter a display name ☩"); return; }
+  if (!email) { showToast("Please enter your email ☩"); return; }
+  if (pass.length < 6) { showToast("Password must be at least 6 characters ☩"); return; }
+  if (pass !== confirm) { showToast("Passwords do not match ☩"); return; }
+
+  try {
+    var cred = await createUserWithEmailAndPassword(auth, email, pass);
+    await updateProfile(cred.user, { displayName: name });
+    var profile = { name: name, jurisdiction: jurisdiction, bio: bio, photo: "", email: email, createdAt: serverTimestamp() };
+    await setDoc(doc(db, "users", cred.user.uid), profile);
+    currentProfile = profile;
+    closeModal("registerModal");
+    showToast("Welcome to the Agora, " + name + "! ☩");
+  } catch(e) {
+    if (e.code === "auth/email-already-in-use") showToast("That email is already registered. Please sign in. ☩");
+    else if (e.code === "auth/invalid-email") showToast("Please enter a valid email address ☩");
+    else showToast("Error: " + e.message);
+  }
+};
+
+// ═══════════════════════════════════════
+// AUTH — LOGIN
+// ═══════════════════════════════════════
+window.doLogin = async function() {
+  var email = document.getElementById("login-email").value.trim();
+  var pass = document.getElementById("login-password").value;
+
+  if (!email || !pass) { showToast("Please enter your email and password ☩"); return; }
+
+  try {
+    await signInWithEmailAndPassword(auth, email, pass);
+    closeModal("loginModal");
+    showToast("Welcome back! ☩");
+  } catch(e) {
+    if (e.code === "auth/invalid-credential" || e.code === "auth/wrong-password" || e.code === "auth/user-not-found") {
+      showToast("Incorrect email or password ☩");
+    } else {
+      showToast("Error: " + e.message);
+    }
+  }
+};
+
+// ═══════════════════════════════════════
+// AUTH — SIGN OUT
+// ═══════════════════════════════════════
+window.signOut = async function() {
+  await fbSignOut(auth);
+  showToast("You have signed out. God be with you. ☩");
+  showPage("home"); setActiveByName("Home");
+};
+
+// ═══════════════════════════════════════
+// SIGNED IN / OUT UI
+// ═══════════════════════════════════════
+function onSignedIn() {
+  document.getElementById("nav-guest").style.display = "none";
+  document.getElementById("nav-user").style.display = "flex";
+  document.getElementById("nav-profile-link").style.display = "inline";
+  updateNavAvatar();
+  updateProfilePage();
+  updateAgoraComposer();
+  listenToPosts();
+}
+
+function onSignedOut() {
+  document.getElementById("nav-guest").style.display = "flex";
+  document.getElementById("nav-user").style.display = "none";
+  document.getElementById("nav-profile-link").style.display = "none";
+  updateAgoraComposer();
+  if (unsubscribePosts) { unsubscribePosts(); unsubscribePosts = null; }
+  listenToPosts();
+}
+
+function updateNavAvatar() {
+  if (!currentProfile) return;
+  var el = document.getElementById("nav-avatar-icon");
+  var nameEl = document.getElementById("nav-user-name");
+  nameEl.textContent = currentProfile.name.split(" ")[0];
+  if (currentProfile.photo) {
+    el.innerHTML = "<img src='" + currentProfile.photo + "' alt='avatar'>";
+  } else {
+    el.textContent = currentProfile.name.charAt(0).toUpperCase();
+  }
+}
+
+function updateProfilePage() {
+  if (!currentProfile) return;
+  var av = document.getElementById("profile-avatar-display");
+  if (currentProfile.photo) {
+    av.innerHTML = "<img src='" + currentProfile.photo + "' alt='profile'>";
+  } else {
+    av.textContent = currentProfile.name.charAt(0).toUpperCase();
+  }
+  document.getElementById("profile-name-display").textContent = currentProfile.name;
+  document.getElementById("profile-jurisdiction-display").textContent = currentProfile.jurisdiction || "";
+  document.getElementById("profile-bio-display").textContent = currentProfile.bio || "";
+}
+
+function updateAgoraComposer() {
+  var wrap = document.getElementById("name-input-wrap");
+  if (!wrap) return;
+  if (currentUser && currentProfile) {
+    var initial = currentProfile.name.charAt(0).toUpperCase();
+    var avatarHtml = currentProfile.photo
+      ? "<img src='" + currentProfile.photo + "' style='width:100%;height:100%;object-fit:cover;border-radius:50%;' alt=''>"
+      : initial;
+    wrap.innerHTML =
+      "<div class='avatar' style='cursor:pointer;' onclick='showPage(\"profile\");setActiveByName(\"Profile\")'>" + avatarHtml + "</div>" +
+      "<span style='font-family:Cinzel,serif;font-size:12px;color:var(--gold);letter-spacing:1px;'>Posting as <strong>" + currentProfile.name + "</strong></span>" +
+      (currentProfile.jurisdiction ? "<span style='font-family:Cinzel,serif;font-size:10px;color:var(--gold-dim);margin-left:8px;'>" + currentProfile.jurisdiction.split("—")[0].trim() + "</span>" : "");
+  } else {
+    wrap.innerHTML =
+      "<div class='avatar'>☩</div>" +
+      "<input type='text' class='name-field' id='posterName' placeholder='Your name (optional)' maxlength='40'>";
+  }
+}
+
+// ═══════════════════════════════════════
+// EDIT PROFILE
+// ═══════════════════════════════════════
+window.openEditProfile = function() {
+  if (!currentProfile) { showToast("Please sign in to edit your profile ☩"); return; }
+  document.getElementById("edit-name").value = currentProfile.name;
+  document.getElementById("edit-jurisdiction").value = currentProfile.jurisdiction || "";
+  document.getElementById("edit-bio").value = currentProfile.bio || "";
+  var prev = document.getElementById("edit-avatar-preview");
+  if (currentProfile.photo) {
+    prev.innerHTML = "<img src='" + currentProfile.photo + "' alt=''>";
+  } else {
+    prev.textContent = currentProfile.name.charAt(0).toUpperCase();
+  }
+  document.getElementById("editProfileModal").classList.add("open");
+};
+
+window.saveProfile = async function() {
+  if (!currentUser) return;
+  var name = document.getElementById("edit-name").value.trim();
+  if (!name) { showToast("Display name cannot be empty ☩"); return; }
+  currentProfile.name = name;
+  currentProfile.jurisdiction = document.getElementById("edit-jurisdiction").value;
+  currentProfile.bio = document.getElementById("edit-bio").value.trim();
+  try {
+    await setDoc(doc(db, "users", currentUser.uid), currentProfile, { merge: true });
+    await updateProfile(currentUser, { displayName: name });
+    closeModal("editProfileModal");
+    updateNavAvatar();
+    updateProfilePage();
+    updateAgoraComposer();
+    showToast("Profile saved ☩");
+  } catch(e) {
+    showToast("Could not save profile: " + e.message);
+  }
+};
+
+window.handlePhotoUpload = function(input) {
+  var file = input.files[0];
+  if (!file) return;
+  if (file.size > 500000) { showToast("Photo must be under 500KB ☩"); return; }
+  var reader = new FileReader();
+  reader.onload = function(e) {
+    if (currentProfile) currentProfile.photo = e.target.result;
+    var prev = document.getElementById("edit-avatar-preview");
+    prev.innerHTML = "<img src='" + e.target.result + "' alt=''>";
+  };
+  reader.readAsDataURL(file);
+};
+
+window.removePhoto = function() {
+  if (currentProfile) currentProfile.photo = "";
+  var prev = document.getElementById("edit-avatar-preview");
+  prev.textContent = currentProfile ? currentProfile.name.charAt(0).toUpperCase() : "?";
+};
+
+// ═══════════════════════════════════════
+// FIRESTORE POSTS — LIVE FEED
+// ═══════════════════════════════════════
+function listenToPosts() {
+  var feed = document.getElementById("post-feed");
+  // Clear dynamic posts but keep sample posts
+  var samplePosts = feed.querySelectorAll(".post-card.sample");
+  
+  var q = query(collection(db, "posts"), orderBy("createdAt", "desc"));
+  if (unsubscribePosts) unsubscribePosts();
+  unsubscribePosts = onSnapshot(q, function(snapshot) {
+    // Remove any previously rendered firebase posts
+    feed.querySelectorAll(".post-card.firebase-post").forEach(function(el) { el.remove(); });
+    // Insert firebase posts before sample posts
+    var firstSample = feed.querySelector(".post-card.sample");
+    snapshot.forEach(function(docSnap) {
+      var data = docSnap.data();
+      var card = buildPostCard(data, true);
+      if (firstSample) {
+        feed.insertBefore(card, firstSample);
+      } else {
+        feed.appendChild(card);
+      }
+    });
+    // Also update profile posts
+    if (currentUser) updateProfilePosts(snapshot);
+  });
+}
+
+function buildPostCard(data, isFirebase) {
+  var card = document.createElement("div");
+  card.className = "post-card" + (isFirebase ? " firebase-post" : "");
+  var avatarHtml = data.photo
+    ? "<img src='" + data.photo + "' style='width:100%;height:100%;object-fit:cover;border-radius:50%;' alt=''>"
+    : (data.initial || "☩");
+  var badge = data.uid ? "<span style='color:var(--gold-dim)'>Member</span>" : "<span style='color:var(--text-mid)'>Guest</span>";
+  var timeStr = data.createdAt ? new Date(data.createdAt.toDate()).toLocaleString() : "Just now";
+  card.innerHTML =
+    "<div class='post-header'><div class='avatar'>" + avatarHtml + "</div>" +
+    "<div class='post-author'><div class='name'>" + (data.name || "Anonymous") + "</div>" +
+    "<div class='meta'>" + timeStr + " · " + badge +
+    (data.jurisdiction ? " · <span style='color:var(--gold-dim);font-size:11px;'>" + data.jurisdiction.split("—")[0].trim() + "</span>" : "") +
+    "</div></div></div>" +
+    "<div class='post-body'>" + (data.text || "").replace(/</g,"&lt;") + "</div>" +
+    "<div class='post-actions'><button class='post-action' onclick='likePost(this)'>♡ 0</button>" +
+    "<button class='post-action'>💬 0</button><button class='post-action'>↗ Share</button></div>";
+  return card;
+}
+
+function updateProfilePosts(snapshot) {
+  if (!currentUser) return;
+  var container = document.getElementById("profile-posts");
+  container.innerHTML = "";
+  var myPosts = [];
+  snapshot.forEach(function(docSnap) {
+    var data = docSnap.data();
+    if (data.uid === currentUser.uid) myPosts.push(data);
+  });
+  if (myPosts.length === 0) {
+    container.innerHTML = "<p style='color:var(--text-mid);font-style:italic;font-size:15px;'>You have not made any posts yet. Head to the Agora to share your first reflection!</p>";
+    return;
+  }
+  myPosts.forEach(function(data) {
+    container.appendChild(buildPostCard(data, false));
+  });
+}
+
+// ═══════════════════════════════════════
+// SUBMIT POST
+// ═══════════════════════════════════════
+window.submitPost = async function() {
+  var input = document.getElementById("postInput");
+  var text = input.value.trim();
+  if (!text) { showToast("Please write something first ☩"); return; }
+
+  var postData = {
+    text: text,
+    createdAt: serverTimestamp()
+  };
+
+  if (currentUser && currentProfile) {
+    postData.uid = currentUser.uid;
+    postData.name = currentProfile.name;
+    postData.initial = currentProfile.name.charAt(0).toUpperCase();
+    postData.photo = currentProfile.photo || "";
+    postData.jurisdiction = currentProfile.jurisdiction || "";
+  } else {
+    var nameEl = document.getElementById("posterName");
+    var guestName = (nameEl ? nameEl.value.trim() : "") || "Anonymous Pilgrim";
+    postData.uid = null;
+    postData.name = guestName;
+    postData.initial = guestName.charAt(0).toUpperCase();
+    postData.photo = "";
+    postData.jurisdiction = "";
+  }
+
+  try {
+    await addDoc(collection(db, "posts"), postData);
+    input.value = "";
+    var pn = document.getElementById("posterName");
+    if (pn) pn.value = "";
+    document.getElementById("charCount").textContent = "0 / 500";
+    showToast("Your post was shared ☩");
+  } catch(e) {
+    showToast("Could not post: " + e.message);
+  }
+};
+
+// ═══════════════════════════════════════
+// VIDEO GRID RENDERING
+// ═══════════════════════════════════════
+function makeVideoCard(v, idx) {
+  var div = document.createElement("div");
+  div.className = "video-card";
+  div.setAttribute("onclick","openVideo("+idx+")");
+  div.innerHTML =
+    "<div class='video-thumb'><img src='"+v.thumb+"' alt='"+v.title+"'><span class='yt-badge'>YouTube</span><div class='play-overlay'><div class='play-btn'>▶</div></div></div>"+
+    "<div class='video-info'><h3>"+v.title+"</h3><div class='video-meta'><span class='channel'>"+v.channel+" · "+v.org+"</span></div>"+
+    "<div class='video-tags'>"+v.tags.map(function(t){return "<span class='tag'>"+t+"</span>";}).join("")+"</div></div>";
+  return div;
+}
+
+function renderGrids() {
+  var homeGrid = document.getElementById("home-video-grid");
+  var allGrid = document.getElementById("all-video-grid");
+  for (var i=0;i<Math.min(4,videos.length);i++) homeGrid.appendChild(makeVideoCard(videos[i],i));
+  for (var j=0;j<videos.length;j++) allGrid.appendChild(makeVideoCard(videos[j],j));
+  renderHomeFeedPreview();
+}
+
+function renderHomeFeedPreview() {
+  var wrap = document.getElementById("home-feed-preview");
+  wrap.innerHTML =
+    "<div class='post-card'><div class='post-header'><div class='avatar'>Ν</div><div class='post-author'><div class='name'>Nikolaos Stavros</div><div class='meta'>3 hours ago · <span style='color:var(--gold-dim)'>Elder Member</span></div></div></div>"+
+    "<div class='post-body'>&ldquo;The mind that has been purified and illumined sees things divine.&rdquo; — St. John Chrysostom. Blessed Sunday to all faithful gathered here. ☩</div>"+
+    "<div class='post-actions'><button class='post-action' onclick='likePost(this)'>♡ 24</button><button class='post-action'>💬 Reply</button><button class='post-action'>↗ Share</button></div></div>";
+}
+
+// ═══════════════════════════════════════
+// VIDEO PLAYER
+// ═══════════════════════════════════════
+var previousPage = "home";
+
+window.openVideo = function(idx) {
+  var v = videos[idx];
+  var activePage = document.querySelector(".page.active");
+  if (activePage && activePage.id !== "page-video-detail") {
+    previousPage = activePage.id.replace("page-","");
+  }
+  document.getElementById("vd-title").textContent = v.title;
+  document.getElementById("vd-channel").textContent = v.channel + " · " + v.org;
+  document.getElementById("vd-credit").textContent = "☩ " + v.credit;
+  document.getElementById("vd-desc").textContent = v.desc;
+  var iframe = document.getElementById("yt-iframe");
+  var placeholder = document.getElementById("player-placeholder");
+  iframe.setAttribute("src","https://www.youtube-nocookie.com/embed/"+v.ytId+"?autoplay=1&rel=0&modestbranding=1");
+  placeholder.style.display = "none";
+  iframe.style.display = "block";
+  var relList = document.getElementById("related-list");
+  relList.innerHTML = "";
+  for (var i=0;i<videos.length;i++) {
+    if (i===idx) continue;
+    var rv = videos[i];
+    var item = document.createElement("div");
+    item.className = "related-item";
+    item.setAttribute("onclick","openVideo("+i+")");
+    item.innerHTML = "<div class='related-thumb'><img src='"+rv.thumb+"' alt=''></div><div class='related-info'><h4>"+rv.title+"</h4><span>"+rv.channel+"</span></div>";
+    relList.appendChild(item);
+  }
+  showPage("video-detail");
+  setActiveByName("Videos");
+};
+
+// ═══════════════════════════════════════
+// PAGE NAV
+// ═══════════════════════════════════════
+window.showPage = function(name) {
+  if (name !== "video-detail") {
+    var iframe = document.getElementById("yt-iframe");
+    iframe.removeAttribute("src");
+    iframe.style.display = "none";
+    document.getElementById("player-placeholder").style.display = "flex";
+  }
+  document.querySelectorAll(".page").forEach(function(p){p.classList.remove("active");});
+  document.getElementById("page-"+name).classList.add("active");
+  window.scrollTo(0,0);
+};
+
+window.goBack = function() {
+  var map = {home:"Home",videos:"Videos",agora:"The Agora",calendar:"Calendar",about:"About",search:""};
+  showPage(previousPage);
+  setActiveByName(map[previousPage]||"");
+};
+
+window.setActive = function(el) {
+  document.querySelectorAll(".nav-links a").forEach(function(a){a.classList.remove("active");});
+  el.classList.add("active");
+};
+
+window.setActiveByName = function(name) {
+  document.querySelectorAll(".nav-links a").forEach(function(a){
+    a.classList.toggle("active", a.textContent.trim()===name);
+  });
+};
+
+// ═══════════════════════════════════════
+// SEARCH
+// ═══════════════════════════════════════
+window.doSearch = function() {
+  var raw = document.getElementById("searchInput").value.trim();
+  var q = raw.toLowerCase();
+  if (!q) return;
+  var activePage = document.querySelector(".page.active");
+  if (activePage && activePage.id !== "page-search") previousPage = activePage.id.replace("page-","");
+  showPage("search"); setActiveByName("");
+  document.getElementById("search-heading").textContent = 'Results for "' + raw + '"';
+  var results = document.getElementById("search-results");
+  results.innerHTML = "";
+  var matches = videos.filter(function(v){
+    return v.title.toLowerCase().indexOf(q)!==-1 || v.channel.toLowerCase().indexOf(q)!==-1 ||
+           v.tags.join(" ").toLowerCase().indexOf(q)!==-1 || v.desc.toLowerCase().indexOf(q)!==-1;
+  });
+  if (matches.length===0) {
+    results.innerHTML = "<p style='color:var(--text-mid);font-style:italic;padding:20px 0;grid-column:1/-1;'>No videos found matching your search.</p>";
+  } else {
+    matches.forEach(function(v){ results.appendChild(makeVideoCard(v, videos.indexOf(v))); });
+  }
+};
+
+// ═══════════════════════════════════════
+// MODALS
+// ═══════════════════════════════════════
+window.openModal = function(id) {
+  document.getElementById(id).classList.add("open");
+};
+window.closeModal = function(id) { document.getElementById(id).classList.remove("open"); };
+
+document.querySelectorAll(".modal-overlay").forEach(function(m){
+  m.addEventListener("click",function(e){if(e.target===m)m.classList.remove("open");});
+});
+document.getElementById("feastPopup").addEventListener("click",function(e){if(e.target===this)closeFeast();});
+
+// ═══════════════════════════════════════
+// TOAST
+// ═══════════════════════════════════════
+window.showToast = function(msg) {
+  var t=document.getElementById("toast");
+  t.textContent=msg; t.classList.add("show");
+  setTimeout(function(){t.classList.remove("show");},3500);
+};
+
+// ═══════════════════════════════════════
+// LIKES
+// ═══════════════════════════════════════
+window.likePost = function(btn) {
+  btn.classList.toggle("liked");
+  var parts=btn.textContent.trim().split(" ");
+  var n=parseInt(parts[1])||0;
+  btn.textContent=(btn.classList.contains("liked")?"♥ ":"♡ ")+(btn.classList.contains("liked")?n+1:n-1);
+};
+
+window.updateCharCount = function(ta) {
+  document.getElementById("charCount").textContent=ta.value.length+" / 500";
+};
+
+// ═══════════════════════════════════════
+// DROPDOWN
+// ═══════════════════════════════════════
+window.toggleDropdown = function() {
+  document.getElementById("user-dropdown").classList.toggle("open");
+};
+window.closeDropdown = function() {
+  document.getElementById("user-dropdown").classList.remove("open");
+};
+document.addEventListener("click", function(e) {
+  var nav = document.getElementById("nav-user");
+  if (nav && !nav.contains(e.target)) closeDropdown();
+});
+
+// ═══════════════════════════════════════
+// JULIAN CALENDAR
+// ═══════════════════════════════════════
+var calYear = 2026, calMonth = 2;
+var JULIAN_OFFSET = 13;
+var MONTHS = ["January","February","March","April","May","June","July","August","September","October","November","December"];
+
+
+// ═══════════════════════════════════════
+// FEAST DATA
+// ═══════════════════════════════════════
+var feasts = {
+  '1-22': {type:'feast', name:'Forgiveness Sunday', desc:'The last Sunday before Great Lent — Forgiveness Sunday. At Vespers, all clergy and faithful bow before one another asking forgiveness. Dairy and eggs are permitted today. This evening begins Great Lent.'},
+  '1-23': {type:'fast', name:'Clean Monday — Great Lent Begins', desc:'Clean Monday marks the beginning of Great Lent — the most solemn fasting period of the Orthodox year. The faithful begin the 48-day journey of prayer, fasting, and repentance in preparation for Holy Pascha.'},
+  '1-24': {type:'fast', name:'Great Lent', desc:'Great Lent continues. On weekdays, the faithful observe strict fasting: no meat, dairy, fish, oil, or wine.'},
+  '1-25': {type:'fast', name:'Great Lent — Wednesday', desc:'Wednesday of the first week. Strict fasting (xerophagy). Evening Presanctified Liturgy.'},
+  '1-26': {type:'fast', name:'Great Lent', desc:'Great Lent continues. The Canon of St. Andrew of Crete is chanted across the first four evenings.'},
+  '1-27': {type:'fast', name:'Great Lent — Friday', desc:'Friday of the first week. Strict fasting. Evening Presanctified Liturgy.'},
+  '1-28': {type:'fast', name:'Saturday of Souls (1st)', desc:'The first Saturday of Souls — a day of solemn commemoration for the faithful departed. Memorial services are served. Oil and wine permitted.'},
+  '1-29': {type:'feast', name:'Sunday of Orthodoxy (1st Sunday)', desc:'The first Sunday of Great Lent celebrates the Triumph of Orthodoxy — the restoration of the holy icons in 843 AD. A solemn procession of icons is held throughout Orthodox parishes.'},
+  '2-1':  {type:'feast', name:'Sunday of Orthodoxy (1st Sunday)', desc:'The first Sunday of Great Lent — the Triumph of Orthodoxy, celebrating the restoration of the holy icons in 843 AD. A procession of icons is held. Oil and wine permitted on Sundays.'},
+  '2-2':  {type:'fast', name:'Great Lent — Week 2', desc:'The second week of Great Lent. Strict fasting on weekdays. Presanctified Liturgy on Wednesday and Friday evenings.'},
+  '2-3':  {type:'fast', name:'Great Lent — Wednesday', desc:'Wednesday of the second week. Strict fasting. Evening Presanctified Liturgy.'},
+  '2-4':  {type:'fast', name:'Great Lent', desc:'Great Lent continues.'},
+  '2-5':  {type:'fast', name:'Great Lent — Friday', desc:'Friday of the second week. Strict fasting. Evening Presanctified Liturgy.'},
+  '2-6':  {type:'fast', name:'Saturday of Souls (2nd)', desc:'The second Saturday of Souls. Memorial services for the faithful departed. Oil and wine permitted.'},
+  '2-7':  {type:'feast', name:'Sunday of St. Gregory Palamas (2nd Sunday)', desc:'The second Sunday of Great Lent honors St. Gregory Palamas, Archbishop of Thessalonika and defender of hesychasm. He taught that the uncreated divine energies of God can be directly experienced by the purified soul.'},
+  '2-8':  {type:'fast', name:'Great Lent — Week 3', desc:'The third week of Great Lent. Strict fasting on weekdays.'},
+  '2-9':  {type:'fast', name:'Great Lent — Wednesday', desc:'Wednesday of the third week. Strict fasting. Evening Presanctified Liturgy.'},
+  '2-10': {type:'fast', name:'Great Lent', desc:'Great Lent continues.'},
+  '2-11': {type:'fast', name:'Great Lent — Friday', desc:'Friday of the third week. Strict fasting. Evening Presanctified Liturgy.'},
+  '2-12': {type:'fast', name:'Saturday of Souls (3rd)', desc:'The third Saturday of Souls. Memorial services for the faithful departed. Oil and wine permitted.'},
+  '2-13': {type:'fast', name:'Great Lent — Saturday', desc:'Saturday of the third week. Oil and wine permitted.'},
+  '2-14': {type:'fast', name:'Great Lent', desc:'Great Lent continues.'},
+  '2-15': {type:'feast', name:'Sunday of the Holy Cross (3rd Sunday)', desc:'The third Sunday of Great Lent — the midpoint of the Great Fast. The precious Cross is brought out for veneration, giving the faithful strength to complete the remaining weeks of the fast.'},
+  '2-16': {type:'fast', name:'Great Lent — Week 4', desc:'The fourth week of Great Lent. Strict fasting on weekdays.'},
+  '2-17': {type:'fast', name:'Great Lent — Wednesday', desc:'Wednesday of the fourth week. Strict fasting. Evening Presanctified Liturgy. Feast of St. Alexios, Man of God.'},
+  '2-18': {type:'fast', name:'Great Lent', desc:'Great Lent continues.'},
+  '2-19': {type:'fast', name:'Great Lent — Friday', desc:'Friday of the fourth week. Strict fasting. Evening Presanctified Liturgy.'},
+  '2-20': {type:'fast', name:'Saturday of the Akathist', desc:'The Saturday of the Akathist Hymn to the Most Holy Theotokos. The entire Akathist Hymn is chanted at Matins. Oil and wine permitted.'},
+  '2-21': {type:'fast', name:'Great Lent — Saturday', desc:'Saturday of the fourth week. Oil and wine permitted.'},
+  '2-22': {type:'feast', name:'Sunday of St. John Climacus (4th Sunday)', desc:'The fourth Sunday of Great Lent honors St. John Climacus, Abbot of Mt. Sinai and author of The Ladder of Divine Ascent.'},
+  '2-23': {type:'fast', name:'Great Lent — Week 5', desc:'The fifth week of Great Lent. On Thursday night the full Great Canon of St. Andrew of Crete is chanted.'},
+  '2-24': {type:'fast', name:'Great Lent — Wednesday', desc:'Wednesday of the fifth week. Strict fasting. Evening Presanctified Liturgy.'},
+  '2-25': {type:'feast', name:'Annunciation of the Most Holy Theotokos ☩', desc:'One of the Twelve Great Feasts — the Archangel Gabriel announces to the Theotokos that she will bear the Son of God. Fish is permitted today even during the strict Lenten fast.'},
+  '2-26': {type:'fast', name:'Standing of Mary of Egypt', desc:'Thursday of the fifth week — the Great Canon of St. Andrew of Crete is chanted in full along with the Life of St. Mary of Egypt. One of the longest services of the Orthodox year.'},
+  '2-27': {type:'fast', name:'Great Lent — Friday', desc:'Friday of the fifth week. Strict fasting. Evening Presanctified Liturgy.'},
+  '2-28': {type:'fast', name:'Saturday of Souls (4th)', desc:'The fourth Saturday of Souls. Memorial services for the faithful departed. Oil and wine permitted.'},
+  '2-29': {type:'feast', name:'Sunday of St. Mary of Egypt (5th Sunday)', desc:'The fifth Sunday of Great Lent honors St. Mary of Egypt — the great repentant saint who spent 47 years in the desert. Her story is a profound icon of the boundless mercy of God.'},
+  '3-1':  {type:'fast', name:'Great Lent — Week 6', desc:'The sixth and final week of Great Lent before Holy Week. Strict fasting on weekdays.'},
+  '3-2':  {type:'fast', name:'Great Lent — Wednesday', desc:'Wednesday of the sixth week. Strict fasting. Evening Presanctified Liturgy.'},
+  '3-3':  {type:'fast', name:'Great Lent — Friday', desc:'Friday of the sixth week. Strict fasting. Evening Presanctified Liturgy.'},
+  '3-4':  {type:'feast', name:'Lazarus Saturday', desc:'The Church commemorates the raising of Lazarus — a foretaste of the Resurrection. Fish, wine, and oil are all permitted today. Palm branches are blessed at Vespers tonight.'},
+  '3-5':  {type:'feast', name:'Palm Sunday — Entry into Jerusalem ☩', desc:'The Entry of our Lord into Jerusalem — one of the Twelve Great Feasts. The faithful receive palms and pussy willows. Fish, oil, and wine are permitted. Holy Week begins tomorrow.'},
+  '3-6':  {type:'fast', name:'Holy Monday', desc:'The first day of Holy Week. The Church commemorates the cursing of the barren fig tree and the parable of the ten virgins. Strict fasting.'},
+  '3-7':  {type:'fast', name:'Holy Tuesday', desc:'Holy Tuesday — Christ teaches in the Temple. Strict fasting observed.'},
+  '3-8':  {type:'fast', name:'Holy Wednesday', desc:'Holy Wednesday — the anointing of Christ with myrrh and the betrayal of Judas. The Mystery of Holy Unction may be celebrated. Strict fasting.'},
+  '3-9':  {type:'feast', name:'Holy Thursday — Mystical Supper', desc:'The Institution of the Holy Eucharist at the Last Supper. The Twelve Gospels of the Holy Passion are read at the evening service.'},
+  '3-10': {type:'feast', name:'Holy Friday — The Crucifixion', desc:'The Crucifixion and death of our Lord Jesus Christ. The most solemn day of the Orthodox year. The Epitaphios is brought out for veneration at Vespers. Strict fast.'},
+  '3-11': {type:'feast', name:'Holy Saturday — Christ in the Tomb', desc:'Christ lies in the tomb. The Lamentations are sung. Late at night the Paschal Vigil begins — the church is darkened, then lit with candles as the priest proclaims: Christ is Risen!'},
+  '3-12': {type:'feast', name:'☩ PASCHA — The Resurrection of Christ ☩', desc:'The Feast of Feasts! The Resurrection of our Lord, God, and Savior Jesus Christ! CHRISTOS ANESTI! All fasting is broken. Families gather for the Paschal meal.'},
+  '3-13': {type:'feast', name:'Bright Monday', desc:'The first day of Bright Week. The entire week is one continuous feast. All fasting completely suspended. Royal Doors remain open all week.'},
+  '3-14': {type:'feast', name:'Bright Tuesday', desc:'Bright Tuesday — the Resurrection is proclaimed anew. No fasting.'},
+  '3-15': {type:'feast', name:'Bright Wednesday', desc:'Bright Wednesday. No fasting. All services are Paschal in character.'},
+  '3-16': {type:'feast', name:'Bright Thursday', desc:'Bright Thursday. The joy of the Resurrection continues. No fasting.'},
+  '3-17': {type:'feast', name:'Bright Friday — Theotokos of the Life-Giving Spring', desc:'Bright Friday — feast of the Theotokos of the Life-Giving Spring. No fasting.'},
+  '3-18': {type:'feast', name:'Bright Saturday', desc:'The last day of Bright Week. The Paschal season continues for 40 days until the Ascension.'},
+  '3-19': {type:'feast', name:'Sunday of St. Thomas (Antipascha)', desc:'The Sunday of St. Thomas — Christ appears to the disciples and Thomas touches His wounds: "My Lord and my God!" Name day for Thomas.'},
+  '3-26': {type:'name', name:'Name Day: St. George the Trophy-Bearer ☩', desc:'Feast of the Holy Great Martyr George the Trophy-Bearer — patron of soldiers and many Orthodox nations. Name day for George, Georgios, Georgia, Georgiana.'},
+  '3-30': {type:'feast', name:'Sunday of the Paralytic', desc:'The fourth Sunday of Pascha — the healing of the paralytic at the Pool of Bethesda: "Rise, take up your bed and walk."'},
+  '4-7':  {type:'feast', name:'Sunday of the Samaritan Woman', desc:'The fifth Sunday of Pascha — Christ meets the Samaritan Woman at Jacob s Well and reveals Himself as the giver of living water.'},
+  '4-21': {type:'feast', name:'Ascension of the Lord ☩', desc:'The Ascension of our Lord into Heaven — one of the Twelve Great Feasts. Forty days after Pascha, Christ ascends to the right hand of the Father.'},
+  '4-24': {type:'feast', name:'Mid-Pentecost', desc:'The midpoint between Pascha and Pentecost. The Church celebrates Christ teaching in the Temple.'},
+  '4-28': {type:'feast', name:'Sunday of the Holy Fathers — 1st Ecumenical Council', desc:'The Sunday before Pentecost honors the 318 Holy Fathers of the First Ecumenical Council at Nicaea (325 AD) who gave us the Nicene Creed.'},
+  '4-31': {type:'feast', name:'PENTECOST — Descent of the Holy Spirit ☩', desc:'The Great Feast of Pentecost — the descent of the Holy Spirit upon the Apostles fifty days after Pascha. The birthday of the Church. The faithful bring green branches to church.'},
+  '5-1':  {type:'feast', name:'Monday of the Holy Spirit', desc:'The day following Pentecost is dedicated to the Holy Spirit. A feast day in Orthodox tradition. No fasting.'},
+  '5-7':  {type:'feast', name:'All Saints Sunday', desc:'The first Sunday after Pentecost honors all the saints — known and unknown — who have pleased God throughout the ages. The Apostles Fast begins the following Monday.'},
+  '5-8':  {type:'fast', name:'Apostles Fast Begins', desc:'The Apostles Fast begins and continues until the Feast of Sts. Peter and Paul (June 29). Less strict than Great Lent — fish permitted most days except Wednesdays and Fridays.'},
+  '5-28': {type:'name', name:'Eve of Sts. Peter & Paul', desc:'Eve of the feast of the Holy Apostles Peter and Paul. The Apostles Fast concludes today.'},
+  '5-29': {type:'feast', name:'Feast of Sts. Peter & Paul ☩', desc:'The feast of the First-Enthroned Apostles Peter and Paul. This feast concludes the Apostles Fast. Name day for Peter/Petros and Paul/Pavlos.'},
+};
+
+window.changeMonth = function(dir) {
+  calMonth += dir;
+  if (calMonth > 11) { calMonth=0; calYear++; }
+  if (calMonth < 0)  { calMonth=11; calYear--; }
+  renderCalendar();
+};
+
+window.closeFeast = function() {
+  document.getElementById("feastPopup").classList.remove("open");
+};
+
+function openFeast(feast, day, month) {
+  var badge = document.getElementById("feast-badge");
+  badge.textContent = feast.type==="feast"?"Feast Day":feast.type==="fast"?"Fast Day":"Name Day";
+  badge.className = "feast-type-badge " + (feast.type==="feast"?"badge-feast":feast.type==="fast"?"badge-fast":"badge-name");
+  document.getElementById("feast-title").textContent = feast.name;
+  var julDay = day - JULIAN_OFFSET;
+  var julMon = month;
+  if (julDay <= 0) { julMon = month-1; julDay = new Date(calYear,month,0).getDate() + julDay; }
+  document.getElementById("feast-date").textContent = MONTHS[month]+" "+day+", "+calYear+" (Julian: "+julDay+" "+MONTHS[julMon]+")";
+  document.getElementById("feast-desc").textContent = feast.desc;
+  document.getElementById("feastPopup").classList.add("open");
+}
+
+function renderCalendar() {
+  var grid = document.getElementById("cal-grid");
+  grid.innerHTML = "";
+  var monthName = MONTHS[calMonth];
+  var julianMonthName = calMonth > 0 ? MONTHS[calMonth-1]+" / "+monthName : "December / "+monthName;
+  document.getElementById("cal-month-title").textContent = monthName+" "+calYear;
+  if (calMode === 'old') {
+    document.getElementById("cal-julian-month").textContent = "Old Calendar (Julian): "+julianMonthName+" "+calYear;
+  } else {
+    document.getElementById("cal-julian-month").textContent = "New Calendar (Revised Julian): "+monthName+" "+calYear;
+  }
+  document.getElementById("cal-nav-label").textContent = monthName+" "+calYear;
+  var firstDay = new Date(calYear,calMonth,1).getDay();
+  var daysInMonth = new Date(calYear,calMonth+1,0).getDate();
+  var today = new Date();
+  for (var e=0;e<firstDay;e++) {
+    var empty = document.createElement("div");
+    empty.className = "cal-day empty";
+    grid.appendChild(empty);
+  }
+  for (var d=1;d<=daysInMonth;d++) {
+    var cell = document.createElement("div");
+    var julianDay = d - JULIAN_OFFSET;
+    var julianMonth = calMonth;
+    if (julianDay <= 0) {
+      julianMonth = calMonth-1;
+      julianDay = new Date(calYear,calMonth,0).getDate() + julianDay;
+    }
+    var feast = getFeasts(calYear, calMonth, d);
+    var isToday = (calYear===today.getFullYear() && calMonth===today.getMonth() && d===today.getDate());
+    cell.className = "cal-day"+(isToday?" today":"")+(feast?" has-feast":"");
+    var julLabel = calMode === 'old'
+      ? "<span class='jul-num'>Old Cal: "+julianDay+" "+MONTHS[julianMonth].substring(0,3)+"</span>"
+      : "<span class='jul-num'>"+MONTHS[calMonth].substring(0,3)+" "+d+"</span>";
+    cell.innerHTML = "<span class='greg-num'>"+d+"</span>"+julLabel;
+    if (feast) {
+      var dot = document.createElement("div");
+      dot.className = feast.type==="fast" ? "fast-dot" : "feast-dot";
+      if (feast.type==="name") dot.style.background = "#4a7ab5";
+      cell.appendChild(dot);
+      var fname = document.createElement("span");
+      fname.className = "feast-name";
+      fname.textContent = feast.name.length > 22 ? feast.name.substring(0,20)+"…" : feast.name;
+      cell.appendChild(fname);
+      (function(f,gd,gm){ cell.addEventListener("click",function(){ openFeast(f,gd,gm); }); })(feast,d,calMonth);
+    }
+    grid.appendChild(cell);
+  }
+}
+
+// ═══════════════════════════════════════
+// MOBILE MENU
+// ═══════════════════════════════════════
+window.openMobileMenu = function() {
+  document.getElementById('mobile-menu-overlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+};
+window.closeMobileMenu = function() {
+  document.getElementById('mobile-menu-overlay').classList.remove('open');
+  document.body.style.overflow = '';
+};
+window.doMobileSearch = function() {
+  var q = document.getElementById('mobileSearchInput').value.trim();
+  if (!q) return;
+  document.getElementById('searchInput').value = q;
+  closeMobileMenu();
+  doSearch();
+};
+
+function updateMobileNav() {
+  var isLoggedIn = currentUser && currentProfile;
+  var mobileAvatar = document.getElementById('mobile-nav-avatar');
+  var mobileGuest = document.getElementById('mobile-guest-btns');
+  var mobileProfileLink = document.getElementById('mobile-profile-link');
+  var mobileEditLink = document.getElementById('mobile-edit-link');
+  var mobileSignoutLink = document.getElementById('mobile-signout-link');
+  var mobileRegLink = document.getElementById('mobile-register-link');
+  var mobileLoginLink = document.getElementById('mobile-login-link');
+  if (isLoggedIn) {
+    mobileGuest.style.display = 'none';
+    mobileProfileLink.style.display = 'block';
+    mobileEditLink.style.display = 'block';
+    mobileSignoutLink.style.display = 'block';
+    mobileRegLink.style.display = 'none';
+    mobileLoginLink.style.display = 'none';
+    var initial = currentProfile.name.charAt(0).toUpperCase();
+    mobileAvatar.style.display = 'block';
+    mobileAvatar.innerHTML = currentProfile.photo
+      ? '<img src="'+currentProfile.photo+'" style="width:32px;height:32px;border-radius:50%;border:1px solid var(--gold);object-fit:cover;" alt="">'
+      : '<div style="width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,var(--gold-dim),var(--navy-light));border:1px solid var(--gold);display:flex;align-items:center;justify-content:center;font-family:Cinzel,serif;font-size:13px;color:var(--gold);">'+initial+'</div>';
+  } else {
+    mobileGuest.style.display = 'flex';
+    mobileAvatar.style.display = 'none';
+    mobileProfileLink.style.display = 'none';
+    mobileEditLink.style.display = 'none';
+    mobileSignoutLink.style.display = 'none';
+    mobileRegLink.style.display = 'block';
+    mobileLoginLink.style.display = 'block';
+  }
+}
+
+// Hook into existing onSignedIn / onSignedOut
+var _origOnSignedIn = onSignedIn;
+var onSignedIn = function() { _origOnSignedIn(); updateMobileNav(); };
+var _origOnSignedOut = onSignedOut;
+var onSignedOut = function() { _origOnSignedOut(); updateMobileNav(); };
+
+// ═══════════════════════════════════════
+// CALENDAR MODE (NEW vs OLD)
+// ═══════════════════════════════════════
+var calMode = 'new'; // 'new' = Revised Julian (matches Gregorian for fixed feasts), 'old' = Old Julian (+13 days)
+
+var OLD_CAL_FIXED_FEASTS = {
+  // Old Calendar fixed feasts shown on their Gregorian equivalent dates
+  // These are the same feast days but observed 13 days later on the civil calendar
+  // Key = "month-day" Gregorian date when Old Cal parishes celebrate the feast
+  '0-7':  {type:'feast', name:'Nativity of Christ (Old Calendar) ☩', desc:'Christmas on the Old (Julian) Calendar. Orthodox Christians following the Old Calendar — including the Russian, Serbian, Georgian Orthodox Churches and ROCOR — celebrate the Nativity of our Lord on December 25 Julian, which falls on January 7 Gregorian. "And the Word became flesh and dwelt among us." (John 1:14)'},
+  '0-14': {type:'feast', name:'Circumcision of the Lord / St. Basil the Great', desc:'Old Calendar: The Circumcision of our Lord Jesus Christ on the eighth day, and the Feast of St. Basil the Great, Archbishop of Caesarea. One of the Three Holy Hierarchs.'},
+  '0-19': {type:'feast', name:'Theophany — Baptism of the Lord (Old Calendar) ☩', desc:'Old Calendar: The Theophany (Epiphany) — the Baptism of our Lord Jesus Christ in the Jordan River by St. John the Baptist. The Holy Trinity is revealed: the Father speaks from heaven, the Son is baptized, and the Holy Spirit descends as a dove. Celebrated January 6 Julian = January 19 Gregorian.'},
+  '1-15': {type:'feast', name:'Meeting of the Lord (Old Calendar) ☩', desc:'Old Calendar: The Presentation of our Lord Jesus Christ in the Temple — the Meeting of the Lord. Forty days after His Nativity, the infant Christ is brought to the Temple where He is received by the righteous Elder Simeon: "Lord, now lettest Thou Thy servant depart in peace." (Luke 2:29). Celebrated February 2 Julian = February 15 Gregorian.'},
+  '3-7':  {type:'feast', name:'Annunciation of the Theotokos (Old Calendar) ☩', desc:'Old Calendar: The Annunciation of the Most Holy Theotokos — the Archangel Gabriel announces to the Virgin Mary that she will conceive and bear the Son of God. One of the Twelve Great Feasts. Celebrated March 25 Julian = April 7 Gregorian.'},
+  '4-6':  {type:'name', name:'Name Day: St. George (Old Calendar)', desc:'Old Calendar: Feast of the Holy Great Martyr George the Trophy-Bearer. Celebrated April 23 Julian = May 6 Gregorian. Name day for George, Georgia, Georgiana.'},
+  '8-11': {type:'feast', name:'Nativity of the Theotokos (Old Calendar) ☩', desc:'Old Calendar: The Nativity of the Most Holy Theotokos. Celebrated September 8 Julian = September 21 Gregorian. One of the Twelve Great Feasts.'},
+  '9-14': {type:'feast', name:'Protection of the Theotokos (Old Calendar)', desc:'Old Calendar: The Feast of the Protecting Veil (Pokrov) of the Most Holy Theotokos. Beloved in Slavic Orthodoxy. Celebrated October 1 Julian = October 14 Gregorian.'},
+  '10-8': {type:'feast', name:'Archangel Michael (Old Calendar)', desc:'Old Calendar: Feast of the Holy Archangel Michael and All the Bodiless Powers of Heaven. Celebrated November 8 Julian = November 21 Gregorian.'},
+  '11-6': {type:'name', name:'Name Day: St. Nicholas (Old Calendar)', desc:'Old Calendar: Feast of the Holy Hierarch Nicholas the Wonderworker, Archbishop of Myra. One of the most beloved saints of the Orthodox Church. Celebrated December 6 Julian = December 19 Gregorian.'},
+  '11-25': {type:'feast', name:'Nativity of Christ (Old Calendar) ☩', desc:'Old Calendar: Christmas Eve (December 24 Julian = January 6 Gregorian next year). The Nativity Fast concludes. The Royal Hours are served.'},
+};
+
+// Pascha and all movable feasts are IDENTICAL on both calendars
+// The toggle only affects fixed (immovable) feasts
+
+window.setCalMode = function(mode) {
+  calMode = mode;
+  document.getElementById('toggle-new').classList.toggle('active', mode === 'new');
+  document.getElementById('toggle-old').classList.toggle('active', mode === 'old');
+  var desc = document.getElementById('cal-mode-desc');
+  if (mode === 'new') {
+    desc.textContent = 'New Calendar (Revised Julian) — used by OCA, Antiochian, Greek, Romanian, Bulgarian Orthodox. Fixed feasts align with the Gregorian calendar. Pascha is the same for all Orthodox.';
+  } else {
+    desc.textContent = 'Old Calendar (Julian) — used by ROCOR, Russian, Serbian, Georgian, Jerusalem Orthodox. Fixed feasts fall 13 days later on the civil calendar. Pascha is celebrated on the same date by all Orthodox Churches.';
+  }
+  renderCalendar();
+};
+
+function getFeasts(gregYear, gregMonth, gregDay) {
+  var key = gregMonth + '-' + gregDay;
+  if (calMode === 'old') {
+    // For Old Calendar: use the old-calendar fixed feast data
+    // Pascha and movable feasts remain the same on both calendars
+    var oldFeast = OLD_CAL_FIXED_FEASTS[key] || null;
+    var movableFeast = feasts[key] || null;
+    // Movable feasts (Pascha, Great Lent, etc.) override — same on both calendars
+    // Fixed feasts from main feasts object are New Calendar feasts — suppress them in Old Cal mode
+    // unless they are movable (indicated by containing Lent/Pascha/Bright/Pentecost keywords)
+    if (movableFeast) {
+      var movableKeywords = ['Lent','Pascha','Bright','Pentecost','Holy Monday','Holy Tuesday','Holy Wednesday','Holy Thursday','Holy Friday','Holy Saturday','Lazarus','Palm Sunday','Apostles Fast','All Saints','Ascension','Annunciation','Mid-Pentecost','Forgiveness','Clean Monday','Akathist','Canon','Souls','Orthodoxy','Palamas','Cross','Climacus','Mary of Egypt','Blind Man','Samaritan','Paralytic','Thomas','Myrrhbearing'];
+      var isMovable = movableKeywords.some(function(k){ return movableFeast.name.indexOf(k) !== -1; });
+      if (isMovable) return movableFeast;
+    }
+    return oldFeast;
+  }
+  return feasts[key] || null;
+}
+
+// ═══════════════════════════════════════
+// VIDEO FILTERING
+// ═══════════════════════════════════════
+
+// Extended categories for each video (by index)
+var videoCategories = {
+  // Patristic Nectar
+  0:  ['Iconography','Spiritual Life','Divine Liturgy'],
+  1:  ['Church History','Apologetics','Holy Fathers'],
+  2:  ['Apologetics','Church History','Holy Fathers'],
+  3:  ['Apologetics','Holy Fathers','Spiritual Life'],
+  4:  ['Spiritual Life','Holy Fathers'],
+  // Orthodox Kyle
+  5:  ['Spiritual Life','Holy Fathers','Apologetics'],
+  6:  ['Holy Fathers','Spiritual Life','Church History'],
+  7:  ['Spiritual Life','Apologetics','Church History'],
+  // Alex Sorin
+  8:  ['Apologetics','Holy Scripture','Church History'],
+  9:  ['Apologetics','Spiritual Life','Holy Fathers'],
+  10: ['Apologetics','Church History','Trinity'],
+  // Barrel Aged Faith
+  11: ['Spiritual Life','Culture','Church History'],
+  12: ['Apologetics','Church History','Holy Scripture'],
+  13: ['Divine Liturgy','Holy Fathers','Spiritual Life'],
+  // Orthodox Ethos
+  14: ['Church History','Apologetics','Holy Fathers'],
+  15: ['Apologetics','Spiritual Life','Holy Fathers'],
+  16: ['Church History','Holy Fathers','Apologetics'],
+  17: ['Holy Fathers','Spiritual Life','Trinity'],
+  // Jay Dyer
+  18: ['Apologetics','Church History','Holy Fathers'],
+  19: ['Apologetics','Holy Fathers','Church History'],
+  // Ancient Faith: Lord of Spirits
+  20: ['Holy Scripture','Holy Fathers','Church History'],
+  21: ['Holy Scripture','Holy Fathers','Spiritual Life'],
+  // Ancient Faith: Fr. Andrew Damick
+  22: ['Apologetics','Church History','Holy Fathers'],
+  // Ancient Faith: Fr. Stephen De Young
+  23: ['Holy Scripture','Holy Fathers','Church History'],
+  24: ['Holy Scripture','Holy Fathers','Church History'],
+  // Ancient Faith: Fr. Thomas Hopko
+  25: ['Spiritual Life','Holy Fathers','Divine Liturgy'],
+  // Church of the Eternal Logos
+  26: ['Culture','Spiritual Life','Church History'],
+  27: ['Church History','Holy Fathers','Spiritual Life'],
+  28: ['Spiritual Life','Holy Fathers','Apologetics'],
+  // Orthodox Soul
+  29: ['Spiritual Life','Holy Fathers','Divine Liturgy'],
+  30: ['Spiritual Life','Holy Fathers','Trinity'],
+  // Behold the Chalice
+  31: ['Divine Liturgy','Holy Fathers','Spiritual Life'],
+  32: ['Divine Liturgy','Holy Scripture','Holy Fathers'],
+  // Reader Paul
+  33: ['Holy Scripture','Holy Fathers','Apologetics'],
+};
+
+var categoryKeyMap = {
+  'Divine Liturgy': 'Divine Liturgy',
+  'Holy Scripture': 'Holy Scripture',
+  'Holy Fathers': 'Holy Fathers',
+  'Iconography': 'Iconography',
+  'Trinity': 'Trinity',
+  'Chanting': 'Chanting',
+  'Feast Days': 'Feast Days',
+  'Church History': 'Church History',
+  'Apologetics': 'Apologetics',
+  'Spiritual Life': 'Spiritual Life',
+  'All': 'All'
+};
+
+window.filterVideos = function(category) {
+  var grid = document.getElementById('all-video-grid');
+  grid.innerHTML = '';
+  var shown = 0;
+  for (var i = 0; i < videos.length; i++) {
+    var cats = videoCategories[i] || [];
+    if (category === 'All' || cats.indexOf(category) !== -1) {
+      grid.appendChild(makeVideoCard(videos[i], i));
+      shown++;
+    }
+  }
+  if (shown === 0) {
+    grid.innerHTML = '<p style="color:var(--text-mid);font-style:italic;padding:20px 0;grid-column:1/-1;">No videos in this category yet — more coming soon! ☩</p>';
+  }
+  // Update active state on filter list
+  document.querySelectorAll('#video-filter-list li').forEach(function(li) {
+    li.classList.remove('filter-active');
+  });
+  event.currentTarget.classList.add('filter-active');
+};
+
+window.filterToCategory = function(category) {
+  showPage('videos'); setActiveByName('Videos');
+  setTimeout(function() { filterVideos(category); }, 50);
+};
+
+function updateFilterCounts() {
+  var counts = {
+    'Divine Liturgy': 0, 'Holy Scripture': 0, 'Holy Fathers': 0,
+    'Iconography': 0, 'Trinity': 0, 'Chanting': 0,
+    'Feast Days': 0, 'Church History': 0, 'Apologetics': 0, 'Spiritual Life': 0
+  };
+  for (var i = 0; i < videos.length; i++) {
+    var cats = videoCategories[i] || [];
+    cats.forEach(function(c) { if (counts[c] !== undefined) counts[c]++; });
+  }
+  var idMap = {
+    'Divine Liturgy':'fc-liturgy','Holy Scripture':'fc-scripture','Holy Fathers':'fc-fathers',
+    'Iconography':'fc-icons','Trinity':'fc-trinity','Chanting':'fc-chanting',
+    'Feast Days':'fc-feasts','Church History':'fc-history','Apologetics':'fc-apol','Spiritual Life':'fc-spirit'
+  };
+  Object.keys(idMap).forEach(function(cat) {
+    var el = document.getElementById(idMap[cat]);
+    if (el) el.textContent = counts[cat];
+  });
+}
+
+// ═══════════════════════════════════════
+// CHANNELS DATA & RENDERING
+// ═══════════════════════════════════════
+var channels = [
+  {
+    initial: '☩', name: 'Patristic Nectar Films', org: 'Fr. Josiah Trenham', jurisdiction: 'Antiochian Orthodox',
+    desc: 'Fr. Josiah Trenham is an Archpriest of St. Andrew Orthodox Church in Riverside, California, founder of Patristic Nectar Publications, and holder of a Ph.D. in Theology from the University of Durham. His channel covers the breadth of Orthodox theology, spirituality, apologetics, and patristic teaching.',
+    filter: 'Patristic Nectar'
+  },
+  {
+    initial: 'K', name: 'Orthodox Kyle', org: 'Orthodox Kyle', jurisdiction: 'OCA',
+    desc: 'Orthodox Kyle is an Orthodox Christian convert whose channel offers accessible, passionate content on Orthodox spirituality, the Holy Fathers, spiritual warfare, and navigating the path of conversion to the ancient faith.',
+    filter: 'Orthodox Kyle'
+  },
+  {
+    initial: 'A', name: 'Alex Sorin', org: 'Alex Sorin (@Alex_Ortodoxie)', jurisdiction: 'Romanian Orthodox',
+    desc: 'Alex Sorin is a Romanian-Orthodox lawyer and apologist who engages in rigorous theological debate defending Holy Orthodoxy against Protestantism, Roman Catholicism, and other heterodox positions. A sharp and charitable voice for the Faith.',
+    filter: 'Alex Sorin'
+  },
+  {
+    initial: 'B', name: 'Barrel Aged Faith', org: 'Barrel Aged Faith', jurisdiction: 'Orthodox',
+    desc: 'Barrel Aged Faith produces thoughtful long-form conversations exploring Orthodox Christianity, culture, and the spiritual life — engaging theologians, scholars, and converts in discussions rooted in the living Tradition of the Church.',
+    filter: 'Barrel Aged Faith'
+  },
+  {
+    initial: '☦', name: 'Orthodox Ethos', org: 'Fr. Peter Heers, D.Th.', jurisdiction: 'ROCOR',
+    desc: 'Fr. Peter Heers is a priest of ROCOR, founder of Uncut Mountain Press, and Doctor of Dogmatic Theology. Orthodox Ethos presents rigorous catechesis, lecture series, and Q&A sessions covering Orthodox ecclesiology, eschatology, and the Holy Fathers.',
+    filter: 'Orthodox Ethos'
+  },
+  {
+    initial: 'J', name: 'Jay Dyer', org: 'Jay Dyer', jurisdiction: 'Antiochian Orthodox',
+    desc: 'Jay Dyer is an Orthodox Christian philosopher, author, and cultural analyst. His channel covers Orthodox theology, philosophy, apologetics, and cultural commentary — engaging Western philosophy and heterodox thought from a firmly patristic perspective.',
+    filter: 'Jay Dyer'
+  },
+  {
+    initial: '✝', name: 'Ancient Faith Ministries', org: 'Ancient Faith Radio', jurisdiction: 'Antiochian Orthodox (pan-Orthodox)',
+    desc: 'Ancient Faith Ministries is the premier pan-Orthodox media ministry in English, featuring Fr. Andrew Stephen Damick, Fr. Stephen De Young (Lord of Spirits), the late Fr. Thomas Hopko, Frederica Mathewes-Green, Dr. Jeannie Constantinou, and more than one hundred Orthodox voices.',
+    filter: 'Ancient Faith'
+  },
+  {
+    initial: 'Λ', name: 'Church of the Eternal Logos', org: 'Dr. David Patrick Harry, PhD', jurisdiction: 'Orthodox',
+    desc: 'Dr. David Patrick Harry holds a doctorate in Religious Studies and runs Church of the Eternal Logos — a channel exploring Orthodox Christian theology, intellectual history, philosophy, and cultural commentary through the lens of the Divine Logos.',
+    filter: 'Church of the Eternal Logos'
+  },
+  {
+    initial: 'Ψ', name: 'Orthodox Soul', org: 'Orthodox Soul', jurisdiction: 'Orthodox',
+    desc: 'Orthodox Soul produces content focused on the interior life of Orthodox Christianity — the Jesus Prayer, theosis, the hesychast tradition, and the deep spiritual formation that comes through faithful participation in the sacramental life of the Church.',
+    filter: 'Orthodox Soul'
+  },
+  {
+    initial: '🍷', name: 'Behold the Chalice', org: 'Behold the Chalice', jurisdiction: 'Orthodox',
+    desc: 'Behold the Chalice is devoted to the sacred heart of Orthodox Christian life: the Divine Liturgy and the Holy Eucharist. Through careful theological and patristic reflection, this channel illumines the eternal sacrifice that stands at the center of Orthodox worship.',
+    filter: 'Behold the Chalice'
+  },
+  {
+    initial: 'P', name: 'Bottom of the Rabbit Hole', org: 'Reader Paul', jurisdiction: 'Antiochian Orthodox',
+    desc: 'Reader Paul is a Reader at an Antiochian Orthodox Church whose channel "Bottom of the Rabbit Hole" (@bottomoftherabbithole) produces rigorous Orthodox apologetics and theological content — defending the Holy Faith against Protestantism, engaging Rome, and presenting the epistemological case for Holy Orthodoxy as the one true apostolic Church. He has collaborated with Fr. Peter Heers of Orthodox Ethos on debates and theological analysis.',
+    filter: 'Reader Paul'
+  },
+];
+
+function renderChannels() {
+  var grid = document.getElementById('channels-grid');
+  if (!grid) return;
+  grid.innerHTML = '';
+  channels.forEach(function(ch) {
+    var vidCount = videos.filter(function(v){ return v.org.indexOf(ch.filter) !== -1 || v.channel.indexOf(ch.filter) !== -1; }).length;
+    var card = document.createElement('div');
+    card.className = 'channel-card';
+    card.onclick = function(){ filterToCategory(ch.filter); };
+    card.innerHTML =
+      '<div class="channel-avatar">' + ch.initial + '</div>' +
+      '<div class="channel-name">' + ch.name + '</div>' +
+      '<div class="channel-org">' + ch.org + '</div>' +
+      '<div style="font-family:Cinzel,serif;font-size:9px;letter-spacing:1px;color:var(--gold-dim);text-transform:uppercase;margin-bottom:10px;">' + ch.jurisdiction + '</div>' +
+      '<div class="channel-desc">' + ch.desc + '</div>' +
+      '<div class="channel-vid-count">' + vidCount + ' video' + (vidCount !== 1 ? 's' : '') + ' in library · Click to browse ›</div>';
+    grid.appendChild(card);
+  });
+}
+
+// Override filterToCategory to also handle channel names
+var _origFilterToCategory = window.filterToCategory;
+window.filterToCategory = function(category) {
+  showPage('videos'); setActiveByName('Videos');
+  setTimeout(function() {
+    var grid = document.getElementById('all-video-grid');
+    grid.innerHTML = '';
+    var shown = 0;
+    for (var i = 0; i < videos.length; i++) {
+      var v = videos[i];
+      var cats = videoCategories[i] || [];
+      var matchCat = cats.indexOf(category) !== -1;
+      var matchOrg = v.org.indexOf(category) !== -1 || v.channel.indexOf(category) !== -1;
+      if (category === 'All' || matchCat || matchOrg) {
+        grid.appendChild(makeVideoCard(videos[i], i));
+        shown++;
+      }
+    }
+    if (shown === 0) {
+      grid.innerHTML = '<p style="color:var(--text-mid);font-style:italic;padding:20px 0;grid-column:1/-1;">No videos in this category yet — more coming soon! ☩</p>';
+    }
+    document.querySelectorAll('#video-filter-list li').forEach(function(li){ li.classList.remove('filter-active'); });
+  }, 50);
+};
+
+// ═══════════════════════════════════════
+// PRIVATE MESSAGES (Firebase)
+// ═══════════════════════════════════════
+var activeConvoId = null;
+var unsubscribeMessages = null;
+var ADMIN_NAME = 'Theodore'; // Admin profile name — contact form goes here
+
+function showMessagesUI() {
+  var loggedIn = currentUser && currentProfile;
+  document.getElementById('messages-login-prompt').style.display = loggedIn ? 'none' : 'block';
+  document.getElementById('messages-ui').style.display = loggedIn ? 'block' : 'none';
+  if (loggedIn) loadConversations();
+}
+
+async function loadConversations() {
+  if (!currentUser) return;
+  var q = query(
+    collection(db, 'conversations'),
+    orderBy('lastMessageAt', 'desc')
+  );
+  onSnapshot(q, function(snapshot) {
+    var list = document.getElementById('convo-list-items');
+    var myConvos = [];
+    snapshot.forEach(function(d) {
+      var data = d.data();
+      if (data.participants && data.participants.indexOf(currentUser.uid) !== -1) {
+        myConvos.push({ id: d.id, ...data });
+      }
+    });
+    if (myConvos.length === 0) {
+      list.innerHTML = '<div style="padding:20px;color:var(--text-mid);font-size:13px;font-style:italic;text-align:center;">No conversations yet.</div>';
+      return;
+    }
+    list.innerHTML = '';
+    myConvos.forEach(function(convo) {
+      var otherName = convo.participantNames ? convo.participantNames.filter(function(n){ return n !== currentProfile.name; })[0] : 'Unknown';
+      var item = document.createElement('div');
+      item.className = 'convo-item' + (activeConvoId === convo.id ? ' active' : '');
+      item.innerHTML =
+        '<span class="convo-time">' + (convo.lastMessageAt ? new Date(convo.lastMessageAt.toDate()).toLocaleDateString() : '') + '</span>' +
+        '<div class="convo-name">' + otherName + '</div>' +
+        '<div class="convo-preview">' + (convo.lastMessage || '') + '</div>';
+      item.onclick = function() { openConversation(convo.id, otherName); };
+      list.appendChild(item);
+    });
+  });
+}
+
+window.openConversation = function(convoId, otherName) {
+  activeConvoId = convoId;
+  document.getElementById('msg-no-convo').style.display = 'none';
+  var activePanel = document.getElementById('msg-active-panel');
+  activePanel.style.display = 'flex';
+  document.getElementById('msg-panel-header').textContent = otherName;
+  if (unsubscribeMessages) unsubscribeMessages();
+  var msgQ = query(collection(db, 'conversations', convoId, 'messages'), orderBy('sentAt', 'asc'));
+  unsubscribeMessages = onSnapshot(msgQ, function(snapshot) {
+    var feed = document.getElementById('msg-feed');
+    feed.innerHTML = '';
+    snapshot.forEach(function(d) {
+      var data = d.data();
+      var bubble = document.createElement('div');
+      bubble.className = 'msg-bubble ' + (data.senderUid === currentUser.uid ? 'sent' : 'received');
+      bubble.textContent = data.text;
+      feed.appendChild(bubble);
+    });
+    feed.scrollTop = feed.scrollHeight;
+  });
+};
+
+window.sendMessage = async function() {
+  if (!currentUser || !activeConvoId) return;
+  var input = document.getElementById('msg-input');
+  var text = input.value.trim();
+  if (!text) return;
+  try {
+    await addDoc(collection(db, 'conversations', activeConvoId, 'messages'), {
+      text: text, senderUid: currentUser.uid, senderName: currentProfile.name, sentAt: serverTimestamp()
+    });
+    await setDoc(doc(db, 'conversations', activeConvoId), { lastMessage: text, lastMessageAt: serverTimestamp() }, { merge: true });
+    input.value = '';
+  } catch(e) { showToast('Could not send: ' + e.message); }
+};
+
+window.openNewMessage = function() { openModal('newMessageModal'); };
+
+window.sendNewMessage = async function() {
+  if (!currentUser) return;
+  var to = document.getElementById('new-msg-to').value.trim();
+  var body = document.getElementById('new-msg-body').value.trim();
+  if (!to || !body) { showToast('Please fill in recipient and message ☩'); return; }
+  var convoId = [currentUser.uid, to.toLowerCase().replace(/\s+/g,'_')].sort().join('__');
+  try {
+    await setDoc(doc(db, 'conversations', convoId), {
+      participants: [currentUser.uid, to],
+      participantNames: [currentProfile.name, to],
+      lastMessage: body, lastMessageAt: serverTimestamp()
+    }, { merge: true });
+    await addDoc(collection(db, 'conversations', convoId, 'messages'), {
+      text: body, senderUid: currentUser.uid, senderName: currentProfile.name, sentAt: serverTimestamp()
+    });
+    closeModal('newMessageModal');
+    document.getElementById('new-msg-to').value = '';
+    document.getElementById('new-msg-body').value = '';
+    showMessagesUI();
+    showToast('Message sent ☩');
+  } catch(e) { showToast('Could not send: ' + e.message); }
+};
+
+// ═══════════════════════════════════════
+// CONTACT FORM → Admin Inbox
+// ═══════════════════════════════════════
+window.submitContact = async function() {
+  var name = document.getElementById('contact-name').value.trim() || 'Anonymous';
+  var subject = document.getElementById('contact-subject').value;
+  var message = document.getElementById('contact-message').value.trim();
+  if (!message) { showToast('Please write a message ☩'); return; }
+  try {
+    // Save to Firestore admin-messages collection
+    await addDoc(collection(db, 'admin-messages'), {
+      name: name, subject: subject, message: message,
+      sentAt: serverTimestamp(), read: false
+    });
+    document.getElementById('contact-form').style.display = 'none';
+    document.getElementById('contact-success').style.display = 'block';
+  } catch(e) {
+    showToast('Could not send message: ' + e.message);
+  }
+};
+
+window.resetContact = function() {
+  document.getElementById('contact-name').value = '';
+  document.getElementById('contact-subject').value = '';
+  document.getElementById('contact-message').value = '';
+  document.getElementById('contact-form').style.display = 'block';
+  document.getElementById('contact-success').style.display = 'none';
+};
+
+// Show messages UI when page is opened
+var _origShowPage = window.showPage;
+window.showPage = function(name) {
+  _origShowPage(name);
+  if (name === 'messages') showMessagesUI();
+  if (name === 'channels') renderChannels();
+};
+
+// Update mobile messages link visibility
+var _origUpdateMobileNav = window.updateMobileNav || function(){};
+window.updateMobileNav = function() {
+  if (typeof _origUpdateMobileNav === 'function') _origUpdateMobileNav();
+  var mml = document.getElementById('mobile-messages-link');
+  var nml = document.getElementById('nav-messages-link');
+  var loggedIn = currentUser && currentProfile;
+  if (mml) mml.style.display = loggedIn ? 'block' : 'none';
+  if (nml) nml.style.display = loggedIn ? 'inline' : 'none';
+};
+
+// ═══════════════════════════════════════
+// INIT
+// ═══════════════════════════════════════
+renderGrids();
+renderCalendar();
+listenToPosts();
+updateFilterCounts();
+setCalMode('new');
+</script>
+
+<script>
+// Bridge: expose module functions to HTML onclick attributes
+// (ES modules are scoped and don't auto-expose to window in all browsers)
+document.addEventListener('DOMContentLoaded', function() {
+  // All window.* assignments in the module script handle this,
+  // but we add event listeners as a fallback for any remaining buttons
+  var saveBtn = document.querySelector('#editProfileModal .btn-gold');
+  if (saveBtn) saveBtn.addEventListener('click', function() { if(window.saveProfile) window.saveProfile(); });
+  
+  var removeBtn = document.querySelector('#editProfileModal .upload-btn:last-of-type');
+  if (removeBtn) removeBtn.addEventListener('click', function() { if(window.removePhoto) window.removePhoto(); });
+  
+  var uploadInput = document.getElementById('photo-upload-input');
+  if (uploadInput) uploadInput.addEventListener('change', function() { if(window.handlePhotoUpload) window.handlePhotoUpload(this); });
+});
+</script>
+</body>
+</html>
