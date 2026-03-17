@@ -182,13 +182,94 @@
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| (Populated during roadmap creation) | | |
+| AUTH-01 | Phase 1 | Pending |
+| AUTH-02 | Phase 1 | Pending |
+| AUTH-03 | Phase 1 | Pending |
+| AUTH-04 | Phase 1 | Pending |
+| AUTH-05 | Phase 1 | Pending |
+| AUTH-06 | Phase 1 | Pending |
+| AUTH-07 | Phase 1 | Pending |
+| AUTH-08 | Phase 1 | Pending |
+| DES-01 | Phase 1 | Pending |
+| DES-02 | Phase 1 | Pending |
+| DES-03 | Phase 1 | Pending |
+| PROF-01 | Phase 2 | Pending |
+| PROF-02 | Phase 2 | Pending |
+| PROF-03 | Phase 2 | Pending |
+| PROF-04 | Phase 2 | Pending |
+| PROF-05 | Phase 2 | Pending |
+| PROF-06 | Phase 2 | Pending |
+| AGRA-01 | Phase 2 | Pending |
+| AGRA-02 | Phase 2 | Pending |
+| AGRA-03 | Phase 2 | Pending |
+| AGRA-04 | Phase 2 | Pending |
+| AGRA-05 | Phase 2 | Pending |
+| AGRA-06 | Phase 2 | Pending |
+| AGRA-07 | Phase 2 | Pending |
+| AGRA-08 | Phase 2 | Pending |
+| AGRA-09 | Phase 2 | Pending |
+| AGRA-10 | Phase 2 | Pending |
+| CAT-01 | Phase 2 | Pending |
+| CAT-02 | Phase 2 | Pending |
+| VID-01 | Phase 3 | Pending |
+| VID-02 | Phase 3 | Pending |
+| VID-03 | Phase 3 | Pending |
+| VID-04 | Phase 3 | Pending |
+| VID-05 | Phase 3 | Pending |
+| VID-06 | Phase 3 | Pending |
+| VID-07 | Phase 3 | Pending |
+| VID-08 | Phase 3 | Pending |
+| VID-09 | Phase 3 | Pending |
+| VID-10 | Phase 3 | Pending |
+| VID-11 | Phase 3 | Pending |
+| VID-12 | Phase 3 | Pending |
+| VID-13 | Phase 3 | Pending |
+| CHAN-01 | Phase 3 | Pending |
+| CHAN-02 | Phase 3 | Pending |
+| CHAN-03 | Phase 3 | Pending |
+| CHAN-04 | Phase 3 | Pending |
+| MOD-01 | Phase 3 | Pending |
+| MOD-02 | Phase 3 | Pending |
+| MOD-03 | Phase 3 | Pending |
+| MOD-04 | Phase 3 | Pending |
+| MOD-05 | Phase 3 | Pending |
+| CAL-01 | Phase 4 | Pending |
+| CAL-02 | Phase 4 | Pending |
+| CAL-03 | Phase 4 | Pending |
+| CAL-04 | Phase 4 | Pending |
+| CAL-05 | Phase 4 | Pending |
+| CAL-06 | Phase 4 | Pending |
+| CAL-07 | Phase 4 | Pending |
+| SYN-01 | Phase 4 | Pending |
+| SYN-02 | Phase 4 | Pending |
+| SYN-03 | Phase 4 | Pending |
+| SYN-04 | Phase 4 | Pending |
+| LIB-01 | Phase 5 | Pending |
+| LIB-02 | Phase 5 | Pending |
+| LIB-03 | Phase 5 | Pending |
+| LIB-04 | Phase 5 | Pending |
+| LIB-05 | Phase 5 | Pending |
+| LIB-06 | Phase 5 | Pending |
+| PAT-01 | Phase 6 | Pending |
+| PAT-02 | Phase 6 | Pending |
+| PAT-03 | Phase 6 | Pending |
+| PAT-04 | Phase 6 | Pending |
+| PAT-05 | Phase 6 | Pending |
+| PAT-06 | Phase 6 | Pending |
+| STD-01 | Phase 6 | Pending |
+| STD-02 | Phase 6 | Pending |
+| STD-03 | Phase 6 | Pending |
+| SRCH-01 | Phase 7 | Pending |
+| SRCH-02 | Phase 7 | Pending |
+| MSG-01 | Phase 7 | Pending |
+| MSG-02 | Phase 7 | Pending |
+| MSG-03 | Phase 7 | Pending |
 
 **Coverage:**
-- v1 requirements: 64 total
-- Mapped to phases: 0
-- Unmapped: 64
+- v1 requirements: 82 total
+- Mapped to phases: 82
+- Unmapped: 0
 
 ---
 *Requirements defined: 2026-03-16*
-*Last updated: 2026-03-16 after initial definition*
+*Last updated: 2026-03-16 after roadmap creation — traceability populated*
