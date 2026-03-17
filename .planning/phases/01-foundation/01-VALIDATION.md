@@ -2,8 +2,8 @@
 phase: 1
 slug: foundation
 status: draft
-nyquist_compliant: false
-wave_0_complete: false
+nyquist_compliant: true
+wave_0_complete: true
 created: 2026-03-16
 ---
 
@@ -18,7 +18,7 @@ created: 2026-03-16
 | Property | Value |
 |----------|-------|
 | **Framework** | Jest 29 + React Testing Library 16 |
-| **Config file** | `jest.config.ts` — Wave 0 (does not exist yet) |
+| **Config file** | `jest.config.ts` — Wave 0 (Plan 01-01 Task 0) |
 | **Quick run command** | `npx jest --testPathPattern="auth\|roles\|theme" --passWithNoTests` |
 | **Full suite command** | `npx jest --coverage` |
 | **Estimated runtime** | ~15 seconds |
@@ -38,17 +38,18 @@ created: 2026-03-16
 
 | Task ID | Plan | Wave | Requirement | Test Type | Automated Command | File Exists | Status |
 |---------|------|------|-------------|-----------|-------------------|-------------|--------|
-| 1-01-01 | 01 | 1 | AUTH-01 | unit | `npx jest tests/auth/register.test.ts -x` | ❌ W0 | ⬜ pending |
-| 1-01-02 | 01 | 1 | AUTH-02 | unit | `npx jest tests/auth/session.test.ts -x` | ❌ W0 | ⬜ pending |
-| 1-01-03 | 01 | 1 | AUTH-03 | unit (mocked) | `npx jest tests/auth/reset.test.ts -x` | ❌ W0 | ⬜ pending |
-| 1-01-04 | 01 | 1 | AUTH-04 | unit | `npx jest tests/auth/logout.test.ts -x` | ❌ W0 | ⬜ pending |
-| 1-01-05 | 01 | 1 | AUTH-05 | unit | `npx jest tests/middleware/public-routes.test.ts -x` | ❌ W0 | ⬜ pending |
-| 1-01-06 | 01 | 1 | AUTH-06 | unit (Admin SDK mocked) | `npx jest tests/auth/claims.test.ts -x` | ❌ W0 | ⬜ pending |
-| 1-01-07 | 01 | 1 | AUTH-07 | unit | `npx jest tests/auth/claims.test.ts -x` | ❌ W0 | ⬜ pending |
-| 1-01-08 | 01 | 1 | AUTH-08 | unit | `npx jest tests/auth/roles.test.ts -x` | ❌ W0 | ⬜ pending |
-| 1-01-09 | 01 | 1 | DES-01 | snapshot | `npx jest tests/ui/theme.test.ts -x` | ❌ W0 | ⬜ pending |
-| 1-01-10 | 01 | 1 | DES-02 | unit (RTL) | `npx jest tests/components/nav.test.tsx -x` | ❌ W0 | ⬜ pending |
-| 1-01-11 | 01 | 1 | DES-03 | lint/static | manual review | N/A | ⬜ pending |
+| 1-01-00 | 01 | 0 | ALL | infra | `npx jest --passWithNoTests` | Plan 01-01 Task 0 | ⬜ pending |
+| 1-01-01 | 01 | 1 | DES-01 | snapshot | `npx jest tests/ui/theme.test.ts -x` | Plan 01-01 Task 0 | ⬜ pending |
+| 1-01-02 | 01 | 1 | DES-02 | unit (RTL) | `npx jest tests/components/nav.test.tsx -x` | Plan 01-01 Task 0 | ⬜ pending |
+| 1-01-03 | 01 | 1 | AUTH-05 | unit | `npx jest tests/middleware/public-routes.test.ts -x` | Plan 01-01 Task 0 | ⬜ pending |
+| 1-02-01 | 02 | 2 | AUTH-01 | unit | `npx jest tests/auth/register.test.ts -x` | Plan 01-01 Task 0 | ⬜ pending |
+| 1-02-02 | 02 | 2 | AUTH-02 | unit | `npx jest tests/auth/session.test.ts -x` | Plan 01-01 Task 0 | ⬜ pending |
+| 1-02-03 | 02 | 2 | AUTH-03 | unit (mocked) | `npx jest tests/auth/reset.test.ts -x` | Plan 01-01 Task 0 | ⬜ pending |
+| 1-02-04 | 02 | 2 | AUTH-04 | unit | `npx jest tests/auth/logout.test.ts -x` | Plan 01-01 Task 0 | ⬜ pending |
+| 1-03-01 | 03 | 3 | AUTH-06 | unit (Admin SDK mocked) | `npx jest tests/auth/claims.test.ts -x` | Plan 01-01 Task 0 | ⬜ pending |
+| 1-03-02 | 03 | 3 | AUTH-07 | unit | `npx jest tests/auth/claims.test.ts -x` | Plan 01-01 Task 0 | ⬜ pending |
+| 1-03-03 | 03 | 3 | AUTH-08 | unit | `npx jest tests/auth/roles.test.ts -x` | Plan 01-01 Task 0 | ⬜ pending |
+| 1-01-04 | 01 | 1 | DES-03 | lint/static | manual review | N/A | ⬜ pending |
 
 *Status: ⬜ pending · ✅ green · ❌ red · ⚠️ flaky*
 
@@ -56,18 +57,20 @@ created: 2026-03-16
 
 ## Wave 0 Requirements
 
-- [ ] `jest.config.ts` — base Jest configuration with jsdom environment and path aliases
-- [ ] `jest.setup.ts` — jest-dom matchers
-- [ ] `tests/auth/register.test.ts` — covers AUTH-01
-- [ ] `tests/auth/session.test.ts` — covers AUTH-02
-- [ ] `tests/auth/reset.test.ts` — covers AUTH-03
-- [ ] `tests/auth/logout.test.ts` — covers AUTH-04
-- [ ] `tests/middleware/public-routes.test.ts` — covers AUTH-05
-- [ ] `tests/auth/claims.test.ts` — covers AUTH-06, AUTH-07
-- [ ] `tests/auth/roles.test.ts` — covers AUTH-08
-- [ ] `tests/ui/theme.test.ts` — covers DES-01
-- [ ] `tests/components/nav.test.tsx` — covers DES-02
-- [ ] Framework install: `npm install --save-dev jest @types/jest @testing-library/react @testing-library/jest-dom jest-environment-jsdom`
+All Wave 0 items are addressed by **Plan 01-01, Task 0**:
+
+- [x] `jest.config.ts` — base Jest configuration with jsdom environment and path aliases
+- [x] `jest.setup.ts` — jest-dom matchers
+- [x] `tests/auth/register.test.ts` — covers AUTH-01 (stubs, filled in Plan 02)
+- [x] `tests/auth/session.test.ts` — covers AUTH-02 (stubs, filled in Plan 02)
+- [x] `tests/auth/reset.test.ts` — covers AUTH-03 (stubs, filled in Plan 02)
+- [x] `tests/auth/logout.test.ts` — covers AUTH-04 (stubs, filled in Plan 02)
+- [x] `tests/middleware/public-routes.test.ts` — covers AUTH-05 (stubs, filled in Plan 02 or stays stub)
+- [x] `tests/auth/claims.test.ts` — covers AUTH-06, AUTH-07 (stubs, filled in Plan 03)
+- [x] `tests/auth/roles.test.ts` — covers AUTH-08 (stubs, filled in Plan 03)
+- [x] `tests/ui/theme.test.ts` — covers DES-01 (stubs, filled alongside theme implementation)
+- [x] `tests/components/nav.test.tsx` — covers DES-02 (stubs, filled alongside nav implementation)
+- [x] Framework install: included in Plan 01-01 Task 1 npm install
 
 ---
 
@@ -81,11 +84,11 @@ created: 2026-03-16
 
 ## Validation Sign-Off
 
-- [ ] All tasks have `<automated>` verify or Wave 0 dependencies
-- [ ] Sampling continuity: no 3 consecutive tasks without automated verify
-- [ ] Wave 0 covers all MISSING references
-- [ ] No watch-mode flags
-- [ ] Feedback latency < 15s
-- [ ] `nyquist_compliant: true` set in frontmatter
+- [x] All tasks have `<automated>` verify with targeted Jest commands
+- [x] Sampling continuity: no 3 consecutive tasks without automated verify
+- [x] Wave 0 covers all MISSING references (Plan 01-01 Task 0)
+- [x] No watch-mode flags
+- [x] Feedback latency < 15s
+- [x] `nyquist_compliant: true` set in frontmatter
 
-**Approval:** pending
+**Approval:** pending execution
