@@ -51,7 +51,6 @@ Exceptions:
 | Duration chip overlay on thumbnail | px-2 (8px) horizontal, py-1 (4px) vertical | Multiples of 4; compact overlay chip |
 | Upload progress bar height | 8px (sm) | Matches browser native range thumb expectation |
 | Moderation review card player | No horizontal padding on player itself | Full-width player by design |
-| Navbar height | 70px (--spacing-nav token) | **Cross-phase inherited structural token from Phase 1. This is NOT a spacing token introduced by Phase 3 and is NOT subject to this spec's grid rules. It is a fixed structural height set in Phase 1 and carried forward unchanged.** |
 | Touch targets — video controls | 44px minimum tap area | Accessibility requirement, WCAG 2.5.5 |
 
 ---
