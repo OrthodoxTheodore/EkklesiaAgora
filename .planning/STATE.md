@@ -3,14 +3,14 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: planning
-stopped_at: Completed 01-foundation-01-PLAN.md
-last_updated: "2026-03-18T02:44:26.267Z"
+stopped_at: Completed 01-foundation-02-PLAN.md
+last_updated: "2026-03-18T02:55:41.548Z"
 last_activity: 2026-03-17 — Project packaged for transfer to new developer
 progress:
   total_phases: 7
   completed_phases: 0
   total_plans: 3
-  completed_plans: 1
+  completed_plans: 2
   percent: 0
 ---
 
@@ -51,6 +51,7 @@ Progress: [░░░░░░░░░░] 0%
 
 *Updated after each plan completion*
 | Phase 01-foundation P01 | 18 | 3 tasks | 31 files |
+| Phase 01-foundation P02 | 7 | 2 tasks | 15 files |
 
 ## Accumulated Context
 
@@ -65,6 +66,9 @@ Recent decisions affecting current work:
 - [Pre-phase]: DMCA agent registration ($6/year) must precede any user-uploaded content — even prototype demo for clergy
 - [Pre-phase]: Seed content must be jurisdictionally balanced from day one; moderation decisions must benchmark against Seven Ecumenical Councils, not any one jurisdiction
 - [Phase 01-foundation]: next-firebase-auth-edge v1.12 uses setAuthCookies/removeAuthCookies from next-firebase-auth-edge/next/cookies (not createSessionCookieOnLogin from lib/next/server)
+- [Phase 01-foundation]: Server Action used for setCustomUserClaims — keeps Admin SDK server-only, avoids exposing service account to client bundle
+- [Phase 01-foundation]: Double /api/login POST pattern: first creates initial session cookie, second updates it after roleLevel:1 claim is set via Admin SDK
+- [Phase 01-foundation]: Anti-enumeration: password reset always shows success message regardless of whether email exists (swallows auth/user-not-found)
 
 ### Pending Todos
 
@@ -78,6 +82,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-03-18T02:44:26.261Z
-Stopped at: Completed 01-foundation-01-PLAN.md
+Last session: 2026-03-18T02:55:41.542Z
+Stopped at: Completed 01-foundation-02-PLAN.md
 Resume file: None

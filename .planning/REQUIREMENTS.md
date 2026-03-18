@@ -7,10 +7,10 @@
 
 ### Authentication & Accounts
 
-- [ ] **AUTH-01**: User can create account with email and password
-- [ ] **AUTH-02**: User can log in and stay logged in across sessions
-- [ ] **AUTH-03**: User can reset password via email link
-- [ ] **AUTH-04**: User can log out from any page
+- [x] **AUTH-01**: User can create account with email and password
+- [x] **AUTH-02**: User can log in and stay logged in across sessions
+- [x] **AUTH-03**: User can reset password via email link
+- [x] **AUTH-04**: User can log out from any page
 - [x] **AUTH-05**: Guest can browse all public content without an account
 - [ ] **AUTH-06**: Super admin can create other admin accounts with full or limited permissions
 - [ ] **AUTH-07**: Only admins can promote a standard account to moderator
@@ -182,10 +182,10 @@
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| AUTH-01 | Phase 1 | Pending |
-| AUTH-02 | Phase 1 | Pending |
-| AUTH-03 | Phase 1 | Pending |
-| AUTH-04 | Phase 1 | Pending |
+| AUTH-01 | Phase 1 | Complete |
+| AUTH-02 | Phase 1 | Complete |
+| AUTH-03 | Phase 1 | Complete |
+| AUTH-04 | Phase 1 | Complete |
 | AUTH-05 | Phase 1 | Complete |
 | AUTH-06 | Phase 1 | Pending |
 | AUTH-07 | Phase 1 | Pending |

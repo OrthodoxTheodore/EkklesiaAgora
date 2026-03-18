@@ -32,7 +32,7 @@ Decimal phases appear between their surrounding integers in numeric order.
   3. An admin can promote another account to moderator; a super admin can create new admin accounts with configurable permissions
   4. The role hierarchy (guest → registered → moderator → admin → super admin) is enforced — lower roles cannot perform higher-role actions
   5. All pages render correctly on mobile and desktop in the Byzantine aesthetic (navy #0d1b2e, gold #c9a84c, Cinzel headings, EB Garamond body)
-**Plans:** 1/3 plans executed
+**Plans:** 2/3 plans executed
 
 Plans:
 - [ ] 01-01-PLAN.md — Next.js 15 + Firebase project init, Tailwind v4 Byzantine theme, fonts, app shell with responsive nav, middleware
@@ -142,7 +142,7 @@ Note: Phase 4 depends only on Phase 1 (architecturally independent of social/vid
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Foundation | 1/3 | In Progress|  |
+| 1. Foundation | 2/3 | In Progress|  |
 | 2. Social Core | 0/3 | Not started | - |
 | 3. Video Hub + Moderation | 0/4 | Not started | - |
 | 4. Orthodox Identity | 0/3 | Not started | - |
