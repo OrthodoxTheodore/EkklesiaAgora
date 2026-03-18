@@ -5,6 +5,7 @@ import { getProfileByHandle } from '@/lib/firestore/profiles';
 import { getAdminFirestore } from '@/lib/firebase/admin';
 import { ProfileHeader } from '@/components/profile/ProfileHeader';
 import { ProfileTabs } from '@/components/profile/ProfileTabs';
+import { followUser, unfollowUser } from '@/app/actions/follows';
 
 const authConfig = {
   apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY!,
@@ -52,6 +53,20 @@ export default async function ProfilePage({ params }: ProfilePageProps) {
     isFollowing = followDoc.exists;
   }
 
+  // Server Action closures — capture uid and profile.uid in server scope
+  const uid = currentUserUid;
+  const profileUid = profile.uid;
+
+  async function handleFollow() {
+    'use server';
+    await followUser(uid, profileUid);
+  }
+
+  async function handleUnfollow() {
+    'use server';
+    await unfollowUser(uid, profileUid);
+  }
+
   return (
     <div className="max-w-2xl mx-auto px-4 py-8">
       <ProfileHeader
@@ -59,6 +74,8 @@ export default async function ProfilePage({ params }: ProfilePageProps) {
         isOwnProfile={isOwnProfile}
         isFollowing={isFollowing}
         currentUserUid={currentUserUid}
+        onFollow={handleFollow}
+        onUnfollow={handleUnfollow}
       />
       <div className="mt-4">
         <ProfileTabs>

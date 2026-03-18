@@ -6,6 +6,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useAuth } from '@/components/auth/AuthProvider';
 import { MobileMenu } from './MobileMenu';
+import { NotificationBell } from './NotificationBell';
 import { getAuth, signOut } from 'firebase/auth';
 import firebaseApp from '@/lib/firebase/client';
 
@@ -90,7 +91,12 @@ export function Navbar() {
             {/* Desktop auth controls */}
             <div className="hidden md:flex items-center gap-2">
               {user ? (
-                <div className="relative">
+                <div className="flex items-center gap-1">
+                  {/* Notification bell */}
+                  <NotificationBell uid={user.uid} />
+
+                  {/* Avatar dropdown */}
+                  <div className="relative">
                   <button
                     onClick={() => setAvatarOpen(!avatarOpen)}
                     className="w-9 h-9 rounded-full bg-gold-dim border border-gold/40 flex items-center justify-center font-cinzel text-navy text-sm font-bold hover:bg-gold transition-colors"
@@ -106,18 +112,18 @@ export function Navbar() {
                         <p className="text-text-mid text-xs font-garamond truncate">{user.email}</p>
                       </div>
                       <Link
-                        href="/profile"
+                        href="/profile/edit"
                         onClick={() => setAvatarOpen(false)}
                         className="block px-4 py-2 font-cinzel text-xs uppercase tracking-wider text-text-light hover:text-gold hover:bg-gold/5 transition-colors"
                       >
                         Profile
                       </Link>
                       <Link
-                        href="/dashboard"
+                        href="/agora"
                         onClick={() => setAvatarOpen(false)}
                         className="block px-4 py-2 font-cinzel text-xs uppercase tracking-wider text-text-light hover:text-gold hover:bg-gold/5 transition-colors"
                       >
-                        Dashboard
+                        Agora
                       </Link>
                       {isAdmin && (
                         <Link
@@ -136,6 +142,7 @@ export function Navbar() {
                       </button>
                     </div>
                   )}
+                </div>
                 </div>
               ) : (
                 <>

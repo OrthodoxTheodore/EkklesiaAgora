@@ -79,6 +79,9 @@ Recent decisions affecting current work:
 - [Phase 01-foundation]: Privilege escalation guard: non-super-admin callers cannot assign role >= own level
 - [Phase 01-foundation]: CSS token testing via fs.readFileSync with regex assertions — no jsdom needed for static CSS content
 - [Phase 02-social-core]: Jest 30 renamed --testPathPattern to --testPathPatterns (plural); all verify commands in Phase 2 plans must use the plural flag
+- [Phase 02-social-core-01]: userProfiles collection is separate from /users/{uid} — userProfiles is public social data, /users/{uid} is the auth/role document
+- [Phase 02-social-core-01]: Admin SDK writes for posts/comments/follows/feed/notifications use allow write: if false in Firestore rules (rules enforce no direct client writes)
+- [Phase 02-social-core-01]: Owner-controlled privacy controls (block, mute, like) use direct Firestore writes with isOwner() && isRegistered() guard
 - [Phase 02-social-core-03]: Fan-out feed uses 500-op batch chunks; open-graph-scraper v7 uses ogsResult.error flag not result.success
 
 ### Pending Todos

@@ -2,9 +2,12 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { Button } from '@/components/ui/Button';
 import { getJurisdictionLabel } from '@/lib/constants/jurisdictions';
 import type { UserProfile } from '@/lib/types/social';
+import { blockUser, muteUser, reportContent } from '@/app/actions/moderation';
+import { followUser, unfollowUser } from '@/app/actions/follows';
 
 interface ProfileHeaderProps {
   profile: UserProfile;
@@ -15,17 +18,30 @@ interface ProfileHeaderProps {
   onUnfollow?: () => Promise<void>;
 }
 
+const REPORT_REASONS = ['Spam', 'Harassment', 'Inappropriate content', 'Other'];
+
 export function ProfileHeader({
   profile,
   isOwnProfile,
   isFollowing: initialIsFollowing,
+  currentUserUid,
   onFollow,
   onUnfollow,
 }: ProfileHeaderProps) {
+  const router = useRouter();
   const [isFollowing, setIsFollowing] = useState(initialIsFollowing);
   const [followLoading, setFollowLoading] = useState(false);
   const [overflowOpen, setOverflowOpen] = useState(false);
   const [bioExpanded, setBioExpanded] = useState(false);
+  const [showBlockConfirm, setShowBlockConfirm] = useState(false);
+  const [showReportSheet, setShowReportSheet] = useState(false);
+  const [selectedReason, setSelectedReason] = useState('');
+  const [toast, setToast] = useState<string | null>(null);
+
+  function showToastMessage(message: string) {
+    setToast(message);
+    setTimeout(() => setToast(null), 3000);
+  }
 
   const handleFollow = async () => {
     if (followLoading) return;
@@ -34,25 +50,69 @@ export function ProfileHeader({
     setFollowLoading(true);
     try {
       if (prev) {
-        await onUnfollow?.();
+        if (onUnfollow) {
+          await onUnfollow();
+        } else {
+          const result = await unfollowUser(currentUserUid, profile.uid);
+          if (!result.success) throw new Error('unfollowUser failed');
+        }
       } else {
-        await onFollow?.();
+        if (onFollow) {
+          await onFollow();
+        } else {
+          const result = await followUser(currentUserUid, profile.uid);
+          if (!result.success) throw new Error('followUser failed');
+        }
       }
     } catch {
       // Rollback on failure
       setIsFollowing(prev);
+      showToastMessage('Could not follow. Try again.');
     } finally {
       setFollowLoading(false);
     }
   };
 
+  async function handleBlock() {
+    setShowBlockConfirm(false);
+    setOverflowOpen(false);
+    await blockUser(currentUserUid, profile.uid);
+    router.push('/agora');
+  }
+
+  async function handleMute() {
+    setOverflowOpen(false);
+    await muteUser(currentUserUid, profile.uid);
+    showToastMessage(`Muted ${profile.displayName}. Their posts will be hidden from your feed.`);
+  }
+
+  async function handleReport() {
+    if (!selectedReason) return;
+    setShowReportSheet(false);
+    await reportContent(currentUserUid, {
+      contentType: 'user',
+      contentId: profile.uid,
+      reason: selectedReason,
+    });
+    showToastMessage('Report submitted. Thank you.');
+    setSelectedReason('');
+  }
+
   const initial = profile.displayName?.charAt(0).toUpperCase() ?? '?';
 
   return (
     <div className="bg-navy-mid border border-gold/[0.15] rounded-[6px] overflow-hidden">
+      {/* Toast */}
+      {toast && (
+        <div className="fixed top-20 right-4 z-[100] bg-navy-mid border border-gold/20 rounded shadow-xl px-4 py-2 font-garamond text-sm text-text-light">
+          {toast}
+        </div>
+      )}
+
       {/* Banner */}
       <div className="relative h-[140px] md:h-[200px]">
         {profile.bannerUrl ? (
+          // eslint-disable-next-line @next/next/no-img-element
           <img
             src={profile.bannerUrl}
             alt={`${profile.displayName}'s banner`}
@@ -60,7 +120,7 @@ export function ProfileHeader({
           />
         ) : (
           <div className="w-full h-full bg-navy-mid relative overflow-hidden">
-            {/* Byzantine tile fallback — gold grid overlay at 8% opacity */}
+            {/* Byzantine tile fallback */}
             <div
               className="absolute inset-0"
               style={{
@@ -76,6 +136,7 @@ export function ProfileHeader({
         {/* Avatar — overlapping banner bottom by 40px */}
         <div className="absolute -bottom-10 left-6">
           {profile.avatarUrl ? (
+            // eslint-disable-next-line @next/next/no-img-element
             <img
               src={profile.avatarUrl}
               alt={`${profile.displayName}'s avatar`}
@@ -91,7 +152,7 @@ export function ProfileHeader({
         </div>
       </div>
 
-      {/* Profile body — padded to clear avatar overlap */}
+      {/* Profile body */}
       <div className="px-6 pt-12 pb-6">
         {/* Display name */}
         <h1 className="font-cinzel text-[28px] text-gold font-semibold leading-tight">
@@ -192,19 +253,25 @@ export function ProfileHeader({
                   <div className="absolute right-0 mt-1 w-44 bg-navy-mid border border-gold/[0.15] rounded-md shadow-lg z-10">
                     <button
                       className="w-full text-left px-4 py-2.5 font-garamond text-base text-text-light hover:bg-navy-light transition-colors"
-                      onClick={() => setOverflowOpen(false)}
+                      onClick={() => {
+                        setOverflowOpen(false);
+                        setShowBlockConfirm(true);
+                      }}
                     >
                       Block
                     </button>
                     <button
                       className="w-full text-left px-4 py-2.5 font-garamond text-base text-text-light hover:bg-navy-light transition-colors"
-                      onClick={() => setOverflowOpen(false)}
+                      onClick={handleMute}
                     >
                       Mute
                     </button>
                     <button
                       className="w-full text-left px-4 py-2.5 font-garamond text-base text-text-mid hover:bg-navy-light transition-colors"
-                      onClick={() => setOverflowOpen(false)}
+                      onClick={() => {
+                        setOverflowOpen(false);
+                        setShowReportSheet(true);
+                      }}
                     >
                       Report User
                     </button>
@@ -215,6 +282,92 @@ export function ProfileHeader({
           )}
         </div>
       </div>
+
+      {/* Block confirmation dialog */}
+      {showBlockConfirm && (
+        <div
+          role="dialog"
+          aria-modal="true"
+          className="fixed inset-0 z-[200] flex items-center justify-center bg-black/60"
+          onClick={(e) => {
+            if (e.target === e.currentTarget) setShowBlockConfirm(false);
+          }}
+        >
+          <div className="bg-navy-mid border border-gold/20 rounded shadow-2xl p-6 w-full max-w-sm mx-4">
+            <p className="font-garamond text-base text-text-light mb-6">
+              Block {profile.displayName}? They won&apos;t be able to see your posts or follow you.
+            </p>
+            <div className="flex items-center gap-3 justify-end">
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={() => setShowBlockConfirm(false)}
+              >
+                Don&apos;t Block
+              </Button>
+              <button
+                onClick={handleBlock}
+                className="px-4 py-1.5 font-cinzel text-xs uppercase tracking-widest rounded bg-crimson text-white hover:opacity-90 transition-opacity"
+              >
+                Block {profile.displayName}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Report sheet */}
+      {showReportSheet && (
+        <div
+          role="dialog"
+          aria-modal="true"
+          className="fixed inset-0 z-[200] flex items-end justify-center bg-black/60"
+          onClick={(e) => {
+            if (e.target === e.currentTarget) setShowReportSheet(false);
+          }}
+        >
+          <div className="bg-navy-mid border border-gold/20 rounded-t-xl shadow-2xl p-6 w-full max-w-sm">
+            <h2 className="font-cinzel text-xs uppercase tracking-widest text-gold mb-4">
+              Report User
+            </h2>
+            <div className="flex flex-col gap-2 mb-6">
+              {REPORT_REASONS.map((reason) => (
+                <button
+                  key={reason}
+                  onClick={() => setSelectedReason(reason)}
+                  className={`text-left px-4 py-2 rounded font-garamond text-base transition-colors ${
+                    selectedReason === reason
+                      ? 'bg-gold/10 text-gold border border-gold/20'
+                      : 'text-text-light hover:bg-navy-light'
+                  }`}
+                >
+                  {reason}
+                </button>
+              ))}
+            </div>
+            <div className="flex items-center gap-3 justify-end">
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={() => {
+                  setShowReportSheet(false);
+                  setSelectedReason('');
+                }}
+              >
+                Cancel
+              </Button>
+              <Button
+                variant="gold"
+                size="sm"
+                disabled={!selectedReason}
+                onClick={handleReport}
+              >
+                Submit Report
+              </Button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

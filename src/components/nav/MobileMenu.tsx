@@ -59,18 +59,18 @@ export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
             {user ? (
               <>
                 <Link
-                  href="/dashboard"
-                  onClick={onClose}
-                  className="px-4 py-2 font-cinzel text-sm uppercase tracking-widest text-text-light hover:text-gold transition-colors"
-                >
-                  Dashboard
-                </Link>
-                <Link
-                  href="/profile"
+                  href="/profile/edit"
                   onClick={onClose}
                   className="px-4 py-2 font-cinzel text-sm uppercase tracking-widest text-text-light hover:text-gold transition-colors"
                 >
                   Profile
+                </Link>
+                <Link
+                  href="/agora"
+                  onClick={onClose}
+                  className="px-4 py-2 font-cinzel text-sm uppercase tracking-widest text-text-light hover:text-gold transition-colors"
+                >
+                  Agora
                 </Link>
               </>
             ) : (
