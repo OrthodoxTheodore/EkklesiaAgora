@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { useAuth } from '@/components/auth/AuthProvider';
 import { MobileMenu } from './MobileMenu';
 import { getAuth, signOut } from 'firebase/auth';
@@ -10,6 +11,7 @@ import firebaseApp from '@/lib/firebase/client';
 
 export function Navbar() {
   const { user } = useAuth();
+  const router = useRouter();
   const [mobileOpen, setMobileOpen] = useState(false);
   const [avatarOpen, setAvatarOpen] = useState(false);
 
@@ -20,6 +22,8 @@ export function Navbar() {
       // 2. Clear client-side auth state
       await signOut(getAuth(firebaseApp));
       setAvatarOpen(false);
+      // 3. Redirect to home
+      router.push('/');
     } catch (err) {
       console.error('Logout error:', err);
     }
