@@ -44,12 +44,15 @@ Declared values (multiples of 4):
 | 3xl | 64px | Page-level vertical spacing |
 
 Exceptions:
-- Video player aspect ratio container: 16:9 fixed ratio (not a spacing token)
-- Duration chip overlay on thumbnail: 4px padding horizontal, 2px vertical (xs/2 — pixel-precise for compact chip)
-- Upload progress bar height: 8px (sm) — matches browser native range thumb expectation
-- Moderation console review card: full-width player at top, no horizontal padding on player itself
-- Navbar height: 70px (--spacing-nav token, existing from Phase 1)
-- Touch targets for video controls: minimum 44px tap area (accessibility requirement, WCAG 2.5.5)
+
+| Exception | Value | Reason |
+|-----------|-------|--------|
+| Video player aspect ratio container | 16:9 fixed ratio | Not a spacing token — CSS aspect-ratio property |
+| Duration chip overlay on thumbnail | px-2 (8px) horizontal, py-1 (4px) vertical | Multiples of 4; compact overlay chip |
+| Upload progress bar height | 8px (sm) | Matches browser native range thumb expectation |
+| Moderation review card player | No horizontal padding on player itself | Full-width player by design |
+| Navbar height | 70px (--spacing-nav token) | **Cross-phase inherited structural token from Phase 1. This is NOT a spacing token introduced by Phase 3 and is NOT subject to this spec's grid rules. It is a fixed structural height set in Phase 1 and carried forward unchanged.** |
+| Touch targets — video controls | 44px minimum tap area | Accessibility requirement, WCAG 2.5.5 |
 
 ---
 
@@ -57,10 +60,12 @@ Exceptions:
 
 | Role | Font | Size | Weight | Line Height | Usage |
 |------|------|------|--------|-------------|-------|
-| Body | EB Garamond (font-garamond) | 16px (text-base) | 400 | 1.5 (leading-relaxed) | Video descriptions, comments, moderator notes, channel descriptions |
-| Label | Cinzel (font-cinzel) | 12px (text-xs) | 400 | 1.4 | Metadata chips (duration, view count, date), category tags, handle text, action counts |
-| Heading | Cinzel (font-cinzel) | 20px (text-xl) | 600 (font-semibold) | 1.2 | Video titles on detail page, channel names, console section headers |
+| Body | EB Garamond (font-garamond) | 16px (text-base) | 400 (font-normal) | 1.5 (leading-relaxed) | Video descriptions, comments, moderator notes, channel descriptions |
+| Label | Cinzel (font-cinzel) | 12px (text-xs) | 400 (font-normal) | 1.4 | Metadata chips (duration, view count, date), category tags, handle text, action counts |
+| Heading | Cinzel (font-cinzel) | 20px (text-xl) | 700 (font-bold) | 1.2 | Video titles on detail page, channel names, console section headers |
 | Display | Cinzel (font-cinzel) | 28px (text-2xl) | 700 (font-bold) | 1.2 | Page-level headings (/videos, /channels, /admin/moderation) |
+
+Exactly 2 font weights in use: **400** (Body, Label) and **700** (Heading, Display).
 
 Source: established in Phase 1 (globals.css, PostCard.tsx patterns). No new font sizes introduced.
 
@@ -104,7 +109,7 @@ New components for this phase (reuse/extend existing patterns):
 ### VideoCard
 Extends PostCard pattern. Grid card used in feeds, channel pages, /videos browse.
 - Thumbnail at top (16:9 aspect ratio, rounded-t-[6px])
-- Duration chip: bottom-right overlay on thumbnail — `bg-black/70 font-cinzel text-xs text-white px-2 py-0.5 rounded`
+- Duration chip: bottom-right overlay on thumbnail — `bg-black/70 font-cinzel text-xs text-white px-2 py-1 rounded`
 - Below thumbnail: channel avatar (w-9 h-9, rounded-full, border-gold/[0.15]) + video title (font-cinzel text-base text-text-light) + metadata row (view count, relative date, category chip)
 - No description excerpt in card view (locked decision from CONTEXT.md)
 - Inline playback: clicking thumbnail starts HTML5 video in-card; title/metadata remain as link to /videos/[id]
@@ -159,7 +164,7 @@ Submit: Button gold variant "Submit Application".
 | Idle (pre-upload) | Form visible, "Upload Video" CTA gold button |
 | Uploading | Progress bar visible, button disabled with spinner, "Uploading… N%" label |
 | Processing (upload complete, Firestore write pending) | Progress bar at 100%, label "Processing…" with pulse |
-| Pending review | Status badge: `bg-navy-light border border-gold/[0.15] font-cinzel text-xs text-gold-dim px-2 py-0.5 rounded-full` — "Pending Review" |
+| Pending review | Status badge: `bg-navy-light border border-gold/[0.15] font-cinzel text-xs text-gold-dim px-2 py-1 rounded-full` — "Pending Review" |
 | Approved | Status badge: gold text "Published" |
 | Rejected | Status badge: crimson text "Rejected" + reason shown |
 | Changes requested | Status badge: text-text-mid "Changes Requested" + moderator note shown |
