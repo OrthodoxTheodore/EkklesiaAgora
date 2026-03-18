@@ -11,7 +11,7 @@
 - [ ] **AUTH-02**: User can log in and stay logged in across sessions
 - [ ] **AUTH-03**: User can reset password via email link
 - [ ] **AUTH-04**: User can log out from any page
-- [ ] **AUTH-05**: Guest can browse all public content without an account
+- [x] **AUTH-05**: Guest can browse all public content without an account
 - [ ] **AUTH-06**: Super admin can create other admin accounts with full or limited permissions
 - [ ] **AUTH-07**: Only admins can promote a standard account to moderator
 - [ ] **AUTH-08**: Role hierarchy enforced: guest → registered → moderator → admin → super admin
@@ -128,9 +128,9 @@
 
 ### Design & Platform
 
-- [ ] **DES-01**: Byzantine aesthetic maintained (navy #0d1b2e, gold #c9a84c, Cinzel/EB Garamond typography)
-- [ ] **DES-02**: Fully mobile-responsive web design
-- [ ] **DES-03**: Architecture supports future React Native mobile apps sharing code
+- [x] **DES-01**: Byzantine aesthetic maintained (navy #0d1b2e, gold #c9a84c, Cinzel/EB Garamond typography)
+- [x] **DES-02**: Fully mobile-responsive web design
+- [x] **DES-03**: Architecture supports future React Native mobile apps sharing code
 
 ## v2 Requirements
 
@@ -186,13 +186,13 @@
 | AUTH-02 | Phase 1 | Pending |
 | AUTH-03 | Phase 1 | Pending |
 | AUTH-04 | Phase 1 | Pending |
-| AUTH-05 | Phase 1 | Pending |
+| AUTH-05 | Phase 1 | Complete |
 | AUTH-06 | Phase 1 | Pending |
 | AUTH-07 | Phase 1 | Pending |
 | AUTH-08 | Phase 1 | Pending |
-| DES-01 | Phase 1 | Pending |
-| DES-02 | Phase 1 | Pending |
-| DES-03 | Phase 1 | Pending |
+| DES-01 | Phase 1 | Complete |
+| DES-02 | Phase 1 | Complete |
+| DES-03 | Phase 1 | Complete |
 | PROF-01 | Phase 2 | Pending |
 | PROF-02 | Phase 2 | Pending |
 | PROF-03 | Phase 2 | Pending |
