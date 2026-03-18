@@ -54,19 +54,14 @@ Exceptions:
 
 ## Typography
 
-All sizes are in px. Two weights only: regular (400) for body/reading, semibold (600) for labels/headings. Cinzel is uppercase by default via tracking-widest utility.
+All sizes are in px. Two weights only: regular (400) for body/reading, semibold (600) for labels/headings. Cinzel is uppercase by default via tracking-widest utility. The type scale is exactly four sizes: 12 / 16 / 20 / 28px. No other font sizes may be used anywhere in Phase 2.
 
 | Role | Font | Size | Weight | Line Height | Usage |
 |------|------|------|--------|-------------|-------|
-| Body | EB Garamond | 16px | 400 | 1.5 | Post text, bio, comment text, link preview body |
-| Label | Cinzel | 12px | 600 | 1.2 | Category chip text, jurisdiction badge, nav links, button text, input labels, @handle |
+| Label | Cinzel | 12px | 600 | 1.2 | Category chip text, jurisdiction badge, nav links, button text, input labels, @handle, timestamps, metadata (like count, follower count), section labels, unread badge text, "edited" marker (weight 400, italic), error messages (EB Garamond, weight 400, italic, color crimson) |
+| Body | EB Garamond | 16px | 400 | 1.5 | Post text, bio, comment text, link preview body, dropdown option text |
 | Heading | Cinzel | 20px | 600 | 1.2 | Section titles, post detail page heading, profile display name |
 | Display | Cinzel | 28px | 600 | 1.1 | Profile page name (large), page-level headings |
-
-Supporting scale notes:
-- Subtext / metadata (timestamp, like count, follower count): EB Garamond 14px, weight 400, color `text-mid` (#b8a888)
-- Error messages: EB Garamond 14px italic, color `crimson` (#8b1a1a)
-- "Edited" timestamp on edited posts/comments: EB Garamond 12px italic, color `text-mid`
 
 ---
 
@@ -104,6 +99,12 @@ The Byzantine palette is locked from Phase 1. No new color values may be introdu
 
 ---
 
+## Focal Point
+
+**Primary focal point on `/agora`:** the ComposeBox gold submit button ("Share to Agora") draws the eye first as the primary call to action at the top of the feed. The first PostCard's jurisdiction badge and category chip anchor the content area, establishing the canonical and topical identity of each post at a glance.
+
+---
+
 ## Component Inventory
 
 New components to build in Phase 2. All extend existing tokens and follow Phase 1 patterns.
@@ -113,7 +114,7 @@ New components to build in Phase 2. All extend existing tokens and follow Phase 
 - Layout: avatar (36px circle) + handle + display name + jurisdiction badge + timestamp in one row; post text below; optional image below text; category chip + like/comment row at bottom
 - Jurisdiction badge: `font-cinzel text-xs` gold-dim text, displayed as `• Antiochian` inline after handle
 - Verified checkmark: gold SVG check icon (16px), shown when `roleLevel >= 2`; positioned inline after display name
-- Category chip: pill with `bg-navy-light border border-gold/[0.15] font-cinzel text-[10px] uppercase tracking-widest text-gold-dim px-2 py-0.5 rounded-full`
+- Category chip: pill with `bg-navy-light border border-gold/[0.15] font-cinzel text-xs uppercase tracking-widest text-gold-dim px-2 py-0.5 rounded-full`
 - Like button: heart icon — idle state uses `text-text-mid`; liked state uses `text-gold` with fill; optimistic update on click
 - Comment count: speech-bubble icon + count as a `<Link>` to `/agora/[postId]`; `text-text-mid`; hover: `text-gold`
 - Three-dot overflow (own posts only): opens dropdown with Edit and Delete options
@@ -122,7 +123,7 @@ New components to build in Phase 2. All extend existing tokens and follow Phase 
 - Banner area: 200px height (desktop), 140px height (mobile); full-width; bg `navy-mid` with tile fallback or user-uploaded image
 - Avatar: 80px circle (desktop) / 64px circle (mobile); absolute-positioned overlapping banner bottom; `border-2 border-gold/40`
 - Display name: Cinzel 28px gold, below avatar
-- @handle: Cinzel 14px text-mid
+- @handle: Cinzel 12px text-mid
 - Jurisdiction badge: Cinzel 12px, gold-dim text, displayed as a full badge pill with border; communicates canonical trust
 - Bio: EB Garamond 16px text-light, max 2 lines on profile card with expand option
 - Stats row: "N Posts · N Followers · N Following" — Cinzel 12px uppercase, text-mid for label, text-light for number
@@ -145,13 +146,13 @@ New components to build in Phase 2. All extend existing tokens and follow Phase 
 
 ### CategoryFilterTabs
 - Horizontal scrollable row, no wrap, scrollbar hidden
-- Pills: "All" + 10 category names — Cinzel 11px uppercase, tracking-widest
+- Pills: "All" + 10 category names — Cinzel 12px uppercase, tracking-widest
 - Active: gold text, 2px gold underline; inactive: text-mid; hover: text-light
 - Row padding: 16px horizontal, 8px vertical; border-bottom: `border-gold/[0.10]`
 
 ### NotificationBell
 - Bell SVG icon (24px), `text-text-light`, hover `text-gold`
-- Unread badge: 16px circle, `bg-gold text-navy font-cinzel text-[10px]`, absolute top-right of bell
+- Unread badge: 16px circle, `bg-gold text-navy font-cinzel text-xs`, absolute top-right of bell
 - Positioned in Navbar right section, before avatar
 
 ### CommentCard
@@ -164,12 +165,12 @@ New components to build in Phase 2. All extend existing tokens and follow Phase 
 ### LinkPreviewCard
 - Embedded within PostCard when post body contains a URL
 - Container: `bg-navy-light border border-gold/[0.10] rounded-md overflow-hidden`
-- Layout: thumbnail image (if available) on left or top; title (Cinzel 14px text-light); description (EB Garamond 13px text-mid, 2-line clamp); domain label (Cinzel 11px text-mid)
+- Layout: thumbnail image (if available) on left or top; title (Cinzel 12px text-light); description (EB Garamond 16px text-mid, 2-line clamp); domain label (Cinzel 12px text-mid)
 
 ### JurisdictionDropdown
 - Two sections separated by a `<hr>` in `border-gold/[0.15]`
-- Section 1 label: "Canonical Eastern Orthodox Churches" (Cinzel 10px uppercase text-gold-dim)
-- Section 2 label: "Other Christians" (Cinzel 10px uppercase text-gold-dim)
+- Section 1 label: "Canonical Eastern Orthodox Churches" (Cinzel 12px uppercase text-gold-dim)
+- Section 2 label: "Other Christians" (Cinzel 12px uppercase text-gold-dim)
 - Each option: EB Garamond 16px text-light, hover bg-navy-light
 
 ### BlockingSkeletons
@@ -202,7 +203,7 @@ New components to build in Phase 2. All extend existing tokens and follow Phase 
 | Like error (optimistic rollback) | Toast: "Couldn't update like. Please try again." |
 | Delete post confirmation | "Delete this post? This cannot be undone." — confirm: "Delete", cancel: "Keep" |
 | Delete comment confirmation | "Delete this comment? This cannot be undone." — confirm: "Delete", cancel: "Keep" |
-| Block user confirmation | "Block {displayName}? They won't be able to see your posts or follow you." — confirm: "Block", cancel: "Cancel" |
+| Block user confirmation | "Block {displayName}? They won't be able to see your posts or follow you." — confirm: "Block {displayName}", cancel: "Don't Block" |
 | Report post / comment | Sheet with reason list (no confirmation dialog — submit closes sheet with toast: "Report submitted. Thank you.") |
 | Follow-only comment restriction | "Only followers can comment on this post." |
 | Registered-only comment prompt | "Sign in to join the conversation." — links to /login |
