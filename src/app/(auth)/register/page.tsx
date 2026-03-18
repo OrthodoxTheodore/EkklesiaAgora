@@ -41,8 +41,8 @@ export default function RegisterPage() {
         body: JSON.stringify({ idToken }),
       });
 
-      // 3. Set roleLevel: 1 (registered) via Server Action
-      await registerUser(user.uid);
+      // 3. Set roleLevel: 1 (registered) via Server Action, also creates userProfiles doc
+      await registerUser(user.uid, user.email!);
 
       // 4. Force token refresh to pick up new roleLevel claim
       const refreshedToken = await user.getIdToken(true);
