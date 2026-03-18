@@ -3,9 +3,9 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: in-progress
-stopped_at: Completed 02-social-core-00-PLAN.md
-last_updated: "2026-03-18T04:32:00Z"
-last_activity: 2026-03-18 — Plan 02-00 complete (Wave 0 test stubs)
+stopped_at: Completed 02-social-core-03-PLAN.md
+last_updated: "2026-03-18T19:36:00Z"
+last_activity: 2026-03-18 — Plan 02-03 complete (Agora write-layer Server Actions)
 progress:
   total_phases: 7
   completed_phases: 1
@@ -26,9 +26,9 @@ See: .planning/PROJECT.md (updated 2026-03-16)
 ## Current Position
 
 Phase: 2 of 7 (Social Core) — **IN PROGRESS**
-Plan: 0 of 7 complete (02-00 done, 02-01 is next)
-Status: Phase 2 active — Wave 0 test stubs complete
-Last activity: 2026-03-18 — Plan 02-00 complete (12 Wave 0 test stub files created)
+Plan: 3 of 7 complete (02-03 done, 02-04 is next)
+Status: Phase 2 active — Agora write-layer Server Actions complete
+Last activity: 2026-03-18 — Plan 02-03 complete (8 Server Action files, fan-out feed, follows, likes, comments, link preview, notifications, moderation)
 
 Progress: [███░░░░░░░] 45%
 
@@ -55,6 +55,8 @@ Progress: [███░░░░░░░] 45%
 | Phase 01-foundation P03 | 45 | 2 tasks | 13 files |
 | Phase 01-foundation P04 | 2 | 1 tasks | 1 files |
 | Phase 02-social-core P00 | 5 | 1 task | 12 files |
+| Phase 02-social-core P01 | 6min | 2 tasks | 9 files |
+| Phase 02-social-core P03 | 309s | 2 tasks | 4 files |
 
 ## Accumulated Context
 
@@ -77,6 +79,7 @@ Recent decisions affecting current work:
 - [Phase 01-foundation]: Privilege escalation guard: non-super-admin callers cannot assign role >= own level
 - [Phase 01-foundation]: CSS token testing via fs.readFileSync with regex assertions — no jsdom needed for static CSS content
 - [Phase 02-social-core]: Jest 30 renamed --testPathPattern to --testPathPatterns (plural); all verify commands in Phase 2 plans must use the plural flag
+- [Phase 02-social-core-03]: Fan-out feed uses 500-op batch chunks; open-graph-scraper v7 uses ogsResult.error flag not result.success
 
 ### Pending Todos
 
@@ -90,7 +93,7 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-03-18T04:32:00Z
-Stopped at: Completed 02-social-core-00-PLAN.md
+Last session: 2026-03-18T19:36:00Z
+Stopped at: Completed 02-social-core-03-PLAN.md
 Resume command: `/gsd:execute-phase 2`
-Resume file: .planning/phases/02-social-core/02-01-PLAN.md
+Resume file: .planning/phases/02-social-core/02-04-PLAN.md

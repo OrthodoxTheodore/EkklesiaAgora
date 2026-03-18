@@ -1,6 +1,7 @@
 import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
 import { getTokens } from 'next-firebase-auth-edge';
+import FeedClient from '@/components/agora/FeedClient';
 
 const authConfig = {
   apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY!,
@@ -17,16 +18,21 @@ const authConfig = {
 };
 
 /**
- * Dashboard — protected Server Component.
- * Defense-in-depth: verifies auth here even though middleware also blocks unauthenticated access.
- * Redirects authenticated users to /agora (the main feed).
+ * Agora feed page — protected Server Component.
+ * Verifies auth server-side, then renders the client-side FeedClient.
  */
-export default async function DashboardPage() {
+export default async function AgoraPage() {
   const tokens = await getTokens(await cookies(), authConfig);
 
   if (!tokens) {
     redirect('/login');
   }
 
-  redirect('/agora');
+  const uid = tokens.decodedToken.uid;
+
+  return (
+    <div className="max-w-2xl mx-auto px-4 py-8">
+      <FeedClient uid={uid} />
+    </div>
+  );
 }
