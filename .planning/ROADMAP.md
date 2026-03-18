@@ -50,12 +50,16 @@ Plans:
   3. A user can see an activity feed of posts from people and channels they follow, with link preview cards on shared URLs
   4. A user receives in-app notifications (bell) for likes, comments, follows, and mentions
   5. A user can block or mute others, and can search posts by keyword
-**Plans**: TBD
+**Plans:** 7 plans
 
 Plans:
-- [ ] 02-01: User profiles (display name, avatar, bio, jurisdiction dropdown, PROF-01 through PROF-06)
-- [ ] 02-02: Agora feed — post creation (text + photo), likes, comments, delete, fan-out feed pattern
-- [ ] 02-03: Notifications bell, block/mute, link previews, post keyword search, content category tagging
+- [ ] 02-01-PLAN.md — Shared types, constants (jurisdictions, categories), Firestore/Storage rules, profile Server Actions
+- [ ] 02-02-PLAN.md — Profile view page (/profile/[handle]), profile edit page, jurisdiction dropdown, avatar/banner upload
+- [ ] 02-03-PLAN.md — All Server Actions: posts CRUD with fan-out, follows, likes, comments, link previews, notifications, block/mute
+- [ ] 02-04-PLAN.md — Agora feed page (/agora), ComposeBox with AI category, CategoryFilterTabs, infinite scroll, PostCard
+- [ ] 02-05-PLAN.md — Post detail page (/agora/[postId]), flat comment thread, comment CRUD UI
+- [ ] 02-06-PLAN.md — NotificationBell (real-time), navbar integration, profile block/mute/report wiring
+- [ ] 02-07-PLAN.md — Human verification checkpoint: end-to-end social flow testing
 
 ### Phase 3: Video Hub + Moderation
 **Goal**: Users can upload and watch videos through verified channels, and moderators have a working console to process every pending upload before it goes live
@@ -144,7 +148,7 @@ Note: Phase 4 depends only on Phase 1 (architecturally independent of social/vid
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 1. Foundation | 4/4 | Complete    | 2026-03-18 |
-| 2. Social Core | 0/3 | Not started | - |
+| 2. Social Core | 0/7 | Planning complete | - |
 | 3. Video Hub + Moderation | 0/4 | Not started | - |
 | 4. Orthodox Identity | 0/3 | Not started | - |
 | 5. Scripture Library | 0/2 | Not started | - |
