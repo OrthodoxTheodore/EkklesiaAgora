@@ -3,15 +3,15 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: completed
-stopped_at: Completed 02-social-core-02-PLAN.md
-last_updated: "2026-03-18T19:39:30.884Z"
-last_activity: 2026-03-18 — Plan 02-03 complete (8 Server Action files, fan-out feed, follows, likes, comments, link preview, notifications, moderation)
+stopped_at: Completed 02-social-core-05-PLAN.md
+last_updated: "2026-03-18T19:40:21.235Z"
+last_activity: 2026-03-18 — Plan 02-05 complete (post detail page /agora/[postId], PostDetailClient, CommentCard, PostCard)
 progress:
   total_phases: 7
   completed_phases: 1
   total_plans: 12
-  completed_plans: 9
-  percent: 45
+  completed_plans: 10
+  percent: 50
 ---
 
 # Project State
@@ -26,11 +26,11 @@ See: .planning/PROJECT.md (updated 2026-03-16)
 ## Current Position
 
 Phase: 2 of 7 (Social Core) — **IN PROGRESS**
-Plan: 3 of 7 complete (02-03 done, 02-04 is next)
-Status: Phase 2 active — Agora write-layer Server Actions complete
-Last activity: 2026-03-18 — Plan 02-03 complete (8 Server Action files, fan-out feed, follows, likes, comments, link preview, notifications, moderation)
+Plan: 5 of 7 complete (02-05 done, 02-06 is next)
+Status: Phase 2 active — Post detail page with comment thread complete
+Last activity: 2026-03-18 — Plan 02-05 complete (post detail page /agora/[postId], PostDetailClient, CommentCard, PostCard)
 
-Progress: [███░░░░░░░] 45%
+Progress: [█████░░░░░] 50%
 
 ## Performance Metrics
 
@@ -58,6 +58,7 @@ Progress: [███░░░░░░░] 45%
 | Phase 02-social-core P01 | 6min | 2 tasks | 9 files |
 | Phase 02-social-core P03 | 309s | 2 tasks | 4 files |
 | Phase 02-social-core P02 | 7 | 2 tasks | 8 files |
+| Phase 02-social-core P06 | 8 | 2 tasks | 8 files |
 
 ## Accumulated Context
 
@@ -86,6 +87,9 @@ Recent decisions affecting current work:
 - [Phase 02-social-core-03]: Fan-out feed uses 500-op batch chunks; open-graph-scraper v7 uses ogsResult.error flag not result.success
 - [Phase 02-social-core]: ProfileHeader accepts optional onFollow/onUnfollow callback props to avoid direct import of follows actions from a wave-parallel plan
 - [Phase 02-social-core]: JurisdictionDropdown uses native select with optgroup for accessible two-section jurisdiction picker
+- [Phase 02-social-core-05]: All comments load at once on post detail page — flat thread, no pagination (per CONTEXT locked decision)
+- [Phase 02-social-core-05]: Follower-only restriction enforced both server-side (createComment Server Action) and client-side (compose area hidden with UI message)
+- [Phase 02-social-core-05]: PostCard reused on post detail page with the same component as the feed — no separate detail variant needed
 
 ### Pending Todos
 
@@ -99,7 +103,7 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-03-18T19:39:30.879Z
-Stopped at: Completed 02-social-core-02-PLAN.md
+Last session: 2026-03-18T19:50:00Z
+Stopped at: Completed 02-social-core-05-PLAN.md
 Resume command: `/gsd:execute-phase 2`
-Resume file: None
+Resume file: .planning/phases/02-social-core/02-06-PLAN.md
