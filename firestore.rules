@@ -85,14 +85,96 @@ service cloud.firestore {
       allow write: if false;
     }
 
+    // ─── /userProfiles/{uid} ────────────────────────────────────────────────
+    // Public user profiles for the social feed.
+    //   READ:  anyone (profiles are public)
+    //   WRITE: document owner only (Server Actions use Admin SDK for creation)
+
+    match /userProfiles/{uid} {
+      allow read: if true;
+      allow write: if isOwner(uid);
+    }
+
+    // ─── /posts/{postId} ────────────────────────────────────────────────────
+    // Social feed posts.
+    //   READ:  anyone
+    //   WRITE: false — Server Actions only via Admin SDK
+
+    match /posts/{postId} {
+      allow read: if true;
+      allow write: if false;
+
+      // /posts/{postId}/likes/{uid}
+      //   READ:  anyone
+      //   WRITE: the liking user (must be registered)
+      match /likes/{uid} {
+        allow read: if true;
+        allow write: if isOwner(uid) && isRegistered();
+      }
+
+      // /posts/{postId}/comments/{commentId}
+      //   READ:  anyone
+      //   WRITE: false — Server Actions only
+      match /comments/{commentId} {
+        allow read: if true;
+        allow write: if false;
+      }
+    }
+
+    // ─── /follows/{followId} ────────────────────────────────────────────────
+    // Follow relationships between users.
+    //   READ:  authenticated users only
+    //   WRITE: false — Server Actions only
+
+    match /follows/{followId} {
+      allow read: if request.auth != null;
+      allow write: if false;
+    }
+
+    // ─── /users/{uid}/userFeed/{postId} ─────────────────────────────────────
+    // Per-user fan-out feed (denormalized post copies).
+    //   READ:  the feed owner only
+    //   WRITE: false — Server Actions fan-out writes only
+
+    match /users/{uid}/userFeed/{postId} {
+      allow read: if isOwner(uid);
+      allow write: if false;
+    }
+
+    // ─── /users/{uid}/notifications/{notificationId} ────────────────────────
+    // Per-user notification inbox.
+    //   READ:  the inbox owner only
+    //   WRITE: false — Server Actions only
+
+    match /users/{uid}/notifications/{notificationId} {
+      allow read: if isOwner(uid);
+      allow write: if false;
+    }
+
+    // ─── /userBlocks/{uid}/blocked/{blockedUid} ─────────────────────────────
+    // Per-user block list.
+    //   READ:  the list owner only
+    //   WRITE: the list owner (must be registered)
+
+    match /userBlocks/{uid}/blocked/{blockedUid} {
+      allow read: if isOwner(uid);
+      allow write: if isOwner(uid) && isRegistered();
+    }
+
+    // ─── /userMutes/{uid}/muted/{mutedUid} ──────────────────────────────────
+    // Per-user mute list.
+    //   READ:  the list owner only
+    //   WRITE: the list owner (must be registered)
+
+    match /userMutes/{uid}/muted/{mutedUid} {
+      allow read: if isOwner(uid);
+      allow write: if isOwner(uid) && isRegistered();
+    }
+
     // ─── Future collections ─────────────────────────────────────────────────
-    // Phase 2+: /posts, /comments, /likes, /notifications, /feed
     // Phase 3+: /videos, /channels
     // Phase 4+: /synodeia (people finder)
     // Phase 5+: /scripture (bookmarks, notes)
     // Phase 6+: /studyGuides
-    //
-    // Each will be added here with appropriate role-level guards using the
-    // helper functions defined above (isRegistered, isModerator, isAdmin, etc.)
   }
 }
