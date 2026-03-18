@@ -256,7 +256,7 @@ Submit: Button gold variant "Submit Application".
 | Error — video playback failed | "Video unavailable. Try refreshing the page." |
 | Error — channel application failed | "Your application could not be submitted. Please try again." |
 | Error — moderation action failed | "Action could not be completed. Refresh the page and try again." |
-| Destructive — reject video | Confirmation: "Reject this video? The uploader will be notified and the video will be permanently removed." Actions: "Cancel" (outline) / "Reject Video" (crimson override) |
+| Destructive — reject video | Confirmation: "Reject this video? The uploader will be notified and the video will be permanently removed." Actions: "Keep Video" (outline) / "Reject Video" (crimson override) |
 | Destructive — delete own video | Confirmation: "Delete this video? This cannot be undone." Actions: "Keep" (outline) / "Delete" (crimson override) |
 
 ---
