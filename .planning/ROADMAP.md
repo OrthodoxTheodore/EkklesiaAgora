@@ -32,12 +32,13 @@ Decimal phases appear between their surrounding integers in numeric order.
   3. An admin can promote another account to moderator; a super admin can create new admin accounts with configurable permissions
   4. The role hierarchy (guest → registered → moderator → admin → super admin) is enforced — lower roles cannot perform higher-role actions
   5. All pages render correctly on mobile and desktop in the Byzantine aesthetic (navy #0d1b2e, gold #c9a84c, Cinzel headings, EB Garamond body)
-**Plans:** 3/3 plans complete
+**Plans:** 4 plans (3 complete + 1 gap closure)
 
 Plans:
-- [ ] 01-01-PLAN.md — Next.js 15 + Firebase project init, Tailwind v4 Byzantine theme, fonts, app shell with responsive nav, middleware
-- [ ] 01-02-PLAN.md — Auth flows (register, login, logout, password reset, session cookies) and reusable UI components
-- [ ] 01-03-PLAN.md — Role hierarchy (custom claims), Firestore security rules, admin promotion UI, guest prompt modal
+- [x] 01-01-PLAN.md — Next.js 15 + Firebase project init, Tailwind v4 Byzantine theme, fonts, app shell with responsive nav, middleware
+- [x] 01-02-PLAN.md — Auth flows (register, login, logout, password reset, session cookies) and reusable UI components
+- [x] 01-03-PLAN.md — Role hierarchy (custom claims), Firestore security rules, admin promotion UI, guest prompt modal
+- [ ] 01-04-PLAN.md — Gap closure: Fill DES-01 theme test stubs with real assertions
 
 ### Phase 2: Social Core
 **Goal**: Users can build profiles, post in the Agora, interact with community content, and see a feed from the people they follow
@@ -142,7 +143,7 @@ Note: Phase 4 depends only on Phase 1 (architecturally independent of social/vid
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Foundation | 3/3 | Complete   | 2026-03-18 |
+| 1. Foundation | 3/4 | Gap closure pending | 2026-03-18 |
 | 2. Social Core | 0/3 | Not started | - |
 | 3. Video Hub + Moderation | 0/4 | Not started | - |
 | 4. Orthodox Identity | 0/3 | Not started | - |
