@@ -2,15 +2,15 @@
 gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
-status: in-progress
-stopped_at: Completed 02-social-core-03-PLAN.md
-last_updated: "2026-03-18T19:36:00Z"
-last_activity: 2026-03-18 — Plan 02-03 complete (Agora write-layer Server Actions)
+status: completed
+stopped_at: Completed 02-social-core-02-PLAN.md
+last_updated: "2026-03-18T19:39:30.884Z"
+last_activity: 2026-03-18 — Plan 02-03 complete (8 Server Action files, fan-out feed, follows, likes, comments, link preview, notifications, moderation)
 progress:
   total_phases: 7
   completed_phases: 1
-  total_plans: 11
-  completed_plans: 5
+  total_plans: 12
+  completed_plans: 9
   percent: 45
 ---
 
@@ -57,6 +57,7 @@ Progress: [███░░░░░░░] 45%
 | Phase 02-social-core P00 | 5 | 1 task | 12 files |
 | Phase 02-social-core P01 | 6min | 2 tasks | 9 files |
 | Phase 02-social-core P03 | 309s | 2 tasks | 4 files |
+| Phase 02-social-core P02 | 7 | 2 tasks | 8 files |
 
 ## Accumulated Context
 
@@ -83,6 +84,8 @@ Recent decisions affecting current work:
 - [Phase 02-social-core-01]: Admin SDK writes for posts/comments/follows/feed/notifications use allow write: if false in Firestore rules (rules enforce no direct client writes)
 - [Phase 02-social-core-01]: Owner-controlled privacy controls (block, mute, like) use direct Firestore writes with isOwner() && isRegistered() guard
 - [Phase 02-social-core-03]: Fan-out feed uses 500-op batch chunks; open-graph-scraper v7 uses ogsResult.error flag not result.success
+- [Phase 02-social-core]: ProfileHeader accepts optional onFollow/onUnfollow callback props to avoid direct import of follows actions from a wave-parallel plan
+- [Phase 02-social-core]: JurisdictionDropdown uses native select with optgroup for accessible two-section jurisdiction picker
 
 ### Pending Todos
 
@@ -96,7 +99,7 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-03-18T19:36:00Z
-Stopped at: Completed 02-social-core-03-PLAN.md
+Last session: 2026-03-18T19:39:30.879Z
+Stopped at: Completed 02-social-core-02-PLAN.md
 Resume command: `/gsd:execute-phase 2`
-Resume file: .planning/phases/02-social-core/02-04-PLAN.md
+Resume file: None

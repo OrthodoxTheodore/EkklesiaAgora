@@ -50,7 +50,7 @@ Plans:
   3. A user can see an activity feed of posts from people and channels they follow, with link preview cards on shared URLs
   4. A user receives in-app notifications (bell) for likes, comments, follows, and mentions
   5. A user can block or mute others, and can search posts by keyword
-**Plans:** 3/8 plans executed
+**Plans:** 5/8 plans executed
 
 Plans:
 - [ ] 02-00-PLAN.md — Wave 0: Create all 12 test stub files for Nyquist compliance
@@ -149,7 +149,7 @@ Note: Phase 4 depends only on Phase 1 (architecturally independent of social/vid
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 1. Foundation | 4/4 | Complete    | 2026-03-18 |
-| 2. Social Core | 3/8 | In Progress|  |
+| 2. Social Core | 5/8 | In Progress|  |
 | 3. Video Hub + Moderation | 0/4 | Not started | - |
 | 4. Orthodox Identity | 0/3 | Not started | - |
 | 5. Scripture Library | 0/2 | Not started | - |
