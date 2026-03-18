@@ -3,7 +3,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import type { Tokens } from 'next-firebase-auth-edge';
 import type { InvalidTokenReason } from 'next-firebase-auth-edge/auth/error';
 
-const PRIVATE_PATHS = ['/dashboard', '/admin'];
+const PRIVATE_PATHS = ['/dashboard', '/admin', '/profile', '/agora'];
 const AUTH_PATHS = ['/login', '/register', '/reset-password'];
 
 export async function middleware(request: NextRequest) {
