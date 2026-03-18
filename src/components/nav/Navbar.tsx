@@ -10,7 +10,8 @@ import { getAuth, signOut } from 'firebase/auth';
 import firebaseApp from '@/lib/firebase/client';
 
 export function Navbar() {
-  const { user } = useAuth();
+  const { user, roleLevel } = useAuth();
+  const isAdmin = roleLevel >= 3; // admin (3) or super admin (4)
   const router = useRouter();
   const [mobileOpen, setMobileOpen] = useState(false);
   const [avatarOpen, setAvatarOpen] = useState(false);
@@ -74,6 +75,14 @@ export function Navbar() {
             >
               Scripture
             </Link>
+            {isAdmin && (
+              <Link
+                href="/admin"
+                className="font-cinzel text-xs uppercase tracking-widest text-gold-dim hover:text-gold transition-colors"
+              >
+                Admin
+              </Link>
+            )}
           </nav>
 
           {/* Right: Auth section (desktop) + Hamburger (mobile) */}
@@ -110,6 +119,15 @@ export function Navbar() {
                       >
                         Dashboard
                       </Link>
+                      {isAdmin && (
+                        <Link
+                          href="/admin"
+                          onClick={() => setAvatarOpen(false)}
+                          className="block px-4 py-2 font-cinzel text-xs uppercase tracking-wider text-gold-dim hover:text-gold hover:bg-gold/5 transition-colors"
+                        >
+                          Admin
+                        </Link>
+                      )}
                       <button
                         onClick={handleLogout}
                         className="w-full text-left px-4 py-2 font-cinzel text-xs uppercase tracking-wider text-crimson hover:bg-crimson/10 transition-colors"
