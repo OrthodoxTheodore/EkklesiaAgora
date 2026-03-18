@@ -1,0 +1,98 @@
+rules_version = '2';
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Ekklesia Agora — Firestore Security Rules
+//
+// SECURITY PHILOSOPHY: Defense-in-depth.
+// Middleware (next-firebase-auth-edge) handles routing but CAN be bypassed.
+// Server Components call getTokens() for per-page auth checks.
+// These Firestore rules are the REAL security layer — they enforce access
+// control on every database read/write, regardless of how a request arrives.
+//
+// ROLE HIERARCHY (roleLevel custom claim on Firebase Auth tokens):
+//   0 = guest (unauthenticated — no claim present)
+//   1 = registered
+//   2 = moderator
+//   3 = admin
+//   4 = superAdmin
+//
+// Custom claims are set via Firebase Admin SDK (server-only) and embedded
+// in the JWT. They are available as request.auth.token.roleLevel in rules.
+// ─────────────────────────────────────────────────────────────────────────────
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // ─── Helper functions ───────────────────────────────────────────────────
+
+    /// Returns the caller's roleLevel from their JWT custom claim.
+    /// Falls back to 0 (guest) if the claim is absent.
+    function roleLevel() {
+      return request.auth != null
+        ? (request.auth.token.get('roleLevel', 0))
+        : 0;
+    }
+
+    /// True if caller is a registered user or higher (roleLevel >= 1).
+    function isRegistered() {
+      return request.auth != null && roleLevel() >= 1;
+    }
+
+    /// True if caller is a moderator or higher (roleLevel >= 2).
+    function isModerator() {
+      return request.auth != null && roleLevel() >= 2;
+    }
+
+    /// True if caller is an admin or higher (roleLevel >= 3).
+    function isAdmin() {
+      return request.auth != null && roleLevel() >= 3;
+    }
+
+    /// True if caller is a super admin (roleLevel == 4).
+    function isSuperAdmin() {
+      return request.auth != null && roleLevel() == 4;
+    }
+
+    /// True if the caller's UID matches the given uid (resource owner check).
+    function isOwner(uid) {
+      return request.auth != null && request.auth.uid == uid;
+    }
+
+    // ─── /users/{uid} ───────────────────────────────────────────────────────
+    // User profile documents.
+    //   READ:  any authenticated user (for social features — display names, etc.)
+    //   WRITE: the document owner OR admin+ (for role denormalization via Admin SDK)
+    //          Note: roleLevel field is ALSO set by Admin SDK which bypasses rules.
+    //          These write rules cover direct client writes (profile edits).
+
+    match /users/{uid} {
+      allow read: if request.auth != null;
+
+      // Owner can update their own profile fields (not roleLevel — that's Admin SDK only).
+      // Admin+ can update any user document (used for denormalized roleLevel sync).
+      allow write: if isOwner(uid) || isAdmin();
+    }
+
+    // ─── /roleAuditLog/{entry} ──────────────────────────────────────────────
+    // Role promotion audit trail.
+    //   READ:  admin+ only (for audit review in admin panel)
+    //   WRITE: false — Admin SDK bypasses rules; all writes come from claims.ts
+    //          Blocking client writes here is intentional — this collection
+    //          must only be writable by trusted server code.
+
+    match /roleAuditLog/{entry} {
+      allow read: if isAdmin();
+      allow write: if false;
+    }
+
+    // ─── Future collections ─────────────────────────────────────────────────
+    // Phase 2+: /posts, /comments, /likes, /notifications, /feed
+    // Phase 3+: /videos, /channels
+    // Phase 4+: /synodeia (people finder)
+    // Phase 5+: /scripture (bookmarks, notes)
+    // Phase 6+: /studyGuides
+    //
+    // Each will be added here with appropriate role-level guards using the
+    // helper functions defined above (isRegistered, isModerator, isAdmin, etc.)
+  }
+}
