@@ -12,9 +12,9 @@
 - [x] **AUTH-03**: User can reset password via email link
 - [x] **AUTH-04**: User can log out from any page
 - [x] **AUTH-05**: Guest can browse all public content without an account
-- [ ] **AUTH-06**: Super admin can create other admin accounts with full or limited permissions
-- [ ] **AUTH-07**: Only admins can promote a standard account to moderator
-- [ ] **AUTH-08**: Role hierarchy enforced: guest → registered → moderator → admin → super admin
+- [x] **AUTH-06**: Super admin can create other admin accounts with full or limited permissions
+- [x] **AUTH-07**: Only admins can promote a standard account to moderator
+- [x] **AUTH-08**: Role hierarchy enforced: guest → registered → moderator → admin → super admin
 
 ### User Profiles
 
@@ -187,9 +187,9 @@
 | AUTH-03 | Phase 1 | Complete |
 | AUTH-04 | Phase 1 | Complete |
 | AUTH-05 | Phase 1 | Complete |
-| AUTH-06 | Phase 1 | Pending |
-| AUTH-07 | Phase 1 | Pending |
-| AUTH-08 | Phase 1 | Pending |
+| AUTH-06 | Phase 1 | Complete |
+| AUTH-07 | Phase 1 | Complete |
+| AUTH-08 | Phase 1 | Complete |
 | DES-01 | Phase 1 | Complete |
 | DES-02 | Phase 1 | Complete |
 | DES-03 | Phase 1 | Complete |
