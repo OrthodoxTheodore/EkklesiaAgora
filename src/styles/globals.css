@@ -1,0 +1,41 @@
+@import "tailwindcss";
+
+@theme {
+  /* Colors — matches mockup :root variables exactly */
+  --color-navy:        #0d1b2e;
+  --color-navy-mid:    #152338;
+  --color-navy-light:  #1e3352;
+  --color-gold:        #c9a84c;
+  --color-gold-bright: #e8c96a;
+  --color-gold-dim:    #8a6f30;
+  --color-gold-pale:   #f0dfa0;
+  --color-text-light:  #e8dfc8;
+  --color-text-mid:    #b8a888;
+  --color-crimson:     #8b1a1a;
+
+  /* Typography */
+  --font-cinzel:     'Cinzel', serif;
+  --font-cinzel-dec: 'Cinzel Decorative', serif;
+  --font-garamond:   'EB Garamond', serif;
+
+  /* Spacing / sizing — carry mockup values forward */
+  --spacing-nav: 70px;
+}
+
+/* Gold grid overlay — fixed background decorative element from mockup */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image:
+    repeating-linear-gradient(0deg, transparent, transparent 39px, rgba(201,168,76,0.04) 39px, rgba(201,168,76,0.04) 40px),
+    repeating-linear-gradient(90deg, transparent, transparent 39px, rgba(201,168,76,0.04) 39px, rgba(201,168,76,0.04) 40px);
+  pointer-events: none;
+  z-index: 0;
+}
+
+@layer base {
+  body {
+    @apply bg-navy text-text-light font-garamond;
+  }
+}
