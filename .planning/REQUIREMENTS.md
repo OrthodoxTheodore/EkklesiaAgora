@@ -18,12 +18,12 @@
 
 ### User Profiles
 
-- [ ] **PROF-01**: User can set display name, avatar, and bio
-- [ ] **PROF-02**: User can select Eastern Orthodox jurisdiction from dropdown (Ecumenical Patriarchate, Antiochian, ROCOR, OCA, Serbian, Bulgarian, Romanian, Georgian, Greek, Albanian, Czech/Slovak, Polish, Alexandrian, Jerusalem, Church of Cyprus, Church of Finland, etc.)
-- [ ] **PROF-03**: Non-Eastern Orthodox users can select: Inquirer, Roman Catholic, Protestant, or Oriental Orthodox
-- [ ] **PROF-04**: User can view other users' public profiles
-- [ ] **PROF-05**: User can edit their own profile at any time
-- [ ] **PROF-06**: User can upload profile photo
+- [x] **PROF-01**: User can set display name, avatar, and bio
+- [x] **PROF-02**: User can select Eastern Orthodox jurisdiction from dropdown (Ecumenical Patriarchate, Antiochian, ROCOR, OCA, Serbian, Bulgarian, Romanian, Georgian, Greek, Albanian, Czech/Slovak, Polish, Alexandrian, Jerusalem, Church of Cyprus, Church of Finland, etc.)
+- [x] **PROF-03**: Non-Eastern Orthodox users can select: Inquirer, Roman Catholic, Protestant, or Oriental Orthodox
+- [x] **PROF-04**: User can view other users' public profiles
+- [x] **PROF-05**: User can edit their own profile at any time
+- [x] **PROF-06**: User can upload profile photo
 
 ### Video Platform
 
@@ -50,16 +50,16 @@
 
 ### Social Feed (The Agora)
 
-- [ ] **AGRA-01**: User can create text posts
-- [ ] **AGRA-02**: User can attach photos/images to posts
-- [ ] **AGRA-03**: User can like/unlike posts
-- [ ] **AGRA-04**: User can comment on posts
-- [ ] **AGRA-05**: User can view activity feed of posts from followed users/channels
-- [ ] **AGRA-06**: User can block/mute other users
-- [ ] **AGRA-07**: In-app notification bell for likes, comments, follows, mentions
-- [ ] **AGRA-08**: Link preview cards when sharing URLs in posts
-- [ ] **AGRA-09**: User can delete their own posts
-- [ ] **AGRA-10**: User can search posts by keyword
+- [x] **AGRA-01**: User can create text posts
+- [x] **AGRA-02**: User can attach photos/images to posts
+- [x] **AGRA-03**: User can like/unlike posts
+- [x] **AGRA-04**: User can comment on posts
+- [x] **AGRA-05**: User can view activity feed of posts from followed users/channels
+- [x] **AGRA-06**: User can block/mute other users
+- [x] **AGRA-07**: In-app notification bell for likes, comments, follows, mentions
+- [x] **AGRA-08**: Link preview cards when sharing URLs in posts
+- [x] **AGRA-09**: User can delete their own posts
+- [x] **AGRA-10**: User can search posts by keyword
 
 ### Direct Messaging
 
@@ -79,8 +79,8 @@
 
 ### Content Categories
 
-- [ ] **CAT-01**: All content (videos, posts, articles) can be tagged with Orthodox categories: Divine Liturgy, Holy Scripture, Holy Fathers, Iconography, Holy Trinity, Chanting & Music, Feast Days/Fast Days, Church History, Apologetics, Spiritual Life
-- [ ] **CAT-02**: Users can filter/browse content by category
+- [x] **CAT-01**: All content (videos, posts, articles) can be tagged with Orthodox categories: Divine Liturgy, Holy Scripture, Holy Fathers, Iconography, Holy Trinity, Chanting & Music, Feast Days/Fast Days, Church History, Apologetics, Spiritual Life
+- [x] **CAT-02**: Users can filter/browse content by category
 
 ### Content Moderation
 
@@ -193,24 +193,24 @@
 | DES-01 | Phase 1 | Complete |
 | DES-02 | Phase 1 | Complete |
 | DES-03 | Phase 1 | Complete |
-| PROF-01 | Phase 2 | Pending |
-| PROF-02 | Phase 2 | Pending |
-| PROF-03 | Phase 2 | Pending |
-| PROF-04 | Phase 2 | Pending |
-| PROF-05 | Phase 2 | Pending |
-| PROF-06 | Phase 2 | Pending |
-| AGRA-01 | Phase 2 | Pending |
-| AGRA-02 | Phase 2 | Pending |
-| AGRA-03 | Phase 2 | Pending |
-| AGRA-04 | Phase 2 | Pending |
-| AGRA-05 | Phase 2 | Pending |
-| AGRA-06 | Phase 2 | Pending |
-| AGRA-07 | Phase 2 | Pending |
-| AGRA-08 | Phase 2 | Pending |
-| AGRA-09 | Phase 2 | Pending |
-| AGRA-10 | Phase 2 | Pending |
-| CAT-01 | Phase 2 | Pending |
-| CAT-02 | Phase 2 | Pending |
+| PROF-01 | Phase 2 | Complete |
+| PROF-02 | Phase 2 | Complete |
+| PROF-03 | Phase 2 | Complete |
+| PROF-04 | Phase 2 | Complete |
+| PROF-05 | Phase 2 | Complete |
+| PROF-06 | Phase 2 | Complete |
+| AGRA-01 | Phase 2 | Complete |
+| AGRA-02 | Phase 2 | Complete |
+| AGRA-03 | Phase 2 | Complete |
+| AGRA-04 | Phase 2 | Complete |
+| AGRA-05 | Phase 2 | Complete |
+| AGRA-06 | Phase 2 | Complete |
+| AGRA-07 | Phase 2 | Complete |
+| AGRA-08 | Phase 2 | Complete |
+| AGRA-09 | Phase 2 | Complete |
+| AGRA-10 | Phase 2 | Complete |
+| CAT-01 | Phase 2 | Complete |
+| CAT-02 | Phase 2 | Complete |
 | VID-01 | Phase 3 | Pending |
 | VID-02 | Phase 3 | Pending |
 | VID-03 | Phase 3 | Pending |
