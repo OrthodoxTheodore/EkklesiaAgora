@@ -2,16 +2,14 @@
 gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
-status: completed
-stopped_at: Phase 4 context gathered
-last_updated: "2026-03-19T05:21:54.797Z"
-last_activity: 2026-03-19 — Plan 03-06 complete (channel page VideoCard gap closure)
+status: unknown
+stopped_at: Completed 04-orthodox-identity 04-01-PLAN.md
+last_updated: "2026-03-19T06:12:15.355Z"
 progress:
   total_phases: 7
   completed_phases: 3
-  total_plans: 18
-  completed_plans: 18
-  percent: 76
+  total_plans: 21
+  completed_plans: 19
 ---
 
 # Project State
@@ -21,16 +19,12 @@ progress:
 See: .planning/PROJECT.md (updated 2026-03-16)
 
 **Core value:** Providing a trustworthy, canonically-grounded Eastern Orthodox Christian platform where users can find authentic content and community.
-**Current focus:** Phase 3 — Video Hub + Moderation (Plan 01 complete, Plan 02 next)
+**Current focus:** Phase 04 — orthodox-identity
 
 ## Current Position
 
-Phase: 3 of 7 (Video Hub + Moderation) — **COMPLETE**
-Plan: 6/6 complete (all plans + gap closure done)
-Status: Phase 3 fully complete — all plans and gap closure executed
-Last activity: 2026-03-19 — Plan 03-06 complete (channel page VideoCard gap closure)
-
-Progress: [████████░░] 76%
+Phase: 04 (orthodox-identity) — EXECUTING
+Plan: 1 of 3
 
 ## Performance Metrics
 
@@ -69,6 +63,7 @@ Progress: [████████░░] 76%
 | Phase 03-video-hub-moderation P03 | 6min | 2 tasks | 9 files |
 | Phase 03-video-hub-moderation P05 | 251s | 2 tasks | 7 files |
 | Phase 03-video-hub-moderation P05 | 251s+checkpoint | 3 tasks | 7 files |
+| Phase 04-orthodox-identity P01 | 3min | 2 tasks | 12 files |
 
 ## Accumulated Context
 
@@ -120,6 +115,10 @@ Recent decisions affecting current work:
 - [Phase 03-video-hub-moderation]: Moderation console isModerator guard (roleLevel >= 2) for navbar and page access — separate from isAdmin (3+)
 - [Phase 03-video-hub-moderation]: FlaggedContentCard deduplicates flag reasons — multiple reports same reason shown once; flagCount shows total report count
 - [Phase 03-video-hub-moderation]: Phase 3 human verification checkpoint approved — complete video hub and moderation flow verified
+- [Phase 04-orthodox-identity]: orthocal.info endpoint mapping: new_julian->gregorian, old_julian->julian — Revised Julian aligns with civil dates; Old Julian is 13 days behind
+- [Phase 04-orthodox-identity]: CANONICAL_IDS typed as string[] to allow .includes(string) — readonly literal tuple from as const causes TS2345
+- [Phase 04-orthodox-identity]: sanitizeMember enforces location privacy in application layer — Firestore rules cannot gate individual fields within a document
+- [Phase 04-orthodox-identity]: buildDisplayNameKeywords uses 2-char minimum prefix (not 3+ like video keywords) — personal names like Li/Bo need 2-char matching
 
 ### Pending Todos
 
@@ -133,7 +132,7 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-03-19T05:21:54.789Z
-Stopped at: Phase 4 context gathered
+Last session: 2026-03-19T06:12:15.348Z
+Stopped at: Completed 04-orthodox-identity 04-01-PLAN.md
 Resume command: `/gsd:execute-phase 3`
-Resume file: .planning/phases/04-orthodox-identity/04-CONTEXT.md
+Resume file: None

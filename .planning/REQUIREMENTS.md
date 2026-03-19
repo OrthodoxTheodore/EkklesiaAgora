@@ -69,13 +69,13 @@
 
 ### Liturgical Calendar
 
-- [ ] **CAL-01**: Calendar displays in both Old Julian and New/Revised Julian formats with toggle to switch
+- [x] **CAL-01**: Calendar displays in both Old Julian and New/Revised Julian formats with toggle to switch
 - [ ] **CAL-02**: Calendar shows feast days with descriptions
 - [ ] **CAL-03**: Calendar shows fasting periods and rules
 - [ ] **CAL-04**: Calendar shows saints of the day with life summaries (Synaxarion)
-- [ ] **CAL-05**: Calendar shows Gospel reading of the day
-- [ ] **CAL-06**: Calendar shows Epistle reading of the day
-- [ ] **CAL-07**: Daily readings link directly to the Scripture Library
+- [x] **CAL-05**: Calendar shows Gospel reading of the day
+- [x] **CAL-06**: Calendar shows Epistle reading of the day
+- [x] **CAL-07**: Daily readings link directly to the Scripture Library
 
 ### Content Categories
 
@@ -86,7 +86,7 @@
 
 - [x] **MOD-01**: Unverified user uploads enter pre-publication moderation queue
 - [x] **MOD-02**: Any user can flag/report content with reason
-- [ ] **MOD-03**: Moderator dashboard shows pending uploads and flagged content
+- [x] **MOD-03**: Moderator dashboard shows pending uploads and flagged content
 - [x] **MOD-04**: Moderators can approve, reject, or request changes on queued content
 - [x] **MOD-05**: Users receive notification of moderation decisions on their content
 
@@ -116,10 +116,10 @@
 
 ### People Finder (Synodeia)
 
-- [ ] **SYN-01**: User can browse members by Eastern Orthodox jurisdiction
-- [ ] **SYN-02**: User can search for members by name
-- [ ] **SYN-03**: User can optionally share location (city/state level) for nearby member discovery
-- [ ] **SYN-04**: Location sharing has privacy toggle (on/off)
+- [x] **SYN-01**: User can browse members by Eastern Orthodox jurisdiction
+- [x] **SYN-02**: User can search for members by name
+- [x] **SYN-03**: User can optionally share location (city/state level) for nearby member discovery
+- [x] **SYN-04**: Location sharing has privacy toggle (on/off)
 
 ### Search
 
@@ -230,20 +230,20 @@
 | CHAN-04 | Phase 3 | Complete |
 | MOD-01 | Phase 3 | Complete |
 | MOD-02 | Phase 3 | Complete |
-| MOD-03 | Phase 3 | Pending |
+| MOD-03 | Phase 3 | Complete |
 | MOD-04 | Phase 3 | Complete |
 | MOD-05 | Phase 3 | Complete |
-| CAL-01 | Phase 4 | Pending |
+| CAL-01 | Phase 4 | Complete |
 | CAL-02 | Phase 4 | Pending |
 | CAL-03 | Phase 4 | Pending |
 | CAL-04 | Phase 4 | Pending |
-| CAL-05 | Phase 4 | Pending |
-| CAL-06 | Phase 4 | Pending |
-| CAL-07 | Phase 4 | Pending |
-| SYN-01 | Phase 4 | Pending |
-| SYN-02 | Phase 4 | Pending |
-| SYN-03 | Phase 4 | Pending |
-| SYN-04 | Phase 4 | Pending |
+| CAL-05 | Phase 4 | Complete |
+| CAL-06 | Phase 4 | Complete |
+| CAL-07 | Phase 4 | Complete |
+| SYN-01 | Phase 4 | Complete |
+| SYN-02 | Phase 4 | Complete |
+| SYN-03 | Phase 4 | Complete |
+| SYN-04 | Phase 4 | Complete |
 | LIB-01 | Phase 5 | Pending |
 | LIB-02 | Phase 5 | Pending |
 | LIB-03 | Phase 5 | Pending |

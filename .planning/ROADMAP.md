@@ -91,7 +91,7 @@ Plans:
   2. A user can see the saint(s) of the day with life summaries and the Gospel and Epistle readings of the day, with readings linking directly to the Scripture Library
   3. A user can browse the people finder (Synodeia) by Eastern Orthodox jurisdiction and search by name
   4. A user can optionally share their city/state location for nearby member discovery and toggle location sharing on or off at any time
-**Plans:** 3 plans
+**Plans:** 1/3 plans executed
 
 Plans:
 - [ ] 04-01-PLAN.md — Types, orthocal.info API wrapper, Synodeia Firestore queries, UserProfile extension, Firestore indexes, Wave 0 test stubs
@@ -153,7 +153,7 @@ Note: Phase 4 depends only on Phase 1 (architecturally independent of social/vid
 | 1. Foundation | 4/4 | Complete    | 2026-03-18 |
 | 2. Social Core | 8/8 | Complete   | 2026-03-18 |
 | 3. Video Hub + Moderation | 6/6 | Complete | 2026-03-19 |
-| 4. Orthodox Identity | 0/3 | Not started | - |
+| 4. Orthodox Identity | 1/3 | In Progress|  |
 | 5. Scripture Library | 0/2 | Not started | - |
 | 6. Patristic Library + Study Guides | 0/3 | Not started | - |
 | 7. Discovery + Messaging | 0/2 | Not started | - |
