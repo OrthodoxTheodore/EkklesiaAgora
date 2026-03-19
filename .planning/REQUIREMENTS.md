@@ -37,9 +37,9 @@
 - [ ] **VID-08**: User can subscribe/follow a channel
 - [ ] **VID-09**: Upload progress indicator shown during video upload
 - [ ] **VID-10**: Videos are mobile-responsive with adaptive playback
-- [ ] **VID-11**: Video search by title, description, and tags
-- [ ] **VID-12**: Unverified user video uploads go to moderation queue before publishing
-- [ ] **VID-13**: Videos organized by Orthodox content categories
+- [x] **VID-11**: Video search by title, description, and tags
+- [x] **VID-12**: Unverified user video uploads go to moderation queue before publishing
+- [x] **VID-13**: Videos organized by Orthodox content categories
 
 ### Channels
 
@@ -221,9 +221,9 @@
 | VID-08 | Phase 3 | Pending |
 | VID-09 | Phase 3 | Pending |
 | VID-10 | Phase 3 | Pending |
-| VID-11 | Phase 3 | Pending |
-| VID-12 | Phase 3 | Pending |
-| VID-13 | Phase 3 | Pending |
+| VID-11 | Phase 3 | Complete |
+| VID-12 | Phase 3 | Complete |
+| VID-13 | Phase 3 | Complete |
 | CHAN-01 | Phase 3 | Pending |
 | CHAN-02 | Phase 3 | Pending |
 | CHAN-03 | Phase 3 | Pending |

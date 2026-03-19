@@ -75,7 +75,7 @@ Plans:
 **Plans:** 5 plans
 
 Plans:
-- [ ] 03-01-PLAN.md — Types, Firestore/Storage rules, indexes, search keyword helper, Wave 0 test stubs
+- [x] 03-01-PLAN.md — Types, Firestore/Storage rules, indexes, search keyword helper, Wave 0 test stubs
 - [ ] 03-02-PLAN.md — Server Actions: video CRUD, likes, comments, channels, subscribe, moderation decisions
 - [ ] 03-03-PLAN.md — Video upload flow with progress bar, channel creation UI, channel page, channel browse
 - [ ] 03-04-PLAN.md — VideoCard, VideoPlayer, video browse (/videos), video detail page (/videos/[id])
@@ -151,7 +151,7 @@ Note: Phase 4 depends only on Phase 1 (architecturally independent of social/vid
 |-------|----------------|--------|-----------|
 | 1. Foundation | 4/4 | Complete    | 2026-03-18 |
 | 2. Social Core | 8/8 | Complete   | 2026-03-18 |
-| 3. Video Hub + Moderation | 0/5 | Not started | - |
+| 3. Video Hub + Moderation | 1/5 | In progress | - |
 | 4. Orthodox Identity | 0/3 | Not started | - |
 | 5. Scripture Library | 0/2 | Not started | - |
 | 6. Patristic Library + Study Guides | 0/3 | Not started | - |

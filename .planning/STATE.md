@@ -2,16 +2,16 @@
 gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
-status: planning
-stopped_at: Phase 3 context gathered
-last_updated: "2026-03-18T23:34:24.004Z"
-last_activity: 2026-03-18 — Plan 02-07 complete (Phase 2 human verification approved; Phase 2 Social Core complete)
+status: in_progress
+stopped_at: Phase 3 Plan 01 complete
+last_updated: "2026-03-19T00:31:00.000Z"
+last_activity: 2026-03-19 — Plan 03-01 complete (Phase 3 type contracts, rules, indexes, test stubs)
 progress:
   total_phases: 7
   completed_phases: 2
-  total_plans: 12
-  completed_plans: 12
-  percent: 100
+  total_plans: 17
+  completed_plans: 13
+  percent: 76
 ---
 
 # Project State
@@ -21,16 +21,16 @@ progress:
 See: .planning/PROJECT.md (updated 2026-03-16)
 
 **Core value:** Providing a trustworthy, canonically-grounded Eastern Orthodox Christian platform where users can find authentic content and community.
-**Current focus:** Phase 3 — Video Hub + Moderation (next)
+**Current focus:** Phase 3 — Video Hub + Moderation (Plan 01 complete, Plan 02 next)
 
 ## Current Position
 
-Phase: 2 of 7 (Social Core) — **COMPLETE**
-Plan: 7 of 7 complete (02-07 done — Phase 2 fully complete)
-Status: Phase 2 complete — Human verification approved; ready for Phase 3 planning
-Last activity: 2026-03-18 — Plan 02-07 complete (Phase 2 human verification approved; Phase 2 Social Core complete)
+Phase: 3 of 7 (Video Hub + Moderation) — **IN PROGRESS**
+Plan: 1 of 5 complete (03-01 done)
+Status: Phase 3 in progress — foundation types, rules, and indexes established
+Last activity: 2026-03-19 — Plan 03-01 complete (Phase 3 type contracts, rules, indexes, test stubs)
 
-Progress: [██████████] 100%
+Progress: [████████░░] 76%
 
 ## Performance Metrics
 
@@ -61,6 +61,7 @@ Progress: [██████████] 100%
 | Phase 02-social-core P06 | 8 | 2 tasks | 8 files |
 | Phase 02-social-core P04 | 48 | 2 tasks | 8 files |
 | Phase 02-social-core P07 | 1 | 0 tasks | 0 files |
+| Phase 03-video-hub-moderation P01 | 239s | 2 tasks | 12 files |
 
 ## Accumulated Context
 
@@ -98,6 +99,10 @@ Recent decisions affecting current work:
 - [Phase 02-social-core-04]: Search and category filter are mutually exclusive — entering a search clears the category, selecting a category clears search
 - [Phase 02-social-core-04]: AI category classification uses module-scope getAI/getGenerativeModel initialization to avoid per-render overhead
 - [Phase 02-social-core]: Phase 2 human verification checkpoint — all social core features verified by user before proceeding to Phase 3
+- [Phase 03-video-hub-moderation-01]: Video reads gated on status==published OR owner OR moderator+ — prevents unreviewed content exposure
+- [Phase 03-video-hub-moderation-01]: Notification extended inline in social.ts with moderation type, videoId, decision, moderatorNote fields
+- [Phase 03-video-hub-moderation-01]: buildVideoSearchKeywords uses \\W+ split to handle punctuation in titles/tags, not just whitespace
+- [Phase 03-video-hub-moderation-01]: firebase-admin mocked with jest.mock() hoisting + require() in tests/lib/videos.test.ts to avoid jose ESM parse error
 
 ### Pending Todos
 
@@ -111,7 +116,7 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-03-18T23:34:23.998Z
-Stopped at: Phase 3 context gathered
-Resume command: `/gsd:plan-phase 3`
-Resume file: .planning/phases/03-video-hub-moderation/03-CONTEXT.md
+Last session: 2026-03-19T00:31:00.000Z
+Stopped at: Phase 3 Plan 01 complete — 03-01-SUMMARY.md created
+Resume command: `/gsd:execute-phase 3`
+Resume file: .planning/phases/03-video-hub-moderation/03-02-PLAN.md
