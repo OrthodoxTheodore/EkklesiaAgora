@@ -14,6 +14,11 @@ export interface UserProfile {
   postCount: number;
   createdAt: Timestamp;
   updatedAt: Timestamp;
+  calendarPreference: 'new_julian' | 'old_julian';
+  locationSharingEnabled: boolean;
+  city: string | null;
+  stateRegion: string | null;
+  displayNameKeywords: string[];
 }
 
 export interface Post {

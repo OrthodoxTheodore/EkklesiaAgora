@@ -65,6 +65,22 @@
         { "fieldPath": "status", "order": "ASCENDING" },
         { "fieldPath": "primaryCategory", "order": "ASCENDING" }
       ]
+    },
+    {
+      "collectionGroup": "userProfiles",
+      "queryScope": "COLLECTION",
+      "fields": [
+        { "fieldPath": "displayNameKeywords", "arrayConfig": "CONTAINS" },
+        { "fieldPath": "jurisdictionId", "order": "ASCENDING" }
+      ]
+    },
+    {
+      "collectionGroup": "userProfiles",
+      "queryScope": "COLLECTION",
+      "fields": [
+        { "fieldPath": "jurisdictionId", "order": "ASCENDING" },
+        { "fieldPath": "displayName", "order": "ASCENDING" }
+      ]
     }
   ],
   "fieldOverrides": []
