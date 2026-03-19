@@ -43,7 +43,7 @@ Declared values (must be multiples of 4):
 
 Exceptions:
 - Reading column max-width: 65ch (prose width constraint — not a spacing token, but a layout rule). Source: CONTEXT.md locked decision.
-- Prev/Next navigation buttons at chapter bottom use `py-3` (12px) — comfortable touch target within the standard scale.
+- Prev/Next navigation buttons at chapter bottom use `py-4` (16px) — standard scale value, adequate touch target.
 
 Source: Standard 8-point scale (default); CONTEXT.md "narrow prose width (~65ch)" decision
 
@@ -55,11 +55,12 @@ Source: Standard 8-point scale (default); CONTEXT.md "narrow prose width (~65ch)
 |------|------|------|--------|-------------|
 | Page heading (book name, chapter heading) | Cinzel | 20px (text-xl) | 400 (normal — Cinzel renders bold at 400) | 1.2 |
 | Verse text (body) | EB Garamond | 18px (text-lg) | 400 (regular) | 1.75 |
-| Label / UI text (chapter count, testament label, attribution) | Cinzel | 13px (text-xs, tracking-widest uppercase) | 400 | 1.4 |
-| Search result heading (book name in grouped results) | Cinzel | 14px (text-sm, uppercase, tracking-wider) | 400 | 1.2 |
+| Label / UI text (chapter count, testament label, attribution, search group headers) | Cinzel | 13px (text-xs, tracking-widest uppercase) | 400 | 1.4 |
+| Verse number superscript | EB Garamond | 11px (text-[11px]) | 400 | n/a (inline superscript) |
 
 Notes:
-- Verse numbers are rendered as superscript at 11px (relative to body size), color `text-gold`, inline with verse text. Source: CONTEXT.md "superscript inline" decision.
+- Verse numbers are rendered as superscript at 11px, color `text-gold`, inline with verse text. Source: CONTEXT.md "superscript inline" decision.
+- Search result group headers (book name + match count) use the 13px label style — Cinzel uppercase tracking-widest — consistent with all other Cinzel label usage.
 - Exactly 2 font weights are declared: 400 (regular) across all roles. Cinzel's optical weight reads as display-weight at 400; no semibold needed for this reading-focused phase.
 - EB Garamond body at 18px/1.75 line-height is prescribed for scripture reading comfort — one size larger than the 16px standard to improve long-form readability.
 
@@ -130,12 +131,12 @@ Existing components to reuse without modification:
 2. **Verse rendering**: Continuous prose. Verse number as `<sup>` in `text-gold text-[11px]` followed by verse text in `font-garamond text-lg text-text-light leading-[1.75]`. No line breaks between verses — paragraph-style reading.
 3. **Verse highlight on anchor navigation**: When URL contains `#verse-N`, the target verse receives a `bg-gold/[0.15]` background highlight that fades out after 2 seconds using a CSS transition (`transition-colors duration-[2000ms]`). No bounce or scroll-to animation — browser default anchor scroll is sufficient.
 4. **Navigate button**: Fixed or inline at top of reader. Uses Button outline variant. On click: opens a panel (not a modal) below the button with two native `<select>` elements — one for book (all 76 books in OT/NT optgroup sections), one for chapter (1 to N based on selected book). Submitting navigates to the selected chapter. No always-visible sidebar — collapsed by default.
-5. **Prev/Next chapter navigation**: Two links at the bottom of the verse list — "← Previous Chapter" and "Next Chapter →". Cinzel, gold, 14px. Previous hidden on chapter 1; Next hidden on final chapter.
+5. **Prev/Next chapter navigation**: Two links at the bottom of the verse list — "← Previous Chapter" and "Next Chapter →". Cinzel, gold, 13px (`text-xs`), `py-4` vertical padding. Previous hidden on chapter 1; Next hidden on final chapter.
 6. **EOB attribution**: Small text below NT chapter content only. Exact copy: "New Testament text from the Eastern Orthodox Bible (EOB), Patriarchal Text of 1904. Used with permission for non-commercial Orthodox purposes." Style: `font-garamond text-xs text-text-mid`.
 
 ### Search Results
 
-1. Results grouped by book. Group header: book name in Cinzel gold 14px uppercase, followed by match count in parentheses in `text-text-mid` (e.g., "John (7 results)").
+1. Results grouped by book. Group header: book name in Cinzel gold 13px (`text-xs`) uppercase tracking-widest, followed by match count in parentheses in `text-text-mid` (e.g., "John (7 results)").
 2. Each result: verse reference (e.g., "John 3:16") in `text-gold text-sm font-cinzel` followed by verse text in `font-garamond text-sm text-text-light`. Matching keyword wrapped in `<mark>` with `bg-gold/[0.15] text-text-light` (no bold, highlight only).
 3. Clicking a result: navigate to `/scripture/[book]/[chapter]#verse-[n]`.
 4. Maximum 30 results shown per search (Firestore query limit). If 30 results returned, show: "Showing first 30 results. Refine your search for more specific matches." in `text-text-mid text-sm font-garamond`.
@@ -156,7 +157,7 @@ Existing components to reuse without modification:
 | Next chapter link | "Next Chapter →" |
 | Search input placeholder | "Search Scripture (e.g., grace, John 3:16)" |
 | Search button label | "Search" |
-| Empty state heading (no search results) | "No results found" |
+| Empty state heading (no search results) | "No verses matched that search" |
 | Empty state body | "No verses matched your search. Try a different word or a reference like "John 3:16"." |
 | Error state (chapter failed to load) | "This chapter could not be loaded. Please try refreshing the page." |
 | Search result limit notice | "Showing first 30 results. Refine your search for more specific matches." |
