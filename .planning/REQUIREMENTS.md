@@ -96,7 +96,7 @@
 - [x] **LIB-02**: Full Eastern Orthodox Bible NT (Patriarchal Text) stored as structured machine-readable data
 - [x] **LIB-03**: Scripture text rendered in Byzantine UI aesthetic (EB Garamond body, Cinzel headings, navy/gold theme)
 - [x] **LIB-04**: User can search Scripture by keyword, phrase, or reference
-- [ ] **LIB-05**: User can navigate Scripture by book/chapter/verse
+- [x] **LIB-05**: User can navigate Scripture by book/chapter/verse
 - [x] **LIB-06**: Architecture supports future multilingual translations (French, German, Spanish, Greek, Russian, Arabic, Romanian, Georgian)
 
 ### Patristic Library (Info Center)
@@ -248,7 +248,7 @@
 | LIB-02 | Phase 5 | Complete |
 | LIB-03 | Phase 5 | Complete |
 | LIB-04 | Phase 5 | Complete |
-| LIB-05 | Phase 5 | Pending |
+| LIB-05 | Phase 5 | Complete |
 | LIB-06 | Phase 5 | Complete |
 | PAT-01 | Phase 6 | Pending |
 | PAT-02 | Phase 6 | Pending |

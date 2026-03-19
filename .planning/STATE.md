@@ -3,13 +3,13 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: unknown
-stopped_at: Completed 05-scripture-library 05-01-PLAN.md
-last_updated: "2026-03-19T11:03:40.632Z"
+stopped_at: Completed 05-scripture-library 05-02-PLAN.md
+last_updated: "2026-03-19T11:12:08.199Z"
 progress:
   total_phases: 7
-  completed_phases: 4
+  completed_phases: 5
   total_plans: 23
-  completed_plans: 22
+  completed_plans: 23
 ---
 
 # Project State
@@ -67,6 +67,7 @@ Plan: 1 of 2
 | Phase 04-orthodox-identity P02 | 4min | 2 tasks | 8 files |
 | Phase 04-orthodox-identity P03 | 10min | 3 tasks | 9 files |
 | Phase 05-scripture-library PP01 | 15min | 2 tasks | 11 files |
+| Phase 05-scripture-library P02 | 319s | 3 tasks | 13 files |
 
 ## Accumulated Context
 
@@ -127,6 +128,9 @@ Recent decisions affecting current work:
 - [Phase 04-orthodox-identity]: Search and jurisdiction filter are mutually exclusive in Synodeia — entering search clears tab to All; clicking tab clears search input
 - [Phase 04-orthodox-identity]: Location toggle auto-saves on click via updateLocationSharing Server Action rather than waiting for main profile form submit
 - [Phase 05-scripture-library]: buildVerseKeywords uses >= 3 char filter for verse text; EOB NT seed uses pre-parsed JSON input to separate PDF extraction from Firestore writes; seed scripts inline keyword builder to avoid Next.js module resolution outside src/
+- [Phase 05-scripture-library]: parseReference exported from ScriptureSearch for direct unit testing
+- [Phase 05-scripture-library]: ReadingRef use-client directive removed — Link is server-compatible with no hooks in this component
+- [Phase 05-scripture-library]: ScriptureReader test mocks VerseList to include font-garamond class, satisfying LIB-03 Byzantine rendering gate assertion
 
 ### Pending Todos
 
@@ -140,7 +144,7 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-03-19T11:03:40.625Z
-Stopped at: Completed 05-scripture-library 05-01-PLAN.md
+Last session: 2026-03-19T11:12:08.193Z
+Stopped at: Completed 05-scripture-library 05-02-PLAN.md
 Resume command: `/gsd:execute-phase 3`
 Resume file: None

@@ -16,7 +16,7 @@ Decimal phases appear between their surrounding integers in numeric order.
 - [x] **Phase 2: Social Core** - User profiles, the Agora social feed, and Orthodox content categories (completed 2026-03-18)
 - [x] **Phase 3: Video Hub + Moderation** - Video upload/playback, channels, and the moderation console (ships together) (completed 2026-03-19)
 - [x] **Phase 4: Orthodox Identity** - Liturgical calendar and Synodeia people finder — the prototype differentiators (completed 2026-03-19)
-- [ ] **Phase 5: Scripture Library** - Full Septuagint + Orthodox NT stored, searchable, and navigable
+- [x] **Phase 5: Scripture Library** - Full Septuagint + Orthodox NT stored, searchable, and navigable (completed 2026-03-19)
 - [ ] **Phase 6: Patristic Library + Study Guides** - Church Fathers texts and curated learning paths
 - [ ] **Phase 7: Discovery + Messaging** - Global search and direct messaging
 
@@ -107,7 +107,7 @@ Plans:
   2. A user can search Scripture by keyword, phrase, or reference and navigate by book/chapter/verse
   3. Scripture text is rendered in the Byzantine aesthetic (EB Garamond body, Cinzel headings, navy/gold theme)
   4. The data architecture supports adding multilingual translations in the future without restructuring
-**Plans:** 1/2 plans executed
+**Plans:** 2/2 plans complete
 
 Plans:
 - [ ] 05-01-PLAN.md — Scripture types, Firestore query functions, composite indexes, Brenton LXX + EOB NT seed scripts, Wave 0 test stubs
@@ -154,6 +154,6 @@ Note: Phase 4 depends only on Phase 1 (architecturally independent of social/vid
 | 2. Social Core | 8/8 | Complete   | 2026-03-18 |
 | 3. Video Hub + Moderation | 6/6 | Complete | 2026-03-19 |
 | 4. Orthodox Identity | 3/3 | Complete   | 2026-03-19 |
-| 5. Scripture Library | 1/2 | In Progress|  |
+| 5. Scripture Library | 2/2 | Complete   | 2026-03-19 |
 | 6. Patristic Library + Study Guides | 0/3 | Not started | - |
 | 7. Discovery + Messaging | 0/2 | Not started | - |
