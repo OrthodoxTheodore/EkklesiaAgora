@@ -72,14 +72,15 @@ Plans:
   3. A user can like, comment on, share (copy link), and flag a video; they can subscribe to a channel
   4. A user or institution can create a channel page showing all their videos, subscriber count, and description; all channels are browsable
   5. A moderator can open the console, see all pending uploads and flagged content with uploader context, and approve, reject, or request changes — with the uploader notified of the outcome
-**Plans:** 5/5 plans complete
+**Plans:** 6 plans (5 complete + 1 gap closure)
 
 Plans:
 - [x] 03-01-PLAN.md — Types, Firestore/Storage rules, indexes, search keyword helper, Wave 0 test stubs
-- [ ] 03-02-PLAN.md — Server Actions: video CRUD, likes, comments, channels, subscribe, moderation decisions
-- [ ] 03-03-PLAN.md — Video upload flow with progress bar, channel creation UI, channel page, channel browse
-- [ ] 03-04-PLAN.md — VideoCard, VideoPlayer, video browse (/videos), video detail page (/videos/[id])
-- [ ] 03-05-PLAN.md — Moderation console, navbar integration, NotificationBell moderation type, human verification
+- [x] 03-02-PLAN.md — Server Actions: video CRUD, likes, comments, channels, subscribe, moderation decisions
+- [x] 03-03-PLAN.md — Video upload flow with progress bar, channel creation UI, channel page, channel browse
+- [x] 03-04-PLAN.md — VideoCard, VideoPlayer, video browse (/videos), video detail page (/videos/[id])
+- [x] 03-05-PLAN.md — Moderation console, navbar integration, NotificationBell moderation type, human verification
+- [ ] 03-06-PLAN.md — Gap closure: Wire VideoCard into channel detail page (CHAN-03)
 
 ### Phase 4: Orthodox Identity
 **Goal**: The platform is unmistakably Orthodox — users can navigate the liturgical calendar for their tradition and find fellow Orthodox Christians by jurisdiction
@@ -151,7 +152,7 @@ Note: Phase 4 depends only on Phase 1 (architecturally independent of social/vid
 |-------|----------------|--------|-----------|
 | 1. Foundation | 4/4 | Complete    | 2026-03-18 |
 | 2. Social Core | 8/8 | Complete   | 2026-03-18 |
-| 3. Video Hub + Moderation | 5/5 | Complete   | 2026-03-19 |
+| 3. Video Hub + Moderation | 5/6 | Gap closure pending | 2026-03-19 |
 | 4. Orthodox Identity | 0/3 | Not started | - |
 | 5. Scripture Library | 0/2 | Not started | - |
 | 6. Patristic Library + Study Guides | 0/3 | Not started | - |
