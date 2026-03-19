@@ -3,11 +3,11 @@
 import type { ReadingRef as ReadingRefType } from '@/lib/types/calendar';
 
 interface ReadingRefProps {
-  ref: ReadingRefType;
+  reading: ReadingRefType;
   label: string;
 }
 
-export function ReadingRef({ ref, label }: ReadingRefProps) {
+export function ReadingRef({ reading, label }: ReadingRefProps) {
   return (
     <div className="flex items-center gap-2">
       <span className="font-cinzel text-xs uppercase tracking-widest text-gold-dim">
@@ -18,7 +18,7 @@ export function ReadingRef({ ref, label }: ReadingRefProps) {
         title="Scripture Library — coming soon"
         aria-disabled="true"
       >
-        {ref.display}
+        {reading.display}
       </span>
     </div>
   );

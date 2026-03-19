@@ -214,10 +214,10 @@ export function CalendarDayView({ initialDay, initialCalendar, isLoggedIn }: Cal
         ) : (
           <div className="space-y-2">
             {gospel.map((ref, i) => (
-              <ReadingRef key={`gospel-${i}`} ref={ref} label="Holy Gospel" />
+              <ReadingRef key={`gospel-${i}`} reading={ref} label="Holy Gospel" />
             ))}
             {epistle.map((ref, i) => (
-              <ReadingRef key={`epistle-${i}`} ref={ref} label="Epistle" />
+              <ReadingRef key={`epistle-${i}`} reading={ref} label="Epistle" />
             ))}
           </div>
         )}
