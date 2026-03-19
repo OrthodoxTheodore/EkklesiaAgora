@@ -110,17 +110,35 @@ export async function unmuteUser(callerUid: string, targetUid: string): Promise<
 }
 
 /**
- * Report content (post, comment, or user) to the moderation queue.
+ * Report content (post, comment, user, or video) to the moderation queue.
+ * If a report already exists for the same contentId, increments flagCount instead
+ * of creating a duplicate.
  */
 export async function reportContent(
   callerUid: string,
   data: {
-    contentType: 'post' | 'comment' | 'user';
+    contentType: 'post' | 'comment' | 'user' | 'video';
     contentId: string;
     reason: string;
   },
 ): Promise<{ success: boolean }> {
   const db = getAdminFirestore();
+
+  // Check for existing report on same contentId to increment flagCount
+  const existingSnap = await db
+    .collection('reports')
+    .where('contentId', '==', data.contentId)
+    .where('status', '==', 'pending')
+    .limit(1)
+    .get();
+
+  if (!existingSnap.empty) {
+    // Increment flagCount on existing report
+    await existingSnap.docs[0].ref.update({
+      flagCount: FieldValue.increment(1),
+    });
+    return { success: true };
+  }
 
   await db.collection('reports').add({
     reporterUid: callerUid,
@@ -128,6 +146,7 @@ export async function reportContent(
     contentId: data.contentId,
     reason: data.reason,
     status: 'pending',
+    flagCount: 1,
     createdAt: FieldValue.serverTimestamp(),
   });
 
