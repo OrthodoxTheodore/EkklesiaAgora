@@ -8,7 +8,7 @@ import { Input } from '@/components/ui/Input';
 import { Button } from '@/components/ui/Button';
 import { JurisdictionDropdown } from '@/components/profile/JurisdictionDropdown';
 import { AvatarUpload } from '@/components/profile/AvatarUpload';
-import { updateProfile, updateBanner } from '@/app/actions/profile';
+import { updateProfile, updateBanner, updateLocationSharing } from '@/app/actions/profile';
 import type { UserProfile } from '@/lib/types/social';
 import { getStorage, ref, uploadBytesResumable, getDownloadURL } from 'firebase/storage';
 import firebaseApp from '@/lib/firebase/client';
@@ -42,6 +42,12 @@ export function ProfileEditForm({ profile, uid }: ProfileEditFormProps) {
   );
   const [bannerProgress, setBannerProgress] = useState<number | null>(null);
   const [bannerError, setBannerError] = useState<string | null>(null);
+  const [locationEnabled, setLocationEnabled] = useState<boolean>(
+    profile.locationSharingEnabled ?? false
+  );
+  const [city, setCity] = useState<string>(profile.city ?? '');
+  const [stateRegion, setStateRegion] = useState<string>(profile.stateRegion ?? '');
+  const [locationSaving, setLocationSaving] = useState(false);
 
   const {
     register,
@@ -66,6 +72,9 @@ export function ProfileEditForm({ profile, uid }: ProfileEditFormProps) {
       patronSaint: data.patronSaint || null,
     });
     if (result.success) {
+      if (locationEnabled) {
+        await updateLocationSharing(uid, { locationSharingEnabled: true, city, stateRegion });
+      }
       setServerMessage({ type: 'success', text: 'Profile saved successfully.' });
     } else {
       setServerMessage({ type: 'error', text: result.error ?? 'Failed to save profile.' });
@@ -216,6 +225,73 @@ export function ProfileEditForm({ profile, uid }: ProfileEditFormProps) {
         error={errors.patronSaint?.message}
         {...register('patronSaint')}
       />
+
+      {/* Location sharing for Synodeia */}
+      <div className="flex flex-col gap-3 border-t border-gold/[0.10] pt-6">
+        <div className="flex items-center justify-between">
+          <label
+            htmlFor="location-toggle"
+            className="font-cinzel text-xs uppercase tracking-widest text-gold-dim"
+          >
+            Share my location
+          </label>
+          <button
+            id="location-toggle"
+            type="button"
+            role="switch"
+            aria-checked={locationEnabled}
+            onClick={async () => {
+              const newVal = !locationEnabled;
+              setLocationEnabled(newVal);
+              setLocationSaving(true);
+              await updateLocationSharing(uid, {
+                locationSharingEnabled: newVal,
+                city: newVal ? city : undefined,
+                stateRegion: newVal ? stateRegion : undefined,
+              });
+              setLocationSaving(false);
+            }}
+            className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors ${
+              locationEnabled ? 'bg-gold' : 'bg-navy-light'
+            } ${locationSaving ? 'opacity-50' : ''}`}
+          >
+            <span
+              className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${
+                locationEnabled ? 'translate-x-6' : 'translate-x-1'
+              }`}
+            />
+          </button>
+        </div>
+        <p className="font-garamond text-xs text-text-mid">
+          {locationEnabled
+            ? 'Your city and state will be visible to other Synodeia members.'
+            : 'Your location is private and will not appear in Synodeia.'}
+        </p>
+        {locationEnabled && (
+          <div className="flex gap-4">
+            <div className="flex-1">
+              <Input
+                id="city"
+                label="City"
+                type="text"
+                maxLength={100}
+                value={city}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) => setCity(e.target.value)}
+              />
+            </div>
+            <div className="flex-1">
+              <Input
+                id="stateRegion"
+                label="State / Region"
+                type="text"
+                maxLength={100}
+                value={stateRegion}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) => setStateRegion(e.target.value)}
+              />
+            </div>
+          </div>
+        )}
+      </div>
 
       {/* Server message */}
       {serverMessage && (
