@@ -27,15 +27,15 @@
 
 ### Video Platform
 
-- [ ] **VID-01**: User can upload video files with title, description, tags, and thumbnail
+- [x] **VID-01**: User can upload video files with title, description, tags, and thumbnail
 - [ ] **VID-02**: Videos play with standard controls (play/pause/seek/volume/fullscreen)
 - [ ] **VID-03**: Videos display view count, duration, and upload date
-- [ ] **VID-04**: User can like/unlike a video
-- [ ] **VID-05**: User can comment on a video
+- [x] **VID-04**: User can like/unlike a video
+- [x] **VID-05**: User can comment on a video
 - [ ] **VID-06**: User can share a video via copy link
-- [ ] **VID-07**: User can report/flag a video with reason
-- [ ] **VID-08**: User can subscribe/follow a channel
-- [ ] **VID-09**: Upload progress indicator shown during video upload
+- [x] **VID-07**: User can report/flag a video with reason
+- [x] **VID-08**: User can subscribe/follow a channel
+- [x] **VID-09**: Upload progress indicator shown during video upload
 - [ ] **VID-10**: Videos are mobile-responsive with adaptive playback
 - [x] **VID-11**: Video search by title, description, and tags
 - [x] **VID-12**: Unverified user video uploads go to moderation queue before publishing
@@ -43,8 +43,8 @@
 
 ### Channels
 
-- [ ] **CHAN-01**: User can create a personal channel page
-- [ ] **CHAN-02**: Parishes and monasteries can have institutional channel pages
+- [x] **CHAN-01**: User can create a personal channel page
+- [x] **CHAN-02**: Parishes and monasteries can have institutional channel pages
 - [ ] **CHAN-03**: Channel page displays all videos, subscriber count, and description
 - [ ] **CHAN-04**: User can browse all channels
 
@@ -84,11 +84,11 @@
 
 ### Content Moderation
 
-- [ ] **MOD-01**: Unverified user uploads enter pre-publication moderation queue
-- [ ] **MOD-02**: Any user can flag/report content with reason
+- [x] **MOD-01**: Unverified user uploads enter pre-publication moderation queue
+- [x] **MOD-02**: Any user can flag/report content with reason
 - [ ] **MOD-03**: Moderator dashboard shows pending uploads and flagged content
-- [ ] **MOD-04**: Moderators can approve, reject, or request changes on queued content
-- [ ] **MOD-05**: Users receive notification of moderation decisions on their content
+- [x] **MOD-04**: Moderators can approve, reject, or request changes on queued content
+- [x] **MOD-05**: Users receive notification of moderation decisions on their content
 
 ### Scripture Library
 
@@ -211,28 +211,28 @@
 | AGRA-10 | Phase 2 | Complete |
 | CAT-01 | Phase 2 | Complete |
 | CAT-02 | Phase 2 | Complete |
-| VID-01 | Phase 3 | Pending |
+| VID-01 | Phase 3 | Complete |
 | VID-02 | Phase 3 | Pending |
 | VID-03 | Phase 3 | Pending |
-| VID-04 | Phase 3 | Pending |
-| VID-05 | Phase 3 | Pending |
+| VID-04 | Phase 3 | Complete |
+| VID-05 | Phase 3 | Complete |
 | VID-06 | Phase 3 | Pending |
-| VID-07 | Phase 3 | Pending |
-| VID-08 | Phase 3 | Pending |
-| VID-09 | Phase 3 | Pending |
+| VID-07 | Phase 3 | Complete |
+| VID-08 | Phase 3 | Complete |
+| VID-09 | Phase 3 | Complete |
 | VID-10 | Phase 3 | Pending |
 | VID-11 | Phase 3 | Complete |
 | VID-12 | Phase 3 | Complete |
 | VID-13 | Phase 3 | Complete |
-| CHAN-01 | Phase 3 | Pending |
-| CHAN-02 | Phase 3 | Pending |
+| CHAN-01 | Phase 3 | Complete |
+| CHAN-02 | Phase 3 | Complete |
 | CHAN-03 | Phase 3 | Pending |
 | CHAN-04 | Phase 3 | Pending |
-| MOD-01 | Phase 3 | Pending |
-| MOD-02 | Phase 3 | Pending |
+| MOD-01 | Phase 3 | Complete |
+| MOD-02 | Phase 3 | Complete |
 | MOD-03 | Phase 3 | Pending |
-| MOD-04 | Phase 3 | Pending |
-| MOD-05 | Phase 3 | Pending |
+| MOD-04 | Phase 3 | Complete |
+| MOD-05 | Phase 3 | Complete |
 | CAL-01 | Phase 4 | Pending |
 | CAL-02 | Phase 4 | Pending |
 | CAL-03 | Phase 4 | Pending |
