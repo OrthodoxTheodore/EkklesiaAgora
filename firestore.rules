@@ -171,8 +171,57 @@ service cloud.firestore {
       allow write: if isOwner(uid) && isRegistered();
     }
 
+    // ─── Phase 3: Videos ────────────────────────────────────────────────────
+    // /videos/{videoId}
+    //   READ:  published videos to anyone; pending/rejected to owner or moderator+
+    //   WRITE: false — Server Actions only via Admin SDK
+
+    match /videos/{videoId} {
+      allow read: if resource.data.status == 'published'
+        || (request.auth != null && request.auth.uid == resource.data.uploaderUid)
+        || isModerator();
+      allow write: if false;
+
+      // /videos/{videoId}/likes/{uid}
+      //   READ:  anyone
+      //   WRITE: the liking user (must be registered)
+      match /likes/{uid} {
+        allow read: if true;
+        allow write: if isOwner(uid) && isRegistered();
+      }
+
+      // /videos/{videoId}/comments/{commentId}
+      //   READ:  anyone
+      //   WRITE: false — Server Actions only
+      match /comments/{commentId} {
+        allow read: if true;
+        allow write: if false;
+      }
+    }
+
+    // ─── Phase 3: Channels ──────────────────────────────────────────────────
+    // /channels/{channelId}
+    //   READ:  approved channels to anyone; pending/rejected to owner or moderator+
+    //   WRITE: false — Server Actions only via Admin SDK
+
+    match /channels/{channelId} {
+      allow read: if resource.data.status == 'approved'
+        || (request.auth != null && request.auth.uid == resource.data.ownerUid)
+        || isModerator();
+      allow write: if false;
+    }
+
+    // ─── Phase 3: Channel subscribes ────────────────────────────────────────
+    // /channelSubscribes/{channelId}/subscribers/{uid}
+    //   READ:  authenticated users
+    //   WRITE: false — Server Actions only via Admin SDK
+
+    match /channelSubscribes/{channelId}/subscribers/{uid} {
+      allow read: if request.auth != null;
+      allow write: if false;
+    }
+
     // ─── Future collections ─────────────────────────────────────────────────
-    // Phase 3+: /videos, /channels
     // Phase 4+: /synodeia (people finder)
     // Phase 5+: /scripture (bookmarks, notes)
     // Phase 6+: /studyGuides

@@ -73,13 +73,16 @@ export type FeedEntry = Post; // Full copy in userFeed subcollection
 
 export interface Notification {
   notificationId: string;
-  type: 'like' | 'comment' | 'follow' | 'mention';
+  type: 'like' | 'comment' | 'follow' | 'mention' | 'moderation';
   fromUid: string;
   fromHandle: string;
   fromDisplayName: string;
   fromAvatarUrl: string | null;
   postId: string | null;
   postText: string | null;
+  videoId: string | null;
+  decision: 'published' | 'rejected' | 'changes_requested' | null;
+  moderatorNote: string | null;
   read: boolean;
   createdAt: Timestamp;
 }
