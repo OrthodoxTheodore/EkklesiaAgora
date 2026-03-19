@@ -13,7 +13,7 @@ Ekklesia Agora is built in seven phases that flow from the inside out: authentic
 Decimal phases appear between their surrounding integers in numeric order.
 
 - [x] **Phase 1: Foundation** - Auth flows, role hierarchy, and Byzantine design system on Next.js + Firebase (completed 2026-03-18)
-- [x] **Phase 2: Social Core** - User profiles, the Agora social feed, and Orthodox content categories (completed 2026-03-18)
+- [x] **Phase 2: Social Core** - User profiles, the Agora social feed, and Orthodox content categories (completed 2026-03-18)
 - [ ] **Phase 3: Video Hub + Moderation** - Video upload/playback, channels, and the moderation console (ships together)
 - [ ] **Phase 4: Orthodox Identity** - Liturgical calendar and Synodeia people finder — the prototype differentiators
 - [ ] **Phase 5: Scripture Library** - Full Septuagint + Orthodox NT stored, searchable, and navigable
@@ -72,13 +72,14 @@ Plans:
   3. A user can like, comment on, share (copy link), and flag a video; they can subscribe to a channel
   4. A user or institution can create a channel page showing all their videos, subscriber count, and description; all channels are browsable
   5. A moderator can open the console, see all pending uploads and flagged content with uploader context, and approve, reject, or request changes — with the uploader notified of the outcome
-**Plans**: TBD
+**Plans:** 5 plans
 
 Plans:
-- [ ] 03-01: Channel pages, channel creation (personal + institutional), subscribe/follow
-- [ ] 03-02: Video upload flow (Firebase Storage resumable, progress indicator, metadata, thumbnail, categories)
-- [ ] 03-03: Video player (HTML5, standard controls, mobile-responsive), video metadata display, like/comment/share/flag
-- [ ] 03-04: Moderation console (pending queue, flagged content, approve/reject/request-changes, uploader notification)
+- [ ] 03-01-PLAN.md — Types, Firestore/Storage rules, indexes, search keyword helper, Wave 0 test stubs
+- [ ] 03-02-PLAN.md — Server Actions: video CRUD, likes, comments, channels, subscribe, moderation decisions
+- [ ] 03-03-PLAN.md — Video upload flow with progress bar, channel creation UI, channel page, channel browse
+- [ ] 03-04-PLAN.md — VideoCard, VideoPlayer, video browse (/videos), video detail page (/videos/[id])
+- [ ] 03-05-PLAN.md — Moderation console, navbar integration, NotificationBell moderation type, human verification
 
 ### Phase 4: Orthodox Identity
 **Goal**: The platform is unmistakably Orthodox — users can navigate the liturgical calendar for their tradition and find fellow Orthodox Christians by jurisdiction
@@ -150,7 +151,7 @@ Note: Phase 4 depends only on Phase 1 (architecturally independent of social/vid
 |-------|----------------|--------|-----------|
 | 1. Foundation | 4/4 | Complete    | 2026-03-18 |
 | 2. Social Core | 8/8 | Complete   | 2026-03-18 |
-| 3. Video Hub + Moderation | 0/4 | Not started | - |
+| 3. Video Hub + Moderation | 0/5 | Not started | - |
 | 4. Orthodox Identity | 0/3 | Not started | - |
 | 5. Scripture Library | 0/2 | Not started | - |
 | 6. Patristic Library + Study Guides | 0/3 | Not started | - |
