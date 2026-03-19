@@ -107,11 +107,11 @@ Plans:
   2. A user can search Scripture by keyword, phrase, or reference and navigate by book/chapter/verse
   3. Scripture text is rendered in the Byzantine aesthetic (EB Garamond body, Cinzel headings, navy/gold theme)
   4. The data architecture supports adding multilingual translations in the future without restructuring
-**Plans**: TBD
+**Plans:** 2 plans
 
 Plans:
-- [ ] 05-01: Scripture data ingestion — Brenton LXX and Orthodox NT as structured Firestore documents (book/chapter/verse)
-- [ ] 05-02: Scripture reader UI — Byzantine aesthetic, book/chapter/verse navigation, keyword/reference search, multilingual architecture
+- [ ] 05-01-PLAN.md — Scripture types, Firestore query functions, composite indexes, Brenton LXX + EOB NT seed scripts, Wave 0 test stubs
+- [ ] 05-02-PLAN.md — Scripture landing page, chapter reader, keyword/reference search, BookNavigator, ReadingRef activation (CAL-07), component tests
 
 ### Phase 6: Patristic Library + Study Guides
 **Goal**: Users can explore Church Fathers writings by author and topic, and follow curated study paths that draw from Scripture and patristic sources
