@@ -63,7 +63,8 @@ Source: Established in Phase 1 (`src/styles/globals.css` `--spacing-nav: 70px` a
 Notes:
 - Cinzel is an all-caps / small-caps typeface — all Cinzel usage is inherently uppercase
 - EB Garamond italic is reserved for error messages (matches existing Input.tsx `italic` pattern) and Synaxarion excerpt previews
-- Scripture reading references (disabled stubs) use EB Garamond 14px / weight 400 / opacity 50% — consistent with existing `text-text-mid/50` pattern in codebase
+- Scripture reading references (disabled stubs) use EB Garamond 12px (Label size) / weight 400 / opacity 50% (`text-text-mid/50`) — consistent with existing `text-text-mid/50` pattern in codebase
+- Primary focal point: calendar date header — Display 28px Cinzel (`text-4xl font-cinzel font-semibold`)
 
 Source: `src/components/ui/Button.tsx` (font-cinzel, tracking-widest), `src/components/ui/Input.tsx` (font-garamond, text-base=16px, italic errors), `src/components/agora/CategoryFilterTabs.tsx` (text-xs=12px, font-cinzel), `04-RESEARCH.md` (feast level treatment recommendations).
 
@@ -85,6 +86,8 @@ All tokens defined in `src/styles/globals.css` @theme block. No new colors intro
 | Text primary | `text-text-light` | #e8dfc8 | All body text, member display names |
 | Text secondary | `text-text-mid` | #b8a888 | Saint card collapsed excerpt, jurisdiction badge, city/state location text |
 | Destructive | `text-crimson` / `border-crimson` | #8b1a1a | Destructive actions only (none in Phase 4 primary flows; reserved for future toggle-off confirmation if needed) |
+
+Note: `gold-dim`, `gold-bright`, and `gold-pale` are luminosity variants of the single gold accent hue. Together they count within the 10% accent budget — no additional accent color is introduced.
 
 **Accent reserved for:**
 1. Active filter tab — bottom border `border-gold` + text `text-gold`
@@ -188,7 +191,7 @@ Source: `src/styles/globals.css` (all tokens), `src/components/ui/Card.tsx` (bor
 | Name search placeholder | "Search by name..." |
 | Synodeia empty state — no members | "No members found" (heading) / "No Orthodox members have joined from this jurisdiction yet." (body) |
 | Synodeia empty state — no search results | "No results for \"{query}\"" (heading) / "Try a different name or browse by jurisdiction." (body) |
-| Synodeia auth gate (unauthenticated user) | "Sign in to find fellow Orthodox Christians" (heading) / "Synodeia is available to registered members." (body) / "Sign In" CTA (gold button) |
+| Synodeia auth gate (unauthenticated user) | "Sign in to find fellow Orthodox Christians" (heading) / "Synodeia is available to registered members." (body) / "Sign In to Synodeia" CTA (gold button) |
 | Location sharing toggle label | "Share my location" |
 | Location sharing enabled helper | "Your city and state will be visible to other Synodeia members." |
 | Location sharing disabled helper | "Your location is private and will not appear in Synodeia." |
