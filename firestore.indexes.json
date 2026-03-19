@@ -81,6 +81,24 @@
         { "fieldPath": "jurisdictionId", "order": "ASCENDING" },
         { "fieldPath": "displayName", "order": "ASCENDING" }
       ]
+    },
+    {
+      "collectionGroup": "scripture_verses",
+      "queryScope": "COLLECTION",
+      "fields": [
+        { "fieldPath": "translationId", "order": "ASCENDING" },
+        { "fieldPath": "bookAbbrev", "order": "ASCENDING" },
+        { "fieldPath": "chapter", "order": "ASCENDING" },
+        { "fieldPath": "verse", "order": "ASCENDING" }
+      ]
+    },
+    {
+      "collectionGroup": "scripture_verses",
+      "queryScope": "COLLECTION",
+      "fields": [
+        { "fieldPath": "translationId", "order": "ASCENDING" },
+        { "fieldPath": "searchKeywords", "arrayConfig": "CONTAINS" }
+      ]
     }
   ],
   "fieldOverrides": []
