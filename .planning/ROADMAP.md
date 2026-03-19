@@ -122,12 +122,12 @@ Plans:
   2. A user can search patristic texts by topic, keyword, quote, or author, and visit individual Church Father author pages
   3. Patristic texts render in the Byzantine UI with a clean reading experience
   4. A user can view study guides (curated reading/viewing paths) organized by topic, with each guide referencing Scripture Library and Patristic Library entries in order
-**Plans**: TBD
+**Plans:** 3 plans
 
 Plans:
-- [ ] 06-01: Patristic data ingestion — public domain Church Fathers texts (CCEL/Project Gutenberg pre-1928 translations) as structured Firestore documents
-- [ ] 06-02: Patristic library UI — author pages, browse by category/topic, search, Byzantine aesthetic reading view
-- [ ] 06-03: Study guides — topic-based ordered sequences referencing Scripture and Patristic Library entries
+- [ ] 06-01-PLAN.md — Patristic types, Firestore queries, composite indexes, Firestore rules, seed script (20+ texts, 10+ authors, 4 guides), Wave 0 test stubs
+- [ ] 06-02-PLAN.md — Church Fathers landing page (/fathers), author detail pages, patristic text reader, keyword search page
+- [ ] 06-03-PLAN.md — Study guide pages (/fathers/guides), navbar Church Fathers dropdown, human verification checkpoint
 
 ### Phase 7: Discovery + Messaging
 **Goal**: Users can find any content or person across the platform with a single search, and communicate privately with other members
@@ -155,5 +155,5 @@ Note: Phase 4 depends only on Phase 1 (architecturally independent of social/vid
 | 3. Video Hub + Moderation | 6/6 | Complete | 2026-03-19 |
 | 4. Orthodox Identity | 3/3 | Complete   | 2026-03-19 |
 | 5. Scripture Library | 2/2 | Complete   | 2026-03-19 |
-| 6. Patristic Library + Study Guides | 0/3 | Not started | - |
+| 6. Patristic Library + Study Guides | 0/3 | Planning complete | - |
 | 7. Discovery + Messaging | 0/2 | Not started | - |
