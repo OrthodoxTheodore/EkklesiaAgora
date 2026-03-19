@@ -8,7 +8,9 @@
     "start": "next start",
     "lint": "eslint",
     "test": "jest",
-    "seed:admin": "npx tsx scripts/seed-super-admin.ts"
+    "seed:admin": "npx tsx scripts/seed-super-admin.ts",
+    "seed:brenton": "tsx scripts/seed-brenton-lxx.ts",
+    "seed:eob-nt": "tsx scripts/seed-eob-nt.ts"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.2.2",
@@ -41,6 +43,7 @@
     "jest": "^30.3.0",
     "jest-environment-jsdom": "^30.3.0",
     "tsx": "^4.21.0",
-    "typescript": "^5"
+    "typescript": "^5",
+    "usfm-js": "^3.4.3"
   }
 }
