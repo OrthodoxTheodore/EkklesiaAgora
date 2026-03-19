@@ -45,8 +45,8 @@
 
 - [x] **CHAN-01**: User can create a personal channel page
 - [x] **CHAN-02**: Parishes and monasteries can have institutional channel pages
-- [ ] **CHAN-03**: Channel page displays all videos, subscriber count, and description
-- [ ] **CHAN-04**: User can browse all channels
+- [x] **CHAN-03**: Channel page displays all videos, subscriber count, and description
+- [x] **CHAN-04**: User can browse all channels
 
 ### Social Feed (The Agora)
 
@@ -226,8 +226,8 @@
 | VID-13 | Phase 3 | Complete |
 | CHAN-01 | Phase 3 | Complete |
 | CHAN-02 | Phase 3 | Complete |
-| CHAN-03 | Phase 3 | Pending |
-| CHAN-04 | Phase 3 | Pending |
+| CHAN-03 | Phase 3 | Complete |
+| CHAN-04 | Phase 3 | Complete |
 | MOD-01 | Phase 3 | Complete |
 | MOD-02 | Phase 3 | Complete |
 | MOD-03 | Phase 3 | Pending |
