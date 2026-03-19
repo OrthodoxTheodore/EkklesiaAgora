@@ -70,9 +70,9 @@
 ### Liturgical Calendar
 
 - [x] **CAL-01**: Calendar displays in both Old Julian and New/Revised Julian formats with toggle to switch
-- [ ] **CAL-02**: Calendar shows feast days with descriptions
-- [ ] **CAL-03**: Calendar shows fasting periods and rules
-- [ ] **CAL-04**: Calendar shows saints of the day with life summaries (Synaxarion)
+- [x] **CAL-02**: Calendar shows feast days with descriptions
+- [x] **CAL-03**: Calendar shows fasting periods and rules
+- [x] **CAL-04**: Calendar shows saints of the day with life summaries (Synaxarion)
 - [x] **CAL-05**: Calendar shows Gospel reading of the day
 - [x] **CAL-06**: Calendar shows Epistle reading of the day
 - [x] **CAL-07**: Daily readings link directly to the Scripture Library
@@ -234,9 +234,9 @@
 | MOD-04 | Phase 3 | Complete |
 | MOD-05 | Phase 3 | Complete |
 | CAL-01 | Phase 4 | Complete |
-| CAL-02 | Phase 4 | Pending |
-| CAL-03 | Phase 4 | Pending |
-| CAL-04 | Phase 4 | Pending |
+| CAL-02 | Phase 4 | Complete |
+| CAL-03 | Phase 4 | Complete |
+| CAL-04 | Phase 4 | Complete |
 | CAL-05 | Phase 4 | Complete |
 | CAL-06 | Phase 4 | Complete |
 | CAL-07 | Phase 4 | Complete |

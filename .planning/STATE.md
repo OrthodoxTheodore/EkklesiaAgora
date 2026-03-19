@@ -3,13 +3,13 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: unknown
-stopped_at: Completed 04-orthodox-identity 04-01-PLAN.md
-last_updated: "2026-03-19T06:12:15.355Z"
+stopped_at: Completed 04-orthodox-identity 04-02-PLAN.md
+last_updated: "2026-03-19T06:19:22.234Z"
 progress:
   total_phases: 7
   completed_phases: 3
   total_plans: 21
-  completed_plans: 19
+  completed_plans: 20
 ---
 
 # Project State
@@ -64,6 +64,7 @@ Plan: 1 of 3
 | Phase 03-video-hub-moderation P05 | 251s | 2 tasks | 7 files |
 | Phase 03-video-hub-moderation P05 | 251s+checkpoint | 3 tasks | 7 files |
 | Phase 04-orthodox-identity P01 | 3min | 2 tasks | 12 files |
+| Phase 04-orthodox-identity P02 | 4min | 2 tasks | 8 files |
 
 ## Accumulated Context
 
@@ -119,6 +120,8 @@ Recent decisions affecting current work:
 - [Phase 04-orthodox-identity]: CANONICAL_IDS typed as string[] to allow .includes(string) — readonly literal tuple from as const causes TS2345
 - [Phase 04-orthodox-identity]: sanitizeMember enforces location privacy in application layer — Firestore rules cannot gate individual fields within a document
 - [Phase 04-orthodox-identity]: buildDisplayNameKeywords uses 2-char minimum prefix (not 3+ like video keywords) — personal names like Li/Bo need 2-char matching
+- [Phase 04-orthodox-identity]: ReadingRef prop renamed from ref to reading — ref is reserved by React and silently stripped from function components
+- [Phase 04-orthodox-identity]: CalendarDayView uses router.push(?date=YYYY-MM-DD&cal=) for day navigation — Server Component re-fetches orthocal.info on each navigation
 
 ### Pending Todos
 
@@ -132,7 +135,7 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-03-19T06:12:15.348Z
-Stopped at: Completed 04-orthodox-identity 04-01-PLAN.md
+Last session: 2026-03-19T06:19:22.227Z
+Stopped at: Completed 04-orthodox-identity 04-02-PLAN.md
 Resume command: `/gsd:execute-phase 3`
 Resume file: None
