@@ -13,6 +13,7 @@ import firebaseApp from '@/lib/firebase/client';
 export function Navbar() {
   const { user, roleLevel } = useAuth();
   const isAdmin = roleLevel >= 3; // admin (3) or super admin (4)
+  const isModerator = roleLevel >= 2; // moderator (2), admin (3), or super admin (4)
   const router = useRouter();
   const [mobileOpen, setMobileOpen] = useState(false);
   const [avatarOpen, setAvatarOpen] = useState(false);
@@ -76,6 +77,14 @@ export function Navbar() {
             >
               Scripture
             </Link>
+            {isModerator && (
+              <Link
+                href="/admin/moderation"
+                className="font-cinzel text-xs uppercase tracking-widest text-gold-dim hover:text-gold transition-colors"
+              >
+                Moderation
+              </Link>
+            )}
             {isAdmin && (
               <Link
                 href="/admin"
@@ -125,6 +134,15 @@ export function Navbar() {
                       >
                         Agora
                       </Link>
+                      {isModerator && (
+                        <Link
+                          href="/admin/moderation"
+                          onClick={() => setAvatarOpen(false)}
+                          className="block px-4 py-2 font-cinzel text-xs uppercase tracking-wider text-gold-dim hover:text-gold hover:bg-gold/5 transition-colors"
+                        >
+                          Moderation
+                        </Link>
+                      )}
                       {isAdmin && (
                         <Link
                           href="/admin"

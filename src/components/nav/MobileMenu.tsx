@@ -10,7 +10,8 @@ interface MobileMenuProps {
 }
 
 export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
-  const { user } = useAuth();
+  const { user, roleLevel } = useAuth();
+  const isModerator = roleLevel >= 2;
 
   if (!isOpen) return null;
 
@@ -72,6 +73,15 @@ export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
                 >
                   Agora
                 </Link>
+                {isModerator && (
+                  <Link
+                    href="/admin/moderation"
+                    onClick={onClose}
+                    className="px-4 py-2 font-cinzel text-sm uppercase tracking-widest text-gold-dim hover:text-gold transition-colors"
+                  >
+                    Moderation
+                  </Link>
+                )}
               </>
             ) : (
               <>

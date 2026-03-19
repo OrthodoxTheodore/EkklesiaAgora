@@ -46,12 +46,32 @@ function getNotificationMessage(notification: Notification): string {
       return `started following you`;
     case 'mention':
       return `mentioned you in a post`;
+    case 'moderation': {
+      if (notification.decision === 'published') {
+        return 'Your video has been approved and is now live.';
+      }
+      if (notification.decision === 'rejected') {
+        const reason = notification.moderatorNote ? ` Reason: ${notification.moderatorNote}.` : '';
+        return `Your video was not approved.${reason}`;
+      }
+      if (notification.decision === 'changes_requested') {
+        const note = notification.moderatorNote ? ` ${notification.moderatorNote}.` : '';
+        return `A moderator has requested changes to your video.${note} Please edit and resubmit.`;
+      }
+      return 'A moderation decision was made on your content.';
+    }
     default:
       return 'interacted with your content';
   }
 }
 
 function getNotificationLink(notification: Notification): string {
+  if (notification.type === 'moderation') {
+    if (notification.videoId) {
+      return `/videos/${notification.videoId}`;
+    }
+    return '/upload';
+  }
   if (notification.type === 'follow') {
     return `/profile/${notification.fromHandle}`;
   }
