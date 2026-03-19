@@ -221,9 +221,32 @@ service cloud.firestore {
       allow write: if false;
     }
 
-    // ─── Future collections ─────────────────────────────────────────────────
-    // Phase 4+: /synodeia (people finder)
-    // Phase 5+: /scripture (bookmarks, notes)
-    // Phase 6+: /studyGuides
+    // ─── Phase 6: Patristic Library ─────────────────────────────────────────
+    // /patristic_texts/{textId}
+    //   READ:  anyone (public domain CCEL texts)
+    //   WRITE: false — Admin SDK seed writes bypass rules
+
+    match /patristic_texts/{textId} {
+      allow read: if true;
+      allow write: if false;
+    }
+
+    // /patristic_authors/{slug}
+    //   READ:  anyone
+    //   WRITE: false — Admin SDK seed writes bypass rules
+
+    match /patristic_authors/{slug} {
+      allow read: if true;
+      allow write: if false;
+    }
+
+    // /study_guides/{guideId}
+    //   READ:  anyone
+    //   WRITE: false — Admin SDK seed writes bypass rules
+
+    match /study_guides/{guideId} {
+      allow read: if true;
+      allow write: if false;
+    }
   }
 }

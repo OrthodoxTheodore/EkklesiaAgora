@@ -99,6 +99,30 @@
         { "fieldPath": "translationId", "order": "ASCENDING" },
         { "fieldPath": "searchKeywords", "arrayConfig": "CONTAINS" }
       ]
+    },
+    {
+      "collectionGroup": "patristic_texts",
+      "queryScope": "COLLECTION",
+      "fields": [
+        { "fieldPath": "authorSlug", "order": "ASCENDING" },
+        { "fieldPath": "sortOrder", "order": "ASCENDING" }
+      ]
+    },
+    {
+      "collectionGroup": "patristic_texts",
+      "queryScope": "COLLECTION",
+      "fields": [
+        { "fieldPath": "topics", "arrayConfig": "CONTAINS" },
+        { "fieldPath": "era", "order": "ASCENDING" }
+      ]
+    },
+    {
+      "collectionGroup": "patristic_authors",
+      "queryScope": "COLLECTION",
+      "fields": [
+        { "fieldPath": "era", "order": "ASCENDING" },
+        { "fieldPath": "sortOrder", "order": "ASCENDING" }
+      ]
     }
   ],
   "fieldOverrides": []
