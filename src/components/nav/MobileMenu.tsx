@@ -49,6 +49,20 @@ export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
             Videos
           </Link>
           <Link
+            href="/calendar"
+            onClick={onClose}
+            className="px-4 py-3 font-cinzel text-sm uppercase tracking-widest text-text-light hover:text-gold transition-colors"
+          >
+            Calendar
+          </Link>
+          <Link
+            href="/synodeia"
+            onClick={onClose}
+            className="px-4 py-3 font-cinzel text-sm uppercase tracking-widest text-text-light hover:text-gold transition-colors"
+          >
+            Synodeia
+          </Link>
+          <Link
             href="/scripture"
             onClick={onClose}
             className="px-4 py-3 font-cinzel text-sm uppercase tracking-widest text-text-light hover:text-gold transition-colors"

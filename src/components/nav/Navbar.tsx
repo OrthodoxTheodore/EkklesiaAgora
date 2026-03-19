@@ -72,6 +72,18 @@ export function Navbar() {
               Videos
             </Link>
             <Link
+              href="/calendar"
+              className="font-cinzel text-xs uppercase tracking-widest text-text-light hover:text-gold transition-colors"
+            >
+              Calendar
+            </Link>
+            <Link
+              href="/synodeia"
+              className="font-cinzel text-xs uppercase tracking-widest text-text-light hover:text-gold transition-colors"
+            >
+              Synodeia
+            </Link>
+            <Link
               href="/scripture"
               className="font-cinzel text-xs uppercase tracking-widest text-text-light hover:text-gold transition-colors"
             >
