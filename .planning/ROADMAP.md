@@ -107,7 +107,7 @@ Plans:
   2. A user can search Scripture by keyword, phrase, or reference and navigate by book/chapter/verse
   3. Scripture text is rendered in the Byzantine aesthetic (EB Garamond body, Cinzel headings, navy/gold theme)
   4. The data architecture supports adding multilingual translations in the future without restructuring
-**Plans:** 2 plans
+**Plans:** 1/2 plans executed
 
 Plans:
 - [ ] 05-01-PLAN.md — Scripture types, Firestore query functions, composite indexes, Brenton LXX + EOB NT seed scripts, Wave 0 test stubs
@@ -154,6 +154,6 @@ Note: Phase 4 depends only on Phase 1 (architecturally independent of social/vid
 | 2. Social Core | 8/8 | Complete   | 2026-03-18 |
 | 3. Video Hub + Moderation | 6/6 | Complete | 2026-03-19 |
 | 4. Orthodox Identity | 3/3 | Complete   | 2026-03-19 |
-| 5. Scripture Library | 0/2 | Not started | - |
+| 5. Scripture Library | 1/2 | In Progress|  |
 | 6. Patristic Library + Study Guides | 0/3 | Not started | - |
 | 7. Discovery + Messaging | 0/2 | Not started | - |

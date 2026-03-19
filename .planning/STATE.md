@@ -3,13 +3,13 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: unknown
-stopped_at: Phase 5 context gathered
-last_updated: "2026-03-19T09:28:09.875Z"
+stopped_at: Completed 05-scripture-library 05-01-PLAN.md
+last_updated: "2026-03-19T11:03:40.632Z"
 progress:
   total_phases: 7
   completed_phases: 4
-  total_plans: 21
-  completed_plans: 21
+  total_plans: 23
+  completed_plans: 22
 ---
 
 # Project State
@@ -19,12 +19,12 @@ progress:
 See: .planning/PROJECT.md (updated 2026-03-16)
 
 **Core value:** Providing a trustworthy, canonically-grounded Eastern Orthodox Christian platform where users can find authentic content and community.
-**Current focus:** Phase 04 — orthodox-identity
+**Current focus:** Phase 05 — scripture-library
 
 ## Current Position
 
-Phase: 04 (orthodox-identity) — EXECUTING
-Plan: 1 of 3
+Phase: 05 (scripture-library) — EXECUTING
+Plan: 1 of 2
 
 ## Performance Metrics
 
@@ -66,6 +66,7 @@ Plan: 1 of 3
 | Phase 04-orthodox-identity P01 | 3min | 2 tasks | 12 files |
 | Phase 04-orthodox-identity P02 | 4min | 2 tasks | 8 files |
 | Phase 04-orthodox-identity P03 | 10min | 3 tasks | 9 files |
+| Phase 05-scripture-library PP01 | 15min | 2 tasks | 11 files |
 
 ## Accumulated Context
 
@@ -125,6 +126,7 @@ Recent decisions affecting current work:
 - [Phase 04-orthodox-identity]: CalendarDayView uses router.push(?date=YYYY-MM-DD&cal=) for day navigation — Server Component re-fetches orthocal.info on each navigation
 - [Phase 04-orthodox-identity]: Search and jurisdiction filter are mutually exclusive in Synodeia — entering search clears tab to All; clicking tab clears search input
 - [Phase 04-orthodox-identity]: Location toggle auto-saves on click via updateLocationSharing Server Action rather than waiting for main profile form submit
+- [Phase 05-scripture-library]: buildVerseKeywords uses >= 3 char filter for verse text; EOB NT seed uses pre-parsed JSON input to separate PDF extraction from Firestore writes; seed scripts inline keyword builder to avoid Next.js module resolution outside src/
 
 ### Pending Todos
 
@@ -138,7 +140,7 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-03-19T09:28:09.869Z
-Stopped at: Phase 5 context gathered
+Last session: 2026-03-19T11:03:40.625Z
+Stopped at: Completed 05-scripture-library 05-01-PLAN.md
 Resume command: `/gsd:execute-phase 3`
-Resume file: .planning/phases/05-scripture-library/05-CONTEXT.md
+Resume file: None
