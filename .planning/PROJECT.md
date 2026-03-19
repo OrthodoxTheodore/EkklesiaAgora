@@ -12,7 +12,8 @@ Providing a trustworthy, canonically-grounded Orthodox Christian platform where 
 
 ### Validated
 
-(None yet — ship to validate)
+- [x] Liturgical calendar with Gregorian/Julian dates, feasts, fasts, and saints — Validated in Phase 04: orthodox-identity
+- [x] People finder (Synodeia) — discover members by jurisdiction, location — Validated in Phase 04: orthodox-identity
 
 ### Active
 
@@ -24,12 +25,10 @@ Providing a trustworthy, canonically-grounded Orthodox Christian platform where 
 - [ ] Verified accounts (clergy, known teachers) post freely; unverified uploads require moderator approval
 - [ ] Admin and moderator roles for content oversight
 - [ ] Community flagging system for content review
-- [ ] Liturgical calendar with Gregorian/Julian dates, feasts, fasts, and saints
 - [ ] Orthodox Info Center — searchable library of Church Fathers, liturgical texts by topic/keyword/author
 - [ ] Study guides — curated reading paths and study materials organized by topic
 - [ ] Channel system for content creators (parishes, monasteries, teachers)
 - [ ] Direct messaging between users
-- [ ] People finder (Synodeia) — discover members by jurisdiction, location
 - [ ] Video upload and streaming capability (not just YouTube embeds)
 - [ ] Search across videos, posts, and people
 - [ ] Mobile-responsive web design
@@ -93,4 +92,4 @@ Providing a trustworthy, canonically-grounded Orthodox Christian platform where 
 | No wiki-style content | Orthodox Wiki already exists; avoid competition, focus on video + social + research library | — Pending |
 
 ---
-*Last updated: 2026-03-16 after initialization*
+*Last updated: 2026-03-19 — Phase 04 complete (orthodox-identity: liturgical calendar + Synodeia)*
