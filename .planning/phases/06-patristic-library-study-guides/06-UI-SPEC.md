@@ -1,7 +1,8 @@
 ---
 phase: 6
 slug: patristic-library-study-guides
-status: draft
+status: approved
+reviewed_at: 2026-03-19
 shadcn_initialized: false
 preset: none
 created: 2026-03-19
@@ -240,7 +241,7 @@ max-w-2xl mx-auto px-4 py-8
 | Study guides landing page h1 | "Study Guides" |
 | Search results page h1 | "Search the Fathers" |
 | Empty state — Fathers grid (filter yields nothing) | Heading: "No Fathers in this category" / Body: "Try selecting a different topic or browse all Church Fathers." |
-| Empty state — Search (no results) | Heading: "No results found" / Body: "Try different keywords, or browse by author." |
+| Empty state — Search (no results) | Heading: "No texts match your search" / Body: "Try different keywords, or browse by author." |
 | Empty state — Study guides (no guides seeded) | Heading: "Study guides coming soon" / Body: "Check back soon for curated learning paths." |
 | Error state — text fails to load | "This text could not be loaded. Please try refreshing the page." (font-garamond text-sm text-text-mid — matches ScriptureReader error pattern) |
 | Attribution footnote (Nicene/Ante-Nicene texts) | "From the Ante-Nicene Fathers series, Philip Schaff edition. Public domain." |
