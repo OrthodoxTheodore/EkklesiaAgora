@@ -28,15 +28,15 @@
 ### Video Platform
 
 - [x] **VID-01**: User can upload video files with title, description, tags, and thumbnail
-- [ ] **VID-02**: Videos play with standard controls (play/pause/seek/volume/fullscreen)
-- [ ] **VID-03**: Videos display view count, duration, and upload date
+- [x] **VID-02**: Videos play with standard controls (play/pause/seek/volume/fullscreen)
+- [x] **VID-03**: Videos display view count, duration, and upload date
 - [x] **VID-04**: User can like/unlike a video
 - [x] **VID-05**: User can comment on a video
-- [ ] **VID-06**: User can share a video via copy link
+- [x] **VID-06**: User can share a video via copy link
 - [x] **VID-07**: User can report/flag a video with reason
 - [x] **VID-08**: User can subscribe/follow a channel
 - [x] **VID-09**: Upload progress indicator shown during video upload
-- [ ] **VID-10**: Videos are mobile-responsive with adaptive playback
+- [x] **VID-10**: Videos are mobile-responsive with adaptive playback
 - [x] **VID-11**: Video search by title, description, and tags
 - [x] **VID-12**: Unverified user video uploads go to moderation queue before publishing
 - [x] **VID-13**: Videos organized by Orthodox content categories
@@ -212,15 +212,15 @@
 | CAT-01 | Phase 2 | Complete |
 | CAT-02 | Phase 2 | Complete |
 | VID-01 | Phase 3 | Complete |
-| VID-02 | Phase 3 | Pending |
-| VID-03 | Phase 3 | Pending |
+| VID-02 | Phase 3 | Complete |
+| VID-03 | Phase 3 | Complete |
 | VID-04 | Phase 3 | Complete |
 | VID-05 | Phase 3 | Complete |
-| VID-06 | Phase 3 | Pending |
+| VID-06 | Phase 3 | Complete |
 | VID-07 | Phase 3 | Complete |
 | VID-08 | Phase 3 | Complete |
 | VID-09 | Phase 3 | Complete |
-| VID-10 | Phase 3 | Pending |
+| VID-10 | Phase 3 | Complete |
 | VID-11 | Phase 3 | Complete |
 | VID-12 | Phase 3 | Complete |
 | VID-13 | Phase 3 | Complete |

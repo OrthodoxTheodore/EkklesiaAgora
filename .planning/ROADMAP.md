@@ -72,7 +72,7 @@ Plans:
   3. A user can like, comment on, share (copy link), and flag a video; they can subscribe to a channel
   4. A user or institution can create a channel page showing all their videos, subscriber count, and description; all channels are browsable
   5. A moderator can open the console, see all pending uploads and flagged content with uploader context, and approve, reject, or request changes — with the uploader notified of the outcome
-**Plans:** 2/5 plans executed
+**Plans:** 3/5 plans executed
 
 Plans:
 - [x] 03-01-PLAN.md — Types, Firestore/Storage rules, indexes, search keyword helper, Wave 0 test stubs
@@ -151,7 +151,7 @@ Note: Phase 4 depends only on Phase 1 (architecturally independent of social/vid
 |-------|----------------|--------|-----------|
 | 1. Foundation | 4/4 | Complete    | 2026-03-18 |
 | 2. Social Core | 8/8 | Complete   | 2026-03-18 |
-| 3. Video Hub + Moderation | 2/5 | In Progress|  |
+| 3. Video Hub + Moderation | 3/5 | In Progress|  |
 | 4. Orthodox Identity | 0/3 | Not started | - |
 | 5. Scripture Library | 0/2 | Not started | - |
 | 6. Patristic Library + Study Guides | 0/3 | Not started | - |
