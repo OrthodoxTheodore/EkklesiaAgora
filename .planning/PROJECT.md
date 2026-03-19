@@ -14,6 +14,7 @@ Providing a trustworthy, canonically-grounded Orthodox Christian platform where 
 
 - [x] Liturgical calendar with Gregorian/Julian dates, feasts, fasts, and saints — Validated in Phase 04: orthodox-identity
 - [x] People finder (Synodeia) — discover members by jurisdiction, location — Validated in Phase 04: orthodox-identity
+- [x] Scripture library (Brenton LXX OT + EOB NT) — searchable, navigable, with Byzantine reader — Validated in Phase 05: scripture-library
 
 ### Active
 
@@ -92,4 +93,4 @@ Providing a trustworthy, canonically-grounded Orthodox Christian platform where 
 | No wiki-style content | Orthodox Wiki already exists; avoid competition, focus on video + social + research library | — Pending |
 
 ---
-*Last updated: 2026-03-19 — Phase 04 complete (orthodox-identity: liturgical calendar + Synodeia)*
+*Last updated: 2026-03-19
