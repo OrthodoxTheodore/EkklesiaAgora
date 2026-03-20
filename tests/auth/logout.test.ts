@@ -59,6 +59,12 @@ jest.mock('@/components/nav/MobileMenu', () => ({
   MobileMenu: () => null,
 }));
 
+// Mock NotificationBell — imports firebase-admin which pulls in jose (ESM)
+// that Jest cannot transform in the jsdom environment
+jest.mock('@/components/nav/NotificationBell', () => ({
+  NotificationBell: () => null,
+}));
+
 // Import Navbar AFTER mocks
 // eslint-disable-next-line @typescript-eslint/no-require-imports
 const { Navbar } = require('@/components/nav/Navbar');
