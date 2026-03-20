@@ -3,13 +3,13 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: unknown
-stopped_at: Completed 06-patristic-library-study-guides 06-02-PLAN.md
-last_updated: "2026-03-20T02:26:41.477Z"
+stopped_at: Completed 06-patristic-library-study-guides 06-03-PLAN.md
+last_updated: "2026-03-20T02:42:45.125Z"
 progress:
   total_phases: 7
-  completed_phases: 5
+  completed_phases: 6
   total_plans: 26
-  completed_plans: 25
+  completed_plans: 26
   percent: 96
 ---
 
@@ -98,6 +98,7 @@ Plan: 1 of 3
 | Phase 05-scripture-library PP01 | 15min | 2 tasks | 11 files |
 | Phase 05-scripture-library P02 | 319s | 3 tasks | 13 files |
 | Phase 06 P02 | 353s | 2 tasks | 10 files |
+| Phase 06-patristic-library-study-guides P03 | 25min | 2 tasks | 7 files |
 
 ## Accumulated Context
 
@@ -163,6 +164,7 @@ Recent decisions affecting current work:
 - [Phase 05-scripture-library]: ScriptureReader test mocks VerseList to include font-garamond class, satisfying LIB-03 Byzantine rendering gate assertion
 - [Phase 06]: Topic index built server-side from patristic_texts using .select() projection — avoids loading full text bodies for landing page
 - [Phase 06]: PatristicSearch uses URL-driven search (router.push to /fathers/search?q=) rather than client-side Firestore reads
+- [Phase 06-patristic-library-study-guides]: resolvedLinks built server-side by fetching each patristic refId from Firestore — avoids client-side reads and keeps viewer component purely presentational
 
 ### Pending Todos
 
@@ -176,7 +178,7 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-03-20T02:26:41.470Z
-Stopped at: Completed 06-patristic-library-study-guides 06-02-PLAN.md
+Last session: 2026-03-20T02:42:45.116Z
+Stopped at: Completed 06-patristic-library-study-guides 06-03-PLAN.md
 Resume command: `/gsd:execute-phase 3`
 Resume file: None

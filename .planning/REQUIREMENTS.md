@@ -110,9 +110,9 @@
 
 ### Study Guides
 
-- [ ] **STD-01**: Curated reading/viewing paths organized by topic (e.g., Introduction to Orthodoxy, Theosis, Liturgical Life, Prayer)
-- [ ] **STD-02**: Study guides reference Scripture Library and Patristic Library entries
-- [ ] **STD-03**: Study guides display as ordered content sequences with descriptions
+- [x] **STD-01**: Curated reading/viewing paths organized by topic (e.g., Introduction to Orthodoxy, Theosis, Liturgical Life, Prayer)
+- [x] **STD-02**: Study guides reference Scripture Library and Patristic Library entries
+- [x] **STD-03**: Study guides display as ordered content sequences with descriptions
 
 ### People Finder (Synodeia)
 
@@ -256,9 +256,9 @@
 | PAT-04 | Phase 6 | Complete |
 | PAT-05 | Phase 6 | Complete |
 | PAT-06 | Phase 6 | Complete |
-| STD-01 | Phase 6 | Pending |
-| STD-02 | Phase 6 | Pending |
-| STD-03 | Phase 6 | Pending |
+| STD-01 | Phase 6 | Complete |
+| STD-02 | Phase 6 | Complete |
+| STD-03 | Phase 6 | Complete |
 | SRCH-01 | Phase 7 | Pending |
 | SRCH-02 | Phase 7 | Pending |
 | MSG-01 | Phase 7 | Pending |
