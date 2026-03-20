@@ -17,6 +17,7 @@ export function Navbar() {
   const router = useRouter();
   const [mobileOpen, setMobileOpen] = useState(false);
   const [avatarOpen, setAvatarOpen] = useState(false);
+  const [fathersOpen, setFathersOpen] = useState(false);
 
   async function handleLogout() {
     try {
@@ -89,6 +90,35 @@ export function Navbar() {
             >
               Scripture
             </Link>
+            <div className="relative" onMouseLeave={() => setFathersOpen(false)}>
+              <button
+                onMouseEnter={() => { setFathersOpen(true); setAvatarOpen(false); }}
+                onClick={() => { setFathersOpen(!fathersOpen); setAvatarOpen(false); }}
+                className="font-cinzel text-xs uppercase tracking-widest text-text-light hover:text-gold transition-colors"
+                aria-expanded={fathersOpen}
+                aria-haspopup="true"
+              >
+                Fathers
+              </button>
+              {fathersOpen && (
+                <div className="absolute top-full left-0 mt-1 w-44 bg-navy-mid border border-gold/20 rounded shadow-xl z-60">
+                  <Link
+                    href="/fathers"
+                    onClick={() => setFathersOpen(false)}
+                    className="block px-4 py-2 font-cinzel text-xs uppercase tracking-wider text-text-light hover:text-gold hover:bg-gold/5 transition-colors"
+                  >
+                    Browse Fathers
+                  </Link>
+                  <Link
+                    href="/fathers/guides"
+                    onClick={() => setFathersOpen(false)}
+                    className="block px-4 py-2 font-cinzel text-xs uppercase tracking-wider text-text-light hover:text-gold hover:bg-gold/5 transition-colors"
+                  >
+                    Study Guides
+                  </Link>
+                </div>
+              )}
+            </div>
             {isModerator && (
               <Link
                 href="/admin/moderation"
@@ -119,7 +149,7 @@ export function Navbar() {
                   {/* Avatar dropdown */}
                   <div className="relative">
                   <button
-                    onClick={() => setAvatarOpen(!avatarOpen)}
+                    onClick={() => { setAvatarOpen(!avatarOpen); setFathersOpen(false); }}
                     className="w-9 h-9 rounded-full bg-gold-dim border border-gold/40 flex items-center justify-center font-cinzel text-navy text-sm font-bold hover:bg-gold transition-colors"
                     aria-label="User menu"
                     aria-expanded={avatarOpen}

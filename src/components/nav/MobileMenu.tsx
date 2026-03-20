@@ -69,6 +69,20 @@ export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
           >
             Scripture
           </Link>
+          <Link
+            href="/fathers"
+            onClick={onClose}
+            className="px-4 py-3 font-cinzel text-sm uppercase tracking-widest text-text-light hover:text-gold transition-colors"
+          >
+            Browse Fathers
+          </Link>
+          <Link
+            href="/fathers/guides"
+            onClick={onClose}
+            className="px-4 py-3 font-cinzel text-sm uppercase tracking-widest text-text-light hover:text-gold transition-colors"
+          >
+            Study Guides
+          </Link>
 
           <div className="border-t border-gold/20 mt-2 pt-4 flex flex-col gap-2">
             {user ? (
