@@ -101,8 +101,8 @@
 
 ### Patristic Library (Info Center)
 
-- [ ] **PAT-01**: Curated selections of essential Church Fathers writings stored as structured data
-- [ ] **PAT-02**: Texts sourced from public domain Ante-Nicene, Nicene, and Post-Nicene Fathers series
+- [x] **PAT-01**: Curated selections of essential Church Fathers writings stored as structured data
+- [x] **PAT-02**: Texts sourced from public domain Ante-Nicene, Nicene, and Post-Nicene Fathers series
 - [x] **PAT-03**: User can search patristic texts by topic, keyword, quote, or author
 - [x] **PAT-04**: User can browse by Church Father (author pages)
 - [x] **PAT-05**: Recommended reading lists curated by topic
@@ -250,8 +250,8 @@
 | LIB-04 | Phase 5 | Complete |
 | LIB-05 | Phase 5 | Complete |
 | LIB-06 | Phase 5 | Complete |
-| PAT-01 | Phase 6 | Pending |
-| PAT-02 | Phase 6 | Pending |
+| PAT-01 | Phase 6 | Complete |
+| PAT-02 | Phase 6 | Complete |
 | PAT-03 | Phase 6 | Complete |
 | PAT-04 | Phase 6 | Complete |
 | PAT-05 | Phase 6 | Complete |
