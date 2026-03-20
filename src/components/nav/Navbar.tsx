@@ -7,6 +7,7 @@ import { useRouter } from 'next/navigation';
 import { useAuth } from '@/components/auth/AuthProvider';
 import { MobileMenu } from './MobileMenu';
 import { NotificationBell } from './NotificationBell';
+import { MessagesIcon } from './MessagesIcon';
 import { SearchBar } from '@/components/search/SearchBar';
 import { getAuth, signOut } from 'firebase/auth';
 import firebaseApp from '@/lib/firebase/client';
@@ -147,6 +148,8 @@ export function Navbar() {
             <div className="hidden md:flex items-center gap-2">
               {user ? (
                 <div className="flex items-center gap-1">
+                  {/* Messages icon */}
+                  <MessagesIcon uid={user.uid} />
                   {/* Notification bell */}
                   <NotificationBell uid={user.uid} />
 

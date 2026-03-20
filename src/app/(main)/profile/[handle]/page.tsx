@@ -1,5 +1,6 @@
 import { cookies } from 'next/headers';
 import { redirect, notFound } from 'next/navigation';
+import Link from 'next/link';
 import { getTokens } from 'next-firebase-auth-edge';
 import { getProfileByHandle } from '@/lib/firestore/profiles';
 import { getAdminFirestore } from '@/lib/firebase/admin';
@@ -77,6 +78,16 @@ export default async function ProfilePage({ params }: ProfilePageProps) {
         onFollow={handleFollow}
         onUnfollow={handleUnfollow}
       />
+      {!isOwnProfile && (
+        <div className="mt-3 flex gap-2">
+          <Link
+            href={`/messages?to=${profile.uid}`}
+            className="px-4 py-2 bg-navy-mid border border-gold/[0.15] rounded font-cinzel text-xs uppercase tracking-widest text-text-light hover:text-gold hover:bg-navy-light transition-colors"
+          >
+            Send Message
+          </Link>
+        </div>
+      )}
       <div className="mt-4">
         <ProfileTabs>
           <p className="font-garamond text-text-mid text-center py-12">

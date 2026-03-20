@@ -90,6 +90,15 @@ export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
           >
             Search
           </Link>
+          {user && (
+            <Link
+              href="/messages"
+              onClick={onClose}
+              className="px-4 py-3 font-cinzel text-sm uppercase tracking-widest text-text-light hover:text-gold transition-colors"
+            >
+              Messages
+            </Link>
+          )}
 
           <div className="border-t border-gold/20 mt-2 pt-4 flex flex-col gap-2">
             {user ? (
