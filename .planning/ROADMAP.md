@@ -17,7 +17,7 @@ Decimal phases appear between their surrounding integers in numeric order.
 - [x] **Phase 3: Video Hub + Moderation** - Video upload/playback, channels, and the moderation console (ships together) (completed 2026-03-19)
 - [x] **Phase 4: Orthodox Identity** - Liturgical calendar and Synodeia people finder — the prototype differentiators (completed 2026-03-19)
 - [x] **Phase 5: Scripture Library** - Full Septuagint + Orthodox NT stored, searchable, and navigable (completed 2026-03-19)
-- [ ] **Phase 6: Patristic Library + Study Guides** - Church Fathers texts and curated learning paths
+- [x] **Phase 6: Patristic Library + Study Guides** - Church Fathers texts and curated learning paths (completed 2026-03-20)
 - [ ] **Phase 7: Discovery + Messaging** - Global search and direct messaging
 
 ## Phase Details
