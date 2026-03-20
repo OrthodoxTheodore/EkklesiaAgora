@@ -141,7 +141,14 @@ export async function deletePost(
       return { success: false, error: 'Post not found.' };
     }
     const postData = postDoc.data() as { authorUid: string };
-    if (postData.authorUid !== uid) {
+
+    // Moderators (roleLevel >= 2) can delete any post; authors can delete their own
+    const adminAuth = getAdminAuth();
+    const userRecord = await adminAuth.getUser(uid);
+    const callerRoleLevel: number =
+      (userRecord.customClaims as { roleLevel?: number } | undefined)?.roleLevel ?? 1;
+
+    if (postData.authorUid !== uid && callerRoleLevel < 2) {
       return { success: false, error: 'Not authorized to delete this post.' };
     }
 

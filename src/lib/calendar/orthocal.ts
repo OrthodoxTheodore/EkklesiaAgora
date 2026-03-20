@@ -47,7 +47,7 @@ export function extractReadingRefs(day: OrthodocalDay): {
     const lastVerse = reading.passage[reading.passage.length - 1];
 
     const ref: ReadingRef = {
-      book: reading.display.split(/[\s.]/)[0], // e.g., "John" from "John 3.16-21"
+      book: firstVerse.book, // full book name from API (e.g., "John", "Hebrews", "1 Corinthians")
       chapter: firstVerse.chapter,
       verseStart: firstVerse.verse,
       verseEnd: lastVerse.verse,

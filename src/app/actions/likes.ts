@@ -53,6 +53,9 @@ export async function toggleLike(
           fromAvatarUrl: profile.avatarUrl,
           postId,
           postText: post.text.slice(0, 80),
+          videoId: null,
+          decision: null,
+          moderatorNote: null,
           read: false,
           createdAt: FieldValue.serverTimestamp(),
         });
