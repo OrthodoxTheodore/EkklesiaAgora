@@ -1,5 +1,6 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
+import { PatristicReader } from '@/components/fathers/PatristicReader';
 import type { PatristicText } from '@/lib/types/patristic';
 
 // Mock next/navigation
@@ -27,26 +28,6 @@ jest.mock('next/link', () => {
   return MockLink;
 });
 
-/**
- * Wave 0 stub: PatristicReader
- *
- * These tests define the rendering contract that the real PatristicReader component
- * (to be created in Plan 06-02) must satisfy. The stub component here mirrors the
- * expected markup structure so the assertions can pass now.
- */
-function PatristicReader({ text }: { text: PatristicText }) {
-  return (
-    <div>
-      <h1 className="font-cinzel text-gold">{text.title}</h1>
-      <p className="font-cinzel text-sm text-gold/70">{text.workTitle}</p>
-      <div className="font-garamond prose">{text.body}</div>
-      <p className="text-sm text-text-muted">
-        Public domain — {text.source} — Philip Schaff ed. (CCEL)
-      </p>
-    </div>
-  );
-}
-
 const mockText: PatristicText = {
   textId: 'ignatius-ephesians',
   authorSlug: 'ignatius-of-antioch',
@@ -62,24 +43,91 @@ const mockText: PatristicText = {
   searchKeywords: ['ignatius', 'ephesians', 'church', 'father', 'apostolic'],
 };
 
+const mockPrevText: PatristicText = {
+  ...mockText,
+  textId: 'ignatius-romans',
+  title: 'Epistle to the Romans',
+  sortOrder: 0,
+};
+
+const mockNextText: PatristicText = {
+  ...mockText,
+  textId: 'ignatius-trallians',
+  title: 'Epistle to the Trallians',
+  sortOrder: 2,
+};
+
 describe('PatristicReader', () => {
   it('renders work title with font-cinzel and text-gold', () => {
-    const { container } = render(<PatristicReader text={mockText} />);
+    const { container } = render(
+      <PatristicReader text={mockText} authorSlug="ignatius-of-antioch" prevText={null} nextText={null} />
+    );
     const titleEl = container.querySelector('.font-cinzel.text-gold');
     expect(titleEl).not.toBeNull();
     expect(titleEl?.textContent).toContain('Epistle to the Ephesians');
   });
 
   it('renders body text with font-garamond', () => {
-    const { container } = render(<PatristicReader text={mockText} />);
-    const bodyEl = container.querySelector('.font-garamond');
-    expect(bodyEl).not.toBeNull();
-    expect(bodyEl?.textContent).toContain('Ignatius');
+    const { container } = render(
+      <PatristicReader text={mockText} authorSlug="ignatius-of-antioch" prevText={null} nextText={null} />
+    );
+    const articleEl = container.querySelector('article.font-garamond');
+    expect(articleEl).not.toBeNull();
+    expect(articleEl?.textContent).toContain('Ignatius');
   });
 
   it('displays attribution line with "Public domain" and "Philip Schaff"', () => {
-    render(<PatristicReader text={mockText} />);
+    render(
+      <PatristicReader text={mockText} authorSlug="ignatius-of-antioch" prevText={null} nextText={null} />
+    );
     expect(screen.getByText(/Public domain/)).toBeInTheDocument();
     expect(screen.getByText(/Philip Schaff/)).toBeInTheDocument();
+  });
+
+  it('renders breadcrumb with "Church Fathers" link', () => {
+    render(
+      <PatristicReader text={mockText} authorSlug="ignatius-of-antioch" prevText={null} nextText={null} />
+    );
+    const churchFathersLink = screen.getByRole('link', { name: /Church Fathers/ });
+    expect(churchFathersLink).toBeInTheDocument();
+    expect(churchFathersLink).toHaveAttribute('href', '/fathers');
+  });
+
+  it('does not show prev/next navigation when both are null', () => {
+    render(
+      <PatristicReader text={mockText} authorSlug="ignatius-of-antioch" prevText={null} nextText={null} />
+    );
+    expect(screen.queryByText(/Previous/)).not.toBeInTheDocument();
+    expect(screen.queryByText(/Next/)).not.toBeInTheDocument();
+  });
+
+  it('shows prev navigation when prevText is provided', () => {
+    render(
+      <PatristicReader text={mockText} authorSlug="ignatius-of-antioch" prevText={mockPrevText} nextText={null} />
+    );
+    expect(screen.getByText(/Previous/)).toBeInTheDocument();
+  });
+
+  it('shows next navigation when nextText is provided', () => {
+    render(
+      <PatristicReader text={mockText} authorSlug="ignatius-of-antioch" prevText={null} nextText={mockNextText} />
+    );
+    expect(screen.getByText(/Next/)).toBeInTheDocument();
+  });
+
+  it('prev link points to correct textId URL', () => {
+    render(
+      <PatristicReader text={mockText} authorSlug="ignatius-of-antioch" prevText={mockPrevText} nextText={null} />
+    );
+    const prevLink = screen.getByText(/Previous/).closest('a');
+    expect(prevLink).toHaveAttribute('href', '/fathers/ignatius-of-antioch/ignatius-romans');
+  });
+
+  it('next link points to correct textId URL', () => {
+    render(
+      <PatristicReader text={mockText} authorSlug="ignatius-of-antioch" prevText={null} nextText={mockNextText} />
+    );
+    const nextLink = screen.getByText(/Next/).closest('a');
+    expect(nextLink).toHaveAttribute('href', '/fathers/ignatius-of-antioch/ignatius-trallians');
   });
 });
