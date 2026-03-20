@@ -3,13 +3,13 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: unknown
-stopped_at: Completed 07-discovery-messaging 07-01-PLAN.md
-last_updated: "2026-03-20T14:24:04.828Z"
+stopped_at: Completed 07-discovery-messaging 07-02-PLAN.md
+last_updated: "2026-03-20T14:39:08.674Z"
 progress:
   total_phases: 7
   completed_phases: 6
   total_plans: 29
-  completed_plans: 27
+  completed_plans: 28
   percent: 96
 ---
 
@@ -100,6 +100,7 @@ Plan: 1 of 3
 | Phase 06 P02 | 353s | 2 tasks | 10 files |
 | Phase 06-patristic-library-study-guides P03 | 25min | 2 tasks | 7 files |
 | Phase 07-discovery-messaging P01 | 651 | 2 tasks | 12 files |
+| Phase 07-discovery-messaging P02 | 672s | 2 tasks | 16 files |
 
 ## Accumulated Context
 
@@ -169,6 +170,8 @@ Recent decisions affecting current work:
 - [Phase 07-discovery-messaging]: globalSearch limitPerType defaults to 50 so Server Component pre-fetches enough for All tab and individual tabs with Load More
 - [Phase 07-discovery-messaging]: Search page has no auth guard — available to all users including guests per AUTH-05
 - [Phase 07-discovery-messaging]: searchVideos filters status==published to prevent unreviewed content appearing in search results
+- [Phase 07-discovery-messaging]: Conversations unread count filtered client-side in MessagesIcon (not via Firestore dynamic map path query) — dynamic map field paths lack standard indexes
+- [Phase 07-discovery-messaging]: markConversationRead called on conversationId mount in MessageThread — keeps read tracking automatic
 
 ### Pending Todos
 
@@ -182,7 +185,7 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-03-20T14:23:46.754Z
-Stopped at: Completed 07-discovery-messaging 07-01-PLAN.md
+Last session: 2026-03-20T14:39:08.667Z
+Stopped at: Completed 07-discovery-messaging 07-02-PLAN.md
 Resume command: `/gsd:execute-phase 3`
 Resume file: None

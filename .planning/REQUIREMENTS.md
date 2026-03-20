@@ -63,9 +63,9 @@
 
 ### Direct Messaging
 
-- [ ] **MSG-01**: User can send private messages to other users
-- [ ] **MSG-02**: User can view conversation list with message previews
-- [ ] **MSG-03**: Messages display in chronological order within conversation
+- [x] **MSG-01**: User can send private messages to other users
+- [x] **MSG-02**: User can view conversation list with message previews
+- [x] **MSG-03**: Messages display in chronological order within conversation
 
 ### Liturgical Calendar
 
@@ -261,9 +261,9 @@
 | STD-03 | Phase 6 | Complete |
 | SRCH-01 | Phase 7 | Complete |
 | SRCH-02 | Phase 7 | Complete |
-| MSG-01 | Phase 7 | Pending |
-| MSG-02 | Phase 7 | Pending |
-| MSG-03 | Phase 7 | Pending |
+| MSG-01 | Phase 7 | Complete |
+| MSG-02 | Phase 7 | Complete |
+| MSG-03 | Phase 7 | Complete |
 
 **Coverage:**
 - v1 requirements: 82 total
