@@ -45,7 +45,15 @@ Exceptions:
 - Navbar icon touch targets: 44px (w-11 h-11) — established pattern from NotificationBell.tsx, must be maintained for search icon, envelope icon, and send button
 - Conversation list sidebar: 280px min-width, 320px max-width — fixed, not 8-point, matches CONTEXT.md locked decision
 - Message input area: minimum 44px height for touch accessibility
-- `pt-[86px]` on /search main — named layout token `search-page-top`: 70px navbar height + 16px (md) gap. Not an arbitrary value; documents as `/* navbar-height(70) + md(16) = 86 */`.
+
+### Layout Fixtures
+
+These values are derived from the existing Navbar height (70px, established in Phase 1) and are not spacing tokens — they are layout offsets. The spacing scale itself (4, 8, 16, 24, 32, 48, 64) remains on-grid.
+
+| Fixture | Value | Derivation |
+|---------|-------|------------|
+| `pt-[86px]` on `/search` main element | 86px | navbar-height(70px) + md(16px) — clears the fixed navbar with one grid-unit breathing room |
+| `pt-[70px]` on `/messages` and `/messages/[conversationId]` flex containers | 70px | navbar-height(70px) — flush clear of fixed navbar, no additional gap |
 
 Source: NotificationBell.tsx line 146 (w-11 h-11 pattern), CONTEXT.md §Specific Ideas
 
@@ -196,8 +204,10 @@ Source: CONTEXT.md §Search Result Presentation (empty/no-results copy locked), 
 
 ### /search Page
 
+Primary focal point: search input field (centered at top of content area, full max-w-3xl width, renders above tab bar and results).
+
 ```
-<main class="max-w-3xl mx-auto px-4 pt-[86px]">  ← navbar-height(70px) + md(16px) = 86px
+<main class="max-w-3xl mx-auto px-4 pt-[86px]">  ← layout fixture: navbar-height(70px) + md(16px) = 86px
   <section>                                         ← search input (full width)
   <nav>                                             ← tabs (All | Videos | Posts | People | Scripture | Fathers)
   <div>                                             ← results (sections on All, list on type tabs)
@@ -210,8 +220,10 @@ Source: CONTEXT.md §Search Result Presentation (empty/no-results copy locked), 
 
 ### /messages Page (Desktop)
 
+Primary focal point: message thread panel (right), which occupies flex-1 of the viewport width after the sidebar.
+
 ```
-<div class="flex h-screen pt-[70px]">
+<div class="flex h-screen pt-[70px]">              ← layout fixture: navbar-height(70px)
   <aside class="w-[300px] min-w-[280px] max-w-[320px] bg-navy-mid border-r border-gold/[0.15] overflow-y-auto">
     ← ConversationList
   </aside>
@@ -224,7 +236,7 @@ Source: CONTEXT.md §Search Result Presentation (empty/no-results copy locked), 
 ### /messages/[conversationId] Page (Mobile — full page thread)
 
 ```
-<div class="flex flex-col h-screen pt-[70px]">
+<div class="flex flex-col h-screen pt-[70px]">     ← layout fixture: navbar-height(70px)
   <header class="h-14 bg-navy-mid border-b border-gold/[0.15] px-4 flex items-center gap-3">
     ← Back button (ChevronLeft, aria-label="Back to conversations") + avatar + display name
   </header>
