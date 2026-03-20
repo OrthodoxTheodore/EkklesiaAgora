@@ -123,8 +123,8 @@
 
 ### Search
 
-- [ ] **SRCH-01**: Global search across videos, posts, people, and Scripture
-- [ ] **SRCH-02**: Search results grouped by type with tabs
+- [x] **SRCH-01**: Global search across videos, posts, people, and Scripture
+- [x] **SRCH-02**: Search results grouped by type with tabs
 
 ### Design & Platform
 
@@ -259,8 +259,8 @@
 | STD-01 | Phase 6 | Complete |
 | STD-02 | Phase 6 | Complete |
 | STD-03 | Phase 6 | Complete |
-| SRCH-01 | Phase 7 | Pending |
-| SRCH-02 | Phase 7 | Pending |
+| SRCH-01 | Phase 7 | Complete |
+| SRCH-02 | Phase 7 | Complete |
 | MSG-01 | Phase 7 | Pending |
 | MSG-02 | Phase 7 | Pending |
 | MSG-03 | Phase 7 | Pending |
