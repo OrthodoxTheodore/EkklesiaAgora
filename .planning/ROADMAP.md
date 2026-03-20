@@ -131,16 +131,17 @@ Plans:
 
 ### Phase 7: Discovery + Messaging
 **Goal**: Users can find any content or person across the platform with a single search, and communicate privately with other members
-**Depends on**: Phase 3
+**Depends on**: Phase 6
 **Requirements**: SRCH-01, SRCH-02, MSG-01, MSG-02, MSG-03
 **Success Criteria** (what must be TRUE):
-  1. A user can enter a search query and find results across videos, posts, people, and Scripture in grouped tabs
+  1. A user can enter a search query and find results across videos, posts, people, Scripture, and Church Fathers in grouped tabs
   2. A user can send a private message to another user, view their conversation list with message previews, and read messages in chronological order
-**Plans**: TBD
+**Plans:** 3 plans
 
 Plans:
-- [ ] 07-01: Global search (Firestore prefix queries across videos, posts, people, Scripture) with tabbed results
-- [ ] 07-02: Direct messaging (conversation list, message thread, chronological order, Firestore real-time listeners)
+- [ ] 07-01-PLAN.md — Global search aggregation layer (searchVideos, searchPosts helpers + globalSearch), /search page with tabbed results, SearchBar in navbar
+- [ ] 07-02-PLAN.md — Direct messaging types, Firestore rules, Server Actions, split-pane /messages page, real-time threads, unread badge, seen receipts, online presence
+- [ ] 07-03-PLAN.md — Human verification checkpoint: end-to-end search and messaging testing
 
 ## Progress
 
@@ -155,5 +156,5 @@ Note: Phase 4 depends only on Phase 1 (architecturally independent of social/vid
 | 3. Video Hub + Moderation | 6/6 | Complete | 2026-03-19 |
 | 4. Orthodox Identity | 3/3 | Complete   | 2026-03-19 |
 | 5. Scripture Library | 2/2 | Complete   | 2026-03-19 |
-| 6. Patristic Library + Study Guides | 0/3 | Planning complete | - |
-| 7. Discovery + Messaging | 0/2 | Not started | - |
+| 6. Patristic Library + Study Guides | 3/3 | Complete | 2026-03-20 |
+| 7. Discovery + Messaging | 0/3 | Planning complete | - |
