@@ -5,6 +5,7 @@ import { getAdminFirestore } from '@/lib/firebase/admin';
 import { getPost } from '@/lib/firestore/posts';
 import PostCard from '@/components/agora/PostCard';
 import PostDetailClient from '@/components/agora/PostDetailClient';
+import Link from 'next/link';
 
 const authConfig = {
   apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY!,
@@ -58,12 +59,12 @@ export default async function PostDetailPage({ params }: PostDetailPageProps) {
   return (
     <div className="max-w-2xl mx-auto px-4 py-8">
       {/* Back link */}
-      <a
+      <Link
         href="/agora"
         className="font-cinzel text-xs uppercase tracking-widest text-text-mid hover:text-gold transition-colors mb-6 block"
       >
         &larr; Back to Agora
-      </a>
+      </Link>
 
       {/* Full post */}
       <PostCard

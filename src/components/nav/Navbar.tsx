@@ -7,6 +7,7 @@ import { useRouter } from 'next/navigation';
 import { useAuth } from '@/components/auth/AuthProvider';
 import { MobileMenu } from './MobileMenu';
 import { NotificationBell } from './NotificationBell';
+import { SearchBar } from '@/components/search/SearchBar';
 import { getAuth, signOut } from 'firebase/auth';
 import firebaseApp from '@/lib/firebase/client';
 
@@ -139,6 +140,9 @@ export function Navbar() {
 
           {/* Right: Auth section (desktop) + Hamburger (mobile) */}
           <div className="flex items-center gap-3">
+            {/* Search bar: desktop input + mobile icon */}
+            <SearchBar />
+
             {/* Desktop auth controls */}
             <div className="hidden md:flex items-center gap-2">
               {user ? (

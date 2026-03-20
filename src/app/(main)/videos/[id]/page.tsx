@@ -147,12 +147,12 @@ export default async function VideoDetailPage({ params }: VideoDetailPageProps) 
   return (
     <div className="max-w-7xl mx-auto px-4 py-8">
       {/* Back link */}
-      <a
+      <Link
         href="/videos"
         className="font-cinzel text-xs uppercase tracking-widest text-text-mid hover:text-gold transition-colors mb-6 block"
       >
         &larr; Back to Videos
-      </a>
+      </Link>
 
       {/* Two-column layout */}
       <div className="lg:grid lg:grid-cols-3 gap-6">
