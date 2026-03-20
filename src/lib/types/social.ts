@@ -19,6 +19,7 @@ export interface UserProfile {
   city: string | null;
   stateRegion: string | null;
   displayNameKeywords: string[];
+  lastSeen: import('firebase/firestore').Timestamp | null;
 }
 
 export interface Post {
