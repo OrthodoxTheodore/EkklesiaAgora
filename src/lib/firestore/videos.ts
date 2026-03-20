@@ -24,3 +24,15 @@ export async function isChannelHandleAvailable(handle: string): Promise<boolean>
   const snap = await db.collection('channels').where('handle', '==', handle).limit(1).get();
   return snap.empty;
 }
+
+export async function searchVideos(keyword: string, maxResults = 10): Promise<Video[]> {
+  const db = getAdminFirestore();
+  const term = keyword.toLowerCase().trim();
+  if (!term) return [];
+  const snap = await db.collection('videos')
+    .where('status', '==', 'published')
+    .where('searchKeywords', 'array-contains', term)
+    .limit(maxResults)
+    .get();
+  return snap.docs.map(d => ({ videoId: d.id, ...d.data() }) as Video);
+}
