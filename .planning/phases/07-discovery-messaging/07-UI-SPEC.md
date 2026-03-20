@@ -45,6 +45,7 @@ Exceptions:
 - Navbar icon touch targets: 44px (w-11 h-11) — established pattern from NotificationBell.tsx, must be maintained for search icon, envelope icon, and send button
 - Conversation list sidebar: 280px min-width, 320px max-width — fixed, not 8-point, matches CONTEXT.md locked decision
 - Message input area: minimum 44px height for touch accessibility
+- `pt-[86px]` on /search main — named layout token `search-page-top`: 70px navbar height + 16px (md) gap. Not an arbitrary value; documents as `/* navbar-height(70) + md(16) = 86 */`.
 
 Source: NotificationBell.tsx line 146 (w-11 h-11 pattern), CONTEXT.md §Specific Ideas
 
@@ -56,10 +57,12 @@ Source: NotificationBell.tsx line 146 (w-11 h-11 pattern), CONTEXT.md §Specific
 |------|------|--------|-------------|------|-------|
 | Body | 16px (text-base) | 400 regular | 1.5 | EB Garamond (font-garamond) | Message text, search result context line, conversation preview |
 | Label | 14px (text-sm) | 400 regular | 1.4 | EB Garamond (font-garamond) | Search result title, message sender name, last-message preview |
-| Heading | 20px (text-xl) | 600 semibold | 1.2 | Cinzel (font-cinzel) | Search page section headers (Videos, Posts, People, Scripture, Church Fathers) |
+| Heading | 20px (text-xl) | 700 bold | 1.2 | Cinzel (font-cinzel) | Search page section headers (Videos, Posts, People, Scripture, Church Fathers), conversation display name |
 | Display | 12px (text-xs) | 700 bold | 1 | Cinzel (font-cinzel) | Type badges (VIDEO / POST / PERSON / SCRIPTURE / FATHERS), navbar labels, timestamps |
 
-Weights in use: 400 (regular) and 600/700 (semibold/bold) — matches established project pattern.
+Weights in use: 400 (regular) and 700 (bold) — exactly 2 weights.
+
+Migration note: All `font-semibold` (600) instances replaced with `font-bold` (700). This matches the `font-bold` already used in NotificationBell.tsx badges, Navbar.tsx labels, and SearchResultCard badge text. No visual divergence from established project pattern.
 
 Source: globals.css body rule (font-garamond), NotificationBell.tsx line 150 (font-cinzel text-xs font-bold for badge), Navbar.tsx (font-cinzel text-xs uppercase tracking-widest for nav labels)
 
@@ -111,7 +114,7 @@ New components required for this phase:
 | Component | File | Description |
 |-----------|------|-------------|
 | `MessagesIcon` | `src/components/nav/MessagesIcon.tsx` | Envelope icon (Mail from lucide-react) with unread badge. Structural mirror of NotificationBell.tsx. w-11 h-11 touch target. Unread badge: bg-gold text-navy font-cinzel text-xs font-bold, positioned absolute top-1.5 right-1.5. Shows count of conversations with unread messages (not total messages). onSnapshot listener, client-side filter for unread. |
-| `ConversationList` | `src/components/messages/ConversationList.tsx` | Left sidebar. Width 280px min / 320px max. Each row: 44px min-height, avatar (w-10 h-10 rounded-full border border-gold/[0.15]), display name (text-text-light text-sm font-semibold), last message preview truncated 1 line (text-text-mid text-xs), timestamp (text-text-mid text-xs font-cinzel), unread dot (w-2 h-2 bg-gold rounded-full). Active row: bg-navy-light. |
+| `ConversationList` | `src/components/messages/ConversationList.tsx` | Left sidebar. Width 280px min / 320px max. Each row: 44px min-height, avatar (w-10 h-10 rounded-full border border-gold/[0.15]), display name (text-text-light text-sm font-bold), last message preview truncated 1 line (text-text-mid text-xs), timestamp (text-text-mid text-xs font-cinzel), unread dot (w-2 h-2 bg-gold rounded-full). Active row: bg-navy-light. |
 | `MessageThread` | `src/components/messages/MessageThread.tsx` | Right panel. Messages chronological asc, newest at bottom. onSnapshot listener. Each sent message aligned right (bg-gold/20 text-text-light), received message aligned left (bg-navy-mid text-text-light). Sent message shows "Seen" label (text-text-mid text-xs font-cinzel) below the last sent message only after recipient opens conversation. Auto-scroll to bottom on new messages (scrollRef + scrollIntoView). |
 | `MessageComposer` | `src/components/messages/MessageComposer.tsx` | Fixed bottom bar inside message thread. Text input (bg-navy-mid border border-gold/[0.15] rounded text-text-light font-garamond text-base, min-h-11, full width minus send button). Send button: w-11 h-11 text-text-mid hover:text-gold transition-colors (Send icon from lucide-react). Disabled state when input empty. |
 
@@ -180,6 +183,8 @@ New components required for this phase:
 | Online presence label | aria-label: "{name} — active recently" (screen reader only; sighted: green dot) |
 | Envelope icon aria-label (no unread) | "Messages, no unread" |
 | Envelope icon aria-label (with unread) | "Messages, {N} unread" |
+| Error — search fetch failure | "Couldn't load results. Check your connection and try again." |
+| Error — message send failure | "Message not sent — tap to retry." |
 
 Destructive actions in Phase 7: None. No delete conversation, no delete message in this phase.
 
@@ -192,7 +197,7 @@ Source: CONTEXT.md §Search Result Presentation (empty/no-results copy locked), 
 ### /search Page
 
 ```
-<main class="max-w-3xl mx-auto px-4 pt-[86px]">  ← 70px nav + 16px gap
+<main class="max-w-3xl mx-auto px-4 pt-[86px]">  ← navbar-height(70px) + md(16px) = 86px
   <section>                                         ← search input (full width)
   <nav>                                             ← tabs (All | Videos | Posts | People | Scripture | Fathers)
   <div>                                             ← results (sections on All, list on type tabs)
@@ -221,7 +226,7 @@ Source: CONTEXT.md §Search Result Presentation (empty/no-results copy locked), 
 ```
 <div class="flex flex-col h-screen pt-[70px]">
   <header class="h-14 bg-navy-mid border-b border-gold/[0.15] px-4 flex items-center gap-3">
-    ← Back button (ChevronLeft) + avatar + display name
+    ← Back button (ChevronLeft, aria-label="Back to conversations") + avatar + display name
   </header>
   <main class="flex-1 overflow-y-auto px-4 py-4">
     ← MessageThread
