@@ -3,12 +3,27 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: unknown
-stopped_at: Phase 6 UI-SPEC approved
-last_updated: "2026-03-19T14:11:07.102Z"
+stopped_at: Completed 06-patristic-library-study-guides 06-02-PLAN.md
+last_updated: "2026-03-20T02:26:41.477Z"
 progress:
   total_phases: 7
   completed_phases: 5
-  total_plans: 23
+  total_plans: 26
+  completed_plans: 25
+  percent: 96
+---
+
+---
+gsd_state_version: 1.0
+milestone: v1.0
+milestone_name: milestone
+status: unknown
+stopped_at: Phase 6 UI-SPEC approved
+last_updated: "2026-03-20T01:34:12.384Z"
+progress:
+  [██████████] 96%
+  completed_phases: 5
+  total_plans: 26
   completed_plans: 23
 ---
 
@@ -33,12 +48,12 @@ progress:
 See: .planning/PROJECT.md (updated 2026-03-16)
 
 **Core value:** Providing a trustworthy, canonically-grounded Eastern Orthodox Christian platform where users can find authentic content and community.
-**Current focus:** Phase 05 — scripture-library
+**Current focus:** Phase 06 — patristic-library-study-guides
 
 ## Current Position
 
-Phase: 05 (scripture-library) — EXECUTING
-Plan: 1 of 2
+Phase: 06 (patristic-library-study-guides) — EXECUTING
+Plan: 1 of 3
 
 ## Performance Metrics
 
@@ -82,6 +97,7 @@ Plan: 1 of 2
 | Phase 04-orthodox-identity P03 | 10min | 3 tasks | 9 files |
 | Phase 05-scripture-library PP01 | 15min | 2 tasks | 11 files |
 | Phase 05-scripture-library P02 | 319s | 3 tasks | 13 files |
+| Phase 06 P02 | 353s | 2 tasks | 10 files |
 
 ## Accumulated Context
 
@@ -145,6 +161,8 @@ Recent decisions affecting current work:
 - [Phase 05-scripture-library]: parseReference exported from ScriptureSearch for direct unit testing
 - [Phase 05-scripture-library]: ReadingRef use-client directive removed — Link is server-compatible with no hooks in this component
 - [Phase 05-scripture-library]: ScriptureReader test mocks VerseList to include font-garamond class, satisfying LIB-03 Byzantine rendering gate assertion
+- [Phase 06]: Topic index built server-side from patristic_texts using .select() projection — avoids loading full text bodies for landing page
+- [Phase 06]: PatristicSearch uses URL-driven search (router.push to /fathers/search?q=) rather than client-side Firestore reads
 
 ### Pending Todos
 
@@ -158,7 +176,7 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-03-19T14:11:07.095Z
-Stopped at: Phase 6 UI-SPEC approved
+Last session: 2026-03-20T02:26:41.470Z
+Stopped at: Completed 06-patristic-library-study-guides 06-02-PLAN.md
 Resume command: `/gsd:execute-phase 3`
-Resume file: .planning/phases/06-patristic-library-study-guides/06-UI-SPEC.md
+Resume file: None
