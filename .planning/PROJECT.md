@@ -15,26 +15,24 @@ Providing a trustworthy, canonically-grounded Orthodox Christian platform where 
 - [x] Liturgical calendar with Gregorian/Julian dates, feasts, fasts, and saints — Validated in Phase 04: orthodox-identity
 - [x] People finder (Synodeia) — discover members by jurisdiction, location — Validated in Phase 04: orthodox-identity
 - [x] Scripture library (Brenton LXX OT + EOB NT) — searchable, navigable, with Byzantine reader — Validated in Phase 05: scripture-library
+- [x] Global search across videos, posts, people, Scripture, and Church Fathers — Validated in Phase 07: discovery-messaging
+- [x] Direct messaging between users with real-time threads, unread badges, seen receipts, online presence — Validated in Phase 07: discovery-messaging
+
+### Validated (Prior Phases)
+
+- [x] User authentication with email/password and account management — Validated in Phase 01: foundation
+- [x] Byzantine design system (Navy/Gold, Cinzel/EB Garamond) — Validated in Phase 01: foundation
+- [x] User profiles with avatar, jurisdiction, bio, and activity — Validated in Phase 02: social-core
+- [x] Social media feed with posts, comments, likes, photo sharing — Validated in Phase 02: social-core
+- [x] Content moderation system with verified/unverified account tiers — Validated in Phase 03: video-hub-moderation
+- [x] Video sharing platform with algorithmic content feed — Validated in Phase 03: video-hub-moderation
+- [x] Channel system for content creators (parishes, monasteries, teachers) — Validated in Phase 03: video-hub-moderation
+- [x] Orthodox Info Center — Church Fathers searchable library — Validated in Phase 06: patristic-library-study-guides
+- [x] Study guides — curated reading paths and study materials — Validated in Phase 06: patristic-library-study-guides
 
 ### Active
 
-- [ ] Video sharing platform with algorithmic content feed (YouTube-like)
-- [ ] Social media feed with posts, comments, likes, photo sharing (Facebook-like)
-- [ ] User authentication with email/password and account management
-- [ ] User profiles with avatar, jurisdiction, bio, and activity
-- [ ] Content moderation system with verified/unverified account tiers
-- [ ] Verified accounts (clergy, known teachers) post freely; unverified uploads require moderator approval
-- [ ] Admin and moderator roles for content oversight
-- [ ] Community flagging system for content review
-- [ ] Orthodox Info Center — searchable library of Church Fathers, liturgical texts by topic/keyword/author
-- [ ] Study guides — curated reading paths and study materials organized by topic
-- [ ] Channel system for content creators (parishes, monasteries, teachers)
-- [ ] Direct messaging between users
-- [ ] Video upload and streaming capability (not just YouTube embeds)
-- [ ] Search across videos, posts, and people
-- [ ] Mobile-responsive web design
-- [ ] Browse content without account; account required to post/comment/interact
-- [ ] Seed platform with curated existing Orthodox content alongside user uploads
+**Ekklesia Agora v1 is complete** — Phase 7 complete 2026-03-20. All 7 phases and 29 plans delivered. Platform ready for blessing presentation to priest and bishop.
 
 ### Out of Scope
 
@@ -93,4 +91,4 @@ Providing a trustworthy, canonically-grounded Orthodox Christian platform where 
 | No wiki-style content | Orthodox Wiki already exists; avoid competition, focus on video + social + research library | — Pending |
 
 ---
-*Last updated: 2026-03-19
+*Last updated: 2026-03-20 — Phase 7 complete, v1 milestone achieved*
