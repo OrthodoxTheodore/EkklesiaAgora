@@ -1,3 +1,5 @@
+export const dynamic = 'force-dynamic';
+
 import { getAdminFirestore } from '@/lib/firebase/admin';
 import VideoCard, { VideoCardSkeleton } from '@/components/video/VideoCard';
 import VideoBrowseClient from '@/components/video/VideoBrowseClient';

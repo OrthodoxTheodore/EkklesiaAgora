@@ -1,3 +1,5 @@
+export const dynamic = 'force-dynamic';
+
 import { getStudyGuide } from '@/lib/firestore/patristic';
 import { getAdminFirestore } from '@/lib/firebase/admin';
 import { StudyGuideViewer } from '@/components/fathers/StudyGuideViewer';

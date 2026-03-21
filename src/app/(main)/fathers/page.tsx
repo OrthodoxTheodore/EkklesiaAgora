@@ -1,3 +1,5 @@
+export const dynamic = 'force-dynamic';
+
 import Link from 'next/link';
 import { getPatristicAuthors } from '@/lib/firestore/patristic';
 import { getAdminFirestore } from '@/lib/firebase/admin';

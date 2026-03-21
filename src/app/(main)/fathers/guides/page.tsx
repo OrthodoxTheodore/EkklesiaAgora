@@ -1,3 +1,5 @@
+export const dynamic = 'force-dynamic';
+
 import { getStudyGuides } from '@/lib/firestore/patristic';
 import { StudyGuideCard } from '@/components/fathers/StudyGuideCard';
 
