@@ -6,6 +6,7 @@ import { getAdminFirestore } from '@/lib/firebase/admin';
 // SubscribeButton wraps subscribeChannel / unsubscribeChannel Server Actions
 import SubscribeButton from './SubscribeButton';
 import type { Channel, Video } from '@/lib/types/video';
+import VideoCard from '@/components/video/VideoCard';
 
 const authConfig = {
   apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY!,
@@ -16,7 +17,7 @@ const authConfig = {
   ],
   serviceAccount: {
     projectId: process.env.FIREBASE_PROJECT_ID!,
-    privateKey: process.env.FIREBASE_PRIVATE_KEY!.replace(/\\n/g, '\n'),
+    privateKey: Buffer.from(process.env.FIREBASE_PRIVATE_KEY!, 'base64').toString('utf-8'),
     clientEmail: process.env.FIREBASE_CLIENT_EMAIL!,
   },
 };
@@ -165,14 +166,7 @@ export default async function ChannelPage({ params }: ChannelPageProps) {
         ) : (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 pb-12">
             {videos.map((video) => (
-              // Placeholder for VideoCard — will be replaced in plan 03-04
-              <div
-                key={video.videoId}
-                className="bg-navy-mid border border-gold/[0.15] rounded-[6px] p-4"
-              >
-                <p className="font-cinzel text-sm text-text-light truncate">{video.title}</p>
-                <p className="font-garamond text-xs text-text-mid mt-1">{video.category}</p>
-              </div>
+              <VideoCard key={video.videoId} video={video} />
             ))}
           </div>
         )}

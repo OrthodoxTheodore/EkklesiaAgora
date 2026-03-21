@@ -11,7 +11,7 @@ jest.mock('firebase-admin/app', () => ({
 // Firestore mock — chainable query builder
 const mockGet = jest.fn();
 const mockLimit = jest.fn(() => ({ get: mockGet }));
-const mockOrderBy = jest.fn(() => ({ get: mockGet, limit: mockLimit }));
+const mockOrderBy = jest.fn(() => ({ get: mockGet, limit: mockLimit, orderBy: jest.fn() }));
 const mockWhere = jest.fn();
 
 // where(...).where(...).orderBy(...) or where(...).limit(...)
@@ -97,7 +97,7 @@ describe('getChapter', () => {
     mockGet.mockResolvedValue({
       docs: mockVerses.map(v => ({ data: () => v })),
     });
-    mockOrderBy.mockReturnValue({ get: mockGet });
+    mockOrderBy.mockReturnValue({ get: mockGet, limit: mockLimit, orderBy: mockOrderBy });
 
     const result = await getChapter('brenton', 'genesis', 1);
     expect(result).toHaveLength(2);
@@ -169,7 +169,7 @@ describe('getBooks', () => {
     mockGet.mockResolvedValue({
       docs: mockBooks.map(b => ({ data: () => b })),
     });
-    mockOrderBy.mockReturnValue({ get: mockGet });
+    mockOrderBy.mockReturnValue({ get: mockGet, limit: mockLimit, orderBy: mockOrderBy });
 
     const result = await getBooks('brenton');
     expect(result).toHaveLength(2);

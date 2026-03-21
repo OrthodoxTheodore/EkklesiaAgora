@@ -13,7 +13,7 @@ function getAdminApp(): App {
       credential: cert({
         projectId: process.env.FIREBASE_PROJECT_ID!,
         // Replace escaped newlines — Firebase private key has literal \n in .env.local
-        privateKey: process.env.FIREBASE_PRIVATE_KEY!.replace(/\\n/g, '\n'),
+        privateKey: Buffer.from(process.env.FIREBASE_PRIVATE_KEY!, 'base64').toString('utf-8'),
         clientEmail: process.env.FIREBASE_CLIENT_EMAIL!,
       }),
     });
