@@ -24,6 +24,7 @@ const authConfig = {
 };
 
 export default async function ProfileEditPage() {
+  try {
   const tokens = await getTokens(await cookies(), authConfig);
 
   if (!tokens) {
@@ -85,4 +86,12 @@ export default async function ProfileEditPage() {
       </Card>
     </div>
   );
+  } catch (error) {
+    return (
+      <div style={{ padding: '2rem', color: 'red', fontFamily: 'monospace' }}>
+        <h1>Profile Page Error</h1>
+        <pre>{String(error)}</pre>
+      </div>
+    );
+  }
 }
