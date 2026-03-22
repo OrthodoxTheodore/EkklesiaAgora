@@ -10,8 +10,7 @@ let adminApp: App;
 function parsePrivateKey(raw: string): string {
   // If it already looks like a PEM key, just fix escaped newlines
   if (raw.includes('-----BEGIN')) {
-    return raw.replace(/\\n/g, '
-');
+    return raw.replace(/\\n/g, '\n');
   }
   // Otherwise assume base64-encoded
   return Buffer.from(raw, 'base64').toString('utf-8');
