@@ -239,6 +239,20 @@
           "order": "DESCENDING"
         }
       ]
+    },
+    {
+      "collectionGroup": "scripture_books",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "translationId",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "bookIndex",
+          "order": "ASCENDING"
+        }
+      ]
     }
   ],
   "fieldOverrides": []

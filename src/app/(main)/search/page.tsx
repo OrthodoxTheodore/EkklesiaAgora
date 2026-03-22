@@ -1,3 +1,5 @@
+export const dynamic = 'force-dynamic';
+
 import { globalSearch } from '@/lib/firestore/search';
 import { SearchResultsClient } from '@/components/search/SearchResultsClient';
 

@@ -1,3 +1,5 @@
+export const dynamic = 'force-dynamic';
+
 import { getBooks } from '@/lib/firestore/scripture';
 import { TRANSLATIONS } from '@/lib/types/scripture';
 import { ScriptureSearch } from '@/components/scripture/ScriptureSearch';

@@ -1,3 +1,5 @@
+export const dynamic = 'force-dynamic';
+
 import { searchPatristicTexts } from '@/lib/firestore/patristic';
 import { PatristicSearch } from '@/components/fathers/PatristicSearch';
 

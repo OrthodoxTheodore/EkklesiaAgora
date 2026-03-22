@@ -1,3 +1,5 @@
+export const dynamic = 'force-dynamic';
+
 import { getAuthor, getAuthorTexts } from '@/lib/firestore/patristic';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';

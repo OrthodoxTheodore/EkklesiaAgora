@@ -1,3 +1,5 @@
+export const dynamic = 'force-dynamic';
+
 import { getPatristicText, getAuthorTexts } from '@/lib/firestore/patristic';
 import { PatristicReader } from '@/components/fathers/PatristicReader';
 import { notFound } from 'next/navigation';
