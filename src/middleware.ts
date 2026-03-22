@@ -8,7 +8,6 @@ const AUTH_PATHS = ['/login', '/register', '/reset-password'];
 
 export async function middleware(request: NextRequest) {
   return authMiddleware(request, {
-    debug: true,
     loginPath: '/api/login',
     logoutPath: '/api/logout',
     apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY!,
@@ -56,5 +55,5 @@ export async function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ['/((?!_next|api/debug-auth|.*\\..*).*)', '/'],
+  matcher: ['/((?!_next|.*\\..*).*)', '/'],
 };
