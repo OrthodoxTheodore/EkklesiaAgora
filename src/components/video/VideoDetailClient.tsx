@@ -204,7 +204,7 @@ export default function VideoDetailClient({
   videoId,
   initialLiked,
   initialLikeCount,
-  commentCount: initialCommentCount,
+  commentCount: _initialCommentCount,
   currentUserUid,
   currentUserRoleLevel,
   initialComments,

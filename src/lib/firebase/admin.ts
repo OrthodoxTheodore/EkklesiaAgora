@@ -7,13 +7,22 @@ import { getFirestore } from 'firebase-admin/firestore';
 
 let adminApp: App;
 
+function parsePrivateKey(raw: string): string {
+  // If it already looks like a PEM key, just fix escaped newlines
+  if (raw.includes('-----BEGIN')) {
+    return raw.replace(/\\n/g, '
+');
+  }
+  // Otherwise assume base64-encoded
+  return Buffer.from(raw, 'base64').toString('utf-8');
+}
+
 function getAdminApp(): App {
   if (getApps().length === 0) {
     adminApp = initializeApp({
       credential: cert({
         projectId: process.env.FIREBASE_PROJECT_ID!,
-        // Replace escaped newlines — Firebase private key has literal \n in .env.local
-        privateKey: Buffer.from(process.env.FIREBASE_PRIVATE_KEY!, 'base64').toString('utf-8'),
+        privateKey: parsePrivateKey(process.env.FIREBASE_PRIVATE_KEY!),
         clientEmail: process.env.FIREBASE_CLIENT_EMAIL!,
       }),
     });
