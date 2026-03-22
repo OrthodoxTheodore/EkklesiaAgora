@@ -26,6 +26,7 @@ function getAuthConfig() {
 }
 
 export default async function ProfileEditPage() {
+  try {
   const tokens = await getTokens(await cookies(), getAuthConfig());
 
   if (!tokens) {
@@ -87,4 +88,16 @@ export default async function ProfileEditPage() {
       </Card>
     </div>
   );
+  } catch (error: unknown) {
+    const msg = error instanceof Error ? error.message : String(error);
+    const stack = error instanceof Error ? error.stack : '';
+    return (
+      <div style={{ padding: '2rem', color: '#ff6b6b', background: '#1a1a2e', fontFamily: 'monospace', whiteSpace: 'pre-wrap' }}>
+        <h1 style={{ color: '#ffd700' }}>Profile Page Error</h1>
+        <p><strong>Message:</strong> {msg}</p>
+        <p><strong>Stack:</strong></p>
+        <pre style={{ fontSize: '12px', overflow: 'auto' }}>{stack}</pre>
+      </div>
+    );
+  }
 }
