@@ -35,9 +35,8 @@ export default function LoginPage() {
       // 2. Get ID token and create session cookie
       const idToken = await user.getIdToken();
       await fetch('/api/login', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ idToken }),
+        method: 'GET',
+        headers: { Authorization: `Bearer ${idToken}` },
       });
 
       // 3. Navigate to dashboard
