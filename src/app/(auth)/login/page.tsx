@@ -34,12 +34,19 @@ export default function LoginPage() {
 
       // 2. Get ID token and create session cookie
       const idToken = await user.getIdToken();
-      await fetch('/api/login', {
-        method: 'GET',
+      const res = await fetch('/api/login', {
+        method: 'POST',
         headers: { Authorization: `Bearer ${idToken}` },
       });
 
+      if (!res.ok) {
+        const body = await res.json().catch(() => ({}));
+        console.error('Login cookie error:', res.status, body);
+        throw new Error('Failed to set session cookie');
+      }
+
       // 3. Navigate to dashboard
+      router.refresh();
       router.push('/dashboard');
     } catch (err: unknown) {
       const firebaseError = err as { code?: string };

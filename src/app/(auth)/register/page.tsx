@@ -36,7 +36,7 @@ export default function RegisterPage() {
       // 2. Create initial session cookie (roleLevel not yet set)
       const idToken = await user.getIdToken();
       await fetch('/api/login', {
-        method: 'GET',
+        method: 'POST',
         headers: { Authorization: `Bearer ${idToken}` },
       });
 
@@ -48,7 +48,7 @@ export default function RegisterPage() {
 
       // 5. Update session cookie with refreshed token containing roleLevel
       await fetch('/api/login', {
-        method: 'GET',
+        method: 'POST',
         headers: { Authorization: `Bearer ${refreshedToken}` },
       });
 
