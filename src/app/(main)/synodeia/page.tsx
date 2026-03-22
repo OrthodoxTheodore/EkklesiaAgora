@@ -1,3 +1,5 @@
+export const dynamic = 'force-dynamic';
+
 import { cookies } from 'next/headers';
 import { getTokens } from 'next-firebase-auth-edge';
 import Link from 'next/link';
