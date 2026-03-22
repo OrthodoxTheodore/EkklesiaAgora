@@ -34,15 +34,17 @@ export default function LoginPage() {
 
       // 2. Get ID token and create session cookie
       const idToken = await user.getIdToken();
-      const res = await fetch('/api/login', {
+      const res = await fetch('/api/debug-auth', {
         method: 'POST',
         headers: { Authorization: `Bearer ${idToken}` },
       });
 
+      const debugResult = await res.json().catch(() => ({}));
+      console.log('Auth debug result:', debugResult);
+
       if (!res.ok) {
-        const body = await res.json().catch(() => ({}));
-        console.error('Login cookie error:', res.status, body);
-        throw new Error('Failed to set session cookie');
+        console.error('Login cookie error:', res.status, debugResult);
+        throw new Error(debugResult.error || 'Failed to set session cookie');
       }
 
       // 3. Navigate to dashboard

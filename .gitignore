@@ -40,3 +40,4 @@ next-env.d.ts
 
 # temp directories created during setup
 /ekklesia-temp/
+.vercel
