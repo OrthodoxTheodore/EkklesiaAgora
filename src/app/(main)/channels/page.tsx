@@ -8,7 +8,8 @@ import ChannelBrowseClient from './ChannelBrowseClient';
 import ChannelApplicationForm from '@/components/video/ChannelApplicationForm';
 import type { Channel } from '@/lib/types/video';
 
-const authConfig = {
+function getAuthConfig() {
+  return {
   apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY!,
   cookieName: 'AuthToken',
   cookieSignatureKeys: [
@@ -17,10 +18,11 @@ const authConfig = {
   ],
   serviceAccount: {
     projectId: process.env.FIREBASE_PROJECT_ID!,
-    privateKey: (process.env.FIREBASE_PRIVATE_KEY!.includes('-----BEGIN') ? process.env.FIREBASE_PRIVATE_KEY!.replace(/\\n/g, '\n') : Buffer.from(process.env.FIREBASE_PRIVATE_KEY!, 'base64').toString('utf-8')),
+    privateKey: ((process.env.FIREBASE_PRIVATE_KEY ?? '').includes('-----BEGIN') ? process.env.FIREBASE_PRIVATE_KEY!.replace(/\\n/g, '\n') : Buffer.from(process.env.FIREBASE_PRIVATE_KEY!, 'base64').toString('utf-8')),
     clientEmail: process.env.FIREBASE_CLIENT_EMAIL!,
   },
 };
+}
 
 export default async function ChannelsPage() {
   const db = getAdminFirestore();
@@ -35,7 +37,7 @@ export default async function ChannelsPage() {
   const channels = channelsSnap.docs.map((d) => d.data() as Channel);
 
   // Get current user for authenticated features
-  const tokens = await getTokens(await cookies(), authConfig);
+  const tokens = await getTokens(await cookies(), getAuthConfig());
   const uid = tokens?.decodedToken.uid ?? null;
   const roleLevel: number =
     tokens

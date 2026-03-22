@@ -10,7 +10,8 @@ import { ORTHODOX_CATEGORIES } from '@/lib/constants/categories';
 import { z } from 'zod';
 
 // Inline authConfig — same pattern as admin/actions.ts
-const authConfig = {
+function getAuthConfig() {
+  return {
   apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY!,
   cookieName: 'AuthToken',
   cookieSignatureKeys: [
@@ -19,10 +20,11 @@ const authConfig = {
   ],
   serviceAccount: {
     projectId: process.env.FIREBASE_PROJECT_ID!,
-    privateKey: (process.env.FIREBASE_PRIVATE_KEY!.includes('-----BEGIN') ? process.env.FIREBASE_PRIVATE_KEY!.replace(/\\n/g, '\n') : Buffer.from(process.env.FIREBASE_PRIVATE_KEY!, 'base64').toString('utf-8')),
+    privateKey: ((process.env.FIREBASE_PRIVATE_KEY ?? '').includes('-----BEGIN') ? process.env.FIREBASE_PRIVATE_KEY!.replace(/\\n/g, '\n') : Buffer.from(process.env.FIREBASE_PRIVATE_KEY!, 'base64').toString('utf-8')),
     clientEmail: process.env.FIREBASE_CLIENT_EMAIL!,
   },
 };
+}
 
 const createChannelSchema = z.object({
   name: z.string().min(1).max(100),
@@ -97,7 +99,7 @@ export async function approveChannel(
   channelId: string
 ): Promise<{ success: true } | { error: string }> {
   try {
-    const tokens = await getTokens(await cookies(), authConfig);
+    const tokens = await getTokens(await cookies(), getAuthConfig());
     if (!tokens) {
       return { error: 'Not authenticated.' };
     }
@@ -161,7 +163,7 @@ export async function rejectChannel(
   reason: string
 ): Promise<{ success: true } | { error: string }> {
   try {
-    const tokens = await getTokens(await cookies(), authConfig);
+    const tokens = await getTokens(await cookies(), getAuthConfig());
     if (!tokens) {
       return { error: 'Not authenticated.' };
     }

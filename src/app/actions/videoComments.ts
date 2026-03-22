@@ -10,7 +10,8 @@ import { getProfileByUid } from '@/lib/firestore/profiles';
 import { z } from 'zod';
 
 // Inline authConfig — same pattern as admin/actions.ts
-const authConfig = {
+function getAuthConfig() {
+  return {
   apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY!,
   cookieName: 'AuthToken',
   cookieSignatureKeys: [
@@ -19,10 +20,11 @@ const authConfig = {
   ],
   serviceAccount: {
     projectId: process.env.FIREBASE_PROJECT_ID!,
-    privateKey: (process.env.FIREBASE_PRIVATE_KEY!.includes('-----BEGIN') ? process.env.FIREBASE_PRIVATE_KEY!.replace(/\\n/g, '\n') : Buffer.from(process.env.FIREBASE_PRIVATE_KEY!, 'base64').toString('utf-8')),
+    privateKey: ((process.env.FIREBASE_PRIVATE_KEY ?? '').includes('-----BEGIN') ? process.env.FIREBASE_PRIVATE_KEY!.replace(/\\n/g, '\n') : Buffer.from(process.env.FIREBASE_PRIVATE_KEY!, 'base64').toString('utf-8')),
     clientEmail: process.env.FIREBASE_CLIENT_EMAIL!,
   },
 };
+}
 
 const commentTextSchema = z.string().min(1).max(2000);
 
@@ -114,7 +116,7 @@ export async function deleteVideoComment(
 
     // Verify uid is author OR roleLevel >= 2
     if (commentData.authorUid !== uid) {
-      const tokens = await getTokens(await cookies(), authConfig);
+      const tokens = await getTokens(await cookies(), getAuthConfig());
       const callerRoleLevel: number =
         (tokens?.decodedToken as { roleLevel?: number } | undefined)?.roleLevel ?? 0;
 

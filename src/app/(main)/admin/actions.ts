@@ -6,7 +6,8 @@ import { ROLE_LEVELS } from '@/lib/firebase/roles';
 import type { RoleLevel } from '@/lib/firebase/roles';
 import { setUserRole, searchUsersByEmail } from '@/lib/auth/claims';
 
-const authConfig = {
+function getAuthConfig() {
+  return {
   apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY!,
   cookieName: 'AuthToken',
   cookieSignatureKeys: [
@@ -15,10 +16,11 @@ const authConfig = {
   ],
   serviceAccount: {
     projectId: process.env.FIREBASE_PROJECT_ID!,
-    privateKey: (process.env.FIREBASE_PRIVATE_KEY!.includes('-----BEGIN') ? process.env.FIREBASE_PRIVATE_KEY!.replace(/\\n/g, '\n') : Buffer.from(process.env.FIREBASE_PRIVATE_KEY!, 'base64').toString('utf-8')),
+    privateKey: ((process.env.FIREBASE_PRIVATE_KEY ?? '').includes('-----BEGIN') ? process.env.FIREBASE_PRIVATE_KEY!.replace(/\\n/g, '\n') : Buffer.from(process.env.FIREBASE_PRIVATE_KEY!, 'base64').toString('utf-8')),
     clientEmail: process.env.FIREBASE_CLIENT_EMAIL!,
   },
 };
+}
 
 /**
  * Server Action: promote a user to a new role.
@@ -35,7 +37,7 @@ export async function promoteUser(formData: {
   newRole: RoleLevel;
 }): Promise<{ success: true } | { error: string }> {
   try {
-    const tokens = await getTokens(await cookies(), authConfig);
+    const tokens = await getTokens(await cookies(), getAuthConfig());
 
     if (!tokens) {
       return { error: 'Not authenticated.' };
@@ -88,7 +90,7 @@ export async function searchUsers(
   | { error: string }
 > {
   try {
-    const tokens = await getTokens(await cookies(), authConfig);
+    const tokens = await getTokens(await cookies(), getAuthConfig());
 
     if (!tokens) {
       return { error: 'Not authenticated.' };

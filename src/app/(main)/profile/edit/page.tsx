@@ -9,7 +9,8 @@ import { FieldValue } from 'firebase-admin/firestore';
 import { ProfileEditForm } from '@/components/profile/ProfileEditForm';
 import { Card } from '@/components/ui/Card';
 
-const authConfig = {
+function getAuthConfig() {
+  return {
   apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY!,
   cookieName: 'AuthToken',
   cookieSignatureKeys: [
@@ -18,14 +19,14 @@ const authConfig = {
   ],
   serviceAccount: {
     projectId: process.env.FIREBASE_PROJECT_ID!,
-    privateKey: (process.env.FIREBASE_PRIVATE_KEY!.includes('-----BEGIN') ? process.env.FIREBASE_PRIVATE_KEY!.replace(/\\n/g, '\n') : Buffer.from(process.env.FIREBASE_PRIVATE_KEY!, 'base64').toString('utf-8')),
+    privateKey: ((process.env.FIREBASE_PRIVATE_KEY ?? '').includes('-----BEGIN') ? process.env.FIREBASE_PRIVATE_KEY!.replace(/\\n/g, '\n') : Buffer.from(process.env.FIREBASE_PRIVATE_KEY!, 'base64').toString('utf-8')),
     clientEmail: process.env.FIREBASE_CLIENT_EMAIL!,
   },
 };
+}
 
 export default async function ProfileEditPage() {
-  try {
-  const tokens = await getTokens(await cookies(), authConfig);
+  const tokens = await getTokens(await cookies(), getAuthConfig());
 
   if (!tokens) {
     redirect('/login');
@@ -86,12 +87,4 @@ export default async function ProfileEditPage() {
       </Card>
     </div>
   );
-  } catch (error) {
-    return (
-      <div style={{ padding: '2rem', color: 'red', fontFamily: 'monospace' }}>
-        <h1>Profile Page Error</h1>
-        <pre>{String(error)}</pre>
-      </div>
-    );
-  }
 }

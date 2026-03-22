@@ -7,7 +7,8 @@ import { getTokens } from 'next-firebase-auth-edge';
 import { cookies } from 'next/headers';
 
 // Inline authConfig — same pattern as other action files
-const authConfig = {
+function getAuthConfig() {
+  return {
   apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY!,
   cookieName: 'AuthToken',
   cookieSignatureKeys: [
@@ -16,13 +17,14 @@ const authConfig = {
   ],
   serviceAccount: {
     projectId: process.env.FIREBASE_PROJECT_ID!,
-    privateKey: (process.env.FIREBASE_PRIVATE_KEY!.includes('-----BEGIN') ? process.env.FIREBASE_PRIVATE_KEY!.replace(/\\n/g, '\n') : Buffer.from(process.env.FIREBASE_PRIVATE_KEY!, 'base64').toString('utf-8')),
+    privateKey: ((process.env.FIREBASE_PRIVATE_KEY ?? '').includes('-----BEGIN') ? process.env.FIREBASE_PRIVATE_KEY!.replace(/\\n/g, '\n') : Buffer.from(process.env.FIREBASE_PRIVATE_KEY!, 'base64').toString('utf-8')),
     clientEmail: process.env.FIREBASE_CLIENT_EMAIL!,
   },
 };
+}
 
 export async function createOrGetConversation(otherUid: string): Promise<string> {
-  const tokens = await getTokens(await cookies(), authConfig);
+  const tokens = await getTokens(await cookies(), getAuthConfig());
   if (!tokens) throw new Error('Unauthorized');
 
   const currentUid = tokens.decodedToken.uid;
@@ -70,7 +72,7 @@ export async function createOrGetConversation(otherUid: string): Promise<string>
 }
 
 export async function sendMessage(conversationId: string, text: string): Promise<void> {
-  const tokens = await getTokens(await cookies(), authConfig);
+  const tokens = await getTokens(await cookies(), getAuthConfig());
   if (!tokens) throw new Error('Unauthorized');
 
   const currentUid = tokens.decodedToken.uid;
@@ -115,7 +117,7 @@ export async function sendMessage(conversationId: string, text: string): Promise
 }
 
 export async function markConversationRead(conversationId: string): Promise<void> {
-  const tokens = await getTokens(await cookies(), authConfig);
+  const tokens = await getTokens(await cookies(), getAuthConfig());
   if (!tokens) return;
 
   const currentUid = tokens.decodedToken.uid;
@@ -149,7 +151,7 @@ export async function markConversationRead(conversationId: string): Promise<void
 }
 
 export async function updateLastSeen(): Promise<void> {
-  const tokens = await getTokens(await cookies(), authConfig);
+  const tokens = await getTokens(await cookies(), getAuthConfig());
   if (!tokens) return; // Guest — silently skip
 
   const currentUid = tokens.decodedToken.uid;

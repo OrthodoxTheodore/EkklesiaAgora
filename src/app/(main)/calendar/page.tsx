@@ -9,7 +9,8 @@ import { CalendarDayView } from '@/components/calendar/CalendarDayView';
 import { CalendarSkeleton } from '@/components/calendar/CalendarSkeleton';
 import type { CalendarSystem } from '@/lib/types/calendar';
 
-const authConfig = {
+function getAuthConfig() {
+  return {
   apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY!,
   cookieName: 'AuthToken',
   cookieSignatureKeys: [
@@ -18,10 +19,11 @@ const authConfig = {
   ],
   serviceAccount: {
     projectId: process.env.FIREBASE_PROJECT_ID!,
-    privateKey: (process.env.FIREBASE_PRIVATE_KEY!.includes('-----BEGIN') ? process.env.FIREBASE_PRIVATE_KEY!.replace(/\\n/g, '\n') : Buffer.from(process.env.FIREBASE_PRIVATE_KEY!, 'base64').toString('utf-8')),
+    privateKey: ((process.env.FIREBASE_PRIVATE_KEY ?? '').includes('-----BEGIN') ? process.env.FIREBASE_PRIVATE_KEY!.replace(/\\n/g, '\n') : Buffer.from(process.env.FIREBASE_PRIVATE_KEY!, 'base64').toString('utf-8')),
     clientEmail: process.env.FIREBASE_CLIENT_EMAIL!,
   },
 };
+}
 
 export default async function CalendarPage({
   searchParams,
@@ -40,7 +42,7 @@ export default async function CalendarPage({
   let isLoggedIn = false;
 
   try {
-    const tokens = await getTokens(await cookies(), authConfig);
+    const tokens = await getTokens(await cookies(), getAuthConfig());
     if (tokens) {
       isLoggedIn = true;
       const profile = await getProfileByUid(tokens.decodedToken.uid);
