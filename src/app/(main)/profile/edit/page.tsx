@@ -40,13 +40,16 @@ export default async function ProfileEditPage() {
     redirect('/login');
   }
 
+  // Strip non-serializable Firestore Timestamp fields before passing to client component
+  const { createdAt: _c, updatedAt: _u, lastSeen: _l, ...serializableProfile } = profile;
+
   return (
     <div className="max-w-2xl mx-auto px-4 py-12">
       <h1 className="font-cinzel text-2xl font-bold text-gold mb-2">Edit Profile</h1>
       <p className="font-garamond text-text-mid text-base mb-8">
         Update your display name, avatar, bio, and other profile details.
       </p>
-      <ProfileEditForm profile={profile} uid={uid} />
+      <ProfileEditForm profile={serializableProfile} uid={uid} />
     </div>
   );
 }

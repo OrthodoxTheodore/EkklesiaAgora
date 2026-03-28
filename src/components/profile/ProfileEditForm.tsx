@@ -27,8 +27,10 @@ const profileFormSchema = z.object({
 
 type ProfileFormData = z.infer<typeof profileFormSchema>;
 
+type SerializableProfile = Omit<UserProfile, 'createdAt' | 'updatedAt' | 'lastSeen'>;
+
 interface ProfileEditFormProps {
-  profile: UserProfile;
+  profile: SerializableProfile;
   uid: string;
 }
 
