@@ -13,7 +13,7 @@ import { getAuth, signOut } from 'firebase/auth';
 import firebaseApp from '@/lib/firebase/client';
 
 export function Navbar() {
-  const { user, loading, roleLevel } = useAuth();
+  const { user, loading, roleLevel, handle } = useAuth();
   const isAdmin = roleLevel >= 3; // admin (3) or super admin (4)
   const isModerator = roleLevel >= 2; // moderator (2), admin (3), or super admin (4)
   const router = useRouter();
@@ -171,12 +171,21 @@ export function Navbar() {
                       <div className="px-4 py-2 border-b border-gold/10">
                         <p className="text-text-mid text-xs font-garamond truncate">{user.email}</p>
                       </div>
+                      {handle && (
+                        <Link
+                          href={`/profile/${handle}`}
+                          onClick={() => setAvatarOpen(false)}
+                          className="block px-4 py-2 font-cinzel text-xs uppercase tracking-wider text-text-light hover:text-gold hover:bg-gold/5 transition-colors"
+                        >
+                          Profile
+                        </Link>
+                      )}
                       <Link
                         href="/profile/edit"
                         onClick={() => setAvatarOpen(false)}
                         className="block px-4 py-2 font-cinzel text-xs uppercase tracking-wider text-text-light hover:text-gold hover:bg-gold/5 transition-colors"
                       >
-                        Profile
+                        Edit Profile
                       </Link>
                       <Link
                         href="/agora"
