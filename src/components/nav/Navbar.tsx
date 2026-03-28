@@ -13,7 +13,7 @@ import { getAuth, signOut } from 'firebase/auth';
 import firebaseApp from '@/lib/firebase/client';
 
 export function Navbar() {
-  const { user, roleLevel } = useAuth();
+  const { user, loading, roleLevel } = useAuth();
   const isAdmin = roleLevel >= 3; // admin (3) or super admin (4)
   const isModerator = roleLevel >= 2; // moderator (2), admin (3), or super admin (4)
   const router = useRouter();
@@ -146,7 +146,9 @@ export function Navbar() {
 
             {/* Desktop auth controls */}
             <div className="hidden md:flex items-center gap-2">
-              {user ? (
+              {loading ? (
+                <div className="w-9 h-9 rounded-full bg-navy-light animate-pulse" />
+              ) : user ? (
                 <div className="flex items-center gap-1">
                   {/* Messages icon */}
                   <MessagesIcon uid={user.uid} />

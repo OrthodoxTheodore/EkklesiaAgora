@@ -43,9 +43,8 @@ export default function LoginPage() {
         throw new Error('Failed to set session cookie');
       }
 
-      // 3. Navigate to dashboard
-      router.refresh();
-      router.push('/dashboard');
+      // 3. Navigate to agora (cookie is set — no refresh needed with force-dynamic pages)
+      router.push('/agora');
     } catch (err: unknown) {
       const firebaseError = err as { code?: string };
       switch (firebaseError.code) {

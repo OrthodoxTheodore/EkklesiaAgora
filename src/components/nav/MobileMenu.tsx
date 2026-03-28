@@ -10,7 +10,7 @@ interface MobileMenuProps {
 }
 
 export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
-  const { user, roleLevel } = useAuth();
+  const { user, loading, roleLevel } = useAuth();
   const isModerator = roleLevel >= 2;
 
   if (!isOpen) return null;
@@ -101,7 +101,7 @@ export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
           )}
 
           <div className="border-t border-gold/20 mt-2 pt-4 flex flex-col gap-2">
-            {user ? (
+            {loading ? null : user ? (
               <>
                 <Link
                   href="/profile/edit"
