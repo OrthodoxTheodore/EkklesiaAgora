@@ -9,7 +9,25 @@ import { Button } from '@/components/ui/Button';
 import { JurisdictionDropdown } from '@/components/profile/JurisdictionDropdown';
 import { AvatarUpload } from '@/components/profile/AvatarUpload';
 import { updateProfile, updateBanner, updateLocationSharing } from '@/app/actions/profile';
-import type { UserProfile } from '@/lib/types/social';
+// Plain serializable subset — Timestamps are excluded so this can cross the server→client boundary
+export type ProfileProps = {
+  uid: string;
+  handle: string;
+  displayName: string;
+  bio: string;
+  avatarUrl: string | null;
+  bannerUrl: string | null;
+  jurisdictionId: string | null;
+  patronSaint: string | null;
+  followerCount: number;
+  followingCount: number;
+  postCount: number;
+  calendarPreference: 'new_julian' | 'old_julian';
+  locationSharingEnabled: boolean;
+  city: string | null;
+  stateRegion: string | null;
+  displayNameKeywords: string[];
+};
 import { getStorage, ref, uploadBytesResumable, getDownloadURL } from 'firebase/storage';
 import firebaseApp from '@/lib/firebase/client';
 
@@ -27,10 +45,8 @@ const profileFormSchema = z.object({
 
 type ProfileFormData = z.infer<typeof profileFormSchema>;
 
-type SerializableProfile = Omit<UserProfile, 'createdAt' | 'updatedAt' | 'lastSeen'>;
-
 interface ProfileEditFormProps {
-  profile: SerializableProfile;
+  profile: ProfileProps;
   uid: string;
 }
 

@@ -40,8 +40,26 @@ export default async function ProfileEditPage() {
     redirect('/login');
   }
 
-  // Strip non-serializable Firestore Timestamp fields before passing to client component
-  const { createdAt: _c, updatedAt: _u, lastSeen: _l, ...serializableProfile } = profile;
+  // Build a plain serializable object — Firestore Timestamps cannot cross the
+  // server→client component boundary in Next.js, so we omit them entirely.
+  const profileProps = {
+    uid: profile.uid,
+    handle: profile.handle,
+    displayName: profile.displayName,
+    bio: profile.bio,
+    avatarUrl: profile.avatarUrl,
+    bannerUrl: profile.bannerUrl,
+    jurisdictionId: profile.jurisdictionId,
+    patronSaint: profile.patronSaint,
+    followerCount: profile.followerCount,
+    followingCount: profile.followingCount,
+    postCount: profile.postCount,
+    calendarPreference: profile.calendarPreference,
+    locationSharingEnabled: profile.locationSharingEnabled ?? false,
+    city: profile.city,
+    stateRegion: profile.stateRegion,
+    displayNameKeywords: profile.displayNameKeywords,
+  };
 
   return (
     <div className="max-w-2xl mx-auto px-4 py-12">
@@ -49,7 +67,7 @@ export default async function ProfileEditPage() {
       <p className="font-garamond text-text-mid text-base mb-8">
         Update your display name, avatar, bio, and other profile details.
       </p>
-      <ProfileEditForm profile={serializableProfile} uid={uid} />
+      <ProfileEditForm profile={profileProps} uid={uid} />
     </div>
   );
 }
