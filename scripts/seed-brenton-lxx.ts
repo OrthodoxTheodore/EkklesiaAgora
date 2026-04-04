@@ -202,8 +202,11 @@ async function main() {
     }
 
     const { slug, name, index: bookIndex } = bookInfo;
-    const chaptersData = json.chapters as Array<Record<string, unknown>> | undefined;
-    if (!chaptersData) {
+    // usfm-js returns chapters as an object keyed by chapter number string,
+    // where each value is also an object keyed by verse number string.
+    // e.g. json.chapters = { "1": { "1": { verseObjects: [...] }, "2": {...} } }
+    const chaptersRaw = json.chapters as Record<string, Record<string, { verseObjects?: Array<Record<string, unknown>> }>> | undefined;
+    if (!chaptersRaw || typeof chaptersRaw !== 'object') {
       console.warn(`WARN: No chapters found in ${filename} — skipping`);
       skippedFiles.push(filename);
       continue;
@@ -212,24 +215,26 @@ async function main() {
     const chapterNumbers = new Set<number>();
     const bookVerses: ScriptureVerse[] = [];
 
-    for (const chapterObj of chaptersData) {
-      const chapterNum = parseInt(String(chapterObj.chapterNumber ?? chapterObj.chapter), 10);
+    for (const chapterKey of Object.keys(chaptersRaw)) {
+      const chapterNum = parseInt(chapterKey, 10);
       if (isNaN(chapterNum)) continue;
       chapterNumbers.add(chapterNum);
 
-      const versesData = chapterObj.verses as Array<Record<string, unknown>> | undefined;
-      if (!versesData) continue;
+      const versesRaw = chaptersRaw[chapterKey];
+      if (!versesRaw || typeof versesRaw !== 'object') continue;
 
-      for (const verseObj of versesData) {
-        const verseNum = parseInt(String(verseObj.verseNumber ?? verseObj.verse), 10);
+      for (const verseKey of Object.keys(versesRaw)) {
+        const verseNum = parseInt(verseKey, 10);
         if (isNaN(verseNum)) continue;
 
+        const verseObj = versesRaw[verseKey];
         // Extract plain text: concatenate only type:'text' objects
-        const verseObjects = verseObj.verseObjects as Array<Record<string, unknown>> | undefined ?? [];
+        const verseObjects = Array.isArray(verseObj?.verseObjects) ? verseObj.verseObjects : [];
         const text = verseObjects
-          .filter(o => o.type === 'text')
-          .map(o => String(o.text ?? ''))
+          .filter((o: Record<string, unknown>) => o.type === 'text')
+          .map((o: Record<string, unknown>) => String(o.text ?? ''))
           .join('')
+          .replace(/\s+/g, ' ')
           .trim();
 
         if (!text) continue;
