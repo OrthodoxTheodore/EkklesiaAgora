@@ -1,6 +1,29 @@
 import type { OrthodocalDay, ReadingRef, CalendarSystem } from '@/lib/types/calendar';
 
 /**
+ * The orthocal.info API sometimes returns null instead of [] for array fields.
+ * This sanitizer ensures every array field is always a real array so components
+ * can safely call .length, .map, etc. without null checks everywhere.
+ */
+function sanitizeDay(raw: OrthodocalDay): OrthodocalDay {
+  return {
+    ...raw,
+    titles:   Array.isArray(raw.titles)   ? raw.titles   : [],
+    feasts:   Array.isArray(raw.feasts)   ? raw.feasts   : [],
+    saints:   Array.isArray(raw.saints)   ? raw.saints   : [],
+    stories:  Array.isArray(raw.stories)  ? raw.stories  : [],
+    readings: Array.isArray(raw.readings) ? raw.readings.map(r => ({
+      ...r,
+      passage: Array.isArray(r.passage) ? r.passage : [],
+    })) : [],
+    summary_title:        raw.summary_title        ?? '',
+    feast_level_description: raw.feast_level_description ?? '',
+    fast_level_desc:      raw.fast_level_desc      ?? '',
+    fast_exception_desc:  raw.fast_exception_desc  ?? '',
+  };
+}
+
+/**
  * Fetch liturgical day data from orthocal.info API.
  *
  * Endpoint mapping (CRITICAL — do not swap):
@@ -23,7 +46,8 @@ export async function fetchDayData(
     next: { revalidate: 86400 }, // cache 24 hours
   });
   if (!res.ok) throw new Error(`orthocal.info fetch failed: ${res.status}`);
-  return res.json() as Promise<OrthodocalDay>;
+  const raw = await res.json() as OrthodocalDay;
+  return sanitizeDay(raw);
 }
 
 /**
@@ -80,9 +104,10 @@ export async function fetchMonthData(
   const fetches = Array.from({ length: daysInMonth }, (_, i) => {
     const day = i + 1;
     const url = `https://orthocal.info/api/${endpoint}/${year}/${month}/${day}/`;
-    return fetch(url, { next: { revalidate: 86400 } }).then(res => {
+    return fetch(url, { next: { revalidate: 86400 } }).then(async res => {
       if (!res.ok) throw new Error(`orthocal.info fetch failed for ${year}/${month}/${day}: ${res.status}`);
-      return res.json() as Promise<OrthodocalDay>;
+      const raw = await res.json() as OrthodocalDay;
+      return sanitizeDay(raw);
     });
   });
 
