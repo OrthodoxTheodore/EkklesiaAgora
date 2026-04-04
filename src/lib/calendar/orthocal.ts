@@ -66,6 +66,30 @@ export function extractReadingRefs(day: OrthodocalDay): {
 }
 
 /**
+ * Fetch all liturgical days for a given month in parallel.
+ * Returns an array of OrthodocalDay objects in day order (day 1 first).
+ */
+export async function fetchMonthData(
+  year: number,
+  month: number,
+  calendar: CalendarSystem
+): Promise<OrthodocalDay[]> {
+  const daysInMonth = new Date(year, month, 0).getDate(); // month is 1-indexed here
+  const endpoint = calendar === 'old_julian' ? 'julian' : 'gregorian';
+
+  const fetches = Array.from({ length: daysInMonth }, (_, i) => {
+    const day = i + 1;
+    const url = `https://orthocal.info/api/${endpoint}/${year}/${month}/${day}/`;
+    return fetch(url, { next: { revalidate: 86400 } }).then(res => {
+      if (!res.ok) throw new Error(`orthocal.info fetch failed for ${year}/${month}/${day}: ${res.status}`);
+      return res.json() as Promise<OrthodocalDay>;
+    });
+  });
+
+  return Promise.all(fetches);
+}
+
+/**
  * Format the display date string from OrthodocalDay fields.
  */
 export function formatCalendarDate(day: OrthodocalDay, calendar: CalendarSystem): string {
