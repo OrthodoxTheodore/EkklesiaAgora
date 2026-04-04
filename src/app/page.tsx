@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Image from 'next/image';
 
 // Server Component — accessible without authentication (AUTH-05)
 export default function HomePage() {
@@ -8,8 +9,14 @@ export default function HomePage() {
       {/* Hero Section */}
       <section className="relative px-4 py-20 md:py-32 text-center">
         <div className="max-w-4xl mx-auto">
-          <div className="inline-block mb-4 px-4 py-1 border border-gold/30 rounded text-gold-dim font-cinzel text-xs uppercase tracking-[0.2em]">
-            Eastern Orthodox Community
+          <div className="flex justify-center mb-4">
+            <Image
+              src="/Ekklesia_Agora.jpg"
+              alt="Ekklesia Agora"
+              width={80}
+              height={80}
+              className="rounded-full border border-gold/30 object-cover"
+            />
           </div>
           <h1 className="font-cinzel-dec text-4xl md:text-6xl lg:text-7xl text-gold mb-6 leading-tight">
             Ekklesia Agora
