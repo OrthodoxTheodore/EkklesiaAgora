@@ -13,8 +13,8 @@ export default function HomePage() {
             <Image
               src="/Ekklesia_Agora.jpg"
               alt="Ekklesia Agora"
-              width={80}
-              height={80}
+              width={160}
+              height={160}
               className="rounded-full border border-gold/30 object-cover"
             />
           </div>
