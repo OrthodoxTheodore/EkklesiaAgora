@@ -10,6 +10,9 @@ import { Button } from '@/components/ui/Button';
 import { toggleLike } from '@/app/actions/likes';
 import { deletePost } from '@/app/actions/posts';
 import { getJurisdictionLabel } from '@/lib/constants/jurisdictions';
+import { getVideoEmbed } from '@/lib/utils/videoEmbed';
+import LinkPreviewCard from './LinkPreviewCard';
+import { VideoEmbed } from './VideoEmbed';
 import type { Post } from '@/lib/types/social';
 
 // ─── Helpers ────────────────────────────────────────────────────────────────
@@ -27,57 +30,6 @@ function formatRelativeTime(ts: { seconds: number } | null | undefined): string 
   if (days < 7) return `${days}d ago`;
   const d = new Date(ts.seconds * 1000);
   return d.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
-}
-
-// ─── LinkPreviewCard ─────────────────────────────────────────────────────────
-
-interface LinkPreviewProps {
-  preview: {
-    url: string;
-    title: string | null;
-    description: string | null;
-    imageUrl: string | null;
-    siteName: string | null;
-  };
-}
-
-function LinkPreviewCard({ preview }: LinkPreviewProps) {
-  let hostname = preview.url;
-  try {
-    hostname = new URL(preview.url).hostname;
-  } catch {
-    // use raw URL as fallback
-  }
-
-  return (
-    <a
-      href={preview.url}
-      target="_blank"
-      rel="noopener noreferrer"
-      className="block bg-navy-light border border-gold/[0.10] rounded-md overflow-hidden mt-3 hover:border-gold/30 transition-colors"
-    >
-      {preview.imageUrl && (
-        <img
-          src={preview.imageUrl}
-          alt={preview.title ?? 'Link preview'}
-          className="w-full h-[120px] object-cover"
-        />
-      )}
-      <div>
-        {preview.title && (
-          <p className="font-cinzel text-xs text-text-light px-3 pt-2 truncate">
-            {preview.title}
-          </p>
-        )}
-        {preview.description && (
-          <p className="font-garamond text-base text-text-mid px-3 line-clamp-2">
-            {preview.description}
-          </p>
-        )}
-        <p className="font-cinzel text-xs text-text-mid px-3 pb-2 pt-1">{hostname}</p>
-      </div>
-    </a>
-  );
 }
 
 // ─── PostCard ────────────────────────────────────────────────────────────────
@@ -153,6 +105,8 @@ export default function PostCard({ post, currentUserUid, onPostDeleted }: PostCa
   const jurisdictionLabel = post.authorJurisdictionId
     ? getJurisdictionLabel(post.authorJurisdictionId)
     : null;
+  const linkPreview = post.linkPreview;
+  const videoEmbed = linkPreview ? getVideoEmbed(linkPreview.url) : null;
 
   return (
     <Card>
@@ -250,8 +204,14 @@ export default function PostCard({ post, currentUserUid, onPostDeleted }: PostCa
         />
       )}
 
-      {/* Link preview */}
-      {post.linkPreview && <LinkPreviewCard preview={post.linkPreview} />}
+      {/* Link preview — embed if it's a recognized video platform, else a static card */}
+      {linkPreview && (
+        videoEmbed ? (
+          <VideoEmbed embedUrl={videoEmbed.embedUrl} title={linkPreview.title ?? undefined} />
+        ) : (
+          <LinkPreviewCard preview={linkPreview} />
+        )
+      )}
 
       {/* Like error toast */}
       {likeError && (

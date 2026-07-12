@@ -5,6 +5,8 @@ import { redirect, notFound } from 'next/navigation';
 import Link from 'next/link';
 import { getTokens } from 'next-firebase-auth-edge';
 import { getProfileByHandle } from '@/lib/firestore/profiles';
+import { getPostsByAuthor } from '@/lib/firestore/posts';
+import { getVideosByUploader } from '@/lib/firestore/videos';
 import { getAdminFirestore } from '@/lib/firebase/admin';
 import { ProfileHeader } from '@/components/profile/ProfileHeader';
 import { ProfileTabs } from '@/components/profile/ProfileTabs';
@@ -46,6 +48,11 @@ export default async function ProfilePage({ params }: ProfilePageProps) {
 
   const currentUserUid = tokens.decodedToken.uid;
   const isOwnProfile = currentUserUid === profile.uid;
+
+  const [posts, videos] = await Promise.all([
+    getPostsByAuthor(profile.uid),
+    getVideosByUploader(profile.uid),
+  ]);
 
   // Determine follow status by checking the follows collection
   let isFollowing = false;
@@ -93,11 +100,7 @@ export default async function ProfilePage({ params }: ProfilePageProps) {
         </div>
       )}
       <div className="mt-4">
-        <ProfileTabs>
-          <p className="font-garamond text-text-mid text-center py-12">
-            Posts will appear here
-          </p>
-        </ProfileTabs>
+        <ProfileTabs posts={posts} videos={videos} currentUserUid={currentUserUid} />
       </div>
     </div>
   );

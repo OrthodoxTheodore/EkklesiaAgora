@@ -25,3 +25,13 @@ export async function searchPosts(keyword: string, maxResults = 10): Promise<Pos
     .get();
   return snap.docs.map(d => ({ postId: d.id, ...d.data() }) as Post);
 }
+
+export async function getPostsByAuthor(uid: string, maxResults = 30): Promise<Post[]> {
+  const db = getAdminFirestore();
+  const snap = await db.collection('posts')
+    .where('authorUid', '==', uid)
+    .orderBy('createdAt', 'desc')
+    .limit(maxResults)
+    .get();
+  return snap.docs.map(d => d.data() as Post);
+}

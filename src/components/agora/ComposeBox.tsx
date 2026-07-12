@@ -10,6 +10,8 @@ import { Button } from '@/components/ui/Button';
 import { createPost } from '@/app/actions/posts';
 import { fetchLinkPreview } from '@/app/actions/linkPreview';
 import { ORTHODOX_CATEGORIES } from '@/lib/constants/categories';
+import { getVideoEmbed } from '@/lib/utils/videoEmbed';
+import { VideoEmbed } from './VideoEmbed';
 import type { LinkPreview, Post } from '@/lib/types/social';
 
 // ─── Firebase AI (module-scope initialization) ────────────────────────────────
@@ -171,6 +173,7 @@ export default function ComposeBox({ uid, onPostCreated }: ComposeBoxProps) {
   );
 
   const effectiveCategory = selectedCategory ?? suggestedCategory;
+  const videoEmbed = linkPreview ? getVideoEmbed(linkPreview.url) : null;
 
   async function handleSubmit() {
     if (!text.trim()) return;
@@ -250,28 +253,35 @@ export default function ComposeBox({ uid, onPostCreated }: ComposeBoxProps) {
         className="w-full bg-navy-light border border-gold/[0.15] rounded-md p-4 font-garamond text-base text-text-light placeholder:text-text-mid resize-none overflow-hidden focus:outline-none focus:border-gold/40 transition-colors"
         style={{ minHeight: '80px' }}
       />
+      <p className="font-garamond italic text-xs text-text-mid mt-1">
+        Tip: paste a YouTube or Rumble link to embed the video.
+      </p>
 
-      {/* Link preview */}
+      {/* Link preview — embed if it's a recognized video platform, else a static card */}
       {linkPreview && !fetchingPreview && (
-        <div className="mt-2 bg-navy-light border border-gold/[0.10] rounded-md overflow-hidden">
-          {linkPreview.imageUrl && (
-            <img
-              src={linkPreview.imageUrl}
-              alt={linkPreview.title ?? 'Link preview'}
-              className="w-full h-[80px] object-cover"
-            />
-          )}
-          <div className="px-3 py-2">
-            {linkPreview.title && (
-              <p className="font-cinzel text-xs text-text-light truncate">{linkPreview.title}</p>
+        videoEmbed ? (
+          <VideoEmbed embedUrl={videoEmbed.embedUrl} title={linkPreview.title ?? undefined} />
+        ) : (
+          <div className="mt-2 bg-navy-light border border-gold/[0.10] rounded-md overflow-hidden">
+            {linkPreview.imageUrl && (
+              <img
+                src={linkPreview.imageUrl}
+                alt={linkPreview.title ?? 'Link preview'}
+                className="w-full h-[80px] object-cover"
+              />
             )}
-            {linkPreview.description && (
-              <p className="font-garamond text-sm text-text-mid line-clamp-1">
-                {linkPreview.description}
-              </p>
-            )}
+            <div className="px-3 py-2">
+              {linkPreview.title && (
+                <p className="font-cinzel text-xs text-text-light truncate">{linkPreview.title}</p>
+              )}
+              {linkPreview.description && (
+                <p className="font-garamond text-sm text-text-mid line-clamp-1">
+                  {linkPreview.description}
+                </p>
+              )}
+            </div>
           </div>
-        </div>
+        )
       )}
 
       {/* Category section */}

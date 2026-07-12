@@ -36,3 +36,17 @@ export async function searchVideos(keyword: string, maxResults = 10): Promise<Vi
     .get();
   return snap.docs.map(d => ({ videoId: d.id, ...d.data() }) as Video);
 }
+
+// Single-field equality filter only (no composite index required), sorted
+// and truncated in memory — fine at per-user scale.
+export async function getVideosByUploader(uid: string, maxResults = 30): Promise<Video[]> {
+  const db = getAdminFirestore();
+  const snap = await db.collection('videos')
+    .where('uploaderUid', '==', uid)
+    .get();
+  return snap.docs
+    .map(d => d.data() as Video)
+    .filter(v => v.status === 'published')
+    .sort((a, b) => b.createdAt.toMillis() - a.createdAt.toMillis())
+    .slice(0, maxResults);
+}
