@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import Image from 'next/image';
+import { Play, Users, Calendar } from 'lucide-react';
 
 // Server Component — accessible without authentication (AUTH-05)
 export default function HomePage() {
@@ -50,11 +51,11 @@ export default function HomePage() {
           Coming Together in Christ
         </h2>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {/* Card: Orthodox Video */}
           <div className="bg-navy-mid border border-gold/15 rounded-[6px] p-6 hover:border-gold/30 transition-colors">
             <div className="w-10 h-10 rounded border border-gold/30 bg-gold/10 flex items-center justify-center mb-4">
-              <span className="text-gold text-lg">&#9654;</span>
+              <Play className="w-5 h-5 text-gold" />
             </div>
             <h3 className="font-cinzel text-gold text-sm uppercase tracking-widest mb-2">
               Orthodox Video
@@ -68,7 +69,7 @@ export default function HomePage() {
           {/* Card: The Agora */}
           <div className="bg-navy-mid border border-gold/15 rounded-[6px] p-6 hover:border-gold/30 transition-colors">
             <div className="w-10 h-10 rounded border border-gold/30 bg-gold/10 flex items-center justify-center mb-4">
-              <span className="text-gold text-lg">&#128483;</span>
+              <Users className="w-5 h-5 text-gold" />
             </div>
             <h3 className="font-cinzel text-gold text-sm uppercase tracking-widest mb-2">
               The Agora
@@ -76,6 +77,20 @@ export default function HomePage() {
             <p className="font-garamond text-text-mid text-sm leading-relaxed">
               A community feed for the Orthodox faithful — share reflections,
               ask questions, and discuss the Faith in a spirit of love and truth.
+            </p>
+          </div>
+
+          {/* Card: Liturgical Calendar */}
+          <div className="bg-navy-mid border border-gold/15 rounded-[6px] p-6 hover:border-gold/30 transition-colors">
+            <div className="w-10 h-10 rounded border border-gold/30 bg-gold/10 flex items-center justify-center mb-4">
+              <Calendar className="w-5 h-5 text-gold" />
+            </div>
+            <h3 className="font-cinzel text-gold text-sm uppercase tracking-widest mb-2">
+              Liturgical Calendar
+            </h3>
+            <p className="font-garamond text-text-mid text-sm leading-relaxed">
+              Daily feasts, fasts, and saints of the Orthodox Church, with
+              readings for each day of the liturgical year.
             </p>
           </div>
         </div>
