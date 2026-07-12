@@ -63,27 +63,6 @@ export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
             Synodeia
           </Link>
           <Link
-            href="/scripture"
-            onClick={onClose}
-            className="px-4 py-3 font-cinzel text-sm uppercase tracking-widest text-text-light hover:text-gold transition-colors"
-          >
-            Scripture
-          </Link>
-          <Link
-            href="/fathers"
-            onClick={onClose}
-            className="px-4 py-3 font-cinzel text-sm uppercase tracking-widest text-text-light hover:text-gold transition-colors"
-          >
-            Browse Fathers
-          </Link>
-          <Link
-            href="/fathers/guides"
-            onClick={onClose}
-            className="px-4 py-3 font-cinzel text-sm uppercase tracking-widest text-text-light hover:text-gold transition-colors"
-          >
-            Study Guides
-          </Link>
-          <Link
             href="/search"
             onClick={onClose}
             className="px-4 py-3 font-cinzel text-sm uppercase tracking-widest text-text-light hover:text-gold transition-colors"

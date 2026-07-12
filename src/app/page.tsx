@@ -25,7 +25,7 @@ export default function HomePage() {
             A Gathering Place for the Eastern Orthodox Community
           </p>
           <p className="font-garamond text-base md:text-lg text-text-mid max-w-xl mx-auto mb-10">
-            Share videos, discuss the Faith, read Scripture and the Church Fathers,
+            Share videos, discuss the Faith,
             and connect with the Orthodox faithful around the world.
           </p>
           <Link
@@ -50,7 +50,7 @@ export default function HomePage() {
           Coming Together in Christ
         </h2>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {/* Card: Orthodox Video */}
           <div className="bg-navy-mid border border-gold/15 rounded-[6px] p-6 hover:border-gold/30 transition-colors">
             <div className="w-10 h-10 rounded border border-gold/30 bg-gold/10 flex items-center justify-center mb-4">
@@ -76,20 +76,6 @@ export default function HomePage() {
             <p className="font-garamond text-text-mid text-sm leading-relaxed">
               A community feed for the Orthodox faithful — share reflections,
               ask questions, and discuss the Faith in a spirit of love and truth.
-            </p>
-          </div>
-
-          {/* Card: Scripture Library */}
-          <div className="bg-navy-mid border border-gold/15 rounded-[6px] p-6 hover:border-gold/30 transition-colors">
-            <div className="w-10 h-10 rounded border border-gold/30 bg-gold/10 flex items-center justify-center mb-4">
-              <span className="text-gold text-lg">&#128214;</span>
-            </div>
-            <h3 className="font-cinzel text-gold text-sm uppercase tracking-widest mb-2">
-              Scripture Library
-            </h3>
-            <p className="font-garamond text-text-mid text-sm leading-relaxed">
-              The Holy Scriptures in the Orthodox tradition — Brenton&apos;s Septuagint
-              (Old Testament) and the Eastern Orthodox Bible (New Testament).
             </p>
           </div>
         </div>

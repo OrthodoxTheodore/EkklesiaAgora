@@ -8,10 +8,7 @@
     "start": "next start",
     "lint": "eslint",
     "test": "jest",
-    "seed:admin": "npx tsx scripts/seed-super-admin.ts",
-    "seed:brenton": "tsx scripts/seed-brenton-lxx.ts",
-    "seed:eob-nt": "tsx scripts/seed-eob-nt.ts",
-    "seed:patristic": "tsx scripts/seed-patristic.ts"
+    "seed:admin": "npx tsx scripts/seed-super-admin.ts"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.2.2",

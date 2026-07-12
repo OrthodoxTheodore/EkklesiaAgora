@@ -221,34 +221,6 @@ service cloud.firestore {
       allow write: if false;
     }
 
-    // ─── Phase 6: Patristic Library ─────────────────────────────────────────
-    // /patristic_texts/{textId}
-    //   READ:  anyone (public domain CCEL texts)
-    //   WRITE: false — Admin SDK seed writes bypass rules
-
-    match /patristic_texts/{textId} {
-      allow read: if true;
-      allow write: if false;
-    }
-
-    // /patristic_authors/{slug}
-    //   READ:  anyone
-    //   WRITE: false — Admin SDK seed writes bypass rules
-
-    match /patristic_authors/{slug} {
-      allow read: if true;
-      allow write: if false;
-    }
-
-    // /study_guides/{guideId}
-    //   READ:  anyone
-    //   WRITE: false — Admin SDK seed writes bypass rules
-
-    match /study_guides/{guideId} {
-      allow read: if true;
-      allow write: if false;
-    }
-
     // ─── Conversations ─────────────────────────────────────────────────
     match /conversations/{conversationId} {
       allow read: if request.auth != null

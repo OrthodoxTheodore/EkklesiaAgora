@@ -29,7 +29,7 @@ const ebGaramond = EB_Garamond({
 export const metadata: Metadata = {
   title: 'Ekklesia Agora — A Gathering Place for Eastern Orthodox Christians',
   description:
-    'An Eastern Orthodox Christian platform for video sharing, community discussion, Scripture reading, and patristic study.',
+    'An Eastern Orthodox Christian platform for video sharing and community discussion.',
 };
 
 export default function RootLayout({

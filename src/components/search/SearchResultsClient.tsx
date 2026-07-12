@@ -17,8 +17,6 @@ const TABS = [
   { id: 'videos', label: 'Videos' },
   { id: 'posts', label: 'Posts' },
   { id: 'people', label: 'People' },
-  { id: 'scripture', label: 'Scripture' },
-  { id: 'fathers', label: 'Church Fathers' },
 ] as const;
 
 type TabId = typeof TABS[number]['id'];
@@ -84,7 +82,7 @@ export function SearchResultsClient({ query, initialTab, results }: SearchResult
       <div className="flex flex-col items-center justify-center min-h-[60vh] text-center px-4">
         <h1 className="font-cinzel text-xl text-gold">Search Ekklesia Agora</h1>
         <p className="text-text-mid font-garamond text-base mt-2">
-          Find videos, posts, people, Scripture, and Church Fathers writings.
+          Find videos, posts, and people.
         </p>
         <div className="mt-6 w-full max-w-md">
           <input
@@ -92,7 +90,7 @@ export function SearchResultsClient({ query, initialTab, results }: SearchResult
             value={emptyInput}
             onChange={e => setEmptyInput(e.target.value)}
             onKeyDown={handleEmptySearch}
-            placeholder="Search videos, posts, people, Scripture, Fathers..."
+            placeholder="Search videos, posts, people..."
             className="w-full bg-navy-mid border border-gold/[0.15] rounded px-4 py-2.5 text-sm font-garamond text-text-light placeholder:text-text-mid focus-visible:ring-1 focus-visible:ring-gold/60 focus-visible:outline-none"
             aria-label="Search"
             autoFocus
@@ -102,8 +100,8 @@ export function SearchResultsClient({ query, initialTab, results }: SearchResult
     );
   }
 
-  const { videos, posts, people, scripture, fathers } = results;
-  const totalCount = videos.length + posts.length + people.length + scripture.length + fathers.length;
+  const { videos, posts, people } = results;
+  const totalCount = videos.length + posts.length + people.length;
 
   // No results state
   if (totalCount === 0) {
@@ -148,32 +146,10 @@ export function SearchResultsClient({ query, initialTab, results }: SearchResult
     />
   ));
 
-  const scriptureCards = scripture.map(v => (
-    <SearchResultCard
-      key={v.verseId}
-      type="SCRIPTURE"
-      title={v.bookAbbrev + ' ' + v.chapter + ':' + v.verse}
-      context={truncate(v.text, 80)}
-      href={'/scripture/' + v.bookAbbrev.toLowerCase() + '/' + v.chapter}
-    />
-  ));
-
-  const fatherCards = fathers.map(t => (
-    <SearchResultCard
-      key={t.textId}
-      type="FATHERS"
-      title={t.title}
-      context={t.authorName + ' - ' + t.era}
-      href={'/fathers/' + t.authorSlug + '/' + t.textId}
-    />
-  ));
-
   const sectionDefs: Array<{ tabId: TabId; label: string; cards: React.ReactNode[] }> = [
     { tabId: 'videos', label: 'Videos', cards: videoCards },
     { tabId: 'posts', label: 'Posts', cards: postCards },
     { tabId: 'people', label: 'People', cards: peopleCards },
-    { tabId: 'scripture', label: 'Scripture', cards: scriptureCards },
-    { tabId: 'fathers', label: 'Church Fathers', cards: fatherCards },
   ];
 
   const tabCardMap: Record<TabId, React.ReactNode[]> = {
@@ -181,8 +157,6 @@ export function SearchResultsClient({ query, initialTab, results }: SearchResult
     videos: videoCards,
     posts: postCards,
     people: peopleCards,
-    scripture: scriptureCards,
-    fathers: fatherCards,
   };
 
   return (
