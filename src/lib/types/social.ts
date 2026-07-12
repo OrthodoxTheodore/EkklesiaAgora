@@ -49,6 +49,9 @@ export interface LinkPreview {
   description: string | null;
   imageUrl: string | null;
   siteName: string | null;
+  // Resolved once server-side when the link is a known video platform
+  // (see resolveVideoEmbed) — null for ordinary links.
+  embedUrl: string | null;
 }
 
 export interface Like {

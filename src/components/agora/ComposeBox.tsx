@@ -10,7 +10,6 @@ import { Button } from '@/components/ui/Button';
 import { createPost } from '@/app/actions/posts';
 import { fetchLinkPreview } from '@/app/actions/linkPreview';
 import { ORTHODOX_CATEGORIES } from '@/lib/constants/categories';
-import { getVideoEmbed } from '@/lib/utils/videoEmbed';
 import { VideoEmbed } from './VideoEmbed';
 import type { LinkPreview, Post } from '@/lib/types/social';
 
@@ -173,7 +172,6 @@ export default function ComposeBox({ uid, onPostCreated }: ComposeBoxProps) {
   );
 
   const effectiveCategory = selectedCategory ?? suggestedCategory;
-  const videoEmbed = linkPreview ? getVideoEmbed(linkPreview.url) : null;
 
   async function handleSubmit() {
     if (!text.trim()) return;
@@ -259,8 +257,8 @@ export default function ComposeBox({ uid, onPostCreated }: ComposeBoxProps) {
 
       {/* Link preview — embed if it's a recognized video platform, else a static card */}
       {linkPreview && !fetchingPreview && (
-        videoEmbed ? (
-          <VideoEmbed embedUrl={videoEmbed.embedUrl} title={linkPreview.title ?? undefined} />
+        linkPreview.embedUrl ? (
+          <VideoEmbed embedUrl={linkPreview.embedUrl} title={linkPreview.title ?? undefined} />
         ) : (
           <div className="mt-2 bg-navy-light border border-gold/[0.10] rounded-md overflow-hidden">
             {linkPreview.imageUrl && (

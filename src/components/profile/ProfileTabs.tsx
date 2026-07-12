@@ -4,7 +4,6 @@ import React, { useState } from 'react';
 import Link from 'next/link';
 import { Play } from 'lucide-react';
 import PostCard from '@/components/agora/PostCard';
-import { getVideoEmbed } from '@/lib/utils/videoEmbed';
 import type { Post } from '@/lib/types/social';
 import type { Video } from '@/lib/types/video';
 
@@ -39,17 +38,14 @@ export function ProfileTabs({ posts: initialPosts, videos, currentUserUid }: Pro
       isPlayable: true,
     })),
     ...posts
-      .filter((p) => p.imageUrl || (p.linkPreview && getVideoEmbed(p.linkPreview.url)))
-      .map((p): MediaItem => {
-        const embed = p.linkPreview ? getVideoEmbed(p.linkPreview.url) : null;
-        return {
-          key: `post-${p.postId}`,
-          href: `/agora/${p.postId}`,
-          thumbnailUrl: p.imageUrl ?? p.linkPreview?.imageUrl ?? null,
-          label: p.text || p.linkPreview?.title || 'Post',
-          isPlayable: !!embed,
-        };
-      }),
+      .filter((p) => p.imageUrl || p.linkPreview?.embedUrl)
+      .map((p): MediaItem => ({
+        key: `post-${p.postId}`,
+        href: `/agora/${p.postId}`,
+        thumbnailUrl: p.imageUrl ?? p.linkPreview?.imageUrl ?? null,
+        label: p.text || p.linkPreview?.title || 'Post',
+        isPlayable: !!p.linkPreview?.embedUrl,
+      })),
   ];
 
   return (

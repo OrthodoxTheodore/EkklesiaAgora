@@ -10,7 +10,6 @@ import { Button } from '@/components/ui/Button';
 import { toggleLike } from '@/app/actions/likes';
 import { deletePost } from '@/app/actions/posts';
 import { getJurisdictionLabel } from '@/lib/constants/jurisdictions';
-import { getVideoEmbed } from '@/lib/utils/videoEmbed';
 import LinkPreviewCard from './LinkPreviewCard';
 import { VideoEmbed } from './VideoEmbed';
 import type { Post } from '@/lib/types/social';
@@ -106,7 +105,6 @@ export default function PostCard({ post, currentUserUid, onPostDeleted }: PostCa
     ? getJurisdictionLabel(post.authorJurisdictionId)
     : null;
   const linkPreview = post.linkPreview;
-  const videoEmbed = linkPreview ? getVideoEmbed(linkPreview.url) : null;
 
   return (
     <Card>
@@ -206,8 +204,8 @@ export default function PostCard({ post, currentUserUid, onPostDeleted }: PostCa
 
       {/* Link preview — embed if it's a recognized video platform, else a static card */}
       {linkPreview && (
-        videoEmbed ? (
-          <VideoEmbed embedUrl={videoEmbed.embedUrl} title={linkPreview.title ?? undefined} />
+        linkPreview.embedUrl ? (
+          <VideoEmbed embedUrl={linkPreview.embedUrl} title={linkPreview.title ?? undefined} />
         ) : (
           <LinkPreviewCard preview={linkPreview} />
         )
