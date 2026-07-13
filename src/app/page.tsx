@@ -1,9 +1,21 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { Play, Users, Calendar } from 'lucide-react';
+import { fetchDayData } from '@/lib/calendar/orthocal';
+import { TodayInChurch } from '@/components/calendar/TodayInChurch';
+import type { OrthodocalDay } from '@/lib/types/calendar';
 
 // Server Component — accessible without authentication (AUTH-05)
-export default function HomePage() {
+export default async function HomePage() {
+  // Best-effort — the homepage must stay accessible even if orthocal.info
+  // is unreachable, so a failed fetch just omits the section.
+  let today: OrthodocalDay | null = null;
+  try {
+    today = await fetchDayData(new Date(), 'new_julian');
+  } catch {
+    today = null;
+  }
+
   return (
     <div className="min-h-screen">
 
@@ -44,6 +56,8 @@ export default function HomePage() {
           <div className="h-px flex-1 max-w-xs bg-gradient-to-l from-transparent to-gold/30" />
         </div>
       </section>
+
+      {today && <TodayInChurch day={today} />}
 
       {/* Feature Preview Cards */}
       <section className="px-4 pb-20 max-w-6xl mx-auto">
