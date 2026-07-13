@@ -3,6 +3,7 @@ import { Cinzel, Cinzel_Decorative, EB_Garamond } from 'next/font/google';
 import '@/styles/globals.css';
 import { AuthProvider } from '@/components/auth/AuthProvider';
 import { Navbar } from '@/components/nav/Navbar';
+import { Footer } from '@/components/layout/Footer';
 
 const cinzel = Cinzel({
   subsets: ['latin'],
@@ -42,12 +43,13 @@ export default function RootLayout({
       lang="en"
       className={`${cinzel.variable} ${cinzelDecorative.variable} ${ebGaramond.variable}`}
     >
-      <body className="bg-navy font-garamond text-text-light pt-[70px] min-h-screen">
+      <body className="bg-navy font-garamond text-text-light pt-[70px] min-h-screen flex flex-col">
         <AuthProvider>
           <Navbar />
-          <main className="relative z-10">
+          <main className="relative z-10 flex-1">
             {children}
           </main>
+          <Footer />
         </AuthProvider>
       </body>
     </html>
