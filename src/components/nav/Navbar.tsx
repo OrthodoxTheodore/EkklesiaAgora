@@ -151,13 +151,6 @@ export function Navbar() {
                       >
                         Edit Profile
                       </Link>
-                      <Link
-                        href="/agora"
-                        onClick={() => setAvatarOpen(false)}
-                        className="block px-4 py-2 font-cinzel text-xs uppercase tracking-wider text-text-light hover:text-gold hover:bg-gold/5 transition-colors"
-                      >
-                        Agora
-                      </Link>
                       {isModerator && (
                         <Link
                           href="/admin/moderation"
