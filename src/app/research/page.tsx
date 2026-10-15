@@ -90,6 +90,15 @@ export default function ResearchPage() {
             hereditary societies that honor the patriots. Once one cousin&rsquo;s application proves a line, it becomes
             much easier for others on the same branch to follow.
           </p>
+          <div className="mt-6 max-w-3xl border-l-4 border-ulster bg-parchment px-5 py-4">
+            <p className="font-display text-xl text-continental">Joseph is already an established patriot</p>
+            <p className="mt-1 text-ink-soft">
+              The DAR lists him as Patriot Ancestor <strong className="font-normal text-continental">A076882</strong>{" "}
+              (as &ldquo;McGarrah&rdquo;), and the SAR as Patriot <strong className="font-normal text-continental">P-244671</strong>.
+              His service does not need to be proven again. An applicant only needs to document their own line of
+              descent back to him. Mention these numbers when you contact a chapter registrar.
+            </p>
+          </div>
           <ResourceList items={societies} />
         </div>
       </section>

@@ -18,7 +18,7 @@ export type Generation = {
   spouseParents?: string;
   note?: string;
   evidence: Evidence;
-  source?: string;
+  sources?: string[];
 };
 
 export const familyHistoryUrl = "https://ekklesia-agora-publishing.vercel.app/mcgarraugh-family-history";
@@ -38,9 +38,13 @@ export const lineage: Generation[] = [
     died: "1810",
     spouse: "Elizabeth K. Pennock",
     spouseBorn: "1735",
-    note: "Major, 3rd Battalion, Westmoreland County Militia, 1778.",
+    note: "Major, Westmoreland County Militia and Rangers on the frontier, 1778–1783; Justice of the Peace. Lived in Rostraver Township; died before 7 March 1810, Washington Township, Fayette County.",
     evidence: "verified",
-    source: "Pennsylvania State Archives, Westmoreland County Revolutionary War Militia (spelled “McGerraugh”)",
+    sources: [
+      "Pennsylvania State Archives, Westmoreland County Revolutionary War Militia (spelled “McGerraugh”)",
+      "DAR Patriot Ancestor A076882",
+      "SAR Patriot P-244671",
+    ],
   },
   {
     name: "Rev. Robert McGarraugh",
@@ -49,13 +53,14 @@ export const lineage: Generation[] = [
     spouse: "Lavina Jane Stille",
     spouseBorn: "1773",
     spouseDied: "1837",
-    note: "Presbyterian missionary of the Presbytery of Redstone to the Stump Creek country (Clarion and Jefferson Counties), active 1831–32.",
+    note: "Born in Westmoreland County; married 1798 at Canonsburg. Presbyterian missionary of the Presbytery of Redstone to the Stump Creek country (Clarion and Jefferson Counties), active 1831–32. Died in Clarion County; buried Old Concord Cemetery, Washington County.",
     evidence: "verified",
-    source: "History of the Presbytery of Clarion of the Presbyterian Church",
+    sources: ["History of the Presbytery of Clarion of the Presbyterian Church"],
   },
   {
     name: "Joseph McGarraugh",
-    born: "1792",
+    born: "c. 1792",
+    note: "The least-documented link in the line. The family tree also records a marriage to Margaret Callen.",
     spouse: "Hannah Milligan",
     spouseBorn: "1797",
     spouseDied: "1859",
@@ -65,6 +70,7 @@ export const lineage: Generation[] = [
     name: "Lyanias McGarraugh",
     born: "1824",
     died: "1869",
+    note: "Born in Chillicothe, Ohio; married 1846 in Highland County, Ohio; buried at Avon, Fulton County, Illinois.",
     spouse: "Elizabeth Ann Anderson",
     spouseParents: "Benjamin Franklin Anderson (1794–1876) & Rhoda Marie Dimmitt (1796–1853)",
     spouseBorn: "1827",
@@ -75,6 +81,7 @@ export const lineage: Generation[] = [
     name: "J. Albert McGarraugh",
     born: "1865",
     died: "1929",
+    note: "Born in Illinois; died in Enid, Oklahoma, and buried in Enid Cemetery.",
     spouse: "Sarah Elizabeth Sands",
     spouseBorn: "1870",
     spouseDied: "1943",
@@ -84,6 +91,7 @@ export const lineage: Generation[] = [
     name: "Clyde Edward McGarraugh",
     born: "1889",
     died: "1952",
+    note: "Born in Rice County, Kansas; married 1911 in Harper County; farmed near Perryton, Texas, from 1920; buried in Ochiltree Cemetery, Perryton.",
     spouse: "Bessie Kaup",
     spouseParents: "David Kaup (1858–1924) & Jadah Zeddah Griffin (1865–1954)",
     spouseBorn: "1893",
@@ -94,6 +102,7 @@ export const lineage: Generation[] = [
     name: "Lloyd Edward McGarraugh",
     born: "1915",
     died: "1997",
+    note: "Born in Corwin, Harper County, Kansas; married 1939 in Liberal, Kansas; died in Perryton, Texas.",
     spouse: "Sylvia Marie Wing",
     spouseParents: "George Edward Wing (1894–1960) & Alida May Murray (1899–1926)",
     spouseBorn: "1918",
@@ -104,6 +113,7 @@ export const lineage: Generation[] = [
     name: "Ronald McGarraugh",
     born: "1942",
     died: "2025",
+    note: "Born in Ochiltree County, Texas.",
     spouse: "Carolyn Sherrill McGarraugh",
     spouseParents: "Charles Neely Sherrill (1910–1979) & Shelan Juanita Stephens (1909–1995)",
     spouseLiving: true,

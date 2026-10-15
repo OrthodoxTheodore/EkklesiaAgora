@@ -39,7 +39,7 @@ function chain(gens: Generation[]): Person[] {
       spouse: spouseLabel(g),
       spouseParents: g.spouseParents && g.spouse ? `${g.spouse.split(" ")[0]}'s parents: ${g.spouseParents}` : undefined,
       note: g.note,
-      sources: g.source ? [g.source] : undefined,
+      sources: g.sources,
       children: chain(rest),
     },
   ];
@@ -53,11 +53,18 @@ export const patriarch: Person = {
   born: "1738",
   bornPlace: "Ulster, Ireland",
   died: "1810",
-  diedPlace: "Fayette County, Pennsylvania",
   spouse: spouseLabel(joseph),
-  note: "Major, 3rd Battalion, Westmoreland County Militia, 1778. Our common ancestor.",
-  sources: joseph.source ? [joseph.source] : undefined,
-  children: chain(lineage.slice(1)),
+  diedPlace: "Washington Township, Fayette County, Pennsylvania",
+  note: "Major, Westmoreland County Militia and Rangers, 1778–1783; Justice of the Peace. Married about 1770. Our common ancestor.",
+  sources: joseph.sources,
+  // Joseph and Elizabeth's four children, per the family tree on FamilySearch.
+  // The line traced on this site runs through Robert.
+  children: [
+    { id: "joseph-1775", name: "Joseph McGarraugh", dates: "b. 1775" },
+    ...chain(lineage.slice(1)),
+    { id: "elizabeth-1777", name: "Elizabeth McGarraugh", dates: "1777 – 1855" },
+    { id: "thomas-1780", name: "Thomas McGarraugh", dates: "b. 1780" },
+  ],
 };
 
 // Spellings of the surname found in records cited in the family history. Clerks wrote names as they
@@ -65,6 +72,7 @@ export const patriarch: Person = {
 export const spellingVariants = [
   "McGarraugh",
   "McGerraugh",
+  "McGarrough",
   "M'Garrough",
   "McGarrah",
   "McGarroch",

@@ -6,21 +6,25 @@ import { Ornament } from "@/components/Ornament";
 export const metadata: Metadata = { title: "Major Joseph McGarraugh" };
 
 const facts = [
-  { label: "Born", value: "1738, Ulster, Ireland" },
+  { label: "Born", value: "1738, Ulster (family tradition)" },
   { label: "Parents", value: "Alexander & Mary McGarraugh (family tradition)" },
-  { label: "Wife", value: "Elizabeth K. Pennock" },
-  { label: "Service", value: "Major, 3rd Battalion, Westmoreland County Militia, 1778" },
-  { label: "Son", value: "Rev. Robert McGarraugh (1777–1839)" },
-  { label: "Died", value: "1810, Fayette County, Pennsylvania" },
+  { label: "Wife", value: "Elizabeth K. Pennock, m. about 1770" },
+  { label: "Service", value: "Major, Westmoreland County Militia and Rangers, 1778–1783" },
+  { label: "Civil office", value: "Justice of the Peace" },
+  { label: "Home", value: "Rostraver Township, Westmoreland County" },
+  { label: "Children", value: "Joseph, Rev. Robert, Elizabeth, Thomas" },
+  { label: "Died", value: "Before 7 March 1810, Washington Township, Fayette County" },
+  { label: "Patriot No.", value: "DAR A076882 · SAR P-244671" },
 ];
 
 const openQuestions = [
   "When did the family leave Ulster, and from which county? Antrim, Down, Londonderry?",
   "Is there a ship list, land warrant, or naturalization record for Alexander and Mary?",
-  "When and where did Joseph marry Elizabeth K. Pennock, and when did she die?",
-  "Besides Robert, what other children did Joseph and Elizabeth have?",
-  "Where exactly in Fayette County did he live, and where is he buried?",
-  "Did he leave a will, a land warrant, or a pension application?",
+  "When and where was Joseph born? The family says 1738 in Ulster; the DAR and SAR say 1745 in Scotland.",
+  "What was his wife's name? Recorded as Elizabeth K. Pennock, Jane Pennock, and Elizabeth Rinich or Pinnick.",
+  "Where is Joseph buried?",
+  "What record ties Lyanias (b. 1824) to his father Joseph (b. c. 1792), and who was Lyanias's mother: Hannah Milligan or Margaret Callen?",
+  "Did Joseph leave a will? He died before 7 March 1810, which suggests a probate record may exist in Fayette County.",
 ];
 
 function Source({ children }: { children: React.ReactNode }) {
@@ -72,13 +76,34 @@ export default function JosephPage() {
 
           <Ornament className="my-10" />
 
+          <h2 className="text-3xl text-continental">A recognized patriot</h2>
+          <p>
+            Joseph&rsquo;s service is already recognized by both national lineage societies of the Revolution. The
+            Daughters of the American Revolution list him as <strong className="font-normal text-continental">Patriot
+            Ancestor A076882</strong>, credited with service as a Major, with the Westmoreland County Rangers, and in
+            civil service as a Justice of the Peace. The Sons of the American Revolution list him as{" "}
+            <strong className="font-normal text-continental">Patriot P-244671</strong>, for service on the frontier from
+            1778 to 1783. Both record his home in Rostraver Township, Westmoreland County, and his death before 7 March
+            1810 in Washington Township, Fayette County.
+          </p>
+          <Source>DAR Patriot Ancestor A076882 (as “McGarrah”); SAR Patriot P-244671 (as McGarrah, McGarraugh, McGarrough)</Source>
+          <p>
+            The societies&rsquo; files differ from family memory on one point: they give his birth as 1745, in Scotland,
+            where the family has always said 1738. No birth record has been found yet to settle it.
+          </p>
+
+          <Ornament className="my-10" />
+
           <h2 className="text-3xl text-continental">Family</h2>
           <p>
-            Joseph married Elizabeth K. Pennock. Their son <strong className="font-normal text-continental">Robert</strong>,
-            born in 1777, became a Presbyterian minister. A generation after his father defended the frontier, the
+            Joseph married Elizabeth K. Pennock about 1770, and the family tree records four children: Joseph (born
+            1775), Robert (1777), Elizabeth (1777–1855), and Thomas (born 1780). Their son{" "}
+            <strong className="font-normal text-continental">Robert</strong>, born in Westmoreland County on 7 January
+            1777, became a Presbyterian minister. A generation after his father defended the frontier, the
             Rev. Robert McGarraugh went out from the Presbytery of Redstone as a missionary to the Stump Creek country,
             now Clarion and Jefferson Counties, and was still making regular visits to the Beechwoods settlement in
-            1831 and 1832. He married Lavina Jane Stille and died in 1839.
+            1831 and 1832. He married Lavina Jane Stille in 1798 at Canonsburg, died in Clarion County on 13 July 1839,
+            and was buried in the Old Concord Cemetery in Washington County.
           </p>
           <Source>History of the Presbytery of Clarion of the Presbyterian Church (as “Dr. Robert M&rsquo;Garrough”)</Source>
           <p>
@@ -97,7 +122,7 @@ export default function JosephPage() {
             veterans of the war settled and raised their families.
           </p>
           <p>
-            Joseph McGarraugh died there in 1810. From that corner of Pennsylvania his descendants spread out across
+            Joseph McGarraugh died in Washington Township, Fayette County, before 7 March 1810. From that corner of Pennsylvania his descendants spread out across
             the young republic, and they are spread across it still.
           </p>
         </article>
