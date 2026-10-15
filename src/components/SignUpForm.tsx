@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { friendlyError, signInWithGoogle, signUpWithEmail } from "@/lib/account";
 import { googleSignIn } from "@/lib/firebase-config";
-import { Button, inputClass, Label, Notice } from "./ui";
+import { Button, inputClass, Label, Notice, PasswordInput } from "./ui";
 
 export function SignUpForm() {
   const [busy, setBusy] = useState(false);
@@ -14,6 +14,7 @@ export function SignUpForm() {
     const f = new FormData(e.currentTarget);
     const password = String(f.get("password"));
     if (password.length < 8) return setError("Please choose a password of at least 8 characters.");
+    if (password !== String(f.get("confirm"))) return setError("The two passwords don’t match. Please type them again.");
     setBusy(true);
     setError("");
     try {
@@ -53,7 +54,10 @@ export function SignUpForm() {
           <input name="email" type="email" required autoComplete="email" className={inputClass} />
         </Label>
         <Label text="Password" hint="At least 8 characters">
-          <input name="password" type="password" required minLength={8} autoComplete="new-password" className={inputClass} />
+          <PasswordInput name="password" required minLength={8} autoComplete="new-password" />
+        </Label>
+        <Label text="Confirm password">
+          <PasswordInput name="confirm" required minLength={8} autoComplete="new-password" />
         </Label>
         {error && <Notice tone="error">{error}</Notice>}
         <Button type="submit" className="w-full" disabled={busy}>

@@ -5,7 +5,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useAuth } from "@/components/AuthProvider";
-import { Button, inputClass, Label, MembershipComingSoon, Notice, Panel } from "@/components/ui";
+import { Button, inputClass, Label, MembershipComingSoon, Notice, Panel, PasswordInput } from "@/components/ui";
 import { friendlyError, signInWithGoogle } from "@/lib/account";
 import { auth, firebaseReady } from "@/lib/firebase";
 import { googleSignIn } from "@/lib/firebase-config";
@@ -73,7 +73,7 @@ export function SignInForm() {
           />
         </Label>
         <Label text="Password">
-          <input name="password" type="password" required autoComplete="current-password" className={inputClass} />
+          <PasswordInput name="password" required autoComplete="current-password" />
         </Label>
         {error && <Notice tone="error">{error}</Notice>}
         {message && <Notice tone="success">{message}</Notice>}

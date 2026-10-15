@@ -1,4 +1,7 @@
+"use client";
+
 import Link from "next/link";
+import { useState } from "react";
 
 export const inputClass =
   "mt-1 w-full border border-buff bg-parchment px-3 py-2 text-ink placeholder:text-ink-soft/60 disabled:opacity-60";
@@ -10,6 +13,25 @@ export function Label({ text, hint, children }: { text: string; hint?: string; c
       {hint && <span className="block text-sm italic text-ink-soft/80">{hint}</span>}
       {children}
     </label>
+  );
+}
+
+// A password box with a Show/Hide button so people can check what they typed.
+export function PasswordInput(props: React.InputHTMLAttributes<HTMLInputElement>) {
+  const [visible, setVisible] = useState(false);
+  return (
+    <span className="relative mt-1 block">
+      <input {...props} type={visible ? "text" : "password"} className={`${inputClass.replace("mt-1 ", "")} pr-20`} />
+      <button
+        type="button"
+        onClick={() => setVisible((v) => !v)}
+        aria-pressed={visible}
+        aria-label={visible ? "Hide password" : "Show password"}
+        className="absolute inset-y-0 right-0 px-3 text-sm italic text-claret hover:underline"
+      >
+        {visible ? "Hide" : "Show"}
+      </button>
+    </span>
   );
 }
 
