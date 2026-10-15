@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { FamilyTree } from "@/components/FamilyTree";
+import { LiveFamilyTree } from "@/components/LiveFamilyTree";
 import { PageHeader } from "@/components/PageHeader";
-import { patriarch, spellingVariants } from "@/data/family";
+import { spellingVariants } from "@/data/family";
 
 export const metadata: Metadata = { title: "Family Tree" };
 
@@ -31,16 +31,17 @@ export default function FamilyPage() {
       />
 
       <section className="mx-auto max-w-6xl px-4 py-16">
-        <FamilyTree root={patriarch} />
+        <LiveFamilyTree />
 
         <div className="mt-10 max-w-xl border border-dashed border-buff bg-parchment-deep/40 px-6 py-5">
           <p className="font-display text-xl text-continental">Is your line here yet?</p>
           <p className="mt-2 text-ink-soft">
-            So far the tree shows one line of descent, through Rev. Robert McGarraugh. Joseph&rsquo;s other children and
-            their descendants will be added as cousins send in their lines and the records behind them.
+            So far the tree traces one line in full, through Rev. Robert McGarraugh. Family members can add their own
+            branches: join the site, and once your connection is confirmed, use &ldquo;+ Add a child&rdquo; on any
+            person in the tree.
           </p>
-          <Link href="/connect/" className="mt-3 inline-block text-sm italic text-claret hover:underline">
-            Add your branch →
+          <Link href="/join/" className="mt-3 inline-block text-sm italic text-claret hover:underline">
+            Join the family →
           </Link>
         </div>
       </section>

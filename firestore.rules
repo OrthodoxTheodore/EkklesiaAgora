@@ -1,0 +1,93 @@
+rules_version = '2';
+
+// Who can do what:
+//   Anyone           read deceased people in the tree
+//   Signed in        create their own pending profile and one application
+//   Member           read living people; add people to the tree (unreviewed);
+//                    edit or remove their own unreviewed additions
+//   Admin            everything: approve applications, review the tree, manage roles
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function signedIn() {
+      return request.auth != null;
+    }
+
+    function profilePath() {
+      return /databases/$(database)/documents/users/$(request.auth.uid);
+    }
+
+    function isMember() {
+      return signedIn() && exists(profilePath()) && get(profilePath()).data.status == 'member';
+    }
+
+    function isAdmin() {
+      return isMember() && get(profilePath()).data.role == 'admin';
+    }
+
+    function shortText(field, max) {
+      return field is string && field.size() <= max;
+    }
+
+    match /users/{uid} {
+      allow read: if signedIn() && (request.auth.uid == uid || isAdmin());
+
+      // New accounts always start pending and non-admin.
+      allow create: if signedIn() && request.auth.uid == uid
+        && request.resource.data.keys().hasOnly(['displayName', 'email', 'status', 'role', 'createdAt'])
+        && request.resource.data.status == 'pending'
+        && request.resource.data.role == 'member'
+        && shortText(request.resource.data.displayName, 120);
+
+      // People may change their own display name; only admins change status or role.
+      allow update: if isAdmin()
+        || (signedIn() && request.auth.uid == uid
+            && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['displayName'])
+            && shortText(request.resource.data.displayName, 120));
+
+      allow delete: if isAdmin();
+    }
+
+    match /applications/{uid} {
+      allow read: if signedIn() && (request.auth.uid == uid || isAdmin());
+
+      allow create: if signedIn() && request.auth.uid == uid
+        && request.resource.data.keys().hasOnly(['name', 'email', 'location', 'connection', 'lineage', 'files', 'status', 'submittedAt'])
+        && request.resource.data.status == 'pending'
+        && shortText(request.resource.data.name, 120)
+        && shortText(request.resource.data.location, 120)
+        && shortText(request.resource.data.connection, 120)
+        && shortText(request.resource.data.lineage, 5000)
+        && request.resource.data.files is list
+        && request.resource.data.files.size() <= 5;
+
+      allow update, delete: if isAdmin();
+    }
+
+    match /people/{personId} {
+      allow read: if resource.data.living == false || isMember();
+
+      allow create: if isMember()
+        && request.resource.data.keys().hasOnly(['parentId', 'name', 'born', 'bornPlace', 'died', 'diedPlace', 'spouse', 'note', 'source', 'living', 'reviewed', 'createdBy', 'createdByName', 'createdAt'])
+        && request.resource.data.createdBy == request.auth.uid
+        && request.resource.data.reviewed == false
+        && request.resource.data.living is bool
+        && shortText(request.resource.data.parentId, 100)
+        && request.resource.data.name is string
+        && request.resource.data.name.size() > 0
+        && shortText(request.resource.data.name, 120)
+        && shortText(request.resource.data.note, 1000)
+        && shortText(request.resource.data.source, 300);
+
+      allow update: if isAdmin()
+        || (isMember()
+            && resource.data.createdBy == request.auth.uid
+            && resource.data.reviewed == false
+            && request.resource.data.reviewed == false
+            && request.resource.data.createdBy == resource.data.createdBy);
+
+      allow delete: if isAdmin()
+        || (isMember() && resource.data.createdBy == request.auth.uid && resource.data.reviewed == false);
+    }
+  }
+}

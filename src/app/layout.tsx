@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { IM_Fell_English, Libre_Caslon_Text } from "next/font/google";
+import { AuthProvider } from "@/components/AuthProvider";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 import { site } from "@/data/site";
@@ -34,11 +35,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         >
           Skip to content
         </a>
-        <SiteHeader />
-        <main id="main" className="flex-1">
-          {children}
-        </main>
-        <SiteFooter />
+        <AuthProvider>
+          <SiteHeader />
+          <main id="main" className="flex-1">
+            {children}
+          </main>
+          <SiteFooter />
+        </AuthProvider>
       </body>
     </html>
   );

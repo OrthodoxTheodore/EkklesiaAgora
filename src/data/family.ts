@@ -19,6 +19,10 @@ export type Person = {
   note?: string;
   sources?: string[];
   children?: Person[];
+  // Set on people added by members through the site
+  contributedSource?: string;
+  unreviewed?: boolean;
+  addedBy?: string;
 };
 
 function spouseLabel(g: Generation) {

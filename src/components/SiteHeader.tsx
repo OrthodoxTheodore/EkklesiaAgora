@@ -3,12 +3,20 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
+import { useAuth } from "./AuthProvider";
 import { Crest } from "./Crest";
+import { firebaseReady } from "@/lib/firebase";
 import { nav, site } from "@/data/site";
 
 export function SiteHeader() {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
+  const { ready, user, isAdmin } = useAuth();
+  const account = !firebaseReady || !ready
+    ? null
+    : user
+      ? [{ href: "/account/", label: "My Account" }, ...(isAdmin ? [{ href: "/admin/", label: "Admin" }] : [])]
+      : [{ href: "/signin/", label: "Sign In" }, { href: "/join/", label: "Join" }];
   const isActive = (href: string) => (href === "/" ? pathname === "/" : pathname.startsWith(href));
 
   return (
@@ -22,7 +30,7 @@ export function SiteHeader() {
           </span>
         </Link>
 
-        <nav aria-label="Main" className="hidden lg:block">
+        <nav aria-label="Main" className="hidden xl:block">
           <ul className="flex items-center gap-1">
             {nav.map((item) => (
               <li key={item.href}>
@@ -37,12 +45,26 @@ export function SiteHeader() {
                 </Link>
               </li>
             ))}
+            {account?.map((item, i) => (
+              <li key={item.href}>
+                <Link
+                  href={item.href}
+                  className={
+                    i === account.length - 1
+                      ? "ml-2 border border-buff px-3 py-1.5 text-sm text-buff transition-colors hover:bg-buff hover:text-continental-deep"
+                      : "rounded px-3 py-2 text-sm tracking-wide text-parchment hover:text-buff"
+                  }
+                >
+                  {item.label}
+                </Link>
+              </li>
+            ))}
           </ul>
         </nav>
 
         <button
           type="button"
-          className="rounded border border-buff/50 px-3 py-1.5 text-sm text-buff lg:hidden"
+          className="rounded border border-buff/50 px-3 py-1.5 text-sm text-buff xl:hidden"
           aria-expanded={open}
           aria-controls="mobile-nav"
           onClick={() => setOpen((o) => !o)}
@@ -52,9 +74,9 @@ export function SiteHeader() {
       </div>
 
       {open && (
-        <nav id="mobile-nav" aria-label="Main" className="border-t border-buff/30 bg-continental-deep lg:hidden">
+        <nav id="mobile-nav" aria-label="Main" className="border-t border-buff/30 bg-continental-deep xl:hidden">
           <ul className="mx-auto max-w-6xl px-4 py-2">
-            {nav.map((item) => (
+            {[...nav, ...(account ?? [])].map((item) => (
               <li key={item.href}>
                 <Link
                   href={item.href}
