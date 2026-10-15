@@ -60,7 +60,8 @@ export const lineage: Generation[] = [
   {
     name: "Joseph McGarraugh",
     born: "c. 1792",
-    note: "The least-documented link in the line. The family tree also records a marriage to Margaret Callen.",
+    died: "1823",
+    note: "Died in Fayette County, Pennsylvania, by the family tree. The least-documented link in the line; the tree also records a marriage to Margaret Callen.",
     spouse: "Hannah Milligan",
     spouseBorn: "1797",
     spouseDied: "1859",

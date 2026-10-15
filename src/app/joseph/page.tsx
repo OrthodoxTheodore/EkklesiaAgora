@@ -23,7 +23,7 @@ const openQuestions = [
   "When and where was Joseph born? The family says 1738 in Ulster; the DAR and SAR say 1745 in Scotland.",
   "What was his wife's name? Recorded as Elizabeth K. Pennock, Jane Pennock, and Elizabeth Rinich or Pinnick.",
   "Where is Joseph buried?",
-  "What record ties Lyanias (b. 1824) to his father Joseph (b. c. 1792), and who was Lyanias's mother: Hannah Milligan or Margaret Callen?",
+  "What record ties Lyanias (b. 1824) to his father Joseph (c. 1792–1823), and who was Lyanias's mother: Hannah Milligan or Margaret Callen?",
   "Did Joseph leave a will? He died before 7 March 1810, which suggests a probate record may exist in Fayette County.",
 ];
 

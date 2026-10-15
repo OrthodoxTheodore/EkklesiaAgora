@@ -82,6 +82,12 @@ export const timeline: TimelineEntry[] = [
     kind: "family",
   },
   {
+    year: "1823",
+    title: "Joseph McGarraugh dies",
+    body: "Robert's son Joseph, born about 1792, dies in Fayette County, Pennsylvania, before his son Lyanias is born in May 1824.",
+    kind: "family",
+  },
+  {
     year: "1824",
     title: "West to Ohio",
     body: "Lyanias McGarraugh is born on 4 May in Chillicothe, Ross County, Ohio. In 1846 he marries Elizabeth Ann Anderson in Highland County.",
