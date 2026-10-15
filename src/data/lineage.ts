@@ -15,6 +15,7 @@ export type Generation = {
   spouseBorn?: string;
   spouseDied?: string;
   spouseLiving?: boolean;
+  spouseParents?: string;
   note?: string;
   evidence: Evidence;
   source?: string;
@@ -65,6 +66,7 @@ export const lineage: Generation[] = [
     born: "1824",
     died: "1869",
     spouse: "Elizabeth Ann Anderson",
+    spouseParents: "Benjamin Franklin Anderson (1794–1876) & Rhoda Marie Dimmitt (1796–1853)",
     spouseBorn: "1827",
     spouseDied: "1867",
     evidence: "tradition",
@@ -83,6 +85,7 @@ export const lineage: Generation[] = [
     born: "1889",
     died: "1952",
     spouse: "Bessie Kaup",
+    spouseParents: "David Kaup (1858–1924) & Jadah Zeddah Griffin (1865–1954)",
     spouseBorn: "1893",
     spouseDied: "1953",
     evidence: "tradition",
@@ -92,6 +95,7 @@ export const lineage: Generation[] = [
     born: "1915",
     died: "1997",
     spouse: "Sylvia Marie Wing",
+    spouseParents: "George Edward Wing (1894–1960) & Alida May Murray (1899–1926)",
     spouseBorn: "1918",
     spouseDied: "2014",
     evidence: "tradition",
@@ -101,6 +105,7 @@ export const lineage: Generation[] = [
     born: "1942",
     died: "2025",
     spouse: "Carolyn Sherrill McGarraugh",
+    spouseParents: "Charles Neely Sherrill (1910–1979) & Shelan Juanita Stephens (1909–1995)",
     spouseLiving: true,
     evidence: "tradition",
   },

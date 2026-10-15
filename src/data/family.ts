@@ -15,6 +15,7 @@ export type Person = {
   diedPlace?: string;
   dates?: string;
   spouse?: string;
+  spouseParents?: string;
   note?: string;
   sources?: string[];
   children?: Person[];
@@ -36,6 +37,7 @@ function chain(gens: Generation[]): Person[] {
       name: g.name,
       dates: lifespan(g.born, g.died, g.living),
       spouse: spouseLabel(g),
+      spouseParents: g.spouseParents && g.spouse ? `${g.spouse.split(" ")[0]}'s parents: ${g.spouseParents}` : undefined,
       note: g.note,
       sources: g.source ? [g.source] : undefined,
       children: chain(rest),

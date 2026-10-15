@@ -24,6 +24,7 @@ function PersonCard({ person, root = false }: { person: Person; root?: boolean }
         </p>
       )}
       {person.spouse && <p className="mt-1 text-sm text-ink-soft">m. {person.spouse}</p>}
+      {person.spouseParents && <p className="text-xs italic text-ink-soft">{person.spouseParents}</p>}
       {person.note && <p className="mt-2 text-sm text-ink-soft">{person.note}</p>}
       {person.sources?.map((s) => (
         <p key={s} className="mt-2 border-t border-buff/50 pt-2 text-xs text-ulster">
