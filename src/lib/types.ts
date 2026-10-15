@@ -18,7 +18,7 @@ export type Application = {
   location: string;
   connection: string;
   lineage: string;
-  files: { name: string; path: string }[];
+  evidence: string;
   status: "pending" | "approved" | "rejected";
   submittedAt: Timestamp | null;
   reviewedBy?: string;

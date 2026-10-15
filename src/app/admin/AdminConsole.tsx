@@ -11,13 +11,12 @@ import {
   where,
   writeBatch,
 } from "firebase/firestore";
-import { deleteObject, getDownloadURL, ref } from "firebase/storage";
 import { useEffect, useMemo, useState } from "react";
 import { useAuth } from "@/components/AuthProvider";
 import { Button, inputClass, Loading, MembershipComingSoon, Notice, Panel } from "@/components/ui";
 import { patriarch } from "@/data/family";
 import { friendlyError } from "@/lib/account";
-import { db, firebaseReady, storage } from "@/lib/firebase";
+import { db, firebaseReady } from "@/lib/firebase";
 import { indexNames, type TreeDoc } from "@/lib/tree";
 import type { Application, Profile, TreePerson } from "@/lib/types";
 
@@ -150,19 +149,6 @@ function ApplicationCard({ app }: { app: AppRow }) {
       await batch.commit();
     });
 
-  const openFile = (path: string) =>
-    act(async () => {
-      window.open(await getDownloadURL(ref(storage(), path)), "_blank", "noopener");
-    });
-
-  // Once a decision is made, the documents have done their job; admins can
-  // delete them so the family's private papers are not kept longer than needed.
-  const deleteFiles = () =>
-    act(async () => {
-      await Promise.all(app.files.map((f) => deleteObject(ref(storage(), f.path)).catch(() => {})));
-      await updateDoc(doc(db(), "applications", app.id), { files: [] });
-    });
-
   const statusStyle = {
     pending: "bg-buff/40 text-continental",
     approved: "bg-ulster/15 text-ulster",
@@ -184,23 +170,20 @@ function ApplicationCard({ app }: { app: AppRow }) {
       <p className="mt-4 text-sm uppercase tracking-[0.15em] text-ink-soft">{app.connection}</p>
       <p className="mt-2 whitespace-pre-wrap border-l-2 border-buff pl-4">{app.lineage}</p>
 
-      {app.files.length > 0 && (
-        <div className="mt-4 flex flex-wrap items-center gap-2">
-          {app.files.map((f) => (
-            <button
-              key={f.path}
-              onClick={() => openFile(f.path)}
-              disabled={busy}
-              className="border border-buff px-3 py-1 text-sm text-continental hover:border-claret"
-            >
-              📎 {f.name}
-            </button>
-          ))}
-          {app.status !== "pending" && (
-            <button onClick={deleteFiles} disabled={busy} className="text-sm italic text-claret underline">
-              Delete documents
-            </button>
-          )}
+      {app.evidence && (
+        <div className="mt-4">
+          <p className="text-sm uppercase tracking-[0.15em] text-ink-soft">Records given</p>
+          <p className="mt-1 whitespace-pre-wrap break-words text-sm [&_a]:text-claret">
+            {app.evidence.split(/(https?:\/\/\S+)/g).map((part, i) =>
+              /^https?:\/\//.test(part) ? (
+                <a key={i} href={part} target="_blank" rel="noopener noreferrer" className="underline">
+                  {part}
+                </a>
+              ) : (
+                part
+              ),
+            )}
+          </p>
         </div>
       )}
 

@@ -5,8 +5,8 @@ import { JoinFlow } from "./JoinFlow";
 export const metadata: Metadata = { title: "Join the Family" };
 
 const steps = [
-  { title: "Create an account", body: "Free, with your email or Google account." },
-  { title: "Show your connection", body: "Write out your line to the McGarraugh family, and attach any documents you have." },
+  { title: "Create an account", body: "Free, with your email address and a password." },
+  { title: "Show your connection", body: "Write out your line to the McGarraugh family, with links to any records you have." },
   { title: "Welcome home", body: "Once an admin confirms your connection, you can add to the family tree." },
 ];
 
@@ -37,7 +37,7 @@ export default function JoinPage() {
           </ol>
           <p className="mt-8 border-t border-buff pt-6 text-sm italic text-ink-soft">
             For now, membership is limited to McGarraugh family members, so that we can build this as a family
-            community first. Your documents are seen only by site admins.
+            community first. Your application is seen only by site admins.
           </p>
         </aside>
       </section>

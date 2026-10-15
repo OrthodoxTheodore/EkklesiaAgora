@@ -88,9 +88,7 @@ export function MembershipStatus() {
       <details className="mt-5 text-sm text-ink-soft">
         <summary className="cursor-pointer italic text-claret">What you sent</summary>
         <p className="mt-3 whitespace-pre-wrap border-l-2 border-buff pl-3">{application.lineage}</p>
-        {application.files.length > 0 && (
-          <p className="mt-2">Attached: {application.files.map((f) => f.name).join(", ")}</p>
-        )}
+        {application.evidence && <p className="mt-2 whitespace-pre-wrap">Records: {application.evidence}</p>}
       </details>
     </Panel>
   );

@@ -52,14 +52,13 @@ service cloud.firestore {
       allow read: if signedIn() && (request.auth.uid == uid || isAdmin());
 
       allow create: if signedIn() && request.auth.uid == uid
-        && request.resource.data.keys().hasOnly(['name', 'email', 'location', 'connection', 'lineage', 'files', 'status', 'submittedAt'])
+        && request.resource.data.keys().hasOnly(['name', 'email', 'location', 'connection', 'lineage', 'evidence', 'status', 'submittedAt'])
         && request.resource.data.status == 'pending'
         && shortText(request.resource.data.name, 120)
         && shortText(request.resource.data.location, 120)
         && shortText(request.resource.data.connection, 120)
         && shortText(request.resource.data.lineage, 5000)
-        && request.resource.data.files is list
-        && request.resource.data.files.size() <= 5;
+        && shortText(request.resource.data.evidence, 2000);
 
       allow update, delete: if isAdmin();
     }

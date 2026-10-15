@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { friendlyError, signInWithGoogle, signUpWithEmail } from "@/lib/account";
+import { googleSignIn } from "@/lib/firebase-config";
 import { Button, inputClass, Label, Notice } from "./ui";
 
 export function SignUpForm() {
@@ -36,10 +37,14 @@ export function SignUpForm() {
 
   return (
     <div className="space-y-6">
-      <Button type="button" variant="outline" className="w-full" onClick={google} disabled={busy}>
-        Continue with Google
-      </Button>
-      <p className="text-center text-sm italic text-ink-soft">or create an account with your email</p>
+      {googleSignIn && (
+        <>
+          <Button type="button" variant="outline" className="w-full" onClick={google} disabled={busy}>
+            Continue with Google
+          </Button>
+          <p className="text-center text-sm italic text-ink-soft">or create an account with your email</p>
+        </>
+      )}
       <form onSubmit={onSubmit} className="space-y-4">
         <Label text="Your full name">
           <input name="name" required autoComplete="name" className={inputClass} />

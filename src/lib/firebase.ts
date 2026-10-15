@@ -1,7 +1,6 @@
 import { getApp, getApps, initializeApp, type FirebaseApp } from "firebase/app";
 import { getAuth, type Auth } from "firebase/auth";
 import { getFirestore, type Firestore } from "firebase/firestore";
-import { getStorage, type FirebaseStorage } from "firebase/storage";
 import { firebaseConfig } from "./firebase-config";
 
 // Until the config is filled in, membership features show a "coming soon"
@@ -18,4 +17,3 @@ function firebaseApp() {
 
 export const auth = (): Auth => getAuth(firebaseApp());
 export const db = (): Firestore => getFirestore(firebaseApp());
-export const storage = (): FirebaseStorage => getStorage(firebaseApp());

@@ -8,6 +8,7 @@ import { useAuth } from "@/components/AuthProvider";
 import { Button, inputClass, Label, MembershipComingSoon, Notice, Panel } from "@/components/ui";
 import { friendlyError, signInWithGoogle } from "@/lib/account";
 import { auth, firebaseReady } from "@/lib/firebase";
+import { googleSignIn } from "@/lib/firebase-config";
 
 export function SignInForm() {
   const router = useRouter();
@@ -52,10 +53,14 @@ export function SignInForm() {
 
   return (
     <Panel className="space-y-6">
-      <Button type="button" variant="outline" className="w-full" onClick={() => run(signInWithGoogle)} disabled={busy}>
-        Continue with Google
-      </Button>
-      <p className="text-center text-sm italic text-ink-soft">or sign in with your email</p>
+      {googleSignIn && (
+        <>
+          <Button type="button" variant="outline" className="w-full" onClick={() => run(signInWithGoogle)} disabled={busy}>
+            Continue with Google
+          </Button>
+          <p className="text-center text-sm italic text-ink-soft">or sign in with your email</p>
+        </>
+      )}
       <form onSubmit={onSubmit} className="space-y-4">
         <Label text="Email">
           <input

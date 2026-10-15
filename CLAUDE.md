@@ -13,8 +13,8 @@ The previous project in this repo (Ekklesia Agora) is preserved on the `ekklesia
 ## Stack
 
 - Next.js 15 (App Router, static export to `/out`), React 19, Tailwind CSS v4, TypeScript
-- Firebase (client SDK only; the site stays a static export): Auth (email/password + Google), Firestore, Storage. Config in `src/lib/firebase-config.ts`; when it is empty, membership pages show "opening soon"
-- Security lives in `firestore.rules` and `storage.rules`, not in page code. Deploy them with the Firebase CLI after any change
+- Firebase (client SDK only; the site stays a static export): Auth (email/password; Google sign-in not yet enabled), Firestore. Free Spark plan, so no Cloud Storage: applicants paste record links or email documents. Config in `src/lib/firebase-config.ts`; when it is empty, membership pages show "opening soon"
+- Security lives in `firestore.rules`, not in page code. Deploy them with the Firebase CLI after any change
 - The "Share Your Line" form still opens the visitor's email app (`mailto:`)
 - Fonts: IM Fell English (headings), Libre Caslon Text (body)
 - Palette (in `src/app/globals.css`): Continental blue `#1f3354`, buff `#d6c08f`, parchment `#f5efe2`, claret `#7d2c2a`, Ulster green `#3d5a45`
@@ -24,7 +24,7 @@ The previous project in this repo (Ekklesia Agora) is preserved on the `ekklesia
 - Anyone can sign up; accounts start `pending`. An admin approves the application on `/admin/`, which sets `users/{uid}.status` to `member`
 - Members add people to the tree (`people` collection, `parentId` → a curated id in `src/data/family.ts` or another `people` doc). Additions show at once, flagged "Not yet reviewed" until an admin marks them reviewed
 - Living people added by members are readable by members only (enforced in `firestore.rules`)
-- Application documents live in Storage under `applications/{uid}/`, readable only by the applicant and admins
+- Applications (`applications/{uid}`) are readable only by the applicant and admins
 - The first admin is set by hand in the Firestore console: `users/{uid}` → `status: "member"`, `role: "admin"`
 
 ## Where content lives
