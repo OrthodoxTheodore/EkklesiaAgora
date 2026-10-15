@@ -61,6 +61,40 @@ service cloud.firestore {
         && shortText(request.resource.data.evidence, 2000);
 
       allow update, delete: if isAdmin();
+
+      // Supporting documents, stored in chunks because the free plan has no
+      // file storage (see src/lib/files.ts). Applicants may add them only until
+      // a decision is made on their application.
+      function ownsOpenApplication() {
+        let app = /databases/$(database)/documents/applications/$(uid);
+        return signedIn() && request.auth.uid == uid
+          && (!exists(app) || get(app).data.status == 'pending');
+      }
+
+      match /files/{fileId} {
+        allow read: if signedIn() && (request.auth.uid == uid || isAdmin());
+
+        allow create: if ownsOpenApplication()
+          && request.resource.data.keys().hasOnly(['name', 'type', 'size', 'chunkCount', 'uploadedAt'])
+          && shortText(request.resource.data.name, 200)
+          && (request.resource.data.type.matches('image/.*') || request.resource.data.type == 'application/pdf')
+          && request.resource.data.size is int && request.resource.data.size <= 5 * 1024 * 1024
+          && request.resource.data.chunkCount is int && request.resource.data.chunkCount <= 8;
+
+        allow delete: if isAdmin();
+
+        match /chunks/{chunkId} {
+          allow read: if signedIn() && (request.auth.uid == uid || isAdmin());
+
+          allow create: if ownsOpenApplication()
+            && chunkId.matches('^[0-7]$')
+            && request.resource.data.keys().hasOnly(['data'])
+            && request.resource.data.data is bytes
+            && request.resource.data.data.size() <= 700 * 1024;
+
+          allow delete: if isAdmin();
+        }
+      }
     }
 
     match /people/{personId} {

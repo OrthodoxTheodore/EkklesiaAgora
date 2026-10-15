@@ -17,6 +17,7 @@ import { Button, inputClass, Loading, MembershipComingSoon, Notice, Panel } from
 import { patriarch } from "@/data/family";
 import { friendlyError } from "@/lib/account";
 import { db, firebaseReady } from "@/lib/firebase";
+import { deleteApplicationFiles, listApplicationFiles, openApplicationFile, type StoredFile } from "@/lib/files";
 import { indexNames, type TreeDoc } from "@/lib/tree";
 import type { Application, Profile, TreePerson } from "@/lib/types";
 
@@ -123,6 +124,11 @@ function ApplicationCard({ app }: { app: AppRow }) {
   const [note, setNote] = useState(app.reviewNote ?? "");
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState("");
+  const [files, setFiles] = useState<StoredFile[]>([]);
+
+  useEffect(() => {
+    listApplicationFiles(app.id).then(setFiles, () => setFiles([]));
+  }, [app.id]);
 
   async function act(fn: () => Promise<unknown>) {
     setBusy(true);
@@ -155,6 +161,14 @@ function ApplicationCard({ app }: { app: AppRow }) {
     rejected: "bg-claret/10 text-claret",
   }[app.status];
 
+  // Once a decision is made the documents have done their job; admins can
+  // delete them so the family's private papers are not kept longer than needed.
+  const deleteFiles = () =>
+    act(async () => {
+      await deleteApplicationFiles(app.id);
+      setFiles([]);
+    });
+
   return (
     <Panel className="!p-6">
       <div className="flex flex-wrap items-start justify-between gap-3">
@@ -184,6 +198,26 @@ function ApplicationCard({ app }: { app: AppRow }) {
               ),
             )}
           </p>
+        </div>
+      )}
+
+      {files.length > 0 && (
+        <div className="mt-4 flex flex-wrap items-center gap-2">
+          {files.map((f) => (
+            <button
+              key={f.id}
+              onClick={() => act(() => openApplicationFile(app.id, f))}
+              disabled={busy}
+              className="border border-buff px-3 py-1 text-sm text-continental hover:border-claret"
+            >
+              📎 {f.name} <span className="text-ink-soft">({Math.max(1, Math.round(f.size / 1024))} KB)</span>
+            </button>
+          ))}
+          {app.status !== "pending" && (
+            <button onClick={deleteFiles} disabled={busy} className="text-sm italic text-claret underline">
+              Delete documents
+            </button>
+          )}
         </div>
       )}
 

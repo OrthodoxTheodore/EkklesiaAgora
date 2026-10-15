@@ -2,16 +2,34 @@
 
 import { doc, serverTimestamp, setDoc } from "firebase/firestore";
 import { useState } from "react";
-import { site } from "@/data/site";
 import { friendlyError } from "@/lib/account";
+import { MAX_FILE_BYTES, MAX_FILES, uploadApplicationFile } from "@/lib/files";
 import { db } from "@/lib/firebase";
 import { useAuth } from "./AuthProvider";
 import { Button, inputClass, Label, Notice } from "./ui";
 
+const okType = (f: File) => f.type.startsWith("image/") || f.type === "application/pdf";
+
 export function ApplicationForm() {
   const { user, profile } = useAuth();
+  const [files, setFiles] = useState<File[]>([]);
   const [busy, setBusy] = useState(false);
+  const [progress, setProgress] = useState("");
   const [error, setError] = useState("");
+
+  function pickFiles(e: React.ChangeEvent<HTMLInputElement>) {
+    const picked = Array.from(e.target.files ?? []);
+    e.target.value = "";
+    const all = [...files, ...picked];
+    const bad = picked.find((f) => !okType(f));
+    // Large photos are shrunk on upload, so only PDFs are held to the size limit here.
+    const tooBig = picked.find((f) => f.type === "application/pdf" && f.size > MAX_FILE_BYTES);
+    if (bad) return setError(`"${bad.name}" can't be used. Please attach photos or PDFs.`);
+    if (tooBig) return setError(`"${tooBig.name}" is larger than 5 MB. Try scanning it at a lower resolution.`);
+    if (all.length > MAX_FILES) return setError(`Please attach no more than ${MAX_FILES} files.`);
+    setError("");
+    setFiles(all);
+  }
 
   async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -20,6 +38,11 @@ export function ApplicationForm() {
     setBusy(true);
     setError("");
     try {
+      for (const [i, file] of files.entries()) {
+        setProgress(`Uploading ${i + 1} of ${files.length}: ${file.name}`);
+        await uploadApplicationFile(user.uid, file);
+      }
+      setProgress("Sending your application…");
       await setDoc(doc(db(), "applications", user.uid), {
         name: String(f.get("name")).trim(),
         email: user.email ?? "",
@@ -31,7 +54,8 @@ export function ApplicationForm() {
         submittedAt: serverTimestamp(),
       });
     } catch (err) {
-      setError(friendlyError(err));
+      setError(err instanceof Error && !("code" in err) ? err.message : friendlyError(err));
+      setProgress("");
       setBusy(false);
     }
   }
@@ -70,19 +94,46 @@ export function ApplicationForm() {
         />
       </Label>
       <Label
-        text="Records that show the connection (optional)"
-        hint="Paste links to anything that helps: a FamilySearch person page, a Find a Grave memorial, an online obituary."
+        text="Links to records (optional)"
+        hint="A FamilySearch person page, a Find a Grave memorial, an online obituary."
       >
         <textarea name="evidence" rows={3} maxLength={2000} className={inputClass} />
       </Label>
-      <Notice>
-        Have a document that isn&rsquo;t online, like a family Bible page or a birth record? Email a photo of it to{" "}
-        <a href={`mailto:${site.contactEmail}`} className="text-claret underline">
-          {site.contactEmail}
-        </a>{" "}
-        and mention your name.
-      </Notice>
+      <div>
+        <Label
+          text="Documents and photos (optional)"
+          hint="Up to 5 photos or PDFs: a family Bible page, a birth record, an obituary clipping. A phone photo is fine. Only site admins can see these."
+        >
+          <input
+            type="file"
+            multiple
+            accept="image/*,application/pdf"
+            onChange={pickFiles}
+            disabled={busy || files.length >= MAX_FILES}
+            className="mt-2 block w-full text-sm text-ink-soft file:mr-4 file:border file:border-continental file:bg-parchment file:px-4 file:py-2 file:font-display file:text-continental"
+          />
+        </Label>
+        {files.length > 0 && (
+          <ul className="mt-3 space-y-1 text-sm text-ink-soft">
+            {files.map((file, i) => (
+              <li key={file.name + i} className="flex items-center gap-3">
+                <span>📎 {file.name}</span>
+                {!busy && (
+                  <button
+                    type="button"
+                    onClick={() => setFiles(files.filter((_, j) => j !== i))}
+                    className="text-xs italic text-claret underline"
+                  >
+                    remove
+                  </button>
+                )}
+              </li>
+            ))}
+          </ul>
+        )}
+      </div>
       {error && <Notice tone="error">{error}</Notice>}
+      {progress && <Notice>{progress}</Notice>}
       <Button type="submit" disabled={busy}>
         {busy ? "Sending…" : "Submit Application"}
       </Button>

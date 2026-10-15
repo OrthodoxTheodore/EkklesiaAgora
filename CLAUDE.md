@@ -13,7 +13,7 @@ The previous project in this repo (Ekklesia Agora) is preserved on the `ekklesia
 ## Stack
 
 - Next.js 15 (App Router, static export to `/out`), React 19, Tailwind CSS v4, TypeScript
-- Firebase (client SDK only; the site stays a static export): Auth (email/password; Google sign-in not yet enabled), Firestore. Free Spark plan, so no Cloud Storage: applicants paste record links or email documents. Config in `src/lib/firebase-config.ts`; when it is empty, membership pages show "opening soon"
+- Firebase (client SDK only; the site stays a static export): Auth (email/password; Google sign-in not yet enabled), Firestore. Free Spark plan, so no Cloud Storage: application documents are stored in Firestore as chunked bytes (`src/lib/files.ts`, subcollections under `applications/{uid}/files`), counting toward the 1 GB free quota. Config in `src/lib/firebase-config.ts`; when it is empty, membership pages show "opening soon"
 - Security lives in `firestore.rules`, not in page code. Deploy them with the Firebase CLI after any change
 - The "Share Your Line" form still opens the visitor's email app (`mailto:`)
 - Fonts: IM Fell English (headings), Libre Caslon Text (body)
