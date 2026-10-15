@@ -7,19 +7,29 @@ export const metadata: Metadata = { title: "Major Joseph McGarraugh" };
 
 const facts = [
   { label: "Born", value: "1738, Ulster, Ireland" },
-  { label: "Rank", value: "Major" },
-  { label: "Service", value: "American Revolutionary War" },
+  { label: "Parents", value: "Alexander & Mary McGarraugh (family tradition)" },
+  { label: "Wife", value: "Elizabeth K. Pennock" },
+  { label: "Service", value: "Major, 3rd Battalion, Westmoreland County Militia, 1778" },
+  { label: "Son", value: "Rev. Robert McGarraugh (1777–1839)" },
   { label: "Died", value: "1809, Fayette County, Pennsylvania" },
 ];
 
 const openQuestions = [
-  "When did Joseph leave Ulster, and from which county? Antrim, Down, Londonderry, Tyrone?",
-  "Did he hold his commission in a Pennsylvania militia battalion or in a Continental regiment?",
-  "Who was his wife, and when and where did they marry?",
-  "What were the names of his children, and in what order were they born?",
+  "When did the family leave Ulster, and from which county? Antrim, Down, Londonderry?",
+  "Is there a ship list, land warrant, or naturalization record for Alexander and Mary?",
+  "When and where did Joseph marry Elizabeth K. Pennock, and when did she die?",
+  "Besides Robert, what other children did Joseph and Elizabeth have?",
   "Where exactly in Fayette County did he live, and where is he buried?",
   "Did he leave a will, a land warrant, or a pension application?",
 ];
+
+function Source({ children }: { children: React.ReactNode }) {
+  return (
+    <p className="!mt-3 border-l-2 border-ulster pl-3 text-sm text-ulster">
+      <span className="font-bold">✓ Verified record:</span> {children}
+    </p>
+  );
+}
 
 export default function JosephPage() {
   return (
@@ -27,7 +37,7 @@ export default function JosephPage() {
       <PageHeader
         eyebrow="The Patriarch"
         title="Major Joseph McGarraugh"
-        intro="Ulsterman, soldier, frontiersman, and the common ancestor of every family on this site."
+        intro="Ulsterman, militia officer, frontiersman, and the common ancestor of every family on this site."
       />
 
       <div className="mx-auto grid max-w-6xl gap-12 px-4 py-16 lg:grid-cols-[1fr_20rem]">
@@ -49,13 +59,32 @@ export default function JosephPage() {
 
           <Ornament className="my-10" />
 
-          <h2 className="text-3xl text-continental">A Major in the Revolution</h2>
+          <h2 className="text-3xl text-continental">A Major on the frontier</h2>
           <p>
-            Joseph served in the American Revolutionary War with the rank of Major, an officer&rsquo;s commission that
-            would have placed him among the leaders of the men of his community. Pennsylvania fielded both regiments of
-            the Continental Line and county militia battalions. The militia were organized county by county and were
-            called out in turns to guard the frontier and reinforce the army. Which of these Joseph served in, and
-            where, is one of the questions this family is working to answer.
+            In 1778 the Westmoreland County militia rolls list <em>Major Joseph McGerraugh</em> among the field
+            officers of the county&rsquo;s 3rd Battalion. That is our Joseph, under one of the many spellings clerks
+            gave the name. Westmoreland was then the raw western edge of Pennsylvania. Its county seat at Hannastown
+            was burned by British-allied raiders in 1782. A militia major there was not filling an honorary post. He
+            was organizing his neighbors to defend their own farms, while the war against Britain was fought, for these
+            families, on two fronts at once.
+          </p>
+          <Source>Pennsylvania State Archives, Westmoreland County Revolutionary War Militia</Source>
+
+          <Ornament className="my-10" />
+
+          <h2 className="text-3xl text-continental">Family</h2>
+          <p>
+            Joseph married Elizabeth K. Pennock. Their son <strong className="font-normal text-continental">Robert</strong>,
+            born in 1777, became a Presbyterian minister. A generation after his father defended the frontier, the
+            Rev. Robert McGarraugh went out from the Presbytery of Redstone as a missionary to the Stump Creek country,
+            now Clarion and Jefferson Counties, and was still making regular visits to the Beechwoods settlement in
+            1831 and 1832. He married Lavina Jane Stille and died in 1839.
+          </p>
+          <Source>History of the Presbytery of Clarion of the Presbyterian Church (as “Dr. Robert M&rsquo;Garrough”)</Source>
+          <p>
+            Joseph&rsquo;s parents are remembered in the family tree as Alexander and Mary McGarraugh, who crossed from
+            Ulster to Pennsylvania. No record naming them has been found yet, so for now they stand as family
+            tradition.
           </p>
 
           <Ornament className="my-10" />

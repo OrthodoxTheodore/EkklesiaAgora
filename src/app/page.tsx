@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { AboutFounder } from "@/components/AboutFounder";
 import { Crest } from "@/components/Crest";
 import { Journey } from "@/components/Journey";
 import { Ornament } from "@/components/Ornament";
@@ -8,13 +9,13 @@ const sections = [
     href: "/joseph/",
     eyebrow: "The Patriarch",
     title: "Major Joseph McGarraugh",
-    body: "Born in Ulster, he crossed the ocean, took up arms for independence, and died on the western Pennsylvania frontier. This is his story as far as we know it so far.",
+    body: "Born in Ulster, he commanded frontier militia in the Revolution and died in Fayette County. His story, and the records behind it.",
   },
   {
     href: "/family/",
     eyebrow: "The Branches",
     title: "The Family Tree",
-    body: "Two centuries of sons and daughters, from Fayette County outward across America. Find where your line joins the trunk.",
+    body: "Eleven generations and counting, from Fayette County outward across America. Find where your line joins the trunk.",
   },
   {
     href: "/research/",
@@ -58,6 +59,12 @@ export default function Home() {
               Explore the Family Tree
             </Link>
             <Link
+              href="/#about"
+              className="w-full rounded-sm border border-buff px-7 py-3 font-display text-lg text-buff transition hover:bg-buff/10 sm:w-auto"
+            >
+              About This Site
+            </Link>
+            <Link
               href="/connect/"
               className="w-full rounded-sm border border-buff px-7 py-3 font-display text-lg text-buff transition hover:bg-buff/10 sm:w-auto"
             >
@@ -67,23 +74,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="mx-auto max-w-3xl px-4 py-20">
-        <p className="eyebrow text-center">Welcome, Cousin</p>
-        <h2 className="mt-3 text-center text-3xl text-continental sm:text-4xl">One name, many households</h2>
-        <div className="prose-family mt-8 text-lg">
-          <p className="drop-cap">
-            If you carry the McGarraugh name, or if your grandmother or great-grandfather did, you belong to a family
-            whose American story begins with one man. Joseph McGarraugh came out of Ulster in the eighteenth century,
-            stood with the colonies when they declared their independence, and ended his days in Fayette County,
-            Pennsylvania, in 1809.
-          </p>
-          <p>
-            This site is our common hearth: a place to piece together his life, trace each branch that grew from it,
-            keep the records safe, and find the cousins we have never met. It belongs to all of us, and it grows each
-            time someone shares a name, a date, a photograph, or a story.
-          </p>
-        </div>
-      </section>
+      <AboutFounder />
 
       <section className="border-y border-buff/50 bg-parchment-deep/60 px-4 py-16">
         <p className="eyebrow text-center">From the Old World to the New</p>

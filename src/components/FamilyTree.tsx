@@ -1,6 +1,7 @@
 import type { Person } from "@/data/family";
 
 function lifespan(p: Person) {
+  if (p.dates !== undefined) return p.dates || null;
   if (!p.born && !p.died) return null;
   return `${p.born ?? "?"} – ${p.died ?? ""}`;
 }
@@ -9,7 +10,7 @@ function PersonCard({ person, root = false }: { person: Person; root?: boolean }
   const span = lifespan(person);
   return (
     <div
-      className={`inline-block border bg-parchment px-5 py-4 text-left shadow-sm ${
+      className={`inline-block max-w-md border bg-parchment px-5 py-4 text-left shadow-sm ${
         root ? "border-2 border-claret" : "border-buff"
       }`}
     >
@@ -23,48 +24,49 @@ function PersonCard({ person, root = false }: { person: Person; root?: boolean }
         </p>
       )}
       {person.spouse && <p className="mt-1 text-sm text-ink-soft">m. {person.spouse}</p>}
-      {person.note && <p className="mt-2 max-w-xs text-sm text-ink-soft">{person.note}</p>}
+      {person.note && <p className="mt-2 text-sm text-ink-soft">{person.note}</p>}
+      {person.sources?.map((s) => (
+        <p key={s} className="mt-2 border-t border-buff/50 pt-2 text-xs text-ulster">
+          ✓ Verified: {s}
+        </p>
+      ))}
     </div>
   );
 }
 
-function Branch({ person }: { person: Person }) {
-  const kids = person.children ?? [];
+// A single line of descent runs straight down; the tree only indents where
+// a family actually branches into more than one child.
+function Descendants({ people }: { people: Person[] }) {
+  if (people.length === 0) return null;
+  if (people.length === 1) {
+    const [p] = people;
+    return (
+      <div className="flex flex-col items-start">
+        <span aria-hidden="true" className="ml-8 h-6 border-l-2 border-buff" />
+        <PersonCard person={p} />
+        <Descendants people={p.children ?? []} />
+      </div>
+    );
+  }
   return (
-    <li className="relative pl-6 before:absolute before:left-0 before:top-0 before:h-full before:border-l before:border-buff last:before:h-8 after:absolute after:left-0 after:top-8 after:w-5 after:border-t after:border-buff">
-      {kids.length > 0 ? (
-        <details open className="group">
-          <summary className="cursor-pointer list-none">
-            <PersonCard person={person} />
-            <span className="ml-3 text-xs text-ink-soft group-open:hidden">
-              ({kids.length} {kids.length === 1 ? "child" : "children"})
-            </span>
-          </summary>
-          <ul className="mt-3 space-y-3">
-            {kids.map((c) => (
-              <Branch key={c.id} person={c} />
-            ))}
-          </ul>
-        </details>
-      ) : (
-        <PersonCard person={person} />
-      )}
-    </li>
+    <ul className="ml-8 mt-3 space-y-3 border-l-2 border-buff">
+      {people.map((p) => (
+        <li key={p.id} className="relative pl-6 before:absolute before:left-0 before:top-8 before:w-5 before:border-t-2 before:border-buff">
+          <PersonCard person={p} />
+          <div className="ml-0">
+            <Descendants people={p.children ?? []} />
+          </div>
+        </li>
+      ))}
+    </ul>
   );
 }
 
 export function FamilyTree({ root }: { root: Person }) {
-  const kids = root.children ?? [];
   return (
     <div className="overflow-x-auto pb-4">
       <PersonCard person={root} root />
-      {kids.length > 0 && (
-        <ul className="ml-6 mt-3 space-y-3">
-          {kids.map((c) => (
-            <Branch key={c.id} person={c} />
-          ))}
-        </ul>
-      )}
+      <Descendants people={root.children ?? []} />
     </div>
   );
 }

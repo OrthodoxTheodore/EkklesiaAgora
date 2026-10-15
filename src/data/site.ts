@@ -12,6 +12,7 @@ export const site = {
 
 export const nav = [
   { href: "/", label: "Home" },
+  { href: "/#about", label: "About" },
   { href: "/joseph/", label: "Major Joseph" },
   { href: "/family/", label: "Family Tree" },
   { href: "/timeline/", label: "Timeline" },

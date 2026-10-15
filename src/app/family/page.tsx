@@ -22,8 +22,6 @@ const steps = [
 ];
 
 export default function FamilyPage() {
-  const hasBranches = (patriarch.children ?? []).length > 0;
-
   return (
     <>
       <PageHeader
@@ -35,20 +33,16 @@ export default function FamilyPage() {
       <section className="mx-auto max-w-6xl px-4 py-16">
         <FamilyTree root={patriarch} />
 
-        {!hasBranches && (
-          <div className="ml-6 mt-3 border-l border-dashed border-buff pl-6">
-            <div className="max-w-xl border border-dashed border-buff bg-parchment-deep/40 px-6 py-5">
-              <p className="font-display text-xl text-continental">The branches are waiting to be drawn</p>
-              <p className="mt-2 text-ink-soft">
-                Joseph&rsquo;s children and their descendants will appear here as the family sends in their lines and
-                the records behind them. Your line may be the first.
-              </p>
-              <Link href="/connect/" className="mt-3 inline-block text-sm italic text-claret hover:underline">
-                Add your branch →
-              </Link>
-            </div>
-          </div>
-        )}
+        <div className="mt-10 max-w-xl border border-dashed border-buff bg-parchment-deep/40 px-6 py-5">
+          <p className="font-display text-xl text-continental">Is your line here yet?</p>
+          <p className="mt-2 text-ink-soft">
+            So far the tree shows one line of descent, through Rev. Robert McGarraugh. Joseph&rsquo;s other children and
+            their descendants will be added as cousins send in their lines and the records behind them.
+          </p>
+          <Link href="/connect/" className="mt-3 inline-block text-sm italic text-claret hover:underline">
+            Add your branch →
+          </Link>
+        </div>
       </section>
 
       <section className="border-y border-buff/50 bg-parchment-deep/60 px-4 py-16">

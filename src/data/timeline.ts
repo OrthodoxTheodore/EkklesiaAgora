@@ -34,10 +34,22 @@ export const timeline: TimelineEntry[] = [
     kind: "history",
   },
   {
-    year: "1775–1783",
-    title: "Joseph serves the cause of independence",
-    body: "Joseph serves in the American Revolutionary War, holding the rank of Major. The details of his unit and service are still being gathered. If you hold records, please share them.",
+    year: "1777",
+    title: "Robert McGarraugh is born",
+    body: "Joseph and Elizabeth's son Robert is born. He will become a Presbyterian minister.",
     kind: "family",
+  },
+  {
+    year: "1778",
+    title: "Major of the Westmoreland County militia",
+    body: "Joseph is listed as Major among the field officers of the 3rd Battalion, Westmoreland County Militia, defending the Pennsylvania frontier. (Pennsylvania State Archives)",
+    kind: "family",
+  },
+  {
+    year: "1782",
+    title: "Hannastown burned",
+    body: "British-allied raiders burn Hannastown, the Westmoreland County seat, one of the last major raids of the war on the Pennsylvania frontier.",
+    kind: "history",
   },
   {
     year: "1783",
@@ -49,6 +61,18 @@ export const timeline: TimelineEntry[] = [
     year: "1809",
     title: "Joseph dies in Fayette County",
     body: "Major Joseph McGarraugh dies in Fayette County, Pennsylvania, leaving the descendants who now spread across America.",
+    kind: "family",
+  },
+  {
+    year: "1831–1832",
+    title: "Rev. Robert McGarraugh, missionary",
+    body: "Robert, sent out by the Presbytery of Redstone, makes regular visits to the Beechwoods settlement in the Stump Creek country, now Clarion and Jefferson Counties. (History of the Presbytery of Clarion)",
+    kind: "family",
+  },
+  {
+    year: "1839",
+    title: "Rev. Robert McGarraugh dies",
+    body: "Robert dies, two years after his wife, Lavina Jane Stille. The family line continues through their son Joseph, born 1792.",
     kind: "family",
   },
 ];
