@@ -1,6 +1,6 @@
 # The McGarraugh Family
 
-The gathering place for the descendants of Major Joseph McGarraugh (1738–1809), from Ulster to Fayette County, Pennsylvania.
+The gathering place for the descendants of Major Joseph McGarraugh (1738–1810), from Ulster to Fayette County, Pennsylvania.
 
 ```bash
 npm install

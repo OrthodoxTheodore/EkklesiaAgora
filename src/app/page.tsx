@@ -45,7 +45,7 @@ export default function Home() {
             <br />
             McGarraugh
           </h1>
-          <p className="mt-5 font-display text-2xl italic text-buff sm:text-3xl">1738 – 1809</p>
+          <p className="mt-5 font-display text-2xl italic text-buff sm:text-3xl">1738 – 1810</p>
           <Ornament className="mt-8" />
           <p className="mx-auto mt-8 max-w-2xl text-lg text-buff-soft sm:text-xl">
             Born in Ulster. Patriot of the American Revolution. Laid to rest in Fayette County, Pennsylvania. And the

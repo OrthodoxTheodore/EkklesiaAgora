@@ -34,7 +34,7 @@ export const lineage: Generation[] = [
   {
     name: "Major Joseph McGarraugh",
     born: "1738",
-    died: "1809",
+    died: "1810",
     spouse: "Elizabeth K. Pennock",
     spouseBorn: "1735",
     note: "Major, 3rd Battalion, Westmoreland County Militia, 1778.",
@@ -82,7 +82,7 @@ export const lineage: Generation[] = [
     name: "Clyde Edward McGarraugh",
     born: "1889",
     died: "1952",
-    spouse: "Bessie Kaulp",
+    spouse: "Bessie Kaup",
     spouseBorn: "1893",
     spouseDied: "1953",
     evidence: "tradition",

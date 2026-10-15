@@ -50,7 +50,7 @@ export const patriarch: Person = {
   name: joseph.name,
   born: "1738",
   bornPlace: "Ulster, Ireland",
-  died: "1809",
+  died: "1810",
   diedPlace: "Fayette County, Pennsylvania",
   spouse: spouseLabel(joseph),
   note: "Major, 3rd Battalion, Westmoreland County Militia, 1778. Our common ancestor.",

@@ -12,7 +12,7 @@ export function SiteFooter() {
             <p className="font-display text-xl">{site.name}</p>
             <p className="mt-2 max-w-md text-sm text-buff-soft">
               For every American descendant of Major Joseph McGarraugh, born in Ulster in 1738, patriot of the
-              Revolution, at rest in Fayette County, Pennsylvania since 1809.
+              Revolution, at rest in Fayette County, Pennsylvania since 1810.
             </p>
           </div>
         </div>

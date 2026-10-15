@@ -58,7 +58,7 @@ export const timeline: TimelineEntry[] = [
     kind: "history",
   },
   {
-    year: "1809",
+    year: "1810",
     title: "Joseph dies in Fayette County",
     body: "Major Joseph McGarraugh dies in Fayette County, Pennsylvania, leaving the descendants who now spread across America.",
     kind: "family",

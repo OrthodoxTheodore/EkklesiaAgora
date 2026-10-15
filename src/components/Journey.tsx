@@ -3,7 +3,7 @@ const stops = [
   { place: "Ulster", detail: "Birthplace, 1738" },
   { place: "The Atlantic", detail: "The crossing" },
   { place: "Pennsylvania", detail: "A new country" },
-  { place: "Fayette County", detail: "Resting place, 1809" },
+  { place: "Fayette County", detail: "Resting place, 1810" },
 ];
 
 export function Journey() {

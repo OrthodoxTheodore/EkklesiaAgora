@@ -1,6 +1,6 @@
 # The McGarraugh Family Website
 
-Family site for the American descendants of **Major Joseph McGarraugh (1738–1809)**: born in Ulster, officer in the American Revolutionary War, died in Fayette County, Pennsylvania.
+Family site for the American descendants of **Major Joseph McGarraugh (1738–1810)**: born in Ulster, officer in the American Revolutionary War, died in Fayette County, Pennsylvania.
 
 The previous project in this repo (Ekklesia Agora) is preserved on the `ekklesia-agora-archive` branch.
 

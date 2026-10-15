@@ -2,9 +2,9 @@
 export const site = {
   name: "The McGarraugh Family",
   shortName: "McGarraugh",
-  tagline: "Descendants of Major Joseph McGarraugh · 1738–1809",
+  tagline: "Descendants of Major Joseph McGarraugh · 1738–1810",
   description:
-    "The gathering place for the American descendants of Major Joseph McGarraugh (1738–1809), born in Ulster, patriot of the American Revolution, laid to rest in Fayette County, Pennsylvania.",
+    "The gathering place for the American descendants of Major Joseph McGarraugh (1738–1810), born in Ulster, patriot of the American Revolution, laid to rest in Fayette County, Pennsylvania.",
   // Where family submissions go. Leave empty until a family inbox is chosen;
   // the "Share Your Line" form shows a notice instead of sending.
   contactEmail: "ekklesiaagora@gmail.com",

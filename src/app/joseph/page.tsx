@@ -11,7 +11,7 @@ const facts = [
   { label: "Wife", value: "Elizabeth K. Pennock" },
   { label: "Service", value: "Major, 3rd Battalion, Westmoreland County Militia, 1778" },
   { label: "Son", value: "Rev. Robert McGarraugh (1777–1839)" },
-  { label: "Died", value: "1809, Fayette County, Pennsylvania" },
+  { label: "Died", value: "1810, Fayette County, Pennsylvania" },
 ];
 
 const openQuestions = [
@@ -97,7 +97,7 @@ export default function JosephPage() {
             veterans of the war settled and raised their families.
           </p>
           <p>
-            Joseph McGarraugh died there in 1809. From that corner of Pennsylvania his descendants spread out across
+            Joseph McGarraugh died there in 1810. From that corner of Pennsylvania his descendants spread out across
             the young republic, and they are spread across it still.
           </p>
         </article>
