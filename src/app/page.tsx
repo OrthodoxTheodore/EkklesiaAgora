@@ -1,131 +1,125 @@
-import Link from 'next/link';
-import Image from 'next/image';
-import { Play, Users, Calendar } from 'lucide-react';
-import { fetchDayData } from '@/lib/calendar/orthocal';
-import { TodayInChurch } from '@/components/calendar/TodayInChurch';
-import type { OrthodocalDay } from '@/lib/types/calendar';
+import Link from "next/link";
+import { Crest } from "@/components/Crest";
+import { Journey } from "@/components/Journey";
+import { Ornament } from "@/components/Ornament";
 
-// Server Component — accessible without authentication (AUTH-05)
-export default async function HomePage() {
-  // Best-effort — the homepage must stay accessible even if orthocal.info
-  // is unreachable, so a failed fetch just omits the section.
-  let today: OrthodocalDay | null = null;
-  try {
-    today = await fetchDayData(new Date(), 'new_julian');
-  } catch {
-    today = null;
-  }
+const sections = [
+  {
+    href: "/joseph/",
+    eyebrow: "The Patriarch",
+    title: "Major Joseph McGarraugh",
+    body: "Born in Ulster, he crossed the ocean, took up arms for independence, and died on the western Pennsylvania frontier. This is his story as far as we know it so far.",
+  },
+  {
+    href: "/family/",
+    eyebrow: "The Branches",
+    title: "The Family Tree",
+    body: "Two centuries of sons and daughters, from Fayette County outward across America. Find where your line joins the trunk.",
+  },
+  {
+    href: "/research/",
+    eyebrow: "The Records",
+    title: "Research & Sources",
+    body: "Pension files, county deeds, church registers, gravestones. Where to look, what we have found, and how to join the lineage societies.",
+  },
+];
 
+export default function Home() {
   return (
-    <div className="min-h-screen">
-
-      {/* Hero Section */}
-      <section className="relative px-4 py-20 md:py-32 text-center">
-        <div className="max-w-4xl mx-auto">
-          <div className="flex justify-center mb-4">
-            <Image
-              src="/Ekklesia_Agora.jpg"
-              alt="Ekklesia Agora"
-              width={160}
-              height={160}
-              className="rounded-full border border-gold/30 object-cover"
-            />
-          </div>
-          <h1 className="font-cinzel-dec text-4xl md:text-6xl lg:text-7xl text-gold mb-6 leading-tight">
-            Ekklesia Agora
+    <>
+      <section className="relative overflow-hidden bg-continental-deep px-4 pb-20 pt-16 text-center text-parchment sm:pb-28 sm:pt-24">
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-0 opacity-[0.07]"
+          style={{
+            backgroundImage:
+              "repeating-linear-gradient(45deg, #d6c08f 0 1px, transparent 1px 22px), repeating-linear-gradient(-45deg, #d6c08f 0 1px, transparent 1px 22px)",
+          }}
+        />
+        <div className="relative mx-auto max-w-4xl">
+          <Crest className="mx-auto h-24 w-24 text-buff sm:h-28 sm:w-28" />
+          <p className="eyebrow mt-8 !text-buff">The Descendants of</p>
+          <h1 className="mt-4 text-5xl leading-[1.05] sm:text-7xl">
+            Major Joseph
+            <br />
+            McGarraugh
           </h1>
-          <p className="font-garamond text-xl md:text-2xl text-text-light max-w-2xl mx-auto mb-4 italic">
-            A Gathering Place for the Eastern Orthodox Community
+          <p className="mt-5 font-display text-2xl italic text-buff sm:text-3xl">1738 – 1809</p>
+          <Ornament className="mt-8" />
+          <p className="mx-auto mt-8 max-w-2xl text-lg text-buff-soft sm:text-xl">
+            Born in Ulster. Patriot of the American Revolution. Laid to rest in Fayette County, Pennsylvania. And the
+            father of a family that now reaches across the whole of the country he fought to found.
           </p>
-          <p className="font-garamond text-base md:text-lg text-text-mid max-w-xl mx-auto mb-10">
-            Share videos, discuss the Faith,
-            and connect with the Orthodox faithful around the world.
+          <div className="mt-10 flex flex-col items-center justify-center gap-3 sm:flex-row">
+            <Link
+              href="/family/"
+              className="w-full rounded-sm bg-buff px-7 py-3 font-display text-lg text-continental-deep transition hover:bg-buff-soft sm:w-auto"
+            >
+              Explore the Family Tree
+            </Link>
+            <Link
+              href="/connect/"
+              className="w-full rounded-sm border border-buff px-7 py-3 font-display text-lg text-buff transition hover:bg-buff/10 sm:w-auto"
+            >
+              Add Your Branch
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      <section className="mx-auto max-w-3xl px-4 py-20">
+        <p className="eyebrow text-center">Welcome, Cousin</p>
+        <h2 className="mt-3 text-center text-3xl text-continental sm:text-4xl">One name, many households</h2>
+        <div className="prose-family mt-8 text-lg">
+          <p className="drop-cap">
+            If you carry the McGarraugh name, or if your grandmother or great-grandfather did, you belong to a family
+            whose American story begins with one man. Joseph McGarraugh came out of Ulster in the eighteenth century,
+            stood with the colonies when they declared their independence, and ended his days in Fayette County,
+            Pennsylvania, in 1809.
           </p>
-          <Link
-            href="/register"
-            className="inline-block px-8 py-3 font-cinzel text-sm uppercase tracking-widest text-navy bg-gold rounded hover:bg-gold-bright transition-colors shadow-lg"
-          >
-            Join the Community
-          </Link>
-        </div>
-
-        {/* Decorative gold divider */}
-        <div className="mt-20 flex items-center justify-center gap-4">
-          <div className="h-px flex-1 max-w-xs bg-gradient-to-r from-transparent to-gold/30" />
-          <div className="w-2 h-2 rounded-full bg-gold/40" />
-          <div className="h-px flex-1 max-w-xs bg-gradient-to-l from-transparent to-gold/30" />
+          <p>
+            This site is our common hearth: a place to piece together his life, trace each branch that grew from it,
+            keep the records safe, and find the cousins we have never met. It belongs to all of us, and it grows each
+            time someone shares a name, a date, a photograph, or a story.
+          </p>
         </div>
       </section>
 
-      {today && <TodayInChurch day={today} />}
-
-      {/* Feature Preview Cards */}
-      <section className="px-4 pb-20 max-w-6xl mx-auto">
-        <h2 className="font-cinzel text-center text-gold text-sm uppercase tracking-[0.3em] mb-12">
-          Coming Together in Christ
-        </h2>
-
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {/* Card: Orthodox Video */}
-          <div className="bg-navy-mid border border-gold/15 rounded-[6px] p-6 hover:border-gold/30 transition-colors">
-            <div className="w-10 h-10 rounded border border-gold/30 bg-gold/10 flex items-center justify-center mb-4">
-              <Play className="w-5 h-5 text-gold" />
-            </div>
-            <h3 className="font-cinzel text-gold text-sm uppercase tracking-widest mb-2">
-              Orthodox Video
-            </h3>
-            <p className="font-garamond text-text-mid text-sm leading-relaxed">
-              Sermons, lectures, liturgical services, and educational content from
-              canonically Eastern Orthodox sources worldwide.
-            </p>
-          </div>
-
-          {/* Card: The Agora */}
-          <div className="bg-navy-mid border border-gold/15 rounded-[6px] p-6 hover:border-gold/30 transition-colors">
-            <div className="w-10 h-10 rounded border border-gold/30 bg-gold/10 flex items-center justify-center mb-4">
-              <Users className="w-5 h-5 text-gold" />
-            </div>
-            <h3 className="font-cinzel text-gold text-sm uppercase tracking-widest mb-2">
-              The Agora
-            </h3>
-            <p className="font-garamond text-text-mid text-sm leading-relaxed">
-              A community feed for the Orthodox faithful — share reflections,
-              ask questions, and discuss the Faith in a spirit of love and truth.
-            </p>
-          </div>
-
-          {/* Card: Liturgical Calendar */}
-          <div className="bg-navy-mid border border-gold/15 rounded-[6px] p-6 hover:border-gold/30 transition-colors">
-            <div className="w-10 h-10 rounded border border-gold/30 bg-gold/10 flex items-center justify-center mb-4">
-              <Calendar className="w-5 h-5 text-gold" />
-            </div>
-            <h3 className="font-cinzel text-gold text-sm uppercase tracking-widest mb-2">
-              Liturgical Calendar
-            </h3>
-            <p className="font-garamond text-text-mid text-sm leading-relaxed">
-              Daily feasts, fasts, and saints of the Orthodox Church, with
-              readings for each day of the liturgical year.
-            </p>
-          </div>
+      <section className="border-y border-buff/50 bg-parchment-deep/60 px-4 py-16">
+        <p className="eyebrow text-center">From the Old World to the New</p>
+        <h2 className="mt-3 text-center text-3xl text-continental">The Road from Ulster</h2>
+        <div className="mt-12">
+          <Journey />
         </div>
       </section>
 
-      {/* Footer CTA */}
-      <section className="px-4 py-16 text-center border-t border-gold/10">
-        <p className="font-garamond text-text-mid text-lg italic mb-6">
-          &ldquo;Where two or three are gathered together in My name, I am there in the midst of them.&rdquo;
-        </p>
-        <p className="font-cinzel text-text-mid text-xs uppercase tracking-widest mb-8">
-          Matthew 18:20
-        </p>
-        <Link
-          href="/register"
-          className="inline-block px-8 py-3 font-cinzel text-sm uppercase tracking-widest text-navy bg-gold rounded hover:bg-gold-bright transition-colors"
-        >
-          Create a Free Account
-        </Link>
+      <section className="mx-auto max-w-6xl px-4 py-20">
+        <div className="grid gap-6 md:grid-cols-3">
+          {sections.map((s) => (
+            <Link
+              key={s.href}
+              href={s.href}
+              className="group flex flex-col border border-buff/70 bg-parchment p-7 shadow-sm transition hover:-translate-y-0.5 hover:border-claret/60 hover:shadow-md"
+            >
+              <p className="eyebrow">{s.eyebrow}</p>
+              <h3 className="mt-2 text-2xl text-continental">{s.title}</h3>
+              <p className="mt-3 flex-1 text-ink-soft">{s.body}</p>
+              <span className="mt-5 text-sm italic text-claret group-hover:underline">Read more →</span>
+            </Link>
+          ))}
+        </div>
       </section>
 
-    </div>
+      <section className="px-4">
+        <blockquote className="mx-auto max-w-3xl border-l-4 border-claret bg-parchment-deep/50 px-6 py-8 sm:px-10">
+          <p className="font-display text-2xl italic leading-snug text-continental sm:text-3xl">
+            “We mutually pledge to each other our Lives, our Fortunes, and our sacred Honor.”
+          </p>
+          <footer className="mt-4 text-sm uppercase tracking-[0.18em] text-ink-soft">
+            Declaration of Independence, 1776
+          </footer>
+        </blockquote>
+      </section>
+    </>
   );
 }

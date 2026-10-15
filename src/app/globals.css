@@ -1,0 +1,78 @@
+@import "tailwindcss";
+
+/* Palette drawn from the Continental Army uniform (blue and buff),
+   period parchment, and iron-gall ink. */
+@theme {
+  --color-parchment: #f5efe2;
+  --color-parchment-deep: #ebe2cd;
+  --color-ink: #1f2430;
+  --color-ink-soft: #4a4f5c;
+  --color-continental: #1f3354;
+  --color-continental-deep: #142339;
+  --color-buff: #d6c08f;
+  --color-buff-soft: #e9dcbc;
+  --color-claret: #7d2c2a;
+  --color-ulster: #3d5a45;
+
+  --font-display: var(--font-fell), "Georgia", serif;
+  --font-body: var(--font-caslon), "Georgia", serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--color-parchment);
+  color: var(--color-ink);
+  font-family: var(--font-body);
+  font-size: 1.0625rem;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--font-display);
+  line-height: 1.2;
+  letter-spacing: 0.005em;
+}
+
+::selection {
+  background: var(--color-buff);
+  color: var(--color-continental-deep);
+}
+
+a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible, select:focus-visible {
+  outline: 2px solid var(--color-claret);
+  outline-offset: 2px;
+}
+
+/* Small-caps eyebrow label above section headings */
+.eyebrow {
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--color-claret);
+}
+
+/* Faint laid-paper texture */
+.paper {
+  background-color: var(--color-parchment);
+  background-image:
+    repeating-linear-gradient(0deg, rgb(120 90 40 / 0.025) 0 1px, transparent 1px 4px),
+    radial-gradient(ellipse at top, rgb(255 255 255 / 0.5), transparent 60%);
+}
+
+.prose-family p + p {
+  margin-top: 1.1em;
+}
+
+.drop-cap::first-letter {
+  float: left;
+  font-family: var(--font-display);
+  font-size: 3.6em;
+  line-height: 0.8;
+  padding: 0.08em 0.1em 0 0;
+  color: var(--color-claret);
+}

@@ -1,56 +1,44 @@
-import type { Metadata } from 'next';
-import { Cinzel, Cinzel_Decorative, EB_Garamond } from 'next/font/google';
-import '@/styles/globals.css';
-import { AuthProvider } from '@/components/auth/AuthProvider';
-import { Navbar } from '@/components/nav/Navbar';
-import { Footer } from '@/components/layout/Footer';
+import type { Metadata } from "next";
+import { IM_Fell_English, Libre_Caslon_Text } from "next/font/google";
+import { SiteHeader } from "@/components/SiteHeader";
+import { SiteFooter } from "@/components/SiteFooter";
+import { site } from "@/data/site";
+import "./globals.css";
 
-const cinzel = Cinzel({
-  subsets: ['latin'],
-  weight: ['400', '600', '700', '900'],
-  variable: '--font-cinzel',
-  display: 'swap',
+const fell = IM_Fell_English({
+  weight: "400",
+  style: ["normal", "italic"],
+  subsets: ["latin"],
+  variable: "--font-fell",
 });
 
-const cinzelDecorative = Cinzel_Decorative({
-  subsets: ['latin'],
-  weight: ['400', '700'],
-  variable: '--font-cinzel-dec',
-  display: 'swap',
-});
-
-const ebGaramond = EB_Garamond({
-  subsets: ['latin'],
-  weight: ['400', '500', '600'],
-  style: ['normal', 'italic'],
-  variable: '--font-garamond',
-  display: 'swap',
+const caslon = Libre_Caslon_Text({
+  weight: ["400", "700"],
+  style: ["normal", "italic"],
+  subsets: ["latin"],
+  variable: "--font-caslon",
 });
 
 export const metadata: Metadata = {
-  title: 'Ekklesia Agora — A Gathering Place for Eastern Orthodox Christians',
-  description:
-    'An Eastern Orthodox Christian platform for video sharing and community discussion.',
+  title: { default: site.name, template: `%s · ${site.name}` },
+  description: site.description,
 };
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html
-      lang="en"
-      className={`${cinzel.variable} ${cinzelDecorative.variable} ${ebGaramond.variable}`}
-    >
-      <body className="bg-navy font-garamond text-text-light pt-[70px] min-h-screen flex flex-col">
-        <AuthProvider>
-          <Navbar />
-          <main className="relative z-10 flex-1">
-            {children}
-          </main>
-          <Footer />
-        </AuthProvider>
+    <html lang="en" className={`${fell.variable} ${caslon.variable}`}>
+      <body className="paper flex min-h-screen flex-col">
+        <a
+          href="#main"
+          className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:bg-parchment focus:px-3 focus:py-2"
+        >
+          Skip to content
+        </a>
+        <SiteHeader />
+        <main id="main" className="flex-1">
+          {children}
+        </main>
+        <SiteFooter />
       </body>
     </html>
   );

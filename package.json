@@ -1,48 +1,28 @@
 {
-  "name": "ekklesia-agora",
+  "name": "mcgarraugh-family",
   "version": "0.1.0",
   "private": true,
   "scripts": {
     "dev": "next dev --turbopack",
-    "build": "next build --turbopack",
-    "start": "next start",
-    "lint": "eslint",
-    "test": "jest",
-    "seed:admin": "npx tsx scripts/seed-super-admin.ts"
+    "build": "next build",
+    "start": "npx serve out",
+    "lint": "eslint"
   },
   "dependencies": {
-    "@hookform/resolvers": "^5.2.2",
-    "@tailwindcss/postcss": "^4.2.1",
-    "firebase": "^12.10.0",
-    "firebase-admin": "^13.7.0",
-    "lucide-react": "^0.577.0",
     "next": "15.5.13",
-    "next-firebase-auth-edge": "^1.12.0",
-    "open-graph-scraper": "^6.11.0",
-    "postcss": "^8.5.8",
     "react": "19.1.0",
-    "react-dom": "19.1.0",
-    "react-hook-form": "^7.71.2",
-    "tailwindcss": "^4.2.1",
-    "zod": "^4.3.6"
+    "react-dom": "19.1.0"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
-    "@testing-library/jest-dom": "^6.9.1",
-    "@testing-library/react": "^16.3.2",
-    "@testing-library/user-event": "^14.6.1",
-    "@types/jest": "^30.0.0",
+    "@tailwindcss/postcss": "^4.2.1",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
-    "dotenv": "^17.3.1",
     "eslint": "^9",
     "eslint-config-next": "15.5.13",
-    "fast-xml-parser": "^5.5.7",
-    "jest": "^30.3.0",
-    "jest-environment-jsdom": "^30.3.0",
-    "tsx": "^4.21.0",
-    "typescript": "^5",
-    "usfm-js": "^3.4.3"
+    "postcss": "^8.5.8",
+    "tailwindcss": "^4.2.1",
+    "typescript": "^5"
   }
 }
