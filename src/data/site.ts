@@ -7,7 +7,7 @@ export const site = {
     "The gathering place for the American descendants of Major Joseph McGarraugh (1738–1809), born in Ulster, patriot of the American Revolution, laid to rest in Fayette County, Pennsylvania.",
   // Where family submissions go. Leave empty until a family inbox is chosen;
   // the "Share Your Line" form shows a notice instead of sending.
-  contactEmail: "",
+  contactEmail: "ekklesiaagora@gmail.com",
 };
 
 export const nav = [
